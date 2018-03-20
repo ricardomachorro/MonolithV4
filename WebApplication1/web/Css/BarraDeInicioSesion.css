@@ -1,0 +1,26 @@
+/*Seccion de Elementos Basicos*/
+body{
+    background-color:#e1f7f5;
+}
+/*Fin Seccion de Elementos Basicos*/
+
+/*Seccion de Barra de Navegacion*/
+.BarraDeInicio{
+   padding-bottom:15px;
+   background-color:#17a2b8;
+}
+/*Logo de Monolith para la Barra de Navegacion*/
+#LogoBarraInicio{
+  height:30px;
+  width:30px;
+  margin-right:20px;
+}
+
+.ImagenesBarraInicio{
+  height:20px;
+  width:20px;
+  margin-right:5px;
+  margin-left:5px;
+}
+/*Fin Seccion de Barra de Navegacion*/
+

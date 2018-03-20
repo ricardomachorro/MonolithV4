@@ -1,0 +1,195 @@
+body {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.container-fluid,
+.row-fluid { height: inherit; }
+
+.Señaladores{
+    height:110px;
+    margin:12px;
+}
+
+#BarraResumenActividades{
+    margin:5px;
+}
+
+.Señaladores img{
+    height:72px;
+    width:72px;
+    margin:12px;
+    background-color:#4c8448;
+}
+
+.Señaladores a{
+    margin-top:45px;
+    color:#fff;
+    font-size:32px;
+}
+
+.ContenedoresResumen{
+    box-shadow:0px 0px 1px;
+    margin:1px;
+    margin-bottom:1px;
+    margin-top:1px;
+}
+
+#ActividadesHechas{
+    background-color:#fff9aa;
+}
+
+#ActividadesNoHechas{
+    background-color:#EF9A9A;
+}
+
+#ActividadesPendientes{
+    background-color:#9FA8DA;;
+}
+
+.ResumenActividadesImagenes{
+    height:40px;
+    width:40px;
+    margin-left:4px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.BandejaActividades{   
+    box-shadow:1px 3px 3px;
+}
+
+.TituloContenedores{
+    width:100%;
+    height:120px;
+    margin:0px;
+    background-color:#77c496;
+    color:#FFF;
+    font-size:27px;
+}
+
+.TituloContenedores img{
+    width:60px;
+    height:60px;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+
+.SeparadorTituloContendores{
+    width:100%;
+    height:20px;
+    margin:0px;
+    background-color:#4e8464;
+}
+
+#BotonAgregarActividad{
+    height:40px;
+    padding-top:8px;
+     padding-bottom:12px;
+     padding-left:3px;
+      padding-left:13px;
+}
+.ActividadDiv{
+    max-width:100px;
+     min-width:100px;
+     width:100px;
+    margin-right:8px;
+    margin-left:8px;
+    margin-top:8px;
+    font-size:22px;
+    color:#4c8448;
+    background-color:#c3f7de;
+    font-weight:bold;
+}
+
+.SeccionesActividad{
+    padding:4px;
+}
+
+.ContenedorSeccionesActividad{
+    padding:9px;
+}
+
+.EliminarActividad{
+    background-color:#ef7775;
+    margin:0px;
+    color:#fff;
+    padding-right:12px;
+}
+
+.EliminarActividad img{
+    height:20px;
+    margin:5px;
+    height:20px;
+}
+
+.GuardarActividad{
+     background-color:#52a5b2;
+    margin:0px;
+    color:#fff;
+    padding-right:12px;
+}
+
+.GuardarActividad img{
+     height:20px;
+    margin:5px;
+    height:20px;
+}
+
+.BandejaLateral{
+   height:100%;
+    margin:0px;
+   
+}
+
+.TituloLateralesContenedores{
+    width:100%;
+    height:120px;
+    margin:0px;
+    background-color:#EBC98A;
+    color:#FFF;
+    font-size:27px;
+}
+
+.TituloLateralesContenedores img{
+    width:60px;
+    height:60px;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+
+.ImagenBarraLateral{
+    height:30px;
+    width:30px;
+    margin:12px;
+}
+
+.ContenedorLateralElementos{
+    min-height:350px;
+    height:580px;
+    max-height:1200px;
+    background-color:#fcf0e3;
+    overflow-y:scroll;
+    margin:18px;
+}
+#folderSeparador{
+    background-color:#B07509;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+    background-color:#e9ecef;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    background-color:#a6a6a6;
+   box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+   
+}
+
+::-webkit-scrollbar-track{
+    border-radius:10px;
+    
+}
