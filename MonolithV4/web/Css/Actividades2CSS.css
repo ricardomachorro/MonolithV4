@@ -1,0 +1,135 @@
+body{
+    background-color:#e9ecef;
+}
+
+.container-fluid{
+    margin-bottom:20px;
+}
+.CartasResumenActividades{
+    margin:10px;
+}
+
+.TextoCartasResumenActividades{
+    margin-top:8px;
+}
+
+.ImagenesResumenActividades{
+    height:40px;
+    width:40px;
+}
+
+
+#ImagenBandejaPrincipal{
+    height:50px;
+    width:50px;
+}
+
+.SeccionNuevaActividad input[type='text']{
+    width:"100%";
+}
+
+.SeccionNuevaActividad button{
+    background-color:#0062cc;
+    height:40px;
+    width:100%;
+}
+
+.SeccionNuevaActividad img{
+    height:20px;
+    margin:8px;
+}
+
+.BandejaActividades{
+    overflow-y:scroll;
+    height:725px;
+    margin-top:20px;
+    background-color:#fff;
+    border-color:#8ca5cc;
+}
+
+.ActividadCarta{
+    background-color:#9fcdff;
+    margin:6px;
+}
+
+.ActividadCarta input[type="checkbox"]{
+    height:25px;
+    width:25px;
+}
+
+.OpccionesAcividad{
+    padding:5px;
+    visibility:visible;
+}
+
+.btn-activity{
+  border-width:0;
+  border-radius:30%;
+  box-shadow:3px;
+  margin:2px;
+}
+.btn-activity:target{
+  background-color:#000;
+}
+
+.btn-activity img{
+    height:1px;
+    width:1px;
+    margin:1px;
+}
+
+#BtnGuardar{
+    background-color:#b4edc8;
+}
+
+#BtnEliminar{
+    background-color:#f7a194;
+}
+
+#BtnLocal{
+   background-color:#f7d494;
+}
+
+.ContenedoresLaterales{
+    margin-top:10px;
+}
+
+.ContenedoresLaterales img{
+   height:50px;
+    width:50px;
+}
+
+.ListasLaterales{
+    height:450px;
+    overflow-y:scroll;
+}
+
+.ListasLaterales img{
+    height:25px;
+    width:25px;
+    margin-right:16px;
+}
+
+.ListasLaterales li{
+    margin-top:12px;
+    margin-bottom:12px;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+    background-color:#e9ecef;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius:10px;
+    background-color:#a6a6a6;
+   box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+   
+}
+
+::-webkit-scrollbar-track{
+    border-radius:10px;
+    
+}
+
+

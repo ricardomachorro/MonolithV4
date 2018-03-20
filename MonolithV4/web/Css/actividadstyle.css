@@ -1,0 +1,90 @@
+.ContenedoresListasColgantes{
+    padding:13px;
+}
+
+.ListasColgantes{
+    color:#313D66;
+    padding:13px;
+    text-height:max-size;
+    font-weight:bolder;
+    border-bottom:6px solid #17a2b8;
+    background-color:#fff;
+}
+
+.SeccionActividades{
+    background-color:#fff;
+    margin:13px;
+    height:600px;
+}
+
+#InputNuevaActividad{
+    margin:13px;
+    padding:6px;
+    width:100%;
+}
+
+#BotonAgregarActividad{
+    margin-right:13px;
+    margin-top:13px;
+    width:100%;
+    padding:4px;
+    font-family:sans-serif;
+    font-weight: bold;
+}
+
+.ContenedorListaActividades{
+   margin:12px;
+   overflow-y:scroll;
+   padding:50px;
+   height:500px;
+}
+
+.ContenedorListaCategorias{
+    background-color:#fff;
+    height:250px;
+    margin:13px;
+    padding:13px;
+}
+
+.ContenedorCarpetas{
+    overflow-y:scroll;
+}
+
+.Categorias{
+    margin:12px;
+}
+
+.Categorias img{
+    width:35px;
+    height:35px;
+}
+
+.Categorias p{
+    text-align:left;
+    margin:3px;
+}
+
+.ContenedorListaLugares{
+    background-color:#fff;
+    height:250px;
+    margin:13px;
+    padding:13px;
+}
+
+.ContenedorLugares{
+    overflow-y:scroll;
+}
+
+.Lugares{
+    margin:12px;
+}
+
+.Lugares img{
+    width:35px;
+    height:35px;
+}
+
+.Lugares p{
+    text-align:left;
+    margin:3px;
+}

@@ -1,0 +1,59 @@
+.BandejaNotas{
+    background-color:#fff;
+    min-height:800px;
+    margin:12px;
+    box-shadow:0px 0px 1px;
+}
+
+.TituloContenedores{
+    width:100%;
+    height:120px;
+    margin:0px;
+    background-color:#e8f29b;
+    color:#FFF;
+    font-size:27px;
+}
+
+.TituloContenedores img{
+    width:60px;
+    height:60px;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+
+.SeparadorTituloContendores{
+    width:100%;
+    height:20px;
+    margin:0px;
+    background-color:#92a026;
+}
+
+.BandejaLateral{
+    min-height:800px;
+    margin:12px;
+}
+
+.TituloLateralesContenedores{
+    width:100%;
+    height:120px;
+    margin:0px;
+    background-color:#EBC98A;
+    color:#FFF;
+    font-size:27px;
+}
+
+.TituloLateralesContenedores img{
+    width:60px;
+    height:60px;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+
+.SeparadorTituloContendoresLateral{
+    width:100%;
+    height:20px;
+    margin:0px;
+    background-color:#B07509;
+}
+
+
