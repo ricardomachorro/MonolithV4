@@ -64,10 +64,17 @@ Conteneido text,
 IDUsuario int,
 foreign key (IDUsuario) references Usuario(IDUsuario));
 
-create table Logro(IDLogro int not null auto_increment primary key,
-Nombre varchar(100),
-Descripcion text,
-Costo int);
+create table Logro(
+IDLogro int not null auto_increment primary key,
+Img int not null,
+Filtro int not null,
+Nombre varchar(100) not null,
+fecha date not null,
+Costo int not null
+);
+insert into Logro(Img,Filtro,Nombre,fecha,costo) values(2,5,'perro #97','2017-05-12',5);
+insert into Logro(Img,Filtro,Nombre,fecha,costo) values(1,7,'perro #12','2017-03-01',10);
+select * from Logro;
 
 create table Estampa(IDEstampa int not null auto_increment primary key,
 Nombre varchar (100),
