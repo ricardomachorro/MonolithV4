@@ -4,14 +4,12 @@ package Objetos;
 
 public class Usuario {
     
-     private String Nombre;
+    private String Nombre;
     private String Correo;
     private String Password;
     private int Edad;
     private String Pais;
     private String Direccion;
-    private String Institucion;
-    private String NivelEstudios;
     private int Puntos;
 
     public int getPuntos() {
@@ -72,20 +70,4 @@ public class Usuario {
         this.Direccion = Direccion;
     }
 
-    public String getInstitucion() {
-        return Institucion;
-    }
-
-    public void setInstitucion(String Institucion) {
-        this.Institucion = Institucion;
-    }
-
-    public String getNivelEstudios() {
-        return NivelEstudios;
-    }
-
-    public void setNivelEstudios(String NivelEstudios) {
-        this.NivelEstudios = NivelEstudios;
-    }
-    
 }
