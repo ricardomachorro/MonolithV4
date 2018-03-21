@@ -4,7 +4,7 @@
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
-    
+
 %>
 <html>
     <head>
@@ -45,8 +45,7 @@
                             <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" >Usuario: <%
-                                out.println(Usuario);
+                            <a class="dropdown-item" >Usuario: <%                                out.println(Usuario);
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
@@ -327,17 +326,21 @@
             $("#NuevaActividadBtn").click(function () {
                 var NombreActividad = $("#NuevaActividadtxt").val();
                 var Actividad = {
-                    Nombre: NombreActividad,
+                    NombreActividad: NombreActividad,
                     Clase: "Todos",
-                    Usuario: "rick1234"
+                    Usuario: "rick5678"
                 };
-                $.ajax({
-                    type: "POST",
-                    url: "IngresarActividad",
-                    contentType: "application/json", // NOT dataType!
-                    data: JSON.stringify(Actividad)
+                var xhr = new XMLHttpRequest();
+                var url = "IngresarActividad";
+                xhr.open("POST", url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var json = JSON.parse(xhr.responseText);
 
-                });
+                    }
+                };
+                var data = JSON.stringify(Actividad);
+                xhr.send(data);
             });
 
 

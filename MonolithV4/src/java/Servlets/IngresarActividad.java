@@ -5,7 +5,8 @@
  */
 package Servlets;
 
-import BaseDatos.DataBase;
+import BaseDatos.Database2;
+import Objetos.Actividad;
 import Objetos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.json.JSONObject;
 
 
 @WebServlet(name = "IngresarActividad", urlPatterns = {"/IngresarActividad"})
@@ -27,16 +28,7 @@ public class IngresarActividad  extends HttpServlet{
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Ingreso</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Ingreso at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+          
         }
     }
 
@@ -51,6 +43,19 @@ public class IngresarActividad  extends HttpServlet{
             throws ServletException, IOException {
         try{
             
+            String n=request.getParameter("Actividad");
+             JSONObject jObj = new JSONObject(request.getParameter("Actividad"));
+             String NombreActividad=(String) jObj.getString("NombreActividad");
+             String Usuario=jObj.getString("Usuario");
+             String Clase=jObj.getString("Todos");
+             Actividad act=new Actividad();
+             act.setCategoria(Clase);
+             act.setUsuario(Usuario);
+             act.setTitulo(NombreActividad);
+             Database2 db=new Database2();
+             db.IngresoActividad(act);
+             
+             
         }catch(Exception ex){
             
         }
