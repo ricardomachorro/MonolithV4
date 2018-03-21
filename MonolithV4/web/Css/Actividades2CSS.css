@@ -73,9 +73,14 @@ body{
 }
 
 .btn-activity img{
-    height:1px;
-    width:1px;
+    height:30px;
+    width:30px;
     margin:1px;
+}
+
+.GrupoBotonesActividad{
+    margin-left:12px;
+    margin-top:6px;
 }
 
 #BtnGuardar{

@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%/*
+<%
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
-     */
+    
 %>
 <html>
     <head>
@@ -45,8 +45,8 @@
                             <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" >Usuario: <%/* 
-                                out.println(Usuario);*/
+                            <a class="dropdown-item" >Usuario: <%
+                                out.println(Usuario);
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
@@ -143,9 +143,9 @@
                                         <!--Actividad Abierta-->
                                         <div class="card-deck">
                                             <div class="card ActividadCarta ActividadActiva" >
-                                                <div class="card-body" data-toggle="collapse" href="#Col1">
-                                                    <div class="row " >
-                                                        <div class="col-10">
+                                                <div class="card-body" >
+                                                    <div class="row "  >
+                                                        <div class="col-10" data-toggle="collapse" href="#Col1" >
                                                             <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
                                                         </div>
                                                         <div class="col-2">
@@ -158,10 +158,10 @@
                                                             <input class="form-control"  type="text" placeholder="Nombre Activdad">
                                                             <input class="form-control"  type="text" placeholder="Fecha Activdad">
                                                             <input class="form-control" type="text" placeholder="Categoria">
-                                                            <div class="btn-group btn-group-sm  btn-activity" role="group" >
-                                                                <button type="button" class="btn btn-secondary"><img src="img/save.svg"></button>
-                                                                <button type="button" class="btn btn-secondary"> <img src="img/garbageWhite.svg"></button>
-                                                                <button type="button" class="btn btn-secondary"><img src="img/placeholderWhite.svg"></button>
+                                                            <div class="btn-group btn-group-sm GrupoBotonesActividad float-left" role="group" >
+                                                                <button type="button" class="btn btn-secondary btn-activity"><img src="img/save.svg"></button>
+                                                                <button type="button" class="btn btn-secondary btn-activity"> <img src="img/garbageWhite.svg"></button>
+                                                                <button type="button" class="btn btn-secondary btn-activity"><img src="img/placeholderWhite.svg"></button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -172,9 +172,9 @@
                                         <!--Actividad Normal 1-->
                                         <div class="card-deck">
                                             <div class="card ActividadCarta ActividadActiva" >
-                                                <div class="card-body" data-toggle="collapse" href="#Col2">
-                                                    <div class="row " >
-                                                        <div class="col-10">
+                                                <div class="card-body">
+                                                    <div class="row "  >
+                                                        <div class="col-10" data-toggle="collapse" href="#Col2" >
                                                             <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
                                                         </div>
                                                         <div class="col-2">
