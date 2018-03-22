@@ -123,16 +123,16 @@
                         <div class="card" >
                             <div class="card-body">
                                 <!--Seccion Nueva Actividad-->
-
+                                <form method="Post" action="IngresarActividad">
                                 <div class="row SeccionNuevaActividad" >
                                     <div class="col-lg-8 col-md-6 col-sm-12">
-                                        <input type="text" id="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
+                                        <input type="text" id="NuevaActividadtxt" name="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
                                     </div>
                                     <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <button class="btn-primary" type="submit" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
+                                        <button class="btn-primary" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
                                     </div>
                                 </div>
-
+                                </form>
                                 <!--Fin Seccion Nueva Actividad-->
 
 
@@ -317,35 +317,6 @@
 
             </div>
         </div>
-        <script>
 
-        </script>
-
-        <script>
-
-            $("#NuevaActividadBtn").click(function () {
-                var NombreActividad = $("#NuevaActividadtxt").val();
-                var Actividad = {
-                    NombreActividad: NombreActividad,
-                    Clase: "Todos",
-                    Usuario: "rick5678"
-                };
-                var xhr = new XMLHttpRequest();
-                var url = "IngresarActividad";
-                xhr.open("POST", url, true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var json = JSON.parse(xhr.responseText);
-
-                    }
-                };
-                var data = JSON.stringify(Actividad);
-                xhr.send(data);
-            });
-
-
-
-
-        </script>
     </body>
 </html>

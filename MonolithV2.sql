@@ -17,6 +17,9 @@ Direccion varchar(200),
 Contrasena varchar(70),
 Puntos int not null);
 
+select * from Usuario;
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contraseña,Puntos) values();
+
 create table Validacion(
 IdAdendum int primary key not null auto_increment,
 Nombre varchar(20) not null,
@@ -30,6 +33,8 @@ create table Categoria(IDCategoria int auto_increment not null primary key,
 NombreCategoria varchar(100) not null,
 IDUsuario int not null,
 foreign key (IDUsuario) references Usuario(IDUsuario));
+select * from Categoria;
+
 
 create table Actividad(IDActividad int not null primary key auto_increment,
 Nombre varchar(40),

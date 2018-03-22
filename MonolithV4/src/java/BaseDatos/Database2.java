@@ -26,6 +26,47 @@ public class Database2 {
 
     }
 
+    public void IngresoActividad(Actividad act) {
+
+        try {
+            String sqlactv1 = "insert into Categoria(NombreCategoria,IDUsuario) values(?,?)";
+            String sqlactv2 = "insert into Actividad(Nombre,IDCategoria,Estado) values(?,?,?)";
+            if (CategoriaRepetida(act.getCategoria(), IdentificarUsuario(act.getUsuario()))) {
+                String sqlActRepetida = "select * from Categoria where NombreCategoria=? and IDUsaurio=?";
+                ps = c.prepareStatement(sqlActRepetida);
+                ps.setString(1, act.getCategoria());
+                ps.setInt(2, IdentificarUsuario(act.getUsuario()));
+                rs = ps.executeQuery();
+                int IDCategoria = rs.getInt("IDCategoria");
+                ps = c.prepareStatement(sqlactv2);
+                ps.setString(1, act.getTitulo());
+                ps.setInt(2, IDCategoria);
+                ps.setBoolean(3, false);
+                ps.execute();
+
+            } else {
+                ps = c.prepareStatement(sqlactv1);
+                ps.setString(1, act.getCategoria());
+                ps.setInt(2, IdentificarUsuario(act.getUsuario()));
+                ps.execute();
+                String sqlActRepetida = "select * from Categoria where NombreCategoria=? and IDUsaurio=?";
+                ps = c.prepareStatement(sqlActRepetida);
+                ps.setString(1, act.getCategoria());
+                ps.setInt(2, IdentificarUsuario(act.getUsuario()));
+                rs = ps.executeQuery();
+                int IDCategoria = rs.getInt("IDCategoria");
+                ps = c.prepareStatement(sqlactv2);
+                ps.setString(1, act.getTitulo());
+                ps.setInt(2, 3);
+                ps.setBoolean(3, false);
+                ps.execute();
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString() + "Error de Database2");
+        }
+    }
+
     public boolean IngresoUsuario(Usuario user) {
         boolean RegistroExitoso = false;
         String sql1 = "select * from Usuario where NombreUsuario=?";
@@ -70,32 +111,12 @@ public class Database2 {
         return IngresoExitoso;
     }
 
-    public void IngresoActividad(Actividad act) {
-
-        try {
-            String sql1="insert into Categoria (NombreCategoria,IDUsuario) values=(?,?)";
-            String sql2="insert into Actividad(Nombre,IDCategoria,Estado) values(?,?,?)";
-            if (IdentificarUsuario(act.getUsuario()) != 0) {
-                  ps=c.prepareStatement(sql1);
-                  ps.setString(1,act.getCategoria());
-                  ps.setInt(2,IdentificarUsuario(act.getUsuario()) );
-                  ps.execute();
-                  ps=c.prepareStatement(sql2);
-                  ps.setString(1,act.getTitulo());
-                  ps.setInt(2,1);
-                  ps.setBoolean(3,false);
-                  ps.execute();
-            }
-        } catch (Exception ex) {
-
-        }
-    }
-
     public int IdentificarUsuario(String Nombre) {
         int ID = 0;
         try {
             String sql = "Select * from Usuario where NombreUsuario=?";
             ps = c.prepareStatement(sql);
+            ps.setString(1, Nombre);
             rs = ps.executeQuery();
             if (rs.next()) {
                 ID = rs.getInt("IDUsuario");
@@ -105,6 +126,23 @@ public class Database2 {
         }
 
         return ID;
+    }
+
+    public boolean CategoriaRepetida(String Categoria, int IDUsuario) {
+        boolean Repetida = false;
+        try {
+            String sql = "select * from Categoria where NombreCategoria=? and IDUsaurio=?";
+            ps = c.prepareStatement(sql);
+            ps.setString(1, Categoria);
+            ps.setInt(2, IDUsuario);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Repetida = true;
+            }
+        } catch (Exception ex) {
+
+        }
+        return Repetida;
     }
 
 }

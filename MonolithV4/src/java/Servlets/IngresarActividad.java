@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.sql.SQLException;
+import javax.jms.Session;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.JSONObject;
+import javax.json.JsonWriter;
 
 
 @WebServlet(name = "IngresarActividad", urlPatterns = {"/IngresarActividad"})
@@ -42,16 +43,14 @@ public class IngresarActividad  extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            
-            String n=request.getParameter("Actividad");
-             JSONObject jObj = new JSONObject(request.getParameter("Actividad"));
-             String NombreActividad=(String) jObj.getString("NombreActividad");
-             String Usuario=jObj.getString("Usuario");
-             String Clase=jObj.getString("Todos");
+            HttpSession s = request.getSession();
+             String Usuario=s.getAttribute("usuario").toString();
+             String Clase="Todos";
+             String Titulo=request.getParameter("NuevaActividadtxt");
              Actividad act=new Actividad();
              act.setCategoria(Clase);
              act.setUsuario(Usuario);
-             act.setTitulo(NombreActividad);
+             act.setTitulo(Titulo);
              Database2 db=new Database2();
              db.IngresoActividad(act);
              

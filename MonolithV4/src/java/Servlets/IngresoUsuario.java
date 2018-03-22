@@ -70,7 +70,7 @@ public class IngresoUsuario extends HttpServlet {
             u.setCorreo(Correo);
             u.setPassword(Password);
             if(db.IngresoUsuario(u)){
-                sesion.setAttribute("NombreUsuario", u.getNombre());
+                sesion.setAttribute("usuario", u.getNombre());
                 sesion.setAttribute("password",u.getPassword());
                 response.sendRedirect("Actividades.jsp");
             }else{
