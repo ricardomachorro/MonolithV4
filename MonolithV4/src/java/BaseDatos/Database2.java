@@ -32,7 +32,7 @@ public class Database2 {
             String sqlactv1 = "insert into Categoria(NombreCategoria,IDUsuario) values(?,?)";
             String sqlactv2 = "insert into Actividad(Nombre,IDCategoria,Estado) values(?,?,?)";
             if (CategoriaRepetida(act.getCategoria(), IdentificarUsuario(act.getUsuario()))) {
-                String sqlActRepetida = "select * from Categoria where NombreCategoria=? and IDUsaurio=?";
+                String sqlActRepetida = "select * from Categoria where NombreCategoria=? and IDUsuario=?";
                 ps = c.prepareStatement(sqlActRepetida);
                 ps.setString(1, act.getCategoria());
                 ps.setInt(2, IdentificarUsuario(act.getUsuario()));
@@ -131,7 +131,7 @@ public class Database2 {
     public boolean CategoriaRepetida(String Categoria, int IDUsuario) {
         boolean Repetida = false;
         try {
-            String sql = "select * from Categoria where NombreCategoria=? and IDUsaurio=?";
+            String sql = "select * from Categoria where NombreCategoria=? and IDUsuario=?";
             ps = c.prepareStatement(sql);
             ps.setString(1, Categoria);
             ps.setInt(2, IDUsuario);
