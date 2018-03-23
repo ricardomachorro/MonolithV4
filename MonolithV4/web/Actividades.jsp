@@ -124,15 +124,15 @@
                             <div class="card-body">
                                 <!--Seccion Nueva Actividad-->
                                 <!--method="Post" action="IngresarActividad"-->
-                                    <div class="row SeccionNuevaActividad" >
-                                        <div class="col-lg-8 col-md-6 col-sm-12">
-                                            <input type="text" id="NuevaActividadtxt" name="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <button class="btn-primary" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
-                                        </div>
+                                <div class="row SeccionNuevaActividad" >
+                                    <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <input type="text" id="NuevaActividadtxt" name="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
                                     </div>
-                               
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <button class="btn-primary" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
+                                    </div>
+                                </div>
+
                                 <!--Fin Seccion Nueva Actividad-->
 
 
@@ -318,31 +318,36 @@
             </div>
         </div>
         <script>
-            
+
             $("#NuevaActividadBtn").click(function () {
-                 var NombreActividad=$("#NuevaActividadtxt").val();
-                        $.ajax({
-                            url:"IngresarActividad",
-                            data:{NombreActividad:NombreActividad.toString()},
-                            type:'post',
-                            sucess:function(data){
-                                /*
-                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
-                                  "<div class='card-body'>"+
-                                             "<div class='row'>"+
-                                                        "<div class='col-10'>"+
-                                                           " <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>"+
-                                                        "</div>"+      
-                                "</div></div></div></div>"));
-                            }*/
-                              OnSuccess(alert("Funciona")); } ,
-                            error:function(){
-                                alert("Error");
-                            }
-                        });
-                   
-             }
-           );
+                var NombreActividad = $("#NuevaActividadtxt").val();
+                $.ajax({
+                    url: "IngresarActividad",
+                    data: {NombreActividad: NombreActividad.toString()},
+                    type: 'post',
+                    sucess: function (data) {
+                        /*
+                         
+                         }*/
+                        OnSuccess(alert("cxcxc"));
+                    },
+                    error: function () {
+                        alert("Error");
+                    }, complete: function () {
+                        // Handle the complete event
+                       $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
+                         "<div class='card-body'>"+
+                         "<div class='row'>"+
+                         "<div class='col-10'>"+
+                         " <h5>Nombre Actividad:"+NombreActividad.toString()+"   Fecha:16/03/2018   Localización:dsfdffds</h5>"+
+                         "</div>"+      
+                         "</div></div></div></div>"));
+                        $("#NuevaActividadtxt").text("");
+                    }
+                });
+
+            }
+            );
 
         </script>
 

@@ -22,14 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.json.JsonWriter;
 
-
 @WebServlet(name = "IngresarActividad", urlPatterns = {"/IngresarActividad"})
-public class IngresarActividad  extends HttpServlet{
+public class IngresarActividad extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-          
+
         }
     }
 
@@ -42,27 +42,26 @@ public class IngresarActividad  extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
             HttpSession s = request.getSession();
-           
-             String Usuario=s.getAttribute("usuario").toString();
-              
-             String Clase="Todos";          
+
+            String Usuario = s.getAttribute("usuario").toString();
+
+            String Clase = "Todos";
             /* String Titulo=request.getParameter("NuevaActividadtxt");*/
-             String Titulo=request.getParameter("NombreActividad");
-             Actividad act=new Actividad();
-             act.setCategoria(Clase);
-             act.setUsuario(Usuario);
-             act.setTitulo(Titulo);
-             Database2 db=new Database2();
-             db.IngresoActividad(act);
-              PrintWriter out = response.getWriter();
-              out.println("Ingreso exitoso de Actividad "+act.getTitulo());
-             
-        }catch(Exception ex){
-            
+            String Titulo = request.getParameter("NombreActividad");
+            Actividad act = new Actividad();
+            act.setCategoria(Clase);
+            act.setUsuario(Usuario);
+            act.setTitulo(Titulo);
+            Database2 db = new Database2();
+            db.IngresoActividad(act);
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("sucess");
+
+        } catch (Exception ex) {
+
         }
-  
 
     }
 
