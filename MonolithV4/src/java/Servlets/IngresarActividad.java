@@ -44,16 +44,20 @@ public class IngresarActividad  extends HttpServlet{
             throws ServletException, IOException {
         try{
             HttpSession s = request.getSession();
+           
              String Usuario=s.getAttribute("usuario").toString();
-             String Clase="Todos";
-             String Titulo=request.getParameter("NuevaActividadtxt");
+              
+             String Clase="Todos";          
+            /* String Titulo=request.getParameter("NuevaActividadtxt");*/
+             String Titulo=request.getParameter("NombreActividad");
              Actividad act=new Actividad();
              act.setCategoria(Clase);
              act.setUsuario(Usuario);
              act.setTitulo(Titulo);
              Database2 db=new Database2();
              db.IngresoActividad(act);
-             
+              PrintWriter out = response.getWriter();
+              out.println("Ingreso exitoso de Actividad "+act.getTitulo());
              
         }catch(Exception ex){
             

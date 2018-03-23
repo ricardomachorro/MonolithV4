@@ -35,6 +35,8 @@ IDUsuario int not null,
 foreign key (IDUsuario) references Usuario(IDUsuario));
 select * from Categoria;
 
+insert into Categoria (NombreCategoria ,IDUsuario) values("fsfd",1);
+
 
 create table Actividad(IDActividad int not null primary key auto_increment,
 Nombre varchar(40),
@@ -44,6 +46,9 @@ IDCategoria int,
 Estado boolean,
 foreign key (IDCategoria) references Categoria(IDCategoria)/*,
 foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/);
+
+select * from actividad;
+
 
 create table Grupo(IDGrupo int not null primary key auto_increment,
 Nombre varchar(100) not null,

@@ -45,7 +45,7 @@
                             <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" >Usuario: <%                                out.println(Usuario);
+                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%                                out.println(Usuario);
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
@@ -123,22 +123,22 @@
                         <div class="card" >
                             <div class="card-body">
                                 <!--Seccion Nueva Actividad-->
-                                <form method="Post" action="IngresarActividad">
-                                <div class="row SeccionNuevaActividad" >
-                                    <div class="col-lg-8 col-md-6 col-sm-12">
-                                        <input type="text" id="NuevaActividadtxt" name="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
+                                <!--method="Post" action="IngresarActividad"-->
+                                    <div class="row SeccionNuevaActividad" >
+                                        <div class="col-lg-8 col-md-6 col-sm-12">
+                                            <input type="text" id="NuevaActividadtxt" name="NuevaActividadtxt" class="form-control" placeholder="Nueva Actividad" >
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <button class="btn-primary" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
+                                        </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <button class="btn-primary" id="NuevaActividadBtn" >Agregar Actividad<img src="img/add-square-button.svg" ></button>  
-                                    </div>
-                                </div>
-                                </form>
+                               
                                 <!--Fin Seccion Nueva Actividad-->
 
 
                                 <!--Bandeja Actividades-->
                                 <div class="row BandejaActividades">
-                                    <div class="col-12">
+                                    <div class="col-12" id="ContenedorCartasActividades">
                                         <!--Actividad Abierta-->
                                         <div class="card-deck">
                                             <div class="card ActividadCarta ActividadActiva" >
@@ -317,6 +317,34 @@
 
             </div>
         </div>
+        <script>
+            
+            $("#NuevaActividadBtn").click(function () {
+                 var NombreActividad=$("#NuevaActividadtxt").val();
+                        $.ajax({
+                            url:"IngresarActividad",
+                            data:{NombreActividad:NombreActividad.toString()},
+                            type:'post',
+                            sucess:function(data){
+                                /*
+                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
+                                  "<div class='card-body'>"+
+                                             "<div class='row'>"+
+                                                        "<div class='col-10'>"+
+                                                           " <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>"+
+                                                        "</div>"+      
+                                "</div></div></div></div>"));
+                            }*/
+                              OnSuccess(alert("Funciona")); } ,
+                            error:function(){
+                                alert("Error");
+                            }
+                        });
+                   
+             }
+           );
+
+        </script>
 
     </body>
 </html>
