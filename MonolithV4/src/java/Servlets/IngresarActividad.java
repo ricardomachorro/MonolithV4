@@ -11,7 +11,9 @@ import Objetos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.jms.Session;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
@@ -43,24 +45,22 @@ public class IngresarActividad extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             HttpSession s = request.getSession();
-
             String Usuario = s.getAttribute("usuario").toString();
-
-            String Clase = "Todos";
-            /* String Titulo=request.getParameter("NuevaActividadtxt");*/
-            String Titulo = request.getParameter("NombreActividad");
+            String Clase = request.getParameter("CategoriaActividad");
+            String Titulo = request.getParameter("NombreActivity");
+            String Fecha=request.getParameter("FechaActividad");
             Actividad act = new Actividad();
             act.setCategoria(Clase);
             act.setUsuario(Usuario);
             act.setTitulo(Titulo);
             Database2 db = new Database2();
             db.IngresoActividad(act);
-            response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write("sucess");
+          
 
         } catch (Exception ex) {
-
+              System.out.println(ex.toString());
         }
 
     }

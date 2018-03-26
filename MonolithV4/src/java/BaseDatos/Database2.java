@@ -36,7 +36,7 @@ public class Database2 {
                   while(rs.next()){
                       IDCategoria=rs.getInt("IDCategoria");
                   }
-                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",false)";
+                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",CURDATE(),false)";
                   st.execute(sqlInsertarActividad);
                    
                }else{
@@ -48,7 +48,7 @@ public class Database2 {
                   while(rs.next()){
                       IDCategoria=rs.getInt("IDCategoria");
                   }
-                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",false)";
+                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",CURDATE(),false)";
                   st.execute(sqlInsertarActividad);
                    
                   

@@ -93,7 +93,7 @@
                                         <img src="img/help-button-speech-bubble-with-question-mark.svg"  class="float-left ImagenesResumenActividades" >
                                     </div>
                                     <div class="col-8 TextoCartasResumenActividades" >
-                                        <a >Actividades sin especificar</a>
+                                        <a  id="TxtActividadesSinEspecificar">Actividades sin especificar</a>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                                 <div class="card-body" >
                                                     <div class="row "  >
                                                         <div class="col-10" data-toggle="collapse" href="#Col1" >
-                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
+                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:Pendiente/Nula</h5>
                                                         </div>
                                                         <div class="col-2">
                                                             <input class="CheckBoxActividades float-right" type="checkbox">
@@ -197,38 +197,10 @@
                                             </div>
                                         </div>
                                         <!--Fin Actividad Abierta 1-->
-                                        <div class="card-deck">
-                                            <div class="card ActividadCarta" >
-
-                                                <div class="card-body">
-                                                    <div class="row " >
-                                                        <div class="col-10">
-                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <input class="CheckBoxActividades float-right" type="checkbox">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
 
-                                        <div class="card-deck">
-                                            <div class="card ActividadCarta" >
-
-                                                <div class="card-body">
-                                                    <div class="row " >
-                                                        <div class="col-10">
-                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <input class="CheckBoxActividades float-right" type="checkbox">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
                                     </div>
                                 </div>
                                 <!--Fin Bandeja Actividades-->
@@ -257,7 +229,7 @@
                     <div class="card-deck">
                         <div class="card ListasLaterales"  >
                             <div class="card-body" >
-                                <ul>
+                                <ul id="ListaCategorias">
                                     <li><img src="img/folderOrange.svg">asssa</li>
                                     <li><img src="img/folderOrange.svg">asssa</li>
                                     <li><img src="img/folderOrange.svg">asssa</li>
@@ -318,31 +290,62 @@
             </div>
         </div>
         <script>
-
+             
+              
             $("#NuevaActividadBtn").click(function () {
-                var NombreActividad = $("#NuevaActividadtxt").val();
+               
+                var IngresoActividad=$("#NuevaActividadtxt").val();
+                var inidicehash=IngresoActividad.indexOf('#');
+                 var NombreActividad=IngresoActividad.substring(0,inidicehash);
+                 var NombreCategoria=IngresoActividad.substring(inidicehash,IngresoActividad.length+1);
+                 NombreCategoria=NombreCategoria.replace("#","");
+                 var Fecha = new Date();
+                 var FechaString=Fecha.getDate() + "/" + (Fecha.getMonth() +1) + "/" + Fecha.getFullYear();
                 $.ajax({
                     url: "IngresarActividad",
-                    data: {NombreActividad: NombreActividad.toString()},
+                    data: {NombreActivity: NombreActividad.toString(),
+                        CategoriaActividad:NombreCategoria.toString()
+          
+                     },
                     type: 'post',
-                    sucess: function (data) {
-                        /*
-                         
-                         }*/
-                        OnSuccess(alert("cxcxc"));
+                    sucess: function () {
+                        
                     },
                     error: function () {
                         alert("Error");
                     }, complete: function () {
                         // Handle the complete event
-                       $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
+                      $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
                          "<div class='card-body'>"+
                          "<div class='row'>"+
-                         "<div class='col-10'>"+
-                         " <h5>Nombre Actividad:"+NombreActividad.toString()+"   Fecha:16/03/2018   Localización:dsfdffds</h5>"+
-                         "</div>"+      
+                         "<div class='col-10' data-toggle='collapse' href='#Col2'>"+
+                         " <h5>Nombre Actividad:"+NombreActividad.toString()+"   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>"+
+                         "</div>"+
+                          "<div class='col-2'>"+
+                           "<input class='CheckBoxActividades float-right' type='checkbox'>"+
+                            " </div>"+
+                            "<div class='collapse row OpccionesAcividad' id='Col2' >"+
+                               " <form class='form-inline'>"+
+                                    "<input class='form-control'  type='text' placeholder='Nombre Activdad'>"+
+                                    "<input class='form-control'  type='text' placeholder='Fecha Activdad'>"+
+                                    "<input class='form-control' type='text' placeholder='Categoria'>"+
+                                    "<div class='btn-group btn-group-sm  btn-activity' role='group' >"+
+                                        "<button type='button' class='btn btn-secondary'><img src='img/save.svg'></button>"+
+                                        "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>"+
+                                        "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>"+
+                                    "</div>"+
+                                    "</form>"+
+                                    "</div>"+                   
                          "</div></div></div></div>"));
-                        $("#NuevaActividadtxt").text("");
+                       
+                        $("#NuevaActividadtxt").val("");
+                        var CategoriaExistente="#"+NombreCategoria.toString();
+                        if($(CategoriaExistente).length===0){
+                            $("#ListaCategorias").prepend("<li id='"+NombreCategoria+"'><img src='img/folderOrange.svg'>"+
+                            NombreCategoria+"</li>");
+                        }
+                         
+                        
                     }
                 });
 
