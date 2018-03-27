@@ -1,5 +1,5 @@
+drop database if exists MonolithV2;
 create database MonolithV2;
-/*drop database MonolithV2;*/
 use MonolithV2;
 
 create table Localizacion(IDLocalizacion int auto_increment primary key not null,
@@ -66,6 +66,7 @@ foreign key (IDUsuario) references Usuario(IDUsuario));
 
 create table Logro(
 IDLogro int not null auto_increment primary key,
+IDUsuario int not null;
 Img int not null,
 Filtro int not null,
 Nombre varchar(100) not null,
@@ -76,9 +77,6 @@ insert into Logro(Img,Filtro,Nombre,fecha,costo) values(2,5,'perro #97','2017-05
 insert into Logro(Img,Filtro,Nombre,fecha,costo) values(1,7,'perro #12','2017-03-01',10);
 select * from Logro;
 
-create table Estampa(IDEstampa int not null auto_increment primary key,
-Nombre varchar (100),
-Costo int);
 
 create table LogroUsuario(IDLogroUsuario int not null auto_increment primary key,
 IDUsuario int not null,
