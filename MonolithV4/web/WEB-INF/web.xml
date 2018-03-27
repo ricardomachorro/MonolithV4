@@ -27,5 +27,13 @@
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <servlet-class>Servlets.ChequeoActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <url-pattern>/ChequeoActividad</url-pattern>
+    </servlet-mapping>
     
 </web-app>

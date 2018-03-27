@@ -1,9 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.sql.*" %>
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
+    Connection conexion = null;
+    String driver = "com.mysql.jdbc.Driver";
+    String url = "jdbc:mysql://localhost/MonolithV2";
+    String usuario = "root";
+    String clave = "n0m3l0";
+    try {
+        Class.forName(driver);
+        conexion = DriverManager.getConnection(url, usuario, clave);
+
+        /*guardando la conexion en la session*/
+        session.setAttribute("conexion", conexion);
+    } catch (Exception ex) {
+
+    }
 
 %>
 <html>
@@ -103,6 +118,8 @@
                     <!--Bandeja Actividad Principal-->
 
                     <!--Titulo Bandeja-->
+
+
                     <div class="card-deck">
                         <div class="card" >
                             <div class="card-body">
@@ -140,7 +157,48 @@
                                 <div class="row BandejaActividades">
                                     <div class="col-12" id="ContenedorCartasActividades">
                                         <!--Actividad Abierta-->
-                                        <div class="card-deck">
+
+                                        <%
+                                            Statement st = conexion.createStatement();
+                                            ResultSet rs = st.executeQuery("select * from Actividad");
+                                            while (rs.next()) {
+                                                out.println("<div class='card-deck'>");
+                                                out.println(" <div class='card ActividadCarta ActividadActiva' >");
+                                                out.println("<div class='card-body'>");
+                                                out.println("<div class='row '  >");
+                                                out.println("<div class='col-10' data-toggle='collapse' href='#" + rs.getInt("IDActividad") + "' >");
+                                                out.println("<h5>Nombre Actividad: "+rs.getString("Nombre")+ "  Fecha:"+rs.getString("Fecha")+" Localización:Pendiente/Nula</h5>");
+                                                out.println("</div>");
+                                                out.println(" <div class='col-2'>");
+                                                if(rs.getBoolean("Estado")){
+                                                    out.println(" <input class='CheckBoxActividades float-right' id='"+rs.getInt("IDActividad")+"' checked type='checkbox' >");
+                                                }else{
+                                                    out.println(" <input class='CheckBoxActividades float-right' id='"+rs.getInt("IDActividad")+"'  type='checkbox' >");
+                                                }
+                                                
+                                                out.println("</div>");
+                                                out.println("</div>");
+                                                out.println("<div class='collapse row OpccionesAcividad' id='"+rs.getInt("IDActividad")+"' >");
+                                               out.println("<form class='form-inline'>");
+                                                out.println("<input class='form-control'  type='text' placeholder='Nombre Activdad'>");
+                                                out.println("<input class='form-control'  type='text' placeholder='Fecha Activdad'>");
+                                                out.println("<input class='form-control' type='text' placeholder='Categoria'>");
+                                                out.println("<div class='btn-group btn-group-sm GrupoBotonesActividad float-left' role='group' >");
+                                                out.println(" <button type='button' class='btn btn-secondary btn-activity'><img src='img/save.svg'></button>");
+                                                out.println("<button type='button' class='btn btn-secondary btn-activity'> <img src='img/garbageWhite.svg'></button>");
+                                                 out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
+                                                out.println("</div>");
+                                                out.println("</form>");
+                                                out.println("</div>");
+                                                out.println("</div>");
+                                                out.println("</div>");
+                                                out.println("</div>");
+                                                
+                                            }
+                                        %>
+
+
+                                       <!-- <div class="card-deck">
                                             <div class="card ActividadCarta ActividadActiva" >
                                                 <div class="card-body" >
                                                     <div class="row "  >
@@ -166,41 +224,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <!--Fin Actividad Abierta-->
-                                        <!--Actividad Normal 1-->
-                                        <div class="card-deck">
-                                            <div class="card ActividadCarta ActividadActiva" >
-                                                <div class="card-body">
-                                                    <div class="row "  >
-                                                        <div class="col-10" data-toggle="collapse" href="#Col2" >
-                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:dsfdffds</h5>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <input class="CheckBoxActividades float-right" type="checkbox">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="collapse row OpccionesAcividad" id="Col2" >
-                                                        <form class="form-inline">
-                                                            <input class="form-control"  type="text" placeholder="Nombre Activdad">
-                                                            <input class="form-control"  type="text" placeholder="Fecha Activdad">
-                                                            <input class="form-control" type="text" placeholder="Categoria">
-                                                            <div class="btn-group btn-group-sm  btn-activity" role="group" >
-                                                                <button type="button" class="btn btn-secondary"><img src="img/save.svg"></button>
-                                                                <button type="button" class="btn btn-secondary"> <img src="img/garbageWhite.svg"></button>
-                                                                <button type="button" class="btn btn-secondary"><img src="img/placeholderWhite.svg"></button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Fin Actividad Abierta 1-->
                                         
 
-
-                                    
                                     </div>
                                 </div>
                                 <!--Fin Bandeja Actividades-->
@@ -230,17 +257,15 @@
                         <div class="card ListasLaterales"  >
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
-                                    <li><img src="img/folderOrange.svg">asssa</li>
+                                    <%
+                                      Statement st2 = conexion.createStatement();
+                                      ResultSet rs2 = st.executeQuery("select * from Categoria");
+                                      while(rs2.next()){
+                                          out.println(" <li><img src='img/folderOrange.svg'>"+rs2.getString("NombreCategoria")+"</li>");
+                                      }
+                                    %>
+                                   <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
+                                    
 
                                 </ul>
                             </div>
@@ -290,67 +315,89 @@
             </div>
         </div>
         <script>
-             
-              
+
+
             $("#NuevaActividadBtn").click(function () {
-               
-                var IngresoActividad=$("#NuevaActividadtxt").val();
-                var inidicehash=IngresoActividad.indexOf('#');
-                 var NombreActividad=IngresoActividad.substring(0,inidicehash);
-                 var NombreCategoria=IngresoActividad.substring(inidicehash,IngresoActividad.length+1);
-                 NombreCategoria=NombreCategoria.replace("#","");
-                 var Fecha = new Date();
-                 var FechaString=Fecha.getDate() + "/" + (Fecha.getMonth() +1) + "/" + Fecha.getFullYear();
+
+                var IngresoActividad = $("#NuevaActividadtxt").val();
+                var inidicehash = IngresoActividad.indexOf('#');
+                var NombreActividad = IngresoActividad.substring(0, inidicehash);
+                var NombreCategoria = IngresoActividad.substring(inidicehash, IngresoActividad.length + 1);
+                NombreCategoria = NombreCategoria.replace("#", "");
+                var Fecha = new Date();
+                var FechaString = Fecha.getDate() + "/" + (Fecha.getMonth() + 1) + "/" + Fecha.getFullYear();
                 $.ajax({
                     url: "IngresarActividad",
                     data: {NombreActivity: NombreActividad.toString(),
-                        CategoriaActividad:NombreCategoria.toString()
-          
-                     },
+                        CategoriaActividad: NombreCategoria.toString()
+
+                    },
                     type: 'post',
                     sucess: function () {
-                        
+
                     },
                     error: function () {
                         alert("Error");
                     }, complete: function () {
                         // Handle the complete event
-                      $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >"+
-                         "<div class='card-body'>"+
-                         "<div class='row'>"+
-                         "<div class='col-10' data-toggle='collapse' href='#Col2'>"+
-                         " <h5>Nombre Actividad:"+NombreActividad.toString()+"   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>"+
-                         "</div>"+
-                          "<div class='col-2'>"+
-                           "<input class='CheckBoxActividades float-right' type='checkbox'>"+
-                            " </div>"+
-                            "<div class='collapse row OpccionesAcividad' id='Col2' >"+
-                               " <form class='form-inline'>"+
-                                    "<input class='form-control'  type='text' placeholder='Nombre Activdad'>"+
-                                    "<input class='form-control'  type='text' placeholder='Fecha Activdad'>"+
-                                    "<input class='form-control' type='text' placeholder='Categoria'>"+
-                                    "<div class='btn-group btn-group-sm  btn-activity' role='group' >"+
-                                        "<button type='button' class='btn btn-secondary'><img src='img/save.svg'></button>"+
-                                        "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>"+
-                                        "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>"+
-                                    "</div>"+
-                                    "</form>"+
-                                    "</div>"+                   
-                         "</div></div></div></div>"));
-                       
+                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >" +
+                                "<div class='card-body'>" +
+                                "<div class='row'>" +
+                                "<div class='col-10' data-toggle='collapse' href='#Col2'>" +
+                                " <h5>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
+                                "</div>" +
+                                "<div class='col-2'>" +
+                                "<input class='CheckBoxActividades float-right' type='checkbox'>" +
+                                " </div>" +
+                                "<div class='collapse row OpccionesAcividad' id='Col2' >" +
+                                " <form class='form-inline'>" +
+                                "<input class='form-control'  type='text' placeholder='Nombre Activdad'>" +
+                                "<input class='form-control'  type='text' placeholder='Fecha Activdad'>" +
+                                "<input class='form-control' type='text' placeholder='Categoria'>" +
+                                "<div class='btn-group btn-group-sm  btn-activity' role='group' >" +
+                                "<button type='button' class='btn btn-secondary'><img src='img/save.svg'></button>" +
+                                "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>" +
+                                "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>" +
+                                "</div>" +
+                                "</form>" +
+                                "</div>" +
+                                "</div></div></div></div>"));
+
                         $("#NuevaActividadtxt").val("");
-                        var CategoriaExistente="#"+NombreCategoria.toString();
-                        if($(CategoriaExistente).length===0){
-                            $("#ListaCategorias").prepend("<li id='"+NombreCategoria+"'><img src='img/folderOrange.svg'>"+
-                            NombreCategoria+"</li>");
+                        var CategoriaExistente = "#" + NombreCategoria.toString();
+                        if ($(CategoriaExistente).length === 0) {
+                            $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +
+                                    NombreCategoria + "</li>");
                         }
-                         
-                        
+
+
                     }
                 });
 
             }
             );
+    
+          $(".CheckBoxActividades").click(function(){
+              var IDActividad=$(this).attr("id");
+              $.ajax({
+                       url:"ChequeoActividad",
+                       data:{
+                           IDActividad:IDActividad.toString()
+                       },
+                       type:'post',
+                       sucess:function(){
+                           
+                       },
+                       error:function(){
+                           alert("Error");
+                       },
+                       complete: function(){
+                           alert("unciona");
+                       }
+                       
+                       
+                   });
+          });
 
         </script>
 

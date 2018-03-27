@@ -27,38 +27,73 @@ public class Database2 {
     }
 
     public void IngresoActividad(Actividad act) {
-           try{
-              
-               int IDCategoria=0;
-               if(CategoriaRepetida(act.getCategoria(),IdentificarUsuario(act.getUsuario()))){
-                   String sqlBusquedaCategoria="select * from Categoria where IDUsuario="+IdentificarUsuario(act.getUsuario())+" and NombreCategoria='"+act.getCategoria()+"' ";
-                  rs=st.executeQuery(sqlBusquedaCategoria);
-                  while(rs.next()){
-                      IDCategoria=rs.getInt("IDCategoria");
-                  }
-                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",CURDATE(),false)";
-                  st.execute(sqlInsertarActividad);
-                   
-               }else{
-                  String sqlEntradaCategoria="insert into Categoria (NombreCategoria , IDUsuario) values ('"+act.getCategoria()+"',"+IdentificarUsuario(act.getUsuario())+")";
-                  String sqlBusquedaCategoria="select * from Categoria where IDUsuario="+IdentificarUsuario(act.getUsuario())+" and NombreCategoria='"+act.getCategoria()+"' ";
-                  st=c.createStatement();
-                  st.execute(sqlEntradaCategoria);
-                  rs=st.executeQuery(sqlBusquedaCategoria);
-                  while(rs.next()){
-                      IDCategoria=rs.getInt("IDCategoria");
-                  }
-                  String sqlInsertarActividad="insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('"+act.getTitulo()+"',"+IDCategoria+",CURDATE(),false)";
-                  st.execute(sqlInsertarActividad);
-                   
-                  
-               }
-              
-           }catch(Exception ex){
-               System.out.println(ex.toString());
-           }
+        try {
+
+            int IDCategoria = 0;
+            if (CategoriaRepetida(act.getCategoria(), IdentificarUsuario(act.getUsuario()))) {
+                String sqlBusquedaCategoria = "select * from Categoria where IDUsuario=" + IdentificarUsuario(act.getUsuario()) + " and NombreCategoria='" + act.getCategoria() + "' ";
+                rs = st.executeQuery(sqlBusquedaCategoria);
+                while (rs.next()) {
+                    IDCategoria = rs.getInt("IDCategoria");
+                }
+                String sqlInsertarActividad = "insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('" + act.getTitulo() + "'," + IDCategoria + ",CURDATE(),false)";
+                st.execute(sqlInsertarActividad);
+
+            } else {
+                String sqlEntradaCategoria = "insert into Categoria (NombreCategoria , IDUsuario) values ('" + act.getCategoria() + "'," + IdentificarUsuario(act.getUsuario()) + ")";
+                String sqlBusquedaCategoria = "select * from Categoria where IDUsuario=" + IdentificarUsuario(act.getUsuario()) + " and NombreCategoria='" + act.getCategoria() + "' ";
+                st = c.createStatement();
+                st.execute(sqlEntradaCategoria);
+                rs = st.executeQuery(sqlBusquedaCategoria);
+                while (rs.next()) {
+                    IDCategoria = rs.getInt("IDCategoria");
+                }
+                String sqlInsertarActividad = "insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('" + act.getTitulo() + "'," + IDCategoria + ",CURDATE(),false)";
+                st.execute(sqlInsertarActividad);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
     }
-            
+
+    public boolean CambiarEstadoActividad(int IDActividad) {
+        boolean ActividadCambiadaExitosa = false;
+        boolean Estado = false;
+        try {
+            Estado=ActividadEstado(IDActividad);
+            String sql = "update Actividad set Estado=? where IDActividad=?";
+            ps = c.prepareStatement(sql);
+            ps.setBoolean(1,!Estado);
+            ps.setInt(2, IDActividad);
+            ps.execute();
+        } catch (Exception ex) {
+
+        }
+
+        return ActividadCambiadaExitosa;
+    }
+
+    private boolean ActividadEstado(int IDActividad) {
+        boolean EstadoActividad = false;
+        
+        try {
+            String sql1 = "Select * from Actividad where IDActividad=?";
+            ps = c.prepareStatement(sql1);
+            ps.setInt(1,IDActividad);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                EstadoActividad = rs.getBoolean("Estado");
+                
+            }
+        } catch (Exception ex) {
+
+        }
+
+        return EstadoActividad;
+    }
+
     public boolean IngresoUsuario(Usuario user) {
         boolean RegistroExitoso = false;
         String sql1 = "select * from Usuario where NombreUsuario=?";

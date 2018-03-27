@@ -35,7 +35,6 @@ IDUsuario int not null,
 foreign key (IDUsuario) references Usuario(IDUsuario));
 select * from Categoria;
 
-insert into Categoria (NombreCategoria ,IDUsuario) values("fsfd",1);
 
 
 create table Actividad(IDActividad int not null primary key auto_increment,
