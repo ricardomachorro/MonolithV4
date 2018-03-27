@@ -6,6 +6,7 @@
 package BaseDatos;
 import java.sql.*;
 import Objetos.*;
+import javax.servlet.http.HttpSession;
 public class Database2 {
     
      String driver = "com.mysql.jdbc.Driver";
@@ -64,7 +65,6 @@ public class Database2 {
         }catch(Exception ex){
         
     }
-        
         return IngresoExitoso;
     }
     

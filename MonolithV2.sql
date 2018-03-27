@@ -66,17 +66,19 @@ foreign key (IDUsuario) references Usuario(IDUsuario));
 
 create table Logro(
 IDLogro int not null auto_increment primary key,
-IDUsuario int not null;
+IDUsuario int not null,
 Img int not null,
 Filtro int not null,
 Nombre varchar(100) not null,
-fecha date not null,
-Costo int not null
+fecha date not null
 );
-insert into Logro(Img,Filtro,Nombre,fecha,costo) values(2,5,'perro #97','2017-05-12',5);
-insert into Logro(Img,Filtro,Nombre,fecha,costo) values(1,7,'perro #12','2017-03-01',10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',30);
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'perro #97','2017-05-12');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'perro #12','2017-03-01');
 select * from Logro;
 
+select * from Usuario;
 
 create table LogroUsuario(IDLogroUsuario int not null auto_increment primary key,
 IDUsuario int not null,

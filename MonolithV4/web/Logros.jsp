@@ -37,7 +37,9 @@
                     <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
@@ -53,11 +55,61 @@
                 </ul>
             </div>
         </nav>
-        <div class="container"> 
+        <%
+            HttpSession sesion = request.getSession();
+            String usuario = sesion.getAttribute("usuario").toString();
+            int IDusuario = 0;
+            Connection con = null;
+            Statement sta = null;
+            ResultSet r = null;
+            String nombre = "";
+            String fecha = "";
+            String perrito = "";
+            int numpe = 0;
+            String fil = "";
+            int puntos = 0;
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
+                sta = con.createStatement();
+                r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
+                if (r.next()) {
+                    IDusuario = Integer.parseInt(r.getString("IDUsuario"));
+                    puntos = Integer.parseInt(r.getString("Puntos"));
+                }
+
+        %>
+        <div class="container">
+            <div class="row ">
+                <div class="col-12">
+                    <center><h1>Logros de <%=usuario%></h1></center>
+                </div>
+            </div>
             <div class="row">
-                <div class="col">
+                <div class="col-3">
+                    <%
+                        if (puntos > 0) {
+                    %>
                     <form action="LogrosAgre.jsp" method="post">
                         <input type="submit" class="btn btn-dark" value="Agregar">
+                    </form> 
+                    <%
+                        } else {%>
+                        <input type="submit" class="btn btn-danger" value="sin puntos">
+                        <%
+                        }
+                    %>
+
+                </div>
+                <div class="col-3">
+                    <h3>Cuestan 5 puntos cada dogo</h3>
+                </div>
+                <div class="col-3 ">
+                    <h3>Tienes un total de <%=puntos%> puntos</h3>
+                </div>
+                <div class="col-3">
+                    <form action="LogrosAgre.jsp" method="post">
+                        <input type="submit" class="btn btn-success" value="Intercambio">
                     </form>
                 </div>
             </div>
@@ -67,35 +119,21 @@
                     <div class="card-columns">
 
                         <%
-                            Connection con = null;
-                            Statement sta = null;
-                            ResultSet r = null;
-                            String nombre = "";
-                            String fecha = "";
-                            String perrito="";
-                            int numpe=0;
-                            String fil="";
-                            int costo = 0;
-                            try {
-                                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
-                                sta = con.createStatement();
-                                r = sta.executeQuery("select * from Logro");
-                                while (r.next()) {
-                                    numpe=Integer.parseInt(r.getString("Img"));
-                                    fil="filtro"+r.getString("Filtro");
-                                    perrito="dogo"+numpe+".jpg";
-                                    nombre = r.getString("Nombre");
-                                    fecha = r.getString("fecha");
-                                    costo = Integer.parseInt(r.getString("Costo"));
-                                    
+                            r = sta.executeQuery("select * from Logro where IDUsuario='" + IDusuario + "'");
+                            while (r.next()) {
+                                numpe = Integer.parseInt(r.getString("Img"));
+                                fil = "filtro" + r.getString("Filtro");
+                                perrito = "dogo" + numpe + ".jpg";
+                                nombre = r.getString("Nombre");
+                                fecha = r.getString("fecha");
+
                         %>
                         <div class="card">
                             <img src="img/<%=perrito%>" class="card-img-top <%=fil%>" alt="" width=250px" height="250px">
                             <div class="card-body">
                                 <h5 class="card-title"><%=nombre%></h5>
                                 <p>El dogo se consiguio el <%=fecha%></p>
-                                <p>Este dogo tiene un costo de <%=costo%> actividades</p>
+
                             </div>
                         </div>
 
