@@ -163,7 +163,7 @@
                                             ResultSet rs = st.executeQuery("select * from Actividad");
                                             while (rs.next()) {
                                                 out.println("<div class='card-deck'>");
-                                                out.println(" <div class='card ActividadCarta ActividadActiva' >");
+                                                out.println(" <div class='card ActividadCarta ActividadActiva' id='"+rs.getInt("IDActividad")+"' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
                                                 out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
@@ -185,7 +185,7 @@
                                                 out.println("<input class='form-control txtCategoria' type='text' placeholder='Categoria'>");
                                                 out.println("<div class='btn-group btn-group-sm GrupoBotonesActividad float-left' role='group' >");
                                                 out.println(" <button type='button' class='btn btn-secondary btn-activity btnSave' id='"+rs.getInt("IDActividad")+"'><img src='img/save.svg'></button>");
-                                                out.println("<button type='button' class='btn btn-secondary btn-activity'> <img src='img/garbageWhite.svg'></button>");
+                                                out.println("<button type='button' class='btn btn-secondary btn-activity btnDrop'> <img src='img/garbageWhite.svg'></button>");
                                                  out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
                                                 out.println("</div>");
                                                 out.println("</form>");
@@ -198,35 +198,35 @@
                                         %>
 
 
-                                       <!-- <div class="card-deck">
-                                            <div class="card ActividadCarta ActividadActiva" >
-                                                <div class="card-body" >
-                                                    <div class="row "  >
-                                                        <div class="col-10" data-toggle="collapse" href="#Col1" >
-                                                            <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:Pendiente/Nula</h5>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <input class="CheckBoxActividades float-right" type="checkbox">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="collapse row OpccionesAcividad" id="Col1" >
-                                                        <form class="form-inline">
-                                                            <input class="form-control"  type="text" placeholder="Nombre Activdad">
-                                                            <input class="form-control"  type="text" placeholder="Fecha Activdad">
-                                                            <input class="form-control" type="text" placeholder="Categoria">
-                                                            <div class="btn-group btn-group-sm GrupoBotonesActividad float-left" role="group" >
-                                                                <button type="button" class="btn btn-secondary btn-activity"><img src="img/save.svg"></button>
-                                                                <button type="button" class="btn btn-secondary btn-activity"> <img src="img/garbageWhite.svg"></button>
-                                                                <button type="button" class="btn btn-secondary btn-activity"><img src="img/placeholderWhite.svg"></button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
+                                        <!-- <div class="card-deck">
+                                             <div class="card ActividadCarta ActividadActiva" >
+                                                 <div class="card-body" >
+                                                     <div class="row "  >
+                                                         <div class="col-10" data-toggle="collapse" href="#Col1" >
+                                                             <h5>Nombre Actividad:Actividad1     Fecha:16/03/2018   Localización:Pendiente/Nula</h5>
+                                                         </div>
+                                                         <div class="col-2">
+                                                             <input class="CheckBoxActividades float-right" type="checkbox">
+                                                         </div>
+                                                     </div>
+ 
+                                                     <div class="collapse row OpccionesAcividad" id="Col1" >
+                                                         <form class="form-inline">
+                                                             <input class="form-control"  type="text" placeholder="Nombre Activdad">
+                                                             <input class="form-control"  type="text" placeholder="Fecha Activdad">
+                                                             <input class="form-control" type="text" placeholder="Categoria">
+                                                             <div class="btn-group btn-group-sm GrupoBotonesActividad float-left" role="group" >
+                                                                 <button type="button" class="btn btn-secondary btn-activity"><img src="img/save.svg"></button>
+                                                                 <button type="button" class="btn btn-secondary btn-activity"> <img src="img/garbageWhite.svg"></button>
+                                                                 <button type="button" class="btn btn-secondary btn-activity"><img src="img/placeholderWhite.svg"></button>
+                                                             </div>
+                                                         </form>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>-->
                                         <!--Fin Actividad Abierta-->
-                                        
+
 
                                     </div>
                                 </div>
@@ -264,8 +264,8 @@
                                           out.println(" <li><img src='img/folderOrange.svg'>"+rs2.getString("NombreCategoria")+"</li>");
                                       }
                                     %>
-                                   <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
-                                    
+                                    <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
+
 
                                 </ul>
                             </div>
@@ -334,22 +334,22 @@
                     },
                     type: 'post',
                     success: function (data) {
-                           $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >" +
+                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' id='"+data.toString()+"' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
-                                "<div class='col-10' data-toggle='collapse' href='#Col"+data.toString()+"'>" +
+                                "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
                                 " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
-                                " <input class='CheckBoxActividades float-right' id='"+data.toString()+"'  type='checkbox' >" +
+                                " <input class='CheckBoxActividades float-right' id='" + data.toString() + "'  type='checkbox' >" +
                                 " </div>" +
-                                "<div class='collapse row OpccionesAcividad' id='Col"+data.toString()+"' >" +
+                                "<div class='collapse row OpccionesAcividad' id='Col" + data.toString() + "' >" +
                                 " <form class='form-inline'>" +
                                 "<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>" +
                                 "<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>" +
                                 "<input class='form-control txtCategoria' type='text' placeholder='Categoria'>" +
                                 "<div class='btn-group btn-group-sm  btn-activity' role='group' >" +
-                                "<button type='button' class='btn btn-secondary btnSave' id='"+data.toString()+"'><img src='img/save.svg'></button>" +
+                                "<button type='button' class='btn btn-secondary btnSave' id='" + data.toString() + "'><img src='img/save.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>" +
                                 "</div>" +
@@ -368,7 +368,7 @@
                         alert("Error");
                     }, complete: function () {
                         // Handle the complete event
-                        
+
 
 
                     }
@@ -376,54 +376,83 @@
 
             }
             );
-    
-          $(".CheckBoxActividades").click(function(){
-              var IDActividad=$(this).attr("id");
-              $.ajax({
-                       url:"ChequeoActividad",
-                       data:{
-                           IDActividad:IDActividad.toString()
-                       },
-                       type:'post',
-                       sucess:function(){
-                           
-                       },
-                       error:function(){
-                           alert("Error");
-                       },
-                       complete: function(){
+
+            $(".CheckBoxActividades").click(function () {
+                var IDActividad = $(this).attr("id");
+                $.ajax({
+                    url: "ChequeoActividad",
+                    data: {
+                        IDActividad: IDActividad.toString()
+                    },
+                    type: 'post',
+                    sucess: function () {
+
+                    },
+                    error: function () {
+                        alert("Error");
+                    },
+                    complete: function () {
+
+                    }
+
+
+                });
+            });
+
+
+            $(".btnSave").click(function () {
+                var IDActividad = $(this).attr("id");
+                var inputNombre = $(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
+                var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
+                var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
+                var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
+                ;
+                $.ajax({
+                    url: "CambiosActividad",
+                    type: 'post',
+                    data: {
+                        IDActivity: IDActividad,
+                        NombreActivity: inputNombre,
+                        FechaActividad: inputFecha,
+                        CategoriaActividad: inputCategoria
+                    },
+                    success: function () {
+                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
+                    },
+                    error: {
+
+                    },
+                    complete: function () {
+
+                    }
+
+                });
+
+
+            });
+
+
+            $(".btnDrop").click(function () {
+                var Elemento=$(this).closest(".ActividadCarta");
+                var IDActividad = $(this).closest(".ActividadCarta").attr("id");
+                $.ajax({
+                    url:"EliminarActividad",
+                    type: 'post',
+                    data: {
+                        IDActivity: IDActividad
+                    },
+                    success:function() {
+                         Elemento.parent().remove();
                         
-                       }
-                       
-                       
-                   });
-          });
+                    },
+                    error: function(){
 
+                    },
+                    complete: function () {
 
-           $(".btnSave").click(function(){
-              var IDActividad=$(this).attr("id");
-              var inputNombre=$(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
-              var inputFecha=$(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
-              var inputCategoria=$(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
-              var mensajeActividad=$(this).closest(".ActividadCarta").find("h5.ActividadMensaje");;
-                     $.ajax({
-                         url:"CambiosActividad",
-                         type:'post',
-                         data:{
-                            IDActivity:IDActividad,
-                            NombreActivity:inputNombre,
-                            FechaActividad:inputFecha,
-                            CategoriaActividad:inputCategoria
-                         },
-                         success:function(){
-                             mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
-                         },
-                         error:{
-                             
-                         }
-                         
-                     });
-           });
+                    }
+                });
+            });
         </script>
 
     </body>

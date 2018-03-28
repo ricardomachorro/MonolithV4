@@ -43,5 +43,13 @@
         <servlet-name>CambiosActividad</servlet-name>
         <url-pattern>/CambiosActividad</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EliminarActividad</servlet-name>
+        <servlet-class>Servlets.EliminarActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarActividad</servlet-name>
+        <url-pattern>/EliminarActividad</url-pattern>
+    </servlet-mapping>
     
 </web-app>

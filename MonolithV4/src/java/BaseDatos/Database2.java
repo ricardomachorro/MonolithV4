@@ -114,6 +114,18 @@ public class Database2 {
         return ActividadCambiadaExitosa;
     }
 
+    public void EliminarActividad(int IDActividad){
+        try {
+            String sql1 = "delete from Actividad where IDActividad=?";
+            ps = c.prepareStatement(sql1);
+            ps.setInt(1,IDActividad);
+            ps.execute();
+           
+        } catch (Exception ex) {
+
+        }
+    }
+    
     private boolean ActividadEstado(int IDActividad) {
         boolean EstadoActividad = false;
         
