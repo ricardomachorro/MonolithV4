@@ -167,7 +167,7 @@
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
                                                 out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
-                                                out.println("<h5>Nombre Actividad: "+rs.getString("Nombre")+ "  Fecha:"+rs.getString("Fecha")+" Localización:Pendiente/Nula</h5>");
+                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: "+rs.getString("Nombre")+ "  Fecha:"+rs.getString("Fecha")+" Localización:Pendiente/Nula</h5>");
                                                 out.println("</div>");
                                                 out.println(" <div class='col-2'>");
                                                 if(rs.getBoolean("Estado")){
@@ -338,7 +338,7 @@
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col"+data.toString()+"'>" +
-                                " <h5>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
+                                " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
                                 " <input class='CheckBoxActividades float-right' id='"+data.toString()+"'  type='checkbox' >" +
@@ -402,20 +402,21 @@
 
            $(".btnSave").click(function(){
               var IDActividad=$(this).attr("id");
-              var inputNombre=$(this).closest(".OpccionesAcividad").find("input.txtNombre").val();
+              var inputNombre=$(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
               var inputFecha=$(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
               var inputCategoria=$(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
+              var mensajeActividad=$(this).closest(".ActividadCarta").find("h5.ActividadMensaje");;
                      $.ajax({
                          url:"CambiosActividad",
                          type:'post',
                          data:{
                             IDActivity:IDActividad,
-                            NombreActividad:inputNombre,
+                            NombreActivity:inputNombre,
                             FechaActividad:inputFecha,
                             CategoriaActividad:inputCategoria
                          },
-                         success:{
-                             
+                         success:function(){
+                             mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
                          },
                          error:{
                              
