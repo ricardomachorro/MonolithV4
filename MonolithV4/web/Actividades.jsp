@@ -163,37 +163,37 @@
                                             ResultSet rs = st.executeQuery("select * from Actividad");
                                             while (rs.next()) {
                                                 out.println("<div class='card-deck'>");
-                                                out.println(" <div class='card ActividadCarta ActividadActiva' id='"+rs.getInt("IDActividad")+"' >");
+                                                out.println(" <div class='card ActividadCarta ActividadActiva' id='" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
                                                 out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
-                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: "+rs.getString("Nombre")+ "  Fecha:"+rs.getString("Fecha")+" Localización:Pendiente/Nula</h5>");
+                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: " + rs.getString("Nombre") + "  Fecha:" + rs.getString("Fecha") + " Localización:Pendiente/Nula</h5>");
                                                 out.println("</div>");
                                                 out.println(" <div class='col-2'>");
-                                                if(rs.getBoolean("Estado")){
-                                                    out.println(" <input class='CheckBoxActividades float-right' id='"+rs.getInt("IDActividad")+"' checked type='checkbox' >");
-                                                }else{
-                                                    out.println(" <input class='CheckBoxActividades float-right' id='"+rs.getInt("IDActividad")+"'  type='checkbox' >");
+                                                if (rs.getBoolean("Estado")) {
+                                                    out.println(" <input class='CheckBoxActividades float-right' id='" + rs.getInt("IDActividad") + "' checked type='checkbox' >");
+                                                } else {
+                                                    out.println(" <input class='CheckBoxActividades float-right' id='" + rs.getInt("IDActividad") + "'  type='checkbox' >");
                                                 }
-                                                
+
                                                 out.println("</div>");
                                                 out.println("</div>");
-                                                out.println("<div class='collapse row OpccionesAcividad' id='Col"+rs.getInt("IDActividad")+"' >");
-                                               out.println("<form class='form-inline'>");
+                                                out.println("<div class='collapse row OpccionesAcividad' id='Col" + rs.getInt("IDActividad") + "' >");
+                                                out.println("<form class='form-inline'>");
                                                 out.println("<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>");
                                                 out.println("<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>");
                                                 out.println("<input class='form-control txtCategoria' type='text' placeholder='Categoria'>");
                                                 out.println("<div class='btn-group btn-group-sm GrupoBotonesActividad float-left' role='group' >");
-                                                out.println(" <button type='button' class='btn btn-secondary btn-activity btnSave' id='"+rs.getInt("IDActividad")+"'><img src='img/save.svg'></button>");
+                                                out.println(" <button type='button' class='btn btn-secondary btn-activity btnSave' id='" + rs.getInt("IDActividad") + "'><img src='img/save.svg'></button>");
                                                 out.println("<button type='button' class='btn btn-secondary btn-activity btnDrop'> <img src='img/garbageWhite.svg'></button>");
-                                                 out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
+                                                out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
                                                 out.println("</div>");
                                                 out.println("</form>");
                                                 out.println("</div>");
                                                 out.println("</div>");
                                                 out.println("</div>");
                                                 out.println("</div>");
-                                                
+
                                             }
                                         %>
 
@@ -258,11 +258,11 @@
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
                                     <%
-                                      Statement st2 = conexion.createStatement();
-                                      ResultSet rs2 = st.executeQuery("select * from Categoria");
-                                      while(rs2.next()){
-                                          out.println(" <li><img src='img/folderOrange.svg'>"+rs2.getString("NombreCategoria")+"</li>");
-                                      }
+                                        Statement st2 = conexion.createStatement();
+                                        ResultSet rs2 = st.executeQuery("select * from Categoria");
+                                        while (rs2.next()) {
+                                            out.println(" <li><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
+                                        }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
 
@@ -334,7 +334,7 @@
                     },
                     type: 'post',
                     success: function (data) {
-                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' id='"+data.toString()+"' >" +
+                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
@@ -350,7 +350,7 @@
                                 "<input class='form-control txtCategoria' type='text' placeholder='Categoria'>" +
                                 "<div class='btn-group btn-group-sm  btn-activity' role='group' >" +
                                 "<button type='button' class='btn btn-secondary btnSave' id='" + data.toString() + "'><img src='img/save.svg'></button>" +
-                                "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>" +
+                                "<button type='button' class='btn btn-secondary btnDrop'> <img src='img/garbageWhite.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>" +
                                 "</div>" +
                                 "</form>" +
@@ -363,6 +363,83 @@
                             $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +
                                     NombreCategoria + "</li>");
                         }
+                        $(".btnDrop").click(function () {
+                            var Elemento = $(this).closest(".ActividadCarta");
+                            var IDActividad = $(this).closest(".ActividadCarta").attr("id");
+                            $.ajax({
+                                url: "EliminarActividad",
+                                type: 'post',
+                                data: {
+                                    IDActivity: IDActividad
+                                },
+                                success: function () {
+                                    Elemento.parent().remove();
+
+                                },
+                                error: function () {
+
+                                },
+                                complete: function () {
+
+                                }
+                            });
+                        });
+
+                        $(".CheckBoxActividades").click(function () {
+                            var IDActividad = $(this).attr("id");
+                            $.ajax({
+                                url: "ChequeoActividad",
+                                data: {
+                                    IDActividad: IDActividad.toString()
+                                },
+                                type: 'post',
+                                sucess: function () {
+
+                                },
+                                error: function () {
+                                    alert("Error");
+                                },
+                                complete: function () {
+
+                                }
+
+
+                            });
+                        });
+
+
+                        $(".btnSave").click(function () {
+                            var IDActividad = $(this).attr("id");
+                            var inputNombre = $(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
+                            var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
+                            var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
+                            var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
+                            ;
+                            $.ajax({
+                                url: "CambiosActividad",
+                                type: 'post',
+                                data: {
+                                    IDActivity: IDActividad,
+                                    NombreActivity: inputNombre,
+                                    FechaActividad: inputFecha,
+                                    CategoriaActividad: inputCategoria
+                                },
+                                success: function () {
+                                    mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
+                                },
+                                error: {
+
+                                },
+                                complete: function () {
+
+                                }
+
+                            });
+
+
+                        });
+
+
                     },
                     error: function () {
                         alert("Error");
@@ -433,19 +510,19 @@
 
 
             $(".btnDrop").click(function () {
-                var Elemento=$(this).closest(".ActividadCarta");
+                var Elemento = $(this).closest(".ActividadCarta");
                 var IDActividad = $(this).closest(".ActividadCarta").attr("id");
                 $.ajax({
-                    url:"EliminarActividad",
+                    url: "EliminarActividad",
                     type: 'post',
                     data: {
                         IDActivity: IDActividad
                     },
-                    success:function() {
-                         Elemento.parent().remove();
-                        
+                    success: function () {
+                        Elemento.parent().remove();
+
                     },
-                    error: function(){
+                    error: function () {
 
                     },
                     complete: function () {
