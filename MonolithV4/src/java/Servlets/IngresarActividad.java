@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.json.JsonWriter;
+import javax.json.*;
+import com.google.gson.*;
 
 @WebServlet(name = "IngresarActividad", urlPatterns = {"/IngresarActividad"})
 public class IngresarActividad extends HttpServlet {
@@ -56,8 +57,9 @@ public class IngresarActividad extends HttpServlet {
             act.setUsuario(Usuario);
             act.setTitulo(Titulo);
             Database2 db = new Database2();
-            db.IngresoActividad(act);
-          
+           int IDActividad=db.IngresoActividad(act);
+             response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write(Integer.toString(IDActividad));
 
         } catch (Exception ex) {
               System.out.println(ex.toString());

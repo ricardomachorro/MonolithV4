@@ -26,11 +26,12 @@ public class Database2 {
 
     }
 
-    public void IngresoActividad(Actividad act) {
+    public int IngresoActividad(Actividad act) {
+        int IDActividad=0;
         try {
-
+            
             int IDCategoria = 0;
-            if (CategoriaRepetida(act.getCategoria(), IdentificarUsuario(act.getUsuario()))) {
+            if (CategoriaExistente(act.getCategoria(), IdentificarUsuario(act.getUsuario()))) {
                 String sqlBusquedaCategoria = "select * from Categoria where IDUsuario=" + IdentificarUsuario(act.getUsuario()) + " and NombreCategoria='" + act.getCategoria() + "' ";
                 rs = st.executeQuery(sqlBusquedaCategoria);
                 while (rs.next()) {
@@ -50,14 +51,52 @@ public class Database2 {
                 }
                 String sqlInsertarActividad = "insert into Actividad(Nombre,IDCategoria,Fecha,Estado) values('" + act.getTitulo() + "'," + IDCategoria + ",CURDATE(),false)";
                 st.execute(sqlInsertarActividad);
-
+                String sqlActividadID="select * from Actividad where IDActividad=(select max(IDActividad) from Actividad)";
+                rs=st.executeQuery(sqlActividadID);
+                while (rs.next()) {
+                    IDActividad = rs.getInt("IDActividad");
+                }
             }
 
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
+        return  IDActividad;
     }
 
+    public boolean ActualizacionActividad(int IDActividad,String Nombre,String Categoria,String Usuario){
+        boolean ActActualizada=false;
+        try{
+            if(CategoriaExistente(Categoria, IdentificarUsuario(Usuario))){
+                String sqlUpdateActividad="update Actividad set Nombre=? where IDActividad=?";
+                ps=c.prepareStatement(sqlUpdateActividad);
+                ps.setString(1, Nombre);
+                ps.setInt(2,IDActividad);
+                ps.execute();
+            }else{
+                int IDCategoria=0;
+                String sqlEntradaCategoria = "insert into Categoria (NombreCategoria , IDUsuario) values ('" + Categoria + "'," + IdentificarUsuario(Usuario) + ")";
+                String sqlBusquedaCategoria = "select * from Categoria where IDUsuario=" + IdentificarUsuario(Usuario) + " and NombreCategoria='" + Categoria + "' ";
+                st = c.createStatement();
+                st.execute(sqlEntradaCategoria);
+                rs = st.executeQuery(sqlBusquedaCategoria);
+                while (rs.next()) {
+                    IDCategoria = rs.getInt("IDCategoria");
+                }
+                String sqlUpdateActividad="update Actividad set Nombre=?,IDCategoria=? where IDActividad=?";
+                ps=c.prepareStatement(sqlUpdateActividad);
+                ps.setString(1, Nombre);
+                ps.setInt(2,IDCategoria);
+                ps.setInt(3, IDActividad);
+                ps.execute();
+            }
+            
+        }catch(Exception ex){
+            
+        }
+        return ActActualizada;
+    }
+    
     public boolean CambiarEstadoActividad(int IDActividad) {
         boolean ActividadCambiadaExitosa = false;
         boolean Estado = false;
@@ -155,7 +194,7 @@ public class Database2 {
         return ID;
     }
 
-    public boolean CategoriaRepetida(String Categoria, int IDUsuario) {
+    public boolean CategoriaExistente(String Categoria, int IDUsuario) {
         boolean Repetida = false;
         try {
             String sql = "select * from Categoria where NombreCategoria=? and IDUsuario=?";

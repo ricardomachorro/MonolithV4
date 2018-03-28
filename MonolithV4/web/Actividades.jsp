@@ -166,7 +166,7 @@
                                                 out.println(" <div class='card ActividadCarta ActividadActiva' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
-                                                out.println("<div class='col-10' data-toggle='collapse' href='#" + rs.getInt("IDActividad") + "' >");
+                                                out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<h5>Nombre Actividad: "+rs.getString("Nombre")+ "  Fecha:"+rs.getString("Fecha")+" Localización:Pendiente/Nula</h5>");
                                                 out.println("</div>");
                                                 out.println(" <div class='col-2'>");
@@ -178,13 +178,13 @@
                                                 
                                                 out.println("</div>");
                                                 out.println("</div>");
-                                                out.println("<div class='collapse row OpccionesAcividad' id='"+rs.getInt("IDActividad")+"' >");
+                                                out.println("<div class='collapse row OpccionesAcividad' id='Col"+rs.getInt("IDActividad")+"' >");
                                                out.println("<form class='form-inline'>");
-                                                out.println("<input class='form-control'  type='text' placeholder='Nombre Activdad'>");
-                                                out.println("<input class='form-control'  type='text' placeholder='Fecha Activdad'>");
-                                                out.println("<input class='form-control' type='text' placeholder='Categoria'>");
+                                                out.println("<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>");
+                                                out.println("<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>");
+                                                out.println("<input class='form-control txtCategoria' type='text' placeholder='Categoria'>");
                                                 out.println("<div class='btn-group btn-group-sm GrupoBotonesActividad float-left' role='group' >");
-                                                out.println(" <button type='button' class='btn btn-secondary btn-activity'><img src='img/save.svg'></button>");
+                                                out.println(" <button type='button' class='btn btn-secondary btn-activity btnSave' id='"+rs.getInt("IDActividad")+"'><img src='img/save.svg'></button>");
                                                 out.println("<button type='button' class='btn btn-secondary btn-activity'> <img src='img/garbageWhite.svg'></button>");
                                                  out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
                                                 out.println("</div>");
@@ -333,29 +333,23 @@
 
                     },
                     type: 'post',
-                    sucess: function () {
-
-                    },
-                    error: function () {
-                        alert("Error");
-                    }, complete: function () {
-                        // Handle the complete event
-                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >" +
+                    success: function (data) {
+                           $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
-                                "<div class='col-10' data-toggle='collapse' href='#Col2'>" +
+                                "<div class='col-10' data-toggle='collapse' href='#Col"+data.toString()+"'>" +
                                 " <h5>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
-                                "<input class='CheckBoxActividades float-right' type='checkbox'>" +
+                                " <input class='CheckBoxActividades float-right' id='"+data.toString()+"'  type='checkbox' >" +
                                 " </div>" +
-                                "<div class='collapse row OpccionesAcividad' id='Col2' >" +
+                                "<div class='collapse row OpccionesAcividad' id='Col"+data.toString()+"' >" +
                                 " <form class='form-inline'>" +
-                                "<input class='form-control'  type='text' placeholder='Nombre Activdad'>" +
-                                "<input class='form-control'  type='text' placeholder='Fecha Activdad'>" +
-                                "<input class='form-control' type='text' placeholder='Categoria'>" +
+                                "<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>" +
+                                "<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>" +
+                                "<input class='form-control txtCategoria' type='text' placeholder='Categoria'>" +
                                 "<div class='btn-group btn-group-sm  btn-activity' role='group' >" +
-                                "<button type='button' class='btn btn-secondary'><img src='img/save.svg'></button>" +
+                                "<button type='button' class='btn btn-secondary btnSave' id='"+data.toString()+"'><img src='img/save.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary'> <img src='img/garbageWhite.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>" +
                                 "</div>" +
@@ -369,6 +363,12 @@
                             $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +
                                     NombreCategoria + "</li>");
                         }
+                    },
+                    error: function () {
+                        alert("Error");
+                    }, complete: function () {
+                        // Handle the complete event
+                        
 
 
                     }
@@ -392,13 +392,37 @@
                            alert("Error");
                        },
                        complete: function(){
-                           alert("unciona");
+                        
                        }
                        
                        
                    });
           });
 
+
+           $(".btnSave").click(function(){
+              var IDActividad=$(this).attr("id");
+              var inputNombre=$(this).closest(".OpccionesAcividad").find("input.txtNombre").val();
+              var inputFecha=$(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
+              var inputCategoria=$(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
+                     $.ajax({
+                         url:"CambiosActividad",
+                         type:'post',
+                         data:{
+                            IDActivity:IDActividad,
+                            NombreActividad:inputNombre,
+                            FechaActividad:inputFecha,
+                            CategoriaActividad:inputCategoria
+                         },
+                         success:{
+                             
+                         },
+                         error:{
+                             
+                         }
+                         
+                     });
+           });
         </script>
 
     </body>
