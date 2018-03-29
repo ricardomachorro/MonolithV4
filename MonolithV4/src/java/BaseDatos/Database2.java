@@ -126,6 +126,18 @@ public class Database2 {
         }
     }
     
+    public void EliminarCategoria( String Usuario, String Categoria){
+        try{
+            
+            int IDUsuario=IdentificarUsuario(Usuario);    
+            String sql1 = "delete from Categoria where IDUsuario="+IDUsuario+" and NombreCategoria='"+Categoria+"'";
+          st = c.createStatement();
+          st.execute(sql1);
+        }catch(Exception ex){
+            
+        }
+    }
+    
     private boolean ActividadEstado(int IDActividad) {
         boolean EstadoActividad = false;
         

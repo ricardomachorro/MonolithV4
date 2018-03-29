@@ -160,9 +160,10 @@
 
                                         <%
                                             Statement st = conexion.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from Actividad");
+                                            ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria where Actividad.IDCategoria=Categoria.IDCategoria ");
+                      
                                             while (rs.next()) {
-                                                out.println("<div class='card-deck'>");
+                                                out.println("<div class='card-deck ActividadesCard "+rs.getString("NombreCategoria")+"'>");
                                                 out.println(" <div class='card ActividadCarta ActividadActiva' id='" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
@@ -254,6 +255,20 @@
                         </div>
                     </div>
                     <div class="card-deck">
+                        <div class="card"  >
+                            <div class="card-body" >
+                               <div class="row SeccionEliminarCategoria" >
+                                    <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <input type="text" id="EliminarActividadtxt" name="EliminarActividadtxt" class="form-control" placeholder="Categoria a Elimininar" >
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <button class="btn-primary" id="BtnEliminarCategoria">Eliminar Categoria</button>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-deck">
                         <div class="card ListasLaterales"  >
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
@@ -334,7 +349,7 @@
                     },
                     type: 'post',
                     success: function (data) {
-                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
+                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard "+NombreCategoria+"'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
@@ -426,6 +441,7 @@
                                 },
                                 success: function () {
                                     mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
+                                    
                                 },
                                 error: {
 
@@ -529,6 +545,30 @@
 
                     }
                 });
+            });
+            
+            $("#BtnEliminarCategoria").click(function(){
+                 var NombreCategoriatext=$("#EliminarActividadtxt").val().toString();
+                        $.ajax({
+                            url:"EliminarCategoria",
+                            type:'post',
+                            data:
+                                {
+                                NombreCategoria:NombreCategoriatext
+                            },
+                            error:function(){
+                                alert("Error");
+                            },
+                            success:function(){
+                                $("#"+NombreCategoriatext).remove();
+                               $("#EliminarActividadtxt").val("");
+                               $("."+NombreCategoriatext).remove()
+                            },
+                            complete:function(){
+                                
+                            }
+                            
+                        });
             });
         </script>
 

@@ -95,6 +95,17 @@ body{
    background-color:#f7d494;
 }
 
+
+.SeccionEliminarCategoria input[type='text']{
+    width:"100%";
+}
+
+.eccionEliminarCategoria button{
+    background-color:#0062cc;
+    height:40px;
+    width:100%;
+}
+
 .ContenedoresLaterales{
     margin-top:10px;
 }
