@@ -15,7 +15,7 @@
         <%
             HttpSession seci = request.getSession();
             seci.setAttribute("nivel", null);
-            seci.setAttribute("user", null);
+            seci.setAttribute("usuario", null);
             session.invalidate();
             response.sendRedirect("index.jsp");
         %>

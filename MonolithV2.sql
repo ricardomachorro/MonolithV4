@@ -63,6 +63,7 @@ Nombre varchar(100),
 Conteneido text,
 IDUsuario int,
 foreign key (IDUsuario) references Usuario(IDUsuario));
+/*desde aqui le modifique*/
 
 create table Logro(
 IDLogro int not null auto_increment primary key,
@@ -74,12 +75,31 @@ fecha date not null
 );
 insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
 insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',30);
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'perro #97','2017-05-12');
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'perro #12','2017-03-01');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'dogo #97','2017-05-12');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'dogo #12','2017-03-01');
 select * from Logro;
-
 select * from Usuario;
 
+create table Intercambio(
+IDInter int not null auto_increment primary key,
+IDusuarioDa int not null,
+IDusuarioRe int not null,
+UsuarioDa varchar(100) not null,
+UsuarioRe varchar(100) not null,
+IDdogoDa int not null,
+IDdogoRe int not null,
+FiltroDa varchar(100) not null,
+ImgdogoDa int not null,
+dogoDa varchar(100) not null,
+dogoRe int not null,
+Estado varchar(100) not null,
+fecha date not null
+);
+select * from Intercambio;
+
+
+
+/*aqui termine*/
 create table LogroUsuario(IDLogroUsuario int not null auto_increment primary key,
 IDUsuario int not null,
 IDLogro int not null,

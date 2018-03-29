@@ -18,6 +18,14 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <%
+            HttpSession sesion = request.getSession();
+
+            if (sesion.getAttribute("usuario") == null) {
+                out.println("<script>location.replace('index.jsp');</script>");
+            } else {
+                String usuario = sesion.getAttribute("usuario").toString();
+        %>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -56,8 +64,6 @@
             </div>
         </nav>
         <%
-            HttpSession sesion = request.getSession();
-            String usuario = sesion.getAttribute("usuario").toString();
             int IDusuario = 0;
             Connection con = null;
             Statement sta = null;
@@ -94,9 +100,9 @@
                         <input type="submit" class="btn btn-dark" value="Agregar">
                     </form> 
                     <%
-                        } else {%>
-                        <input type="submit" class="btn btn-danger" value="sin puntos">
-                        <%
+                    } else {%>
+                    <input type="submit" class="btn btn-danger" value="sin puntos">
+                    <%
                         }
                     %>
 
@@ -109,7 +115,7 @@
                 </div>
                 <div class="col-3">
                     <form action="LogrosAgre.jsp" method="post">
-                        <input type="submit" class="btn btn-success" value="Intercambio">
+                        <a type="button" class="btn btn-primary" href="Inter.jsp">Intercambios</a>
                     </form>
                 </div>
             </div>
@@ -138,8 +144,9 @@
                         </div>
 
                         <%   }
-                            } catch (SQLException error) {
-                                out.print(error.toString());
+                                } catch (SQLException error) {
+                                    out.print(error.toString());
+                                }
                             }
                         %>
 

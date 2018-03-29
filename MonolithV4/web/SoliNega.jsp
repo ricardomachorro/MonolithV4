@@ -1,9 +1,8 @@
 <%-- 
-    Document   : agregar
-    Created on : 6/03/2018, 11:58:35 AM
-    Author     : INSPIRON
+    Document   : SoliNega
+    Created on : 28/03/2018, 12:58:50 PM
+    Author     : memo0
 --%>
-
 <%@page import="java.sql.*, java.io.*,java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,18 +21,13 @@
     </head>
     <body>
         <%
-                int IDusuario = 0;
-                Random rand = new Random();
-                int n = rand.nextInt(100) + 1;
-                int img = rand.nextInt(7) + 1;
-                int fil = rand.nextInt(11) + 1;
+                int IDInter = Integer.parseInt(request.getParameter("id"));
                 Calendar fechita = new GregorianCalendar();
                 int año = fechita.get(Calendar.YEAR);
                 int mes = fechita.get(Calendar.MONTH);
                 int dia = fechita.get(Calendar.DAY_OF_MONTH);
                 int meschido = mes + 1;
                 String fecha1 = "" + año + "-" + meschido + "-" + dia;
-                int costo1 = 0;
 
                 try {
                     Connection con = null;
@@ -42,15 +36,9 @@
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                     con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
                     sta = con.createStatement();
-                    r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
-
-                    if (r.next()) {
-                        IDusuario = Integer.parseInt(r.getString("IDUsuario"));
-                        costo1 = Integer.parseInt(r.getString("Puntos"));
-                    }
-                    int costochido = costo1 - 5;
-                    sta.executeUpdate("Insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(" + IDusuario + "," + img + "," + fil + ",'dogo #" + n + "','" + fecha1 + "')");
-                    sta.executeUpdate("update Usuario set Puntos=" + costochido + " where IDUsuario = " + IDusuario + ";");
+                    //sta.executeUpdate("Insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values("+IDusuario+"," + img + "," + fil + ",'perro #" + n + "','" + fecha1 + "')");
+                    sta.executeUpdate("update Intercambio set Estado='negado',fecha='" + fecha1 + "' where IDInter = " + IDInter + ";");
+                    out.println("<script>alert('Intercambio negado')</script>");
                     out.println("<script>location.replace('Logros.jsp');</script>");
                 } catch (SQLException error) {
                     out.print(error.toString());
