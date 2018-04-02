@@ -58,13 +58,8 @@ filter: hue-rotate(45deg);
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
 }
+
 .filtro10{
-    width: 100%;
-    filter: drop-shadow(10px -16px 30px black);
-    -webkit-filter: drop-shadow(10px -16px 30px black);
-    -moz-filter: drop-shadow(10px -16px 30px black);
-}
-.filtro11{
     width: 100%;
     
 }
