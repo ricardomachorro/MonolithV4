@@ -17,7 +17,7 @@
         
     </head>
     <body>
-        <a href="#Inicio">
+        <a href="index.html">
             <img id="logo" src="img/Logo.svg"/>
         </a>
         <div id="contenedor">
