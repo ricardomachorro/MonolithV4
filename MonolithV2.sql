@@ -52,16 +52,16 @@ create table Actividad(
 #Aqui empiezan las tablas para el modulo grupos :v
 create table Grupo(
 	IDGrupo int not null primary key auto_increment,
-	Nombre varchar(100) not null,
+	Nombre nvarchar(100) not null,
 	UsuarioLider int,
-	PuntoReunion int,
+	/*PuntoReunion int,*/
 	foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
 	foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
 );
 
 create table Tarea(
 	IDTarea int not null primary key auto_increment,
-	Nombre varchar(100),
+	Nombre nvarchar(100),
 	Fecha date,
 	Estado boolean
 );
