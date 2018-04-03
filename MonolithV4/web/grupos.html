@@ -1,432 +1,1011 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html">
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Grupos</title>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="Css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="Css/BarraDeInicioSesion.css">
-    <link rel="stylesheet" type="text/css" href="Css/Grupos.css">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Grupos</title>
 
-</head>
-<body>
-	<!--Barra de navegacion-->
-	<nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="true" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-        </button>
-		<a class="navbar-brand"><img src="img/pawn.svg" id="LogoBarraInicio"></a>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="Css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="Css/BarraDeInicioSesion.css">
+        <link rel="stylesheet" type="text/css" href="Css/Grupos.css">
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    </head>
+    <body>
+        <!--Barra de navegacion-->
+        <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand"><img src="img/pawn.svg" id="LogoBarraInicio"></a>
 
-           	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#Actividades"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#Grupos"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#Notas"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 
-            <ul class="navbar-nav mr-left mt-2 mt-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                        <a class="dropdown-item" href="#CerrarSesion"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
-                        <a class="dropdown-item" href="#Configuracion"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Actividades"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Grupos"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Notas"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mr-left mt-2 mt-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
+                            <a class="dropdown-item" href="#CerrarSesion"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
+                            <a class="dropdown-item" href="#Configuracion"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
                                 Configuracion</a>
-                    </div>
-                </li>
-            </ul>
+                        </div>
+                    </li>
+                </ul>
 
-        </div>
-    </nav>
+            </div>
+        </nav>
 
-    <!--Contenedor-->
-    <div class="container-fluid">
-    	<div class="row">
-    		<!-- Lado derecho - Contenedor principal -->
-    		<div class="col-lg-8 col-md-8 col-sm-12">
-    			<!--Inicio titulo contenedor-->
-    			<div class="card-deck">
-    				<div class="card Contenedor">
-    					<div class="card-body">
-    						<div class="row">
-    							<div class="col d-flex align-items-center justify-content-center">
-                                    <h2>Hawkward</h2>
+        <!--Contenedor-->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Lado derecho - Contenedor principal -->
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="panel-gHawkward" role="tabpanel" aria-labelledby="list-home-list">
+                            <!--Inicio titulo contenedor-->
+                            <div class="card-deck">
+                                <div class="card Contenedor">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <h2>Hawkward</h2>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    			<!--Fin titulo contenedor-->
-    			<!--Inicio cuerpo contenedor-->
-    			<div class="card-deck">
-    				<div class="card">
-    					<div class="card-body">
-
-    						<!--Inicio agregar tarea-->
-    						<form>
-							  <div class="form-row align-items-center">
-							    <div class="col-sm-5 mt-2">
-							      <input type="text" class="form-control" placeholder="Ingresa una tarea">
-							    </div>
-							    <div class="col-sm-5 mt-2">
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">@</div>
-							        </div>
-							        <input type="text" class="form-control" placeholder="Correo">
-							      </div>
-							    </div>
-							    <div class="col-sm-2 d-flex justify-content-center mt-2">
-							      <button type="submit" class="btn btn-primary ">Agregar</button>
-							    </div>
-							  </div>
-							</form>
-                            <!--Fin agregar tarea-->
-
-                            <!--Inicio contenedor de lista de tareas-->
-                            <div class="row rowListaTareas">
-                            	<!--Inicio lista de tareas-->
-                            	<div class="col-12" id="listaTareas">
-                            		<!--Inicio tarea-->
-								  	<div class="card mt-3">
-
-								  		<!--Inicio parte visible-->
-									    <div class="card-header" id="headTarea1">
-									    	<div class="row">
-									    		<!--Nombre tarea-->
-									    		<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-											      	<h5 class="mb-0">
-											        	<button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea1" aria-expanded="false" aria-controls="tarea1">
-											          		<h3>Tarea #1</h3>
-											        	</button>
-											      	</h5>
-										      	</div>
-										      	<!--Fecha limite-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
-										      	</div>
-										      	<!--Miembros-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center">
-										      		<div class="dropdown">
-														<button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															Miembros
-														</button>
-														<div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
-															<button class="dropdown-item disabled" type="button">@Miembro 1</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 2</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 3</button>
-														</div>
-													</div>
-										      	</div>
-										      	<!--Checkbox para marcar actividad-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<input class="acabarTarea float-right" type="checkbox">
-										      	</div>
-										    </div>
-										</div>
-										<!--Fin parte visible-->
-
-										<!--Inicio parte colapsable-->
-									    <div id="tarea1" class="collapse" aria-labelledby="headTarea1" data-parent="#listaTareas">
-									      	<div class="card-body">
-									        	<form>
-									        		<!--Inicio formulario para modificar actividad-->
-												  	<div class="form-row">
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
-													    </div>
-
-													    <div class="col-sm-3">
-													    	<input type="date" class="form-control" id="fecha" name="fecha">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
-													    </div>
-												  	</div>
-												  	<!--Fin formulario para modificar actividad-->
-												  	<!--Inicio opciones-->
-												  	<div class="form-row mt-2">
-												  		<div class="col-sm-6">
-												  			<button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
-												  		</div>
-												  		<div class="col-sm-6">
-												  			<button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
-												  		</div>
-												  	</div>
-												  	<!--Fin opciones-->
-												</form>
-									      	</div>
-									    </div>
-									    <!--Fin parte colapsable-->
-
-								  	</div>
-								  	<!--Fin tarea-->
-
-								  	<!--Inicio tarea-->
-								  	<div class="card mt-3">
-
-								  		<!--Inicio parte visible-->
-								  		<div class="card-header" id="headTarea2">
-									    	<div class="row">
-									    		<!--Nombre tarea-->
-									    		<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-											      	<h5 class="mb-0">
-											        	<button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea2" aria-expanded="false" aria-controls="tarea2">
-											          		<h3>Tarea #2</h3>
-											        	</button>
-											      	</h5>
-										      	</div>
-										      	<!--Fecha limite-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
-										      	</div>
-										      	<!--Miembros-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center">
-										      		<div class="dropdown">
-														<button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															Miembros
-														</button>
-														<div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
-															<button class="dropdown-item disabled" type="button">@Miembro 1</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 2</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 3</button>
-														</div>
-													</div>
-										      	</div>
-										      	<!--Checkbox para marcar actividad-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<input class="acabarTarea float-right" type="checkbox">
-										      	</div>
-										    </div>
-										</div>
-									    <!--Fin parte visible-->
-
-									    <!--Inicio parte colapsable-->
-									    <div id="tarea2" class="collapse" aria-labelledby="headTarea2" data-parent="#listaTareas">
-									      	<div class="card-body">
-
-									      		<form>
-									        		<!--Inicio formulario para modificar actividad-->
-												  	<div class="form-row">
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
-													    </div>
-
-													    <div class="col-sm-3">
-													    	<input type="date" class="form-control" id="fecha" name="fecha">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
-													    </div>
-												  	</div>
-												  	<!--Fin formulario para modificar actividad-->
-												  	<!--Inicio opciones-->
-												  	<div class="form-row mt-2">
-												  		<div class="col-sm-6">
-												  			<button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
-												  		</div>
-												  		<div class="col-sm-6">
-												  			<button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
-												  		</div>
-												  	</div>
-												  	<!--Fin opciones-->
-												</form>
-
-									      	</div>
-									    </div>
-									    <!--Fin parte colapsable-->
-
-								  	</div>
-								  	<!--Fin tarea-->
-
-								  	<!--Inicio tarea-->
-								  	<div class="card mt-3">
-
-								  		<!--Inicio parte visible-->
-									    <div class="card-header" id="headTarea3">
-									    	<div class="row">
-									    		<!--Nombre tarea-->
-									    		<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-											      	<h5 class="mb-0">
-											        	<button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea3" aria-expanded="false" aria-controls="tarea3">
-											          		<h3>Tarea #3</h3>
-											        	</button>
-											      	</h5>
-										      	</div>
-										      	<!--Fecha limite-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
-										      	</div>
-										      	<!--Miembros-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center">
-										      		<div class="dropdown">
-														<button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-															Miembros
-														</button>
-														<div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
-															<button class="dropdown-item disabled" type="button">@Miembro 1</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 2</button>
-															<button class="dropdown-item disabled" type="button">@Miembro 3</button>
-														</div>
-													</div>
-										      	</div>
-										      	<!--Checkbox para marcar actividad-->
-										      	<div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-										      		<input class="acabarTarea float-right" type="checkbox">
-										      	</div>
-										    </div>
-										</div>
-										<!--Fin parte visible-->
-
-										<!--Inicio parte colapsable-->
-									    <div id="tarea3" class="collapse" aria-labelledby="headTarea3" data-parent="#listaTareas">
-									      	<div class="card-body">
-									        	
-									      		<form>
-									        		<!--Inicio formulario para modificar actividad-->
-												  	<div class="form-row">
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
-													    </div>
-
-													    <div class="col-sm-3">
-													    	<input type="date" class="form-control" id="fecha" name="fecha">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
-													    </div>
-
-													    <div class="col-sm-3">
-													      	<input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
-													    </div>
-												  	</div>
-												  	<!--Fin formulario para modificar actividad-->
-												  	<!--Inicio opciones-->
-												  	<div class="form-row mt-2">
-												  		<div class="col-sm-6">
-												  			<button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
-												  		</div>
-												  		<div class="col-sm-6">
-												  			<button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
-												  		</div>
-												  	</div>
-												  	<!--Fin opciones-->
-												</form>
-									        	
-									      	</div>
-									    </div>
-									    <!--Fin parte colapsable-->
-
-								  	</div>
-								  	<!--Fin tarea-->
-								</div>
-								<!--Fin lista de tareas-->
                             </div>
-                            <!--Fin de contenedor de lista de tareas-->
+                            <!--Fin titulo contenedor-->
+                            <!--Inicio cuerpo contenedor-->
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
 
-    					</div>
-    				</div>
-    			</div>
-    			<!--Fin cuerpo contenedor-->
-    		</div>
-    		<!--Fin lado derecho-->
+                                        <!--Inicio agregar tarea-->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-5 mt-2">
+                                                    <input type="text" class="form-control" placeholder="Ingresa una tarea">
+                                                </div>
+                                                <div class="col-sm-5 mt-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Correo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center mt-2">
+                                                    <button type="submit" class="btn btn-primary ">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--Fin agregar tarea-->
 
-    		<!-- Lado izquierdo - Contenedor lateral -->
-    		<div class="col-lg-4 col-md-4 col-sm-12">
-    			<!--Inicio titulo contenedor-->
-    			<div class="card-deck">
-    				<div class="card Contenedor">
-    					<div class="card-body">
-    						<div class="row">
-    							<div class="col-sm-6 col-md-8 col-lg-8 d-flex align-items-center justify-content-center">
-                                    <h2>Tus grupos</h2>
+                                        <!--Inicio contenedor de lista de tareas-->
+                                        <div class="row rowListaTareas">
+                                            <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
+                                            <div class="col-12" id="listaTareas">
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="headTarea1">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <!--btn para hacer que se despliegue la parte invisible (IMPORTANTE CAMBIAR ID'S)-->
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#g1tarea1" aria-expanded="false" aria-controls="tarea1">
+                                                                        <h3>Tarea #1</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="g1tarea1" class="collapse" aria-labelledby="headTarea1" data-parent="#listaTareas">
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="headTarea2">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea2" aria-expanded="false" aria-controls="tarea2">
+                                                                        <h3>Tarea #2</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="tarea2" class="collapse" aria-labelledby="headTarea2" data-parent="#listaTareas">
+                                                        <div class="card-body">
+
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="headTarea3">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea3" aria-expanded="false" aria-controls="tarea3">
+                                                                        <h3>Tarea #3</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="tarea3" class="collapse" aria-labelledby="headTarea3" data-parent="#listaTareas">
+                                                        <div class="card-body">
+
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+                                            </div>
+                                            <!--Fin lista de tareas-->
+                                        </div>
+                                        <!--Fin de contenedor de lista de tareas-->
+
+                                    </div>
                                 </div>
-                                <div class="col-sm-6 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
-                                   <img class="float-right" src="img/group.svg">
+                            </div>
+                            <!--Fin cuerpo contenedor-->
+                        </div>
+                        <div class="tab-pane fade" id="panel-g1" role="tabpanel" aria-labelledby="list-profile-list">
+                            <!--Inicio titulo contenedor-->
+                            <div class="card-deck">
+                                <div class="card Contenedor">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <h2>Grupo 1</h2>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    			<!--Fin titulo contenedor-->
-    			<!--Inicio cuerpo contenedor-->
-    			<div class="card-deck">
-    				<div class="card ListasLaterales">
-    					
-    						<!--
-    						<div class="list-group" id="list-tab" role="tablist">
-						      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Hawkward</a>
-						      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Grupo_1</a>
-						      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Grupo_2</a>
-						      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Grupo_3</a>
-						    </div>
-							-->
-                            <ul class="list-group" id="list-tab" role="tablist">
-                                <li class="list-group-item list-group-item-action active" id="gHawkward" data-toggle="list">
-                                    <img src="img/group.svg">
+                            </div>
+                            <!--Fin titulo contenedor-->
+                            <!--Inicio cuerpo contenedor-->
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <!--Inicio agregar tarea-->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-5 mt-2">
+                                                    <input type="text" class="form-control" placeholder="Ingresa una tarea">
+                                                </div>
+                                                <div class="col-sm-5 mt-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Correo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center mt-2">
+                                                    <button type="submit" class="btn btn-primary ">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--Fin agregar tarea-->
+
+                                        <!--Inicio contenedor de lista de tareas-->
+                                        <div class="row rowListaTareas">
+                                            <!--Inicio lista de tareas-->
+                                            <div class="col-12" id="glistaTareas">
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="gheadTarea1">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#gtarea1" aria-expanded="false" aria-controls="gtarea1">
+                                                                        <h3>Tarea #1</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="gtarea1" class="collapse" aria-labelledby="gheadTarea1" data-parent="#glistaTareas">
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+                                            </div>
+                                            <!--Fin lista de tareas-->
+                                        </div>
+                                        <!--Fin de contenedor de lista de tareas-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin cuerpo contenedor-->
+                        </div>
+                        <div class="tab-pane fade" id="panel-g2" role="tabpanel" aria-labelledby="list-messages-list">
+                            <!--Inicio titulo contenedor-->
+                            <div class="card-deck">
+                                <div class="card Contenedor">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <h2>Grupo 2</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin titulo contenedor-->
+                            <!--Inicio cuerpo contenedor-->
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <!--Inicio agregar tarea-->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-5 mt-2">
+                                                    <input type="text" class="form-control" placeholder="Ingresa una tarea">
+                                                </div>
+                                                <div class="col-sm-5 mt-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Correo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center mt-2">
+                                                    <button type="submit" class="btn btn-primary ">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--Fin agregar tarea-->
+
+                                        <!--Inicio contenedor de lista de tareas-->
+                                        <div class="row rowListaTareas">
+                                            <!--Inicio lista de tareas-->
+                                            <div class="col-12" id="g2listaTareas">
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="headTarea1">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#g2tarea1" aria-expanded="false" aria-controls="g2tarea1">
+                                                                        <h3>Tarea #1</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="g2tarea1" class="collapse" aria-labelledby="headTarea1" data-parent="#g2listaTareas">
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+                                            </div>
+                                            <!--Fin lista de tareas-->
+                                        </div>
+                                        <!--Fin de contenedor de lista de tareas-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin cuerpo contenedor-->
+                        </div>
+                        <div class="tab-pane fade" id="panel-g3" role="tabpanel" aria-labelledby="list-settings-list">
+                            <!--Inicio titulo contenedor-->
+                            <div class="card-deck">
+                                <div class="card Contenedor">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <h2>Grupo 3</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin titulo contenedor-->
+                            <!--Inicio cuerpo contenedor-->
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <!--Inicio agregar tarea-->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-5 mt-2">
+                                                    <input type="text" class="form-control" placeholder="Ingresa una tarea">
+                                                </div>
+                                                <div class="col-sm-5 mt-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Correo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center mt-2">
+                                                    <button type="submit" class="btn btn-primary ">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--Fin agregar tarea-->
+
+                                        <!--Inicio contenedor de lista de tareas-->
+                                        <div class="row rowListaTareas">
+                                            <!--Inicio lista de tareas-->
+                                            <div class="col-12" id="listaTareas">
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="headTarea1">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#tarea1" aria-expanded="false" aria-controls="tarea1">
+                                                                        <h3>Tarea #1</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="tarea1" class="collapse" aria-labelledby="headTarea1" data-parent="#listaTareas">
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+                                            </div>
+                                            <!--Fin lista de tareas-->
+                                        </div>
+                                        <!--Fin de contenedor de lista de tareas-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin cuerpo contenedor-->
+                        </div>
+                        <div class="tab-pane fade" id="panel-g4" role="tabpanel" aria-labelledby="list-settings-list">
+                            <!--Inicio titulo contenedor-->
+                            <div class="card-deck">
+                                <div class="card Contenedor">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <h2>Grupo 4</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin titulo contenedor-->
+                            <!--Inicio cuerpo contenedor-->
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <!--Inicio agregar tarea-->
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-sm-5 mt-2">
+                                                    <input type="text" class="form-control" placeholder="Ingresa una tarea">
+                                                </div>
+                                                <div class="col-sm-5 mt-2">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Correo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 d-flex justify-content-center mt-2">
+                                                    <button type="submit" class="btn btn-primary ">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--Fin agregar tarea-->
+
+                                        <!--Inicio contenedor de lista de tareas-->
+                                        <div class="row rowListaTareas">
+                                            <!--Inicio lista de tareas-->
+                                            <div class="col-12" id="g4listaTareas">
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3">
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" id="g4headTarea1">
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" data-target="#g4tarea1" aria-expanded="false" aria-controls="g4tarea1">
+                                                                        <h3>Tarea #1</h3>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small id="Fecha" class="text-muted">dd/mm/aaaa - hh:mm</small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuMiembros" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2">
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 1</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 2</button>
+                                                                        <button class="dropdown-item disabled" type="button">@Miembro 3</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <input class="acabarTarea float-right" type="checkbox">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte visible-->
+
+                                                    <!--Inicio parte colapsable-->
+                                                    <div id="g4tarea1" class="collapse" aria-labelledby="g4headTarea1" data-parent="#g4listaTareas">
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+
+                                                </div>
+                                                <!--Fin tarea-->
+                                            </div>
+                                            <!--Fin lista de tareas-->
+                                        </div>
+                                        <!--Fin de contenedor de lista de tareas-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin cuerpo contenedor-->
+                        </div>
+                    </div>
+                </div>
+                <!--Fin lado derecho-->
+
+                <!-- Lado izquierdo - Contenedor lateral -->
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <!--Inicio titulo contenedor-->
+                    <div class="card-deck">
+                        <div class="card Contenedor">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-8 col-lg-8 d-flex align-items-center justify-content-center">
+                                        <h2>Tus grupos</h2>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-4 d-flex align-items-center justify-content-center">
+                                        <img class="float-right" src="img/group.svg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin titulo contenedor-->
+                    <!--Inicio cuerpo contenedor-->
+                    <div class="card-deck">
+                        <div class="card ListasLaterales">
+                            <!--Inicio lista de grupos-->
+                            <div class="list-group" id="list-tab" role="tablist">
+                                <a class="list-group-item list-group-item-action active" id="lista-gHawkward" data-toggle="list" href="#panel-gHawkward" role="tab" aria-controls="gHawkward">
+                                    <img src="img/group.svg" alt="ic_grupos">
                                     Hawkward
-                                </li>
-                                <li class="list-group-item list-group-item-action" id="g1" data-toggle="list">
-                                    <img src="img/group.svg">
+                                </a>
+                                <a class="list-group-item list-group-item-action" id="lista-g1" data-toggle="list" href="#panel-g1" role="tab" aria-controls="g1">
+                                    <img src="img/group.svg" alt="ic_grupos">
                                     Grupo_1
-                                </li>
-                                <li class="list-group-item list-group-item-action" id="g2" data-toggle="list">
-                                    <img src="img/group.svg">
+                                </a>
+                                <a class="list-group-item list-group-item-action" id="lista-g2" data-toggle="list" href="#panel-g2" role="tab" aria-controls="g2">
+                                    <img src="img/group.svg" alt="ic_grupos">
                                     Grupo_2
-                                </li>
-                                <li class="list-group-item list-group-item-action" id="g3" data-toggle="list">
-                                    <img src="img/group.svg">
+                                </a>
+                                <a class="list-group-item list-group-item-action" id="lista-g3" data-toggle="list" href="#panel-g3" role="tab" aria-controls="g3">
+                                    <img src="img/group.svg" alt="ic_grupos">
                                     Grupo_3
-                                </li>
-                                <li class="list-group-item list-group-item-action" id="g4" data-toggle="list">
-                                    <img src="img/group.svg">
+                                </a>
+                                <a class="list-group-item list-group-item-action" id="lista-g4" data-toggle="list" href="#panel-g4" role="tab" aria-controls="g4">
+                                    <img src="img/group.svg" alt="ic_grupos">
                                     Grupo_4
-                                </li>
-                                <li class="list-group-item  flex-column align-items-start">
-                                	<div class="d-flex w-100 justify-content-between">
-								      <h5 class="mb-1">List group item heading</h5>
-								      <small>3 days ago</small>
-								    </div>
-								    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-								    <small>Donec id elit non mi porta.</small>
-                                </li>
-                            </ul>
-    					
-    				</div>
-    			</div>
-    			<!--Fin cuerpo contenedor-->
-    		</div>
-    		<!--Fin lado izquierdo-->
+                                </a>
+                                <!--BTN PARA COLAPSAR-->
+                                <a class="list-group-item list-group-item-action btn" data-toggle="collapse" href="#agregarGrupo" 
+                                   role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Agregar grupo
+                                </a>
+                                <!--Inicio contenido colapsable-->
+                                <div class="collapse" id="agregarGrupo">
+                                    <a class="list-group-item">
+                                        <div class="d-flex flex-column align-items-center">
+                                            <div>
+                                                <h5>Nuevo grupo</h5>
+                                            </div>
+                                            <div>
+                                                <form>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" class="form-control" placeholder="Nombre grupo">
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <input type="email" class="form-control" placeholder="Correo del integrante">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <button class="form-control">Agregar</button>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <ul class="form-control list-group agregarMiembro">
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    Miembro 1
+                                                                    <span class="badge">
+                                                                        <button type="button" class="close" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </span>
+                                                                </li>
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    Miembro 2
+                                                                    <span class="badge">
+                                                                        <button type="button" class="close" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </span>
+                                                                </li>
+                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    Miembro 3
+                                                                    <span class="badge">
+                                                                        <button type="button" class="close" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary form-control">Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--Fin contenido colapsable-->
+                            </div>
+                            <!--Fin lista de grupos-->
+                        </div>
+                    </div>
+                    <!--Fin cuerpo contenedor-->
+                </div>
+                <!--Fin lado izquierdo-->
 
-    	</div>
-    </div>
+            </div>
+        </div>
 
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.validate.js"></script>
-</body>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.validate.js"></script>
+    </body>
 </html>
