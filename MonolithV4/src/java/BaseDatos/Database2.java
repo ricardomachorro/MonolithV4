@@ -107,6 +107,7 @@ public class Database2 {
             ps.setBoolean(1,!Estado);
             ps.setInt(2, IDActividad);
             ps.execute();
+            
         } catch (Exception ex) {
 
         }
@@ -130,9 +131,11 @@ public class Database2 {
         try{
             
             int IDUsuario=IdentificarUsuario(Usuario);    
-            String sql1 = "delete from Categoria where IDUsuario="+IDUsuario+" and NombreCategoria='"+Categoria+"'";
-          st = c.createStatement();
-          st.execute(sql1);
+            String sql1 = "delete from Categoria where IDUsuario=? and NombreCategoria=?";
+          ps = c.prepareStatement(sql1);
+            ps.setInt(1,IDUsuario);
+            ps.setString(2,Categoria);
+            ps.execute();
         }catch(Exception ex){
             
         }
@@ -233,6 +236,38 @@ public class Database2 {
 
         }
         return Repetida;
+    }
+    
+    public int ContadorActividadesFaltantes(String NombreUsuario){
+        int ActividadesFaltantes=0;
+        try{
+            String sql="select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.NombreUsuario=? and Actividad.Estado=0";
+            ps = c.prepareStatement(sql);
+         ps.setString(1, NombreUsuario);
+         rs=ps.executeQuery();
+         if(rs.last()){
+             ActividadesFaltantes=rs.getRow();
+         }
+        }catch(Exception ex){
+        
+    }
+        return ActividadesFaltantes;
+    }
+    
+    public int ContadorActividadesFinalizadas(String NombreUsuario){
+        int ActividadesFinzalizadas=0;
+        try{
+            String sql="select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.NombreUsuario=? and Actividad.Estado>0";
+            ps = c.prepareStatement(sql);
+         ps.setString(1, NombreUsuario);
+         rs=ps.executeQuery();
+         if(rs.last()){
+             ActividadesFinzalizadas=rs.getRow();
+         }
+        }catch(Exception ex){
+        
+    }
+        return ActividadesFinzalizadas;
     }
 
 }

@@ -28,6 +28,11 @@ body{
     width:"100%";
 }
 
+SeccionNuevaActividad input[type='date']{
+    width:"100%";
+}
+
+
 .SeccionNuevaActividad button{
     background-color:#0062cc;
     height:40px;
@@ -116,7 +121,7 @@ body{
 }
 
 .ListasLaterales{
-    height:450px;
+    height:1050px;
     overflow-y:scroll;
 }
 

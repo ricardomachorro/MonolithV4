@@ -32,7 +32,7 @@ select *from Usuario;
 create table Categoria(IDCategoria int auto_increment not null primary key,
 NombreCategoria varchar(100) not null,
 IDUsuario int not null,
-foreign key (IDUsuario) references Usuario(IDUsuario));
+foreign key (IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade);
 select * from Categoria;
 
 
@@ -43,7 +43,7 @@ Fecha date,
 IDCategoria int,
 /*IDLocalizacion int,*/
 Estado boolean,
-foreign key (IDCategoria) references Categoria(IDCategoria)/*,
+foreign key (IDCategoria) references Categoria(IDCategoria) on update cascade on delete cascade/*,
 foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/);
 
 select * from actividad;

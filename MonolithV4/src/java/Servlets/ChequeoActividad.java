@@ -10,6 +10,7 @@ import Objetos.Actividad;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -43,9 +44,23 @@ public class ChequeoActividad extends HttpServlet {
             throws ServletException, IOException {
         try{
             Database2 db=new Database2();
+            String Opccion=request.getParameter("Opccion");
             String IDActividad=request.getParameter("IDActividad");
+            HttpSession s = request.getSession();
+            String Usuario = s.getAttribute("usuario").toString();
+            if(Opccion.equalsIgnoreCase("1")){  
             int IDActReal=Integer.parseInt(IDActividad);
-            db.CambiarEstadoActividad(IDActReal);
+            db.CambiarEstadoActividad(IDActReal); 
+            int ActividadesHechas=db.ContadorActividadesFinalizadas(Usuario);
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write(Integer.toString(ActividadesHechas));
+            }else if(Opccion.equalsIgnoreCase("2")){
+                int ActividadesNoHechas=db.ContadorActividadesFaltantes(Usuario);
+              response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write(Integer.toString(ActividadesNoHechas));
+            }
+            
+       
 
         } catch (Exception ex) {
               System.out.println(ex.toString());

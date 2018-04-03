@@ -83,7 +83,20 @@
                                         <img src="img/star.svg"  class="float-left ImagenesResumenActividades" >
                                     </div>
                                     <div class="col-8 TextoCartasResumenActividades" >
-                                        <a >Actividades finalizadas</a>
+                                        <%
+                                            Statement stcons2 = conexion.createStatement();
+                                            String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
+                                            ResultSet rscons2 = stcons2.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria "
+                                                    + "inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='" + UsuarioBusqueda1 + "' and Actividad.Estado>0");
+                                            if (rscons2.next()) {
+                                                if (rscons2.last()) {
+                                                    out.println("<a id='txtActividadesFinalizadas' >Actividades finalizadas: " + rscons2.getRow() + "</a>");
+                                                }
+                                            } else {
+                                                out.println("<a id='txtActividadesFinalizadas' >Actividades finalizadas: 0</a>");
+                                            }
+                                        %>
+
                                     </div>
                                 </div>
                             </div>
@@ -95,12 +108,24 @@
                                         <img src="img/warning.svg"  class="float-left ImagenesResumenActividades" >
                                     </div>
                                     <div class="col-8 TextoCartasResumenActividades" >
-                                        <a >Actividades sin finalizar</a>
+                                        <%
+                                            Statement stcons = conexion.createStatement();
+                                            String UsuarioBusqueda2 = sesion.getAttribute("usuario").toString();
+                                            ResultSet rscons = stcons.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria "
+                                                    + "inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='" + UsuarioBusqueda2 + "' and Actividad.Estado=0");
+                                            if (rscons.next()) {
+                                                if (rscons.last()) {
+                                                    out.println("<a id='ActividadesNoFinalizadas' >Actividades no finalizadas: " + rscons.getRow() + "</a>");
+                                                }
+                                            } else {
+                                                out.println("<a id='ActividadesNoFinalizadas'>Actividades no finalizadas: 0</a>");
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <!--
                         <div class="card CartasResumenActividades" >
                             <div class="card-body">
                                 <div class="row">
@@ -113,6 +138,7 @@
                                 </div>
                             </div>
                         </div>
+                        -->
                     </div>
                     <!--Fin Contenedor de Resumen-->
                     <!--Bandeja Actividad Principal-->
@@ -160,10 +186,10 @@
 
                                         <%
                                             Statement st = conexion.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria where Actividad.IDCategoria=Categoria.IDCategoria ");
-                      
+                                            ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+
                                             while (rs.next()) {
-                                                out.println("<div class='card-deck ActividadesCard "+rs.getString("NombreCategoria")+"'>");
+                                                out.println("<div class='card-deck ActividadesCard " + rs.getString("NombreCategoria") + "'>");
                                                 out.println(" <div class='card ActividadCarta ActividadActiva' id='" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
@@ -174,7 +200,7 @@
                                                 if (rs.getBoolean("Estado")) {
                                                     out.println(" <input class='CheckBoxActividades float-right' id='" + rs.getInt("IDActividad") + "' checked type='checkbox' >");
                                                 } else {
-                                                    out.println(" <input class='CheckBoxActividades float-right' id='" + rs.getInt("IDActividad") + "'  type='checkbox' >");
+                                                    out.println(" <input class='CheckBoxActividades float-right checar' id='" + rs.getInt("IDActividad") + "'  type='checkbox' >");
                                                 }
 
                                                 out.println("</div>");
@@ -182,12 +208,12 @@
                                                 out.println("<div class='collapse row OpccionesAcividad' id='Col" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<form class='form-inline'>");
                                                 out.println("<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>");
-                                                out.println("<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>");
+                                                out.println("<input class='form-control txtFecha'  type='date' placeholder='Fecha Activdad'>");
                                                 out.println("<input class='form-control txtCategoria' type='text' placeholder='Categoria'>");
                                                 out.println("<div class='btn-group btn-group-sm GrupoBotonesActividad float-left' role='group' >");
                                                 out.println(" <button type='button' class='btn btn-secondary btn-activity btnSave' id='" + rs.getInt("IDActividad") + "'><img src='img/save.svg'></button>");
                                                 out.println("<button type='button' class='btn btn-secondary btn-activity btnDrop'> <img src='img/garbageWhite.svg'></button>");
-                                                out.println("<button type='button' class='btn btn-secondary btn-activity'><img src='img/placeholderWhite.svg'></button>");
+
                                                 out.println("</div>");
                                                 out.println("</form>");
                                                 out.println("</div>");
@@ -257,7 +283,7 @@
                     <div class="card-deck">
                         <div class="card"  >
                             <div class="card-body" >
-                               <div class="row SeccionEliminarCategoria" >
+                                <div class="row SeccionEliminarCategoria" >
                                     <div class="col-lg-8 col-md-6 col-sm-12">
                                         <input type="text" id="EliminarActividadtxt" name="EliminarActividadtxt" class="form-control" placeholder="Categoria a Elimininar" >
                                     </div>
@@ -268,15 +294,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-deck">
-                        <div class="card ListasLaterales"  >
+                    <div class="card-deck" >
+                        <div class="card ListasLaterales" style="height:850px;"  >
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
                                     <%
                                         Statement st2 = conexion.createStatement();
-                                        ResultSet rs2 = st.executeQuery("select * from Categoria");
+                                        ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
                                         while (rs2.next()) {
-                                            out.println(" <li><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
+                                            out.println(" <li id='" + rs2.getString("NombreCategoria") + "'><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
                                         }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
@@ -286,40 +312,42 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-deck">
-                        <div class="card ContenedoresLaterales"  >
-                            <div class="card-body" >
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-8 col-lg-8">
-                                        <h1>Localizaciones</h1>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-4">
-                                        <img class="float-right" src="img/placeholder.svg">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-deck">
-                        <div class="card ListasLaterales"  >
-                            <div class="card-body" >
-                                <ul>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>
-                                    <li><img src="img/placeholder.svg">asssa</li>    
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!--  
+                             <div class="card-deck">
+                                 <div class="card ContenedoresLaterales"  >
+                                     <div class="card-body" >
+                                         <div class="row">
+                                             <div class="col-sm-6 col-md-8 col-lg-8">
+                                                 <h1>Localizaciones</h1>
+                                             </div>
+                                             <div class="col-sm-6 col-md-4 col-lg-4">
+                                                 <img class="float-right" src="img/placeholder.svg">
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                                           
+                             <div class="card-deck">
+                                 <div class="card ListasLaterales"  >
+                                     <div class="card-body" >
+                                         <ul>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>
+                                             <li><img src="img/placeholder.svg">asssa</li>    
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
+                    -->
 
 
 
@@ -349,29 +377,29 @@
                     },
                     type: 'post',
                     success: function (data) {
-                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard "+NombreCategoria+"'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
+                        $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard " + NombreCategoria + "'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
                                 " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
-                                " <input class='CheckBoxActividades float-right' id='" + data.toString() + "'  type='checkbox' >" +
+                                " <input class='CheckBoxActividades float-right checar' id='" + data.toString() + "'  type='checkbox' >" +
                                 " </div>" +
                                 "<div class='collapse row OpccionesAcividad' id='Col" + data.toString() + "' >" +
                                 " <form class='form-inline'>" +
                                 "<input class='form-control txtNombreActividad'  type='text' placeholder='Nombre Activdad'>" +
-                                "<input class='form-control txtFecha'  type='text' placeholder='Fecha Activdad'>" +
+                                "<input class='form-control txtFecha'  type='date' placeholder='Fecha Activdad'>" +
                                 "<input class='form-control txtCategoria' type='text' placeholder='Categoria'>" +
                                 "<div class='btn-group btn-group-sm  btn-activity' role='group' >" +
                                 "<button type='button' class='btn btn-secondary btnSave' id='" + data.toString() + "'><img src='img/save.svg'></button>" +
                                 "<button type='button' class='btn btn-secondary btnDrop'> <img src='img/garbageWhite.svg'></button>" +
-                                "<button type='button' class='btn btn-secondary'><img src='img/placeholderWhite.svg'></button>" +
                                 "</div>" +
                                 "</form>" +
                                 "</div>" +
                                 "</div></div></div></div>"));
-
+                        var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
+                        $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
                         $("#NuevaActividadtxt").val("");
                         var CategoriaExistente = "#" + NombreCategoria.toString();
                         if ($(CategoriaExistente).length === 0) {
@@ -389,6 +417,11 @@
                                 },
                                 success: function () {
                                     Elemento.parent().remove();
+                                    Elemento.parent().remove();
+                                    var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
+                                    var ContadorFinalizadas = $("input:checkbox:checked").length;
+                                    $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
+                                    $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + ContadorFinalizadas);
 
                                 },
                                 error: function () {
@@ -405,11 +438,32 @@
                             $.ajax({
                                 url: "ChequeoActividad",
                                 data: {
+                                    Opccion: "1",
                                     IDActividad: IDActividad.toString()
+
+
                                 },
                                 type: 'post',
-                                sucess: function () {
+                                success: function (data) {
 
+                                    $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + data);
+                                    $.ajax({
+                                        url: "ChequeoActividad",
+                                        type: "post",
+                                        data: {
+                                            Opccion: "2",
+                                            IDActividad: IDActividad.toString()
+                                        },
+                                        success: function (data) {
+                                            $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
+
+                                        }, error: function (data) {
+
+                                        },
+                                        complete: function (data) {
+
+                                        }
+                                    });
                                 },
                                 error: function () {
                                     alert("Error");
@@ -441,7 +495,7 @@
                                 },
                                 success: function () {
                                     mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
-                                    
+
                                 },
                                 error: {
 
@@ -475,11 +529,32 @@
                 $.ajax({
                     url: "ChequeoActividad",
                     data: {
+                        Opccion: "1",
                         IDActividad: IDActividad.toString()
+
+
                     },
                     type: 'post',
-                    sucess: function () {
+                    success: function (data) {
 
+                        $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + data);
+                        $.ajax({
+                            url: "ChequeoActividad",
+                            type: "post",
+                            data: {
+                                Opccion: "2",
+                                IDActividad: IDActividad.toString()
+                            },
+                            success: function (data) {
+                                $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
+
+                            }, error: function (data) {
+
+                            },
+                            complete: function (data) {
+
+                            }
+                        });
                     },
                     error: function () {
                         alert("Error");
@@ -526,6 +601,7 @@
 
 
             $(".btnDrop").click(function () {
+                var Elemento2= $(this).closest(".ActividadCart");
                 var Elemento = $(this).closest(".ActividadCarta");
                 var IDActividad = $(this).closest(".ActividadCarta").attr("id");
                 $.ajax({
@@ -536,6 +612,11 @@
                     },
                     success: function () {
                         Elemento.parent().remove();
+                        Elemento.remove();
+                        var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
+                        var ContadorFinalizadas = $("input:checkbox:checked").length;
+                        $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas:  " + ContadorNoFinalizadas);
+                        $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + ContadorFinalizadas);
 
                     },
                     error: function () {
@@ -546,29 +627,29 @@
                     }
                 });
             });
-            
-            $("#BtnEliminarCategoria").click(function(){
-                 var NombreCategoriatext=$("#EliminarActividadtxt").val().toString();
-                        $.ajax({
-                            url:"EliminarCategoria",
-                            type:'post',
-                            data:
-                                {
-                                NombreCategoria:NombreCategoriatext
+
+            $("#BtnEliminarCategoria").click(function () {
+                var NombreCategoriatext = $("#EliminarActividadtxt").val().toString();
+                $.ajax({
+                    url: "EliminarCategoria",
+                    type: 'post',
+                    data:
+                            {
+                                NombreCategoria: NombreCategoriatext
                             },
-                            error:function(){
-                                alert("Error");
-                            },
-                            success:function(){
-                                $("#"+NombreCategoriatext).remove();
-                               $("#EliminarActividadtxt").val("");
-                               $("."+NombreCategoriatext).remove()
-                            },
-                            complete:function(){
-                                
-                            }
-                            
-                        });
+                    error: function () {
+                        alert("Error");
+                    },
+                    success: function () {
+                        $("#" + NombreCategoriatext).remove();
+                        $("#EliminarActividadtxt").val("");
+                        $("." + NombreCategoriatext).remove();
+                    },
+                    complete: function () {
+
+                    }
+
+                });
             });
         </script>
 
