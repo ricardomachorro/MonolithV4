@@ -47,7 +47,8 @@ public class CambiosActividad extends HttpServlet {
             int IDActividad=Integer.parseInt(request.getParameter("IDActivity").toString());
             String Clase = request.getParameter("CategoriaActividad");
             String Titulo = request.getParameter("NombreActivity");
-            db.ActualizacionActividad(IDActividad,Titulo, Clase, Usuario);
+            String Fecha=request.getParameter("FechaActividad");
+            db.ActualizacionActividad(IDActividad,Titulo, Clase,Fecha,Usuario);
            
 
         } catch (Exception ex) {

@@ -7,6 +7,8 @@ package BaseDatos;
 
 import java.sql.*;
 import Objetos.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Database2 {
 
@@ -64,14 +66,19 @@ public class Database2 {
         return  IDActividad;
     }
 
-    public boolean ActualizacionActividad(int IDActividad,String Nombre,String Categoria,String Usuario){
+    public boolean ActualizacionActividad(int IDActividad,String Nombre,String Categoria,String Fecha,String Usuario){
         boolean ActActualizada=false;
         try{
             if(CategoriaExistente(Categoria, IdentificarUsuario(Usuario))){
-                String sqlUpdateActividad="update Actividad set Nombre=? where IDActividad=?";
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+               String dateInString = Fecha;
+                Date fechautil= formatter.parse(dateInString);
+                String sqlUpdateActividad="update Actividad set Nombre=?,Fecha=? where IDActividad=?";
                 ps=c.prepareStatement(sqlUpdateActividad);
                 ps.setString(1, Nombre);
-                ps.setInt(2,IDActividad);
+                  Timestamp timestamp = new Timestamp(fechautil.getTime());
+                ps.setTimestamp(2,timestamp);
+                ps.setInt(3,IDActividad);
                 ps.execute();
             }else{
                 int IDCategoria=0;
@@ -83,11 +90,17 @@ public class Database2 {
                 while (rs.next()) {
                     IDCategoria = rs.getInt("IDCategoria");
                 }
-                String sqlUpdateActividad="update Actividad set Nombre=?,IDCategoria=? where IDActividad=?";
+               SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+               String dateInString = Fecha;
+                Date fechautil= formatter.parse(dateInString);
+                
+                String sqlUpdateActividad="update Actividad set Nombre=?,IDCategoria=?,Fecha=? where IDActividad=?";
                 ps=c.prepareStatement(sqlUpdateActividad);
                 ps.setString(1, Nombre);
                 ps.setInt(2,IDCategoria);
-                ps.setInt(3, IDActividad);
+               Timestamp timestamp = new Timestamp(fechautil.getTime());
+                ps.setTimestamp(3,timestamp);
+                ps.setInt(4, IDActividad);
                 ps.execute();
             }
             
@@ -149,7 +162,7 @@ public class Database2 {
             ps = c.prepareStatement(sql1);
             ps.setInt(1,IDActividad);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            if(rs.next()) {
                 EstadoActividad = rs.getBoolean("Estado");
                 
             }

@@ -377,11 +377,15 @@
                     },
                     type: 'post',
                     success: function (data) {
+                        var ObjetoFecha=new Date();
+                        var MesReal=ObjetoFecha.getMonth()+1;
+                        var DiaReal=ObjetoFecha.getDay()+1;
+                        var FechaReal=ObjetoFecha.getFullYear()+"-0"+MesReal+"-0"+DiaReal;
                         $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard " + NombreCategoria + "'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
-                                " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:16/03/2018   Localización:Pendiente/Nula</h5>" +
+                                " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:"+FechaReal +" Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
                                 " <input class='CheckBoxActividades float-right checar' id='" + data.toString() + "'  type='checkbox' >" +
@@ -399,39 +403,15 @@
                                 "</div>" +
                                 "</div></div></div></div>"));
                         var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
+
                         $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
                         $("#NuevaActividadtxt").val("");
+
                         var CategoriaExistente = "#" + NombreCategoria.toString();
                         if ($(CategoriaExistente).length === 0) {
                             $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +
                                     NombreCategoria + "</li>");
                         }
-                        $(".btnDrop").click(function () {
-                            var Elemento = $(this).closest(".ActividadCarta");
-                            var IDActividad = $(this).closest(".ActividadCarta").attr("id");
-                            $.ajax({
-                                url: "EliminarActividad",
-                                type: 'post',
-                                data: {
-                                    IDActivity: IDActividad
-                                },
-                                success: function () {
-                                    Elemento.parent().remove();
-                                    Elemento.parent().remove();
-                                    var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
-                                    var ContadorFinalizadas = $("input:checkbox:checked").length;
-                                    $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
-                                    $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + ContadorFinalizadas);
-
-                                },
-                                error: function () {
-
-                                },
-                                complete: function () {
-
-                                }
-                            });
-                        });
 
                         $(".CheckBoxActividades").click(function () {
                             var IDActividad = $(this).attr("id");
@@ -440,13 +420,12 @@
                                 data: {
                                     Opccion: "1",
                                     IDActividad: IDActividad.toString()
-
-
                                 },
                                 type: 'post',
                                 success: function (data) {
 
                                     $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + data);
+
                                     $.ajax({
                                         url: "ChequeoActividad",
                                         type: "post",
@@ -458,7 +437,7 @@
                                             $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
 
                                         }, error: function (data) {
-
+                                            alert("Error chequeando");
                                         },
                                         complete: function (data) {
 
@@ -483,7 +462,7 @@
                             var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
                             var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
                             var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
-                            ;
+                            
                             $.ajax({
                                 url: "CambiosActividad",
                                 type: 'post',
@@ -494,8 +473,7 @@
                                     CategoriaActividad: inputCategoria
                                 },
                                 success: function () {
-                                    mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
-
+                                    mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:"+inputFecha+" Localización:Pendiente/Nula");
                                 },
                                 error: {
 
@@ -508,6 +486,64 @@
 
 
                         });
+
+
+                        $(".btnDrop").click(function () {
+                            var Elemento2 = $(this).closest(".ActividadCart");
+                            var Elemento = $(this).closest(".ActividadCarta");
+                            var IDActividad = $(this).closest(".ActividadCarta").attr("id");
+                            $.ajax({
+                                url: "EliminarActividad",
+                                type: 'post',
+                                data: {
+                                    IDActivity: IDActividad
+                                },
+                                success: function () {
+                                    Elemento.parent().remove();
+                                    Elemento.remove();
+                                    var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
+                                    var ContadorFinalizadas = $("input:checkbox:checked").length;
+                                    $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + ContadorFinalizadas);
+                                    $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas:  " + ContadorNoFinalizadas);
+
+
+                                },
+                                error: function () {
+
+                                },
+                                complete: function () {
+
+                                }
+                            });
+                        });
+
+                        $("#BtnEliminarCategoria").click(function () {
+                            var NombreCategoriatext = $("#EliminarActividadtxt").val().toString();
+                            $.ajax({
+                                url: "EliminarCategoria",
+                                type: 'post',
+                                data:
+                                        {
+                                            NombreCategoria: NombreCategoriatext
+                                        },
+                                error: function () {
+                                    alert("Error");
+                                },
+                                success: function () {
+                                    $("#" + NombreCategoriatext).remove();
+                                    $("#EliminarActividadtxt").val("");
+                                    $("." + NombreCategoriatext).remove();
+                                },
+                                complete: function () {
+
+                                }
+
+                            });
+                        });
+
+
+
+
 
 
                     },
@@ -531,13 +567,12 @@
                     data: {
                         Opccion: "1",
                         IDActividad: IDActividad.toString()
-
-
                     },
                     type: 'post',
                     success: function (data) {
 
                         $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + data);
+
                         $.ajax({
                             url: "ChequeoActividad",
                             type: "post",
@@ -549,7 +584,7 @@
                                 $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
 
                             }, error: function (data) {
-
+                                alert("Error chequeando");
                             },
                             complete: function (data) {
 
@@ -574,7 +609,7 @@
                 var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
                 var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
                 var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
-                ;
+                
                 $.ajax({
                     url: "CambiosActividad",
                     type: 'post',
@@ -585,7 +620,7 @@
                         CategoriaActividad: inputCategoria
                     },
                     success: function () {
-                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:16/03/2018   Localización:Pendiente/Nula");
+                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:"+ inputFecha+" Localización:Pendiente/Nula");
                     },
                     error: {
 
@@ -601,7 +636,7 @@
 
 
             $(".btnDrop").click(function () {
-                var Elemento2= $(this).closest(".ActividadCart");
+                var Elemento2 = $(this).closest(".ActividadCart");
                 var Elemento = $(this).closest(".ActividadCarta");
                 var IDActividad = $(this).closest(".ActividadCarta").attr("id");
                 $.ajax({
@@ -615,8 +650,9 @@
                         Elemento.remove();
                         var ContadorNoFinalizadas = $("input:checkbox:not(:checked)").length;
                         var ContadorFinalizadas = $("input:checkbox:checked").length;
-                        $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas:  " + ContadorNoFinalizadas);
                         $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + ContadorFinalizadas);
+                        $("#txtActividadesNoFinalizadas").text("Actividades no finalizadas:  " + ContadorNoFinalizadas);
+
 
                     },
                     error: function () {
