@@ -32,6 +32,15 @@ public class Boleto1 {
         this.IPUsaurio = IPUsaurio;
     }
 
-   
+    public String getClaveSesion() {
+        return ClaveSesion;
+    }
+
+    public void setClaveSesion(String ClaveSesion) {
+        
+        
+        
+        this.ClaveSesion = ClaveSesion;
+    }
     
 }
