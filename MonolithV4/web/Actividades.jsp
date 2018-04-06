@@ -1,11 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.sql.*" %>
+<%@ page language="java" import="Seguridad.*" %>
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
-    Connection conexion = null;
+    Connection conexion = null;  
     String driver = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost/MonolithV2";
     String usuario = "root";
