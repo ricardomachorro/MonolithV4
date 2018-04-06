@@ -377,18 +377,18 @@
                     },
                     type: 'post',
                     success: function (data) {
-                        var ObjetoFecha=new Date();
-                        var MesReal=ObjetoFecha.getMonth()+1;
-                        var DiaReal=ObjetoFecha.getDay()+1;
-                        var FechaReal=ObjetoFecha.getFullYear()+"-0"+MesReal+"-0"+DiaReal;
+                        var ObjetoFecha = new Date();
+                        var MesReal = ObjetoFecha.getMonth() + 1;
+                        var DiaReal = ObjetoFecha.getDay() + 1;
+                        var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
                         $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard " + NombreCategoria + "'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
                                 "<div class='card-body'>" +
                                 "<div class='row'>" +
                                 "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
-                                " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:"+FechaReal +" Localización:Pendiente/Nula</h5>" +
+                                " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:" + FechaReal + " Localización:Pendiente/Nula</h5>" +
                                 "</div>" +
                                 "<div class='col-2'>" +
-                                " <input class='CheckBoxActividades float-right checar' id='" + data.toString() + "'  type='checkbox' >" +
+                                "<input class='CheckBoxActividades float-right checar' id='" + data.toString() + "'  type='checkbox' >" +
                                 " </div>" +
                                 "<div class='collapse row OpccionesAcividad' id='Col" + data.toString() + "' >" +
                                 " <form class='form-inline'>" +
@@ -413,6 +413,7 @@
                                     NombreCategoria + "</li>");
                         }
 
+
                         $(".CheckBoxActividades").click(function () {
                             var IDActividad = $(this).attr("id");
                             $.ajax({
@@ -423,12 +424,15 @@
                                 },
                                 type: 'post',
                                 success: function (data) {
-
+                                    alert(data[0]);
+                                     alert(data[1]);
+                                   /*
                                     $("#txtActividadesFinalizadas").text("Actividades finalizadas: " + data);
-
+                                   
                                     $.ajax({
                                         url: "ChequeoActividad",
                                         type: "post",
+                                        
                                         data: {
                                             Opccion: "2",
                                             IDActividad: IDActividad.toString()
@@ -437,15 +441,15 @@
                                             $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
 
                                         }, error: function (data) {
-                                            alert("Error chequeando");
+                                            alert(data);
                                         },
                                         complete: function (data) {
 
                                         }
-                                    });
+                                    });*/
                                 },
                                 error: function () {
-                                    alert("Error");
+                                    alert("Error chequenado");
                                 },
                                 complete: function () {
 
@@ -456,13 +460,16 @@
                         });
 
 
+
+
+
                         $(".btnSave").click(function () {
                             var IDActividad = $(this).attr("id");
                             var inputNombre = $(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
                             var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
                             var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
                             var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
-                            
+
                             $.ajax({
                                 url: "CambiosActividad",
                                 type: 'post',
@@ -473,7 +480,7 @@
                                     CategoriaActividad: inputCategoria
                                 },
                                 success: function () {
-                                    mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:"+inputFecha+" Localización:Pendiente/Nula");
+                                    mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:" + inputFecha + " Localización:Pendiente/Nula");
                                 },
                                 error: {
 
@@ -592,7 +599,7 @@
                         });
                     },
                     error: function () {
-                        alert("Error");
+                        alert("Error chequenado");
                     },
                     complete: function () {
 
@@ -609,7 +616,7 @@
                 var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
                 var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
                 var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
-                
+
                 $.ajax({
                     url: "CambiosActividad",
                     type: 'post',
@@ -620,7 +627,7 @@
                         CategoriaActividad: inputCategoria
                     },
                     success: function () {
-                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:"+ inputFecha+" Localización:Pendiente/Nula");
+                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:" + inputFecha + " Localización:Pendiente/Nula");
                     },
                     error: {
 

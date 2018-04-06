@@ -119,7 +119,7 @@ public class Database2 {
             ps = c.prepareStatement(sql);
             ps.setBoolean(1,!Estado);
             ps.setInt(2, IDActividad);
-            ps.execute();
+            ps.executeUpdate();
             
         } catch (Exception ex) {
 
@@ -181,7 +181,8 @@ public class Database2 {
             ps = c.prepareStatement(sql1);
             ps.setString(1, user.getNombre());
             rs = ps.executeQuery();
-            if (!rs.next()) {
+            boolean n=rs.next();
+           if(!rs.next()) {
                 ps = c.prepareStatement(sql2);
                 ps.setString(1, user.getNombre());
                 ps.setString(2, user.getCorreo());
@@ -190,7 +191,7 @@ public class Database2 {
                 ps.setString(5, user.getDireccion());
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
-                ps.execute();
+                ps.executeUpdate();
                 RegistroExitoso = true;
             }
         } catch (Exception ex) {

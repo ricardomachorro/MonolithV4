@@ -9,28 +9,26 @@ Longitud varchar (40) not null,
 Region varchar (100) not null);
 
 create table Usuario(IDUsuario int auto_increment primary key not null,
-NombreUsuario varchar(100),
-Correo  varchar(70),
+NombreUsuario nvarchar(100),
+Correo  nvarchar(70),
 Edad int,
-Pais varchar(50),
-Direccion varchar(200),
-Contrasena varchar(70),
+Pais nvarchar(50),
+Direccion nvarchar(200),
+Contrasena nvarchar(70),
 Puntos int not null);
-
-select * from Usuario;
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contraseña,Puntos) values();
 
 create table Validacion(
 IdAdendum int primary key not null auto_increment,
-Nombre varchar(20) not null,
-adendum varchar (50) not null
+Nombre nvarchar(20) not null,
+adendum nvarchar (50) not null
 );
 
 select *from Usuario;
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('ri','rerr',2,'fdsdsf','fgfg','fgfg',0);
 
 
 create table Categoria(IDCategoria int auto_increment not null primary key,
-NombreCategoria varchar(100) not null,
+NombreCategoria nvarchar(100) not null,
 IDUsuario int not null,
 foreign key (IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade);
 select * from Categoria;
@@ -38,7 +36,7 @@ select * from Categoria;
 
 
 create table Actividad(IDActividad int not null primary key auto_increment,
-Nombre varchar(40),
+Nombre nvarchar(40),
 Fecha date,
 IDCategoria int,
 /*IDLocalizacion int,*/
@@ -50,14 +48,14 @@ select * from actividad;
 
 
 create table Grupo(IDGrupo int not null primary key auto_increment,
-Nombre varchar(100) not null,
+Nombre nvarchar(100) not null,
 UsuarioLider int,
 PuntoReunion int,
 foreign key(UsuarioLider) references Usuario(IDUsuario),
 foreign key (PuntoReunion) references Localizacion(IDLocalizacion));
 
 create table Tarea(IDTarea int not null primary key auto_increment,
-Nombre varchar(100),
+Nombre nvarchar(100),
 Fecha date,
 Estado boolean);
 
@@ -68,18 +66,18 @@ foreign key (IDTarea) references Tarea(IDTarea)
 );
 
 create table Nota(IDNota int not null auto_increment primary key,
-Nombre varchar(100),
+Nombre nvarchar(100),
 Conteneido text,
 IDUsuario int,
 foreign key (IDUsuario) references Usuario(IDUsuario));
 
 create table Logro(IDLogro int not null auto_increment primary key,
-Nombre varchar(100),
+Nombre nvarchar(100),
 Descripcion text,
 Costo int);
 
 create table Estampa(IDEstampa int not null auto_increment primary key,
-Nombre varchar (100),
+Nombre nvarchar (100),
 Costo int);
 
 create table LogroUsuario(IDLogroUsuario int not null auto_increment primary key,
