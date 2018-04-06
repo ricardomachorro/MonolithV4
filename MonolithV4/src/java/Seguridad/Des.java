@@ -4,39 +4,49 @@
  * and open the template in the editor.
  */
 package Seguridad;
-import javax.crypto.*;
-import com.sun.crypto.provider.DESKeyFactory;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.SecretKeyFactorySpi;
+import javax.crypto.spec.DESKeySpec;
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 
 public class Des {
-     KeyGenerator GeneradorKeys;
-     SecretKey Llave;
-     Cipher Cifrado;
-     Cipher DesCifrado;
+    
+    private SecretKey key;
+    
+     public void Des( String Llave) throws Exception{
+        DESKeySpec desKeySpec=new DESKeySpec(Llave.getBytes());
+        SecretKeyFactory keyFactory= SecretKeyFactory.getInstance("DES");
+        key=keyFactory.generateSecret(desKeySpec);
+    }
      
-     private void Des()throws Exception{
-         GeneradorKeys=KeyGenerator.getInstance("DES");
-         Llave=GeneradorKeys.generateKey();
-         Cifrado=Cipher.getInstance("DES");
-         DesCifrado=Cipher.getInstance("DES");
-         Cifrado.init(Cipher.ENCRYPT_MODE, Llave);
-         DesCifrado.init(Cipher.DECRYPT_MODE,Llave);
-     }
-     
-     public String Cifrar(String Mensaje) throws Exception{
-         String MensajeCifrado="";
-         byte[] utf8 = Mensaje.getBytes("UTF8");
-         byte[] enc = Cifrado.doFinal(utf8);
-         return new sun.misc.BASE64Encoder().encode(enc);
-     }
-     
-     public String DesCifrar(String MensajeCifrado) throws Exception{
-         byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(MensajeCifrado);
-         byte[] utf8 = DesCifrado.doFinal(dec);
-         return new String(utf8, "UTF8");
-     }
+     private String Cifrar(String Mensaje) throws Exception{
+       String MensajeCifrado="";
+       Cipher cifrador=Cipher.getInstance("DES");
+       cifrador.init(Cipher.ENCRYPT_MODE,key);
+       byte[] MensajeBytes=Mensaje.getBytes();
+       byte [] MensajeCifradoBytes=cifrador.doFinal(MensajeBytes);
+       BASE64Encoder encoder=new BASE64Encoder();
+       MensajeCifrado=encoder.encode(MensajeCifradoBytes);
+       return MensajeCifrado;
+    }
+    
+    private String Descifrar(String MensajeCifrado) throws Exception{
+        String MensajeDescifrado="";
+        Cipher descifrador=Cipher.getInstance("DES");
+        descifrador.init(Cipher.DECRYPT_MODE, key);
+        BASE64Decoder decoder=new BASE64Decoder();
+         byte [] MensajeCifradoBytes=decoder.decodeBuffer(MensajeCifrado);
+         byte [] MensajeDesCifradoBytes=descifrador.doFinal(MensajeCifradoBytes);
+         MensajeDescifrado=new String(MensajeDesCifradoBytes,"UTF");
+        return MensajeDescifrado;
+    }
     
 }
