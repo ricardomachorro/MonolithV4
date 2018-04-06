@@ -22,5 +22,11 @@ public class Kerberos {
     ObjectOutputStream alServidor2;
     ObjectInputStream delServidor2;
     
+    public boolean Mensaje(){
+        boolean ServicioEnviadoExitosamente=false;
+        
+        return ServicioEnviadoExitosamente;
+    }
+    
     
 }
