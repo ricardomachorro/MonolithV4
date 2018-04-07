@@ -60,18 +60,30 @@ public class Server {
                         Boleto2 ticket2=new Boleto2();
                         Boleto2 ticket3=new Boleto2();
                         Des des1=new Des(ClaveKCD);
+                        
                         ticket2.setNombreusaurio(des1.Cifrar(NombreUsuario));
                         ticket2.setIDUsuario(des1.Cifrar(Integer.toString(IDUsuario)));
                         ticket2.setIPUsuario(des1.Cifrar(IPUsuario));
                         ticket2.setServicio(des1.Cifrar(Servicio));
                         ticket2.setNombreKDC(des1.Cifrar(NombreKCD));
                         ticket2.setLlaveSesion(des1.Cifrar(ticket2.CrearLlave()));
+                         String LlaveSesion=ticket2.getLlaveSesion();
                          Des des2=new Des(Integer.toString(IDUsuario));
                         ticket3.setNombreusaurio(des2.Cifrar(ticket2.getNombreusaurio()));
                         ticket3.setIDUsuario(des2.Cifrar(ticket2.getIDUsuario()));
+                        ticket3.setIPUsuario(des2.Cifrar(ticket2.getIPUsuario()));
+                        ticket3.setServicio(des2.Cifrar(ticket2.getServicio()));
+                        ticket3.setNombreKDC(des2.Cifrar(ticket2.getServicio()));
+                        ticket3.setLlaveSesion(des2.Cifrar(ticket2.getLlaveSesion()));
+                        
                         salida.writeBoolean(true);
-                        
-                        
+                        salida.writeUTF(ticket3.getNombreusaurio());
+                        salida.writeUTF(ticket3.getIDUsuario());
+                        salida.writeUTF(ticket3.getIPUsuario());
+                        salida.writeUTF(ticket3.getServicio());
+                        salida.writeUTF(ticket3.getNombreKDC());
+                        salida.writeUTF(ticket3.getLlaveSesion());
+                        salida.writeUTF(des2.Cifrar(LlaveSesion));
                     }
                     
                 }

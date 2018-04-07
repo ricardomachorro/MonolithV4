@@ -21,7 +21,7 @@ public class Des {
     
     private SecretKey key;
     
-     public void Des( String Llave) throws Exception{
+     public Des( String Llave) throws Exception{
         DESKeySpec desKeySpec=new DESKeySpec(Llave.getBytes());
         SecretKeyFactory keyFactory= SecretKeyFactory.getInstance("DES");
         key=keyFactory.generateSecret(desKeySpec);

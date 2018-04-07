@@ -39,6 +39,11 @@ public class Kerberos {
              alServidor.flush();
              alServidor.writeUTF(ticket.getIPUsaurio());
              alServidor.flush();
+             boolean confirmacion1=delServidor.readBoolean();
+             if(confirmacion1){
+                 Des des1=new Des(Integer.toString(ticket.getIDentificadorUsuario()));
+                 
+             }
              
         } catch (Exception ex) {
 
