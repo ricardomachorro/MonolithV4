@@ -1,12 +1,23 @@
 
 package Seguridad;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class Boleto1 {
     
     private String NombreUsuario;
     private String NombreServicio;
     private String IPUsaurio;
-    private String ClaveSesion;
+    private int IDentificadorUsuario;
+
+    public int getIDentificadorUsuario() {
+        return IDentificadorUsuario;
+    }
+
+    public void setIDentificadorUsuario(int IDentificadorUsuario) {
+        this.IDentificadorUsuario = IDentificadorUsuario;
+    }
 
     public String getNombreUsuario() {
         return NombreUsuario;
@@ -28,19 +39,9 @@ public class Boleto1 {
         return IPUsaurio;
     }
 
-    public void setIPUsaurio(String IPUsaurio) {
-        this.IPUsaurio = IPUsaurio;
+    public void setIPUsaurio(String IPUsaurio) throws UnknownHostException {
+        this.IPUsaurio = InetAddress.getLocalHost().getHostAddress();
     }
 
-    public String getClaveSesion() {
-        return ClaveSesion;
-    }
-
-    public void setClaveSesion(String ClaveSesion) {
-        
-        
-        
-        this.ClaveSesion = ClaveSesion;
-    }
-    
+  
 }

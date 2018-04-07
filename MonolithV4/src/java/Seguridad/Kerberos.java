@@ -5,28 +5,46 @@
  */
 package Seguridad;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.math.*;
+import java.net.*;
+import java.util.*;
+import javax.xml.bind.DatatypeConverter;
 
 public class Kerberos {
-    
-    //Parametros a cambiar===
-    static final String HOST1 = "192.168.0.4"; //Parametro para el servidor de el proyecto de KerberosServer
-    static final int PUERTO1 = 3000;
-    
-    static final String HOST2 = "192.168.0.4";//Parametro para el servidor de el proyecto de PermisosServer
-    static final int PUERTO2 = 4000;
-    
+
+    static final String HOST1 = "192.168.0.5";
+    static final int PUERTO1 = 5000;
+    static final String HOST2 = "192.168.0.5";
+    static final int PUERTO2 = 4100;
     ObjectOutputStream alServidor;
     ObjectInputStream delServidor;
     ObjectOutputStream alServidor2;
     ObjectInputStream delServidor2;
-    
-    public boolean Mensaje(){
-        boolean ServicioEnviadoExitosamente=false;
-        
-        return ServicioEnviadoExitosamente;
+
+    public boolean EnviarPeticionUsuario(Boleto1 ticket) {
+        boolean exito = false;
+
+        try {
+            Socket skKDC = new Socket(HOST1, PUERTO1);
+            alServidor = new ObjectOutputStream(skKDC.getOutputStream());
+            delServidor = new ObjectInputStream(skKDC.getInputStream());
+            alServidor.writeUTF("2");
+            alServidor.flush();
+            alServidor.writeUTF(ticket.getNombreUsuario());
+            alServidor.flush();
+            alServidor.writeInt(ticket.getIDentificadorUsuario());
+             alServidor.flush();
+            alServidor.writeUTF(ticket.getNombreServicio());
+             alServidor.flush();
+             alServidor.writeUTF(ticket.getIPUsaurio());
+             alServidor.flush();
+             
+        } catch (Exception ex) {
+
+        }
+
+        return exito;
     }
-    
-    
+
 }
