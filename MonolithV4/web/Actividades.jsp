@@ -53,6 +53,9 @@
                     <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
+                    </li>
 
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
