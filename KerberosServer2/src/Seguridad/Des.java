@@ -16,13 +16,13 @@ public class Des {
     
     private SecretKey key;
     
-     public void Des( String Llave) throws Exception{
+     public Des( String Llave) throws Exception{
         DESKeySpec desKeySpec=new DESKeySpec(Llave.getBytes());
         SecretKeyFactory keyFactory= SecretKeyFactory.getInstance("DES");
         key=keyFactory.generateSecret(desKeySpec);
     }
      
-     private String Cifrar(String Mensaje) throws Exception{
+     public String Cifrar(String Mensaje) throws Exception{
        String MensajeCifrado="";
        Cipher cifrador=Cipher.getInstance("DES");
        cifrador.init(Cipher.ENCRYPT_MODE,key);
@@ -33,7 +33,7 @@ public class Des {
        return MensajeCifrado;
     }
     
-    private String Descifrar(String MensajeCifrado) throws Exception{
+    public String Descifrar(String MensajeCifrado) throws Exception{
         String MensajeDescifrado="";
         Cipher descifrador=Cipher.getInstance("DES");
         descifrador.init(Cipher.DECRYPT_MODE, key);
