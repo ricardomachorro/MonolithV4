@@ -37,7 +37,9 @@
                     <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Configuracion.jsp"><img src="img/settings-gears.svg" class="ImagenesBarraInicio" >Configuración</a>
+                    </li>  
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
