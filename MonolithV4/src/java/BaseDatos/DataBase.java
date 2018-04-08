@@ -25,6 +25,7 @@ public class DataBase {
     public void IngresarUsuario(Usuario usr) throws SQLException {
         String sql = "insert into Usuario(NombreUsuario,Institucion,NivelEstudio,Direccion,Correo, Edad, Pais, Contrasena,Autenticado,Puntos) values (?,?,?,?,?,?,?,?,?,?);";
         String sql2= "";
+        /*
         ps = c.prepareStatement(sql);
         ps.setString(1, usr.getNombre());
         ps.setString(2, usr.getInstitucion());
@@ -38,6 +39,7 @@ public class DataBase {
         ps.setInt(10,0);
         ps.execute();
         c.close();
+        */
     }
     
     public boolean ConfirmarValidacionUsuario(String NombreUsuario) throws SQLException{
@@ -56,6 +58,7 @@ public class DataBase {
 
     public void CambiarUsuario(Usuario user, String usuariopeticion) throws SQLException {
         String sql = "update Usuario set NombreUsuario=?,Institucion=?,NivelEstudio=?,Direccion=?,Correo=?,Edad=?,Pais=?,Contrasena=? where Nombreusuario='" + usuariopeticion + "';";
+        /*
         ps = c.prepareStatement(sql);
         ps.setString(1, user.getNombre());
         ps.setString(2, user.getInstitucion());
@@ -67,6 +70,7 @@ public class DataBase {
         ps.setString(8, user.getPassword());
         ps.execute();
         c.close();
+        */
     }
       
     public boolean IngresarActividad(Actividad act) throws SQLException {
@@ -171,6 +175,7 @@ public class DataBase {
         c.close();
     }
 
+     /*
     public void IngresarExamen(Examen exa) throws SQLException {
         String sql = "insert into examen(Titulo,FormaDeEntregar,Descripcion,IDUsuario,FechaLimite,Estado) values (?,?,?,?,?,?);";
         ps = c.prepareStatement(sql);
@@ -196,7 +201,8 @@ public class DataBase {
         ps.execute();
         c.close();
     }
-
+    */
+     
     public void EliminarExamen(String id) throws SQLException {
         int identic = Integer.parseInt(id);
         String sql = "delete from examen where IDExamen=" + identic + ";";

@@ -10,8 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 
-
-
 @WebServlet(name = "IngresoUsuario", urlPatterns = {"/IngresoUsuario"})
 public class IngresoUsuario extends HttpServlet {
     
@@ -22,9 +20,7 @@ public class IngresoUsuario extends HttpServlet {
     private String Pais;
     private String Direccion;
   
-    
-    
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

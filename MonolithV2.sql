@@ -28,6 +28,7 @@ create table Validacion(
 );
 
 #Comprobacion bien brgas de usuarios
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contraseña,Puntos) values('Cubic_85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 0);
 select * from Usuario;
 
 
@@ -49,30 +50,47 @@ create table Actividad(
     foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/
 );
 
-#Aqui empiezan las tablas para el modulo grupos :v
+/*Aqui empiezan las tablas para el modulo grupos :v*/
 create table Grupo(
 	IDGrupo int not null primary key auto_increment,
-	Nombre nvarchar(100) not null,
+	NombreGrupo nvarchar(100) not null,
 	UsuarioLider int,
 	/*PuntoReunion int,*/
 	foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
 	foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
 );
 
+#Comprobacion bien brgas de grupos
+insert into Grupo(Nombre, UsuarioLider) values('Hawkward', 1);
+insert into Grupo(Nombre, UsuarioLider) values('Fisica', 1);
+select * from Grupo;
+
 create table Tarea(
 	IDTarea int not null primary key auto_increment,
 	Nombre nvarchar(100),
-	Fecha date,
+	Fecha datetime,
 	Estado boolean
 );
+
+#Comprobacion bien brgas de tareas
+insert into Tarea(Nombre,Fecha,Estado) values('Modulo grupos', '1000-01-01 00:00:00', false);
+insert into Tarea(Nombre,Fecha,Estado) values('Tesina', '1000-01-01 00:00:00', false);
+insert into Tarea(Nombre,Fecha,Estado) values('Resnick', '1000-01-01 00:00:00', false);
 
 create table TareaUsuario(
 	IDTareaUsuario int not null auto_increment primary key,
 	IDTarea int,
 	IDGrupo int,
-	foreign key (IDTarea) references Tarea(IDTarea) on update cascade on delete cascade
+	foreign key (IDTarea) references Tarea(IDTarea) on update cascade on delete cascade,
+    foreign key (IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
-#Aqui terminan las tablas para el modulo grupos :v
+
+#Comprobacion bien brgas de tareausuario
+insert into TareaUsuario(IDTarea, IDGrupo) values(1,1);
+insert into TareaUsuario(IDTarea, IDGrupo) values(2,1);
+insert into TareaUsuario(IDTarea, IDGrupo) values(3,2);
+
+/*Aqui terminan las tablas para el modulo grupos :v */
 
 create table Nota(
 	IDNota int not null auto_increment primary key,

@@ -11,7 +11,8 @@ public class Usuario {
     private String Pais;
     private String Direccion;
     private int Puntos;
-
+    
+    //PUNTOS
     public int getPuntos() {
         return Puntos;
     }
@@ -20,8 +21,7 @@ public class Usuario {
         this.Puntos = Puntos;
     }
     
-    
-    
+    //NOMBRE
     public String getNombre() {
         return Nombre;
     }
@@ -30,6 +30,7 @@ public class Usuario {
         this.Nombre = Nombre;
     }
 
+    //CORREO
     public String getCorreo() {
         return Correo;
     }
@@ -38,6 +39,7 @@ public class Usuario {
         this.Correo = Correo;
     }
 
+    //CONTRASEÑA
     public String getPassword() {
         return Password;
     }
@@ -46,6 +48,7 @@ public class Usuario {
         this.Password = Password;
     }
 
+    //EDAD
     public int getEdad() {
         return Edad;
     }
@@ -54,6 +57,7 @@ public class Usuario {
         this.Edad = Edad;
     }
 
+    //PAIS
     public String getPais() {
         return Pais;
     }
@@ -62,6 +66,7 @@ public class Usuario {
         this.Pais = Pais;
     }
 
+    //DIRECCION
     public String getDireccion() {
         return Direccion;
     }

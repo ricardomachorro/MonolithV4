@@ -18,7 +18,7 @@ public class IngresoPrograma extends HttpServlet {
     private String Nombre;
     private String Contraseña;
     
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -48,22 +48,26 @@ public class IngresoPrograma extends HttpServlet {
         Usuario u = new Usuario();
         
         try {
+            //BD
             Database2 db = new Database2();
+            //SESION
             HttpSession sesion = request.getSession();   
-            Nombre=request.getParameter("usuario").toString();
-            Contraseña =  request.getParameter("contrasenia").toString();
+            this.Nombre = request.getParameter("usuario").toString();
+            this.Contraseña =  request.getParameter("contrasenia").toString();
+            //OBJETO
             u.setNombre(Nombre);
             u.setPassword(Contraseña);
-            if(db.IngresoPrograma(u)){
+            
+            if(db.IngresoPrograma(u)){ //Evalua el ingreso con datos correctos
+                //Se agregan varibles de sesion
                 sesion.setAttribute("usuario", u.getNombre());
-                sesion.setAttribute("password",u.getPassword());
-                response.sendRedirect("Actividades.jsp");
+                sesion.setAttribute("password", u.getPassword());
+                response.sendRedirect("grupos.jsp");//Abre programa (En grupos xd :v/, El principal deberia ser Actividades)
             }else{
                  response.sendRedirect("Error404.jsp");
             }
-            
-           
-        }catch(Exception ex){
+
+        } catch(Exception ex){
            response.sendRedirect("Error404.jsp");
         }
 
