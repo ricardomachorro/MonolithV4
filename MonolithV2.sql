@@ -1,5 +1,5 @@
+drop database if exists MonolithV2;
 create database MonolithV2;
-/*drop database MonolithV2;*/
 use MonolithV2;
 
 create table Localizacion(IDLocalizacion int auto_increment primary key not null,
@@ -72,10 +72,10 @@ Filtro int not null,
 Nombre varchar(100) not null,
 fecha date not null
 );
-/*insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
 insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',30);
 insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'dogo #97','2017-05-12');
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'dogo #12','2017-03-01');*/
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'dogo #12','2017-03-01');
 select * from Logro;
 select * from Usuario;
 
