@@ -48,7 +48,6 @@ foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/);
 select * from actividad;
 delete from actividad where IDActividad>1;
 
-
 create table Grupo(IDGrupo int not null primary key auto_increment,
 Nombre varchar(100) not null,
 UsuarioLider int,
@@ -73,10 +72,37 @@ Conteneido text,
 IDUsuario int,
 foreign key (IDUsuario) references Usuario(IDUsuario));
 
-create table Logro(IDLogro int not null auto_increment primary key,
-Nombre varchar(100),
-Descripcion text,
-Costo int);
+create table Logro(
+IDLogro int not null auto_increment primary key,
+IDUsuario int not null,
+Img int not null,
+Filtro int not null,
+Nombre varchar(100) not null,
+fecha date not null
+);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',30);
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'dogo #97','2017-05-12');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'dogo #12','2017-03-01');
+select * from Logro;
+select * from Usuario;
+
+create table Intercambio(
+IDInter int not null auto_increment primary key,
+IDusuarioDa int not null,
+IDusuarioRe int not null,
+UsuarioDa varchar(100) not null,
+UsuarioRe varchar(100) not null,
+IDdogoDa int not null,
+IDdogoRe int not null,
+FiltroDa varchar(100) not null,
+ImgdogoDa int not null,
+dogoDa varchar(100) not null,
+dogoRe int not null,
+Estado varchar(100) not null,
+fecha date not null
+);
+select * from Intercambio;
 
 create table Estampa(IDEstampa int not null auto_increment primary key,
 Nombre varchar (100),
