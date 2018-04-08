@@ -92,7 +92,7 @@
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
                         <h2 class="card-title" >Cambio Configuraciones</h2>
-                        <form>
+                        <form action="" method="post">
                             <div class="form-group">
                                 <label >Nombre Usuario</label>
                                 <input  class="form-control"  placeholder="Nombre Usuario">
