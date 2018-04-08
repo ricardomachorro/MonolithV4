@@ -13,7 +13,7 @@
             //Variables de sesion
             HttpSession sesion = request.getSession();
             String nomUsuario = sesion.getAttribute("usuario").toString();
-
+           
             //Variables de conexion a BD
             Connection con = null;
             String driver = "com.mysql.jdbc.Driver";
@@ -29,6 +29,7 @@
                 session.setAttribute("conexion", con);
             } catch (Exception error) {
                 System.out.println("Error: " + error + " :'v");
+                response.sendRedirect("Error404.jsp");
             }
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -73,8 +74,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
                             <a class="dropdown-item" id="UsuarioName" >Usuario: <%out.println(nomUsuario);%></a>
-                            <a class="dropdown-item" href="#CerrarSesion"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
-                            <a class="dropdown-item" href="#Configuracion"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
+                            <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
+                            <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
                                 Configuracion</a>
                         </div>
                     </li>
@@ -100,7 +101,7 @@
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
                         %>
                         <!--Inicio de un grupo-->
-                        <div class='tab-pane fade' <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
+                        <div class="tab-pane fade" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
 
                             <!--Inicio titulo contenedor-->
                             <div class='card-deck'>
@@ -143,9 +144,7 @@
                                         <div class='row rowListaTareas'>
                                             <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
                                             <div class='col-12' <%out.println("id='listaTareas-" + nombreGrupo + "'");%>>
-                                                <%
-                                                    //Generador de actividades
-                                                %>
+
                                             </div>
                                             <!--Fin lista de tareas-->
                                         </div>
@@ -189,6 +188,25 @@
                             <div class="list-group" id="list-tab" role="tablist">
                                 <!--Aqui van los grupos listados (Inicio)-->
                                 <div id="lista-grupos">
+                                    <%
+                                        Statement st2 = con.createStatement();
+                                        ResultSet rs2 = st2.executeQuery(query);
+                                        query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
+                                        String grupo;
+                                        while (rs2.next()) {
+                                            grupo = (String) rs2.getString("NombreGrupo");
+                                    %>
+                                    <a class="list-group-item list-group-item-action" 
+                                       <%out.println(" id='lista-g"+grupo+"' data-toggle='list' href='#panel-g"+grupo+"' role='tab' aria-controls='g"+grupo+"'");%>
+                                    >
+                                        <img src="img/group.svg" alt="ic_grupos">
+                                        <%
+                                            out.println(grupo);
+                                        %>
+                                    </a>
+                                    <%
+                                        }
+                                    %>
                                     <!--
                                     <a class="list-group-item list-group-item-action" id="lista-gNombreGrupo" data-toggle="list" href="#panel-gNombreGrupo" role="tab" aria-controls="gNombreGrupo">
                                         <img src="img/group.svg" alt="ic_grupos">

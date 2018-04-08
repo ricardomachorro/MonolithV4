@@ -28,7 +28,7 @@ create table Validacion(
 );
 
 #Comprobacion bien brgas de usuarios
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contraseña,Puntos) values('Cubic_85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 0);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('Cubic_85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 0);
 select * from Usuario;
 
 
@@ -61,8 +61,8 @@ create table Grupo(
 );
 
 #Comprobacion bien brgas de grupos
-insert into Grupo(Nombre, UsuarioLider) values('Hawkward', 1);
-insert into Grupo(Nombre, UsuarioLider) values('Fisica', 1);
+insert into Grupo(NombreGrupo, UsuarioLider) values('Hawkward', 1);
+insert into Grupo(NombreGrupo, UsuarioLider) values('Fisica', 1);
 select * from Grupo;
 
 create table Tarea(
