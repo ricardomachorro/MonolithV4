@@ -15,7 +15,7 @@ Edad int,
 Pais varchar(50),
 Direccion varchar(200),
 Contrasena varchar(70),
-Tipo,Usuario int,
+TipoUsuario int,
 Puntos int not null);
 
 select * from Usuario;
@@ -117,4 +117,4 @@ foreign key (IDLogro) references Logro(IDLogro));
 create table  EstampaUsaurio(IDEstampaUsuario int not null auto_increment primary key,
 IDUsuario int not null,
 IDEstampa int not null,
-foreign key (IDUsuario) references Usuario(IDUsuario),
+foreign key (IDUsuario) references Usuario(IDUsuario));
