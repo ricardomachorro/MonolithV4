@@ -172,11 +172,28 @@ public class Database2 {
 
         return EstadoActividad;
     }
+    
+    public int TipoUsuario(Usuario user){
+        int tipo=0;
+        try {
+            String sql = "select * from Usuario where NombreUsuario=? and Contrasena=?";
+            ps = c.prepareStatement(sql);
+            ps.setString(1, user.getNombre());
+            ps.setString(2, user.getPassword());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tipo=rs.getInt("TipoUsuario");
+            }
+        } catch (Exception ex) {
+
+        }
+        return tipo;
+    }
 
     public boolean IngresoUsuario(Usuario user) {
         boolean RegistroExitoso = false;
         String sql1 = "select * from Usuario where NombreUsuario=?";
-        String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values(?,?,?,?,?,?,?)";
+        String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos,TipoUsuario) values(?,?,?,?,?,?,?,?)";
         try {
             ps = c.prepareStatement(sql1);
             ps.setString(1, user.getNombre());
@@ -191,6 +208,7 @@ public class Database2 {
                 ps.setString(5, user.getDireccion());
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
+                ps.setInt(8,1);
                 ps.executeUpdate();
                 RegistroExitoso = true;
             }
@@ -250,6 +268,23 @@ public class Database2 {
 
         }
         return Repetida;
+    }
+    
+    public void ActualizarUsuario(Usuario user,String UsuarioOriginal){
+        String sql="update Usaurio set NombreUsuario=?,Correo=?,Edad=?,Pais=?,Direccion=?,Contrasena=? where IDUsuario=?";
+        try{
+            int idUsuario=IdentificarUsuario(UsuarioOriginal);
+            ps = c.prepareStatement(sql);
+            ps.setString(1, user.getNombre());
+            ps.setString(2,user.getCorreo());
+            ps.setInt(3, user.getEdad());
+            ps.setString(4, user.getDireccion());
+            ps.setString(5, user.getPassword());
+            ps.setInt(6, idUsuario);
+            ps.executeUpdate();
+        }catch(Exception ex){
+            
+        }
     }
     
     public int ContadorActividadesFaltantes(String NombreUsuario){

@@ -15,6 +15,7 @@ Edad int,
 Pais varchar(50),
 Direccion varchar(200),
 Contrasena varchar(70),
+Tipo,Usuario int,
 Puntos int not null);
 
 select * from Usuario;
@@ -34,9 +35,6 @@ NombreCategoria varchar(100) not null,
 IDUsuario int not null,
 foreign key (IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade);
 select * from Categoria;
-
-
-
 
 create table Actividad(IDActividad int not null primary key auto_increment,
 Nombre varchar(40),

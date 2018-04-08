@@ -60,5 +60,12 @@
         <servlet-name>EliminarCategoria</servlet-name>
         <url-pattern>/EliminarCategoria</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <servlet-class>Servlets.ActualizarUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <url-pattern>/ActualizarUsuario</url-pattern>
+    </servlet-mapping>
 </web-app>

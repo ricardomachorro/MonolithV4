@@ -84,14 +84,14 @@
                             <li class="list-group-item">Direccion:</li>
                             <li class="list-group-item">Correo:</li>
                         </ul>
-                       
+
 
                     </div>
                 </div>
-                 
+
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
-                         <h2 class="card-title" >Cambio Configuraciones</h2>
+                        <h2 class="card-title" >Cambio Configuraciones</h2>
                         <form>
                             <div class="form-group">
                                 <label >Nombre Usuario</label>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="form-group">
                                 <label >Contraseña</label>
-                                <input  class="form-control"  placeholder="Edad Usuario">
+                                <input  class="form-control"  placeholder="Contrsaeña">
                             </div>
                             <div class="form-group">
                                 <label >Confirmar Contraseña</label>
@@ -122,11 +122,9 @@
                             </div>
                         </form>
                     </div>  
-                    </div>
                 </div>
-
-
             </div>
-        </div>                   
-    </body>
+        </div>
+    </div>                   
+</body>
 </html>
