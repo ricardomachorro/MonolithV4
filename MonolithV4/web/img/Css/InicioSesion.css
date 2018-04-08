@@ -1,0 +1,118 @@
+/*  Seccion para listas colgantes*/
+
+.ContenedoresListasColgantes{
+    margin:13px;
+}
+
+.ListasColgantes{
+    color:#313D66;
+    padding:13px;
+    text-height:max-size;
+    font-weight:bolder;
+    border-bottom:6px solid #17a2b8;
+    background-color:#fff;
+}
+/*Fin   Seccion para listas colgantes*/
+
+/*Seccion para Lista de Pendientes y Finalizados*/
+.ContenedorResumen{
+    padding-bottom:15px;
+}
+
+.ContendorIndividualResumen{
+    margin:15px; 
+    box-shadow:0 0px 12px;
+}
+
+.TituloResumen{
+    background-color:#309599;
+    text-align:center;
+    padding:12px;
+}
+
+.ContenedorListaResumen{
+    background-color:#F7F7F7;
+}
+
+.ContenedorListaResumen ul{
+    font-family:sans-serif;
+    text-align: center;
+    padding: 0; 
+    list-style-type: none;
+}
+
+.ImagenesResumen{
+    width:25px;
+    height:25px;
+}
+
+
+
+/*Css Botones */
+.BarraBotonesFast{
+    background-color:#fff;
+}
+
+.botonfast{
+    
+    padding:0px;
+    color:#fff;
+    font-family:sans-serif;
+    font-weight:bolder;
+    background-color:#313D66;
+    border-width:0;
+}
+
+.botonfast:hover{
+   background-color:#B0B7D1;
+   color:#313D66;
+}
+
+.imagenesBotonesFast{
+    width:15px;
+    height:15px;
+    margin:7px;
+}
+/*Fin Seccion de Barra de Botones Rapidos*/
+
+/*Seccion Panel de Elementos Pendientes*/
+
+#MargenParaPendientes{
+    height:400px;
+    margin:13px;
+    background-color:#fff;
+}
+
+#ContenedorPendientes{
+    box-shadow:0 0px 13px;
+    margin-top:12px;
+    
+    margin-right:7px;
+}
+
+#TituloListaPendientes{
+     background-color:#309599;
+     text-align:center;
+     font-family:sans-serif;
+     padding:13px;
+}
+
+#ContenedorListaPendientes{
+    overflow-y:scroll;
+    height:270px;
+    background-color:#fff;
+}
+
+.ListaObjeto{
+    margin:12px;
+    box-shadow:0 0px 7px;
+    color:#fff;background-color:#408fb2;padding-top:6px;padding-bottom:0px;
+}
+
+.TituloLista{
+    border-width:1px;
+    border-bottom:solid;
+    border-color:#fff;
+}
+/*Fin de Seccion Panel de Elementos Pendientes*/
+
