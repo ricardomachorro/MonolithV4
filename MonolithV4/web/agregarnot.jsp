@@ -15,11 +15,11 @@
     <body>
          <%@page import="java.sql.*, java.io.*" %>
          <%
-            String nom=request.getParameter("nombre"); 
-             String not = request.getParameter("nota");
+            String tit=request.getParameter("titulo"); 
+            String not = request.getParameter("nota");
              
-             nom = not.replaceAll("<", "&lt;");
-            nom = not.replaceAll(">", "&gt;");
+            tit = tit.replaceAll("<", "&lt;");
+            tit = tit.replaceAll(">", "&gt;");
             not = not.replaceAll("<", "&lt;");
             not = not.replaceAll(">", "&gt;");
             
@@ -38,9 +38,10 @@
             }
 
             try {
-              String queryString="INSERT INTO Nota(nombre,contenido) values(?,?)";
+              String queryString="INSERT INTO Nota(Nombrenot,Contenido) values(?,?)";
               pstatement = con.prepareStatement(queryString);
-              pstatement.setString(1, nom);
+              
+              pstatement.setString(1, tit);
               pstatement.setString(2, not);
               updateQuery = pstatement.executeUpdate();
                 out.println("<script>alert('Nota guardada  >:v')");

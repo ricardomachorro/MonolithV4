@@ -55,39 +55,38 @@
         <div class="container-fluid">
             <div class="row" >
 
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                        <div class="row BandejaNotas">
-                            <div class="col-12 ">
-                                <div class="row">
-                                    <div class="col-12 TituloContenedores">
-                                        <div class="row">
-                                            <div class="col-8" style="padding-top:40px;">
-                                                <a>Agregar notas</a>
-                                            </div> 
-                                            <div class="col-4">
-                                                
-                                                <form method="post" action="agregarnot.jsp"  >
-                                                
-                                                <button type="submit" class="btn btn-outline-danger  float-right">Agregar</button>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 SeparadorTituloContendores">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="row BandejaNotas">
+                        <div class="col-12 ">
+                            <div class="row">
+                                <div class="col-12 TituloContenedores">
+                                    <div class="row">
+                                        <div class="col-8" style="padding-top:40px;">
+                                            <a>Agregar notas</a>
+                                        </div> 
+                                        <div class="col-4">
 
+                                            <form method="post" action="agregarnot.jsp" > 
+                                                  
+                                                  <input type="text" class="form-control float-left" style="margin: 5%" placeholder="Escribe el nombre de la nota" size="50" id="titulo" name="titulo" required/>
+
+                                                <button type="submit" class="btn btn-outline-danger  float-right">Agregar</button>
+                                        </div> 
                                     </div>
-                                    hola
-                                    <div>
-                                        <textarea placeholder="Escribe la notas" id="nota" name="nota"> </textarea>
-                                    </div>
-                                    </form>
                                 </div>
+                            </div>
+                            <div class="row">
+
+                                <div>
+                                    <textarea   class="form-control" placeholder="Agrega la descripcion de tu nota" id="nota" name="nota" required></textarea>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                
+
 
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="row BandejaLateral" >
@@ -96,7 +95,8 @@
                                 <div class="col-12 TituloLateralesContenedores">
                                     <div class="row">
                                         <div class="col-8" style="padding-top:40px;">
-                                            <a>Notas</a>
+                                            <b><a>Notas</a></b>
+                                            
                                         </div> 
                                         <div class="col-4">
                                             <img class="float-right" src="img/folderOrange.svg" ><!--E3A229-->
@@ -105,37 +105,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 SeparadorTituloContendoresLateral">
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12" style="height:650px;background-color:#fff;overflow-y:scroll;">
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#fm-modal" > Insertar nota</button>
-
-
-                                    <div class="modal fade" id="fm-modal" tabindex="-1" role="dialog" aria-labelledby="fm-modal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="">Nueva nota</h5>
-                                                    <button class="close" data-dismiss="modal" aria-label="Cerrar">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <form method="post" action="agregarnot.jsp">
-                                                        <input type="text" placeholder="Ingresa el nombre de la nota" size="50"  id="nombre" name="nombre" required/><br><br>
-                                                        <input type="text" placeholder="Ingresa la descripcion de la nota" size="50" id="nota" name="nota"required/><br><br>
-
-                                                        <input type="submit" value="Ingresar" class="btn btn-secondary">
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                <div class="col-12" style="height:650px;background-color:#fff;">
+                                    <iframe src="ver.jsp" style="overflow-y:scroll; height: 600px;width: 375px; border: none" >dfdfff</iframe>
                                 </div> 
 
                             </div>
