@@ -103,23 +103,23 @@
                             </div>
                         </div>
                     </div>
-                     
-                    
+
+
                     <nav class="navbar  navbar-light bg-light" style="margin-top:30px;">
                         <a class="navbar-brand" >
                             <img src="img/question-mark.svg" id="IconoChat" class="d-inline-block align-top" alt="">
                             ¿Tienes Problemas?
                         </a>
                     </nav>
-                    
-                     <div class="card-deck">
+
+                    <div class="card-deck">
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-text">Si tiene alguna duda con el sistema, o problematica con este, en esta parte del 
                                     sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
                                     cualquiera de las dudas que podria tener
                                 </p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -129,11 +129,39 @@
                     <nav class="navbar  navbar-light bg-light">
                         <a class="navbar-brand" href="#">
                             <img src="img/speech-bubble.svg" id="IconoChat" class="d-inline-block align-top" alt="">
-                            Bootstrap
+                            Chat
                         </a>
                     </nav>
+                    <div class="card-deck" style="margin:12px;">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-12" style="height:500px;background-color:#fff;overflow-y:scroll;">
+                                    <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
+                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
+                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-deck" style="margin:12px;">
+                        <div class="card">
+                            <div class="row" style="padding:12px;">
+                                <div class="col-lg-10 col-md-6 col-sm-12">
+                                    <input type="text"  style="width:100%;"  class="form-control" placeholder="Mensaje" >
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                    <button class="btn-primary" style="width:100%;;height:40px" ><img src="img/sent-mail.svg" style="width:30px;height:30px;margin-right:17px;">Enviar</button>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
-
             </div>
         </div>
     </body>
