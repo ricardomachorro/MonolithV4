@@ -27,5 +27,45 @@
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <servlet-class>Servlets.ChequeoActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <url-pattern>/ChequeoActividad</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CambiosActividad</servlet-name>
+        <servlet-class>Servlets.CambiosActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CambiosActividad</servlet-name>
+        <url-pattern>/CambiosActividad</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EliminarActividad</servlet-name>
+        <servlet-class>Servlets.EliminarActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarActividad</servlet-name>
+        <url-pattern>/EliminarActividad</url-pattern>
+    </servlet-mapping>
     
+    <servlet>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <servlet-class>Servlets.EliminarCategoria</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <url-pattern>/EliminarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <servlet-class>Servlets.ActualizarUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <url-pattern>/ActualizarUsuario</url-pattern>
+    </servlet-mapping>
 </web-app>
