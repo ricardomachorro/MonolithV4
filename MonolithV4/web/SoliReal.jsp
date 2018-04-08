@@ -21,7 +21,7 @@
             HttpSession sesion = request.getSession();
 
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -67,7 +67,7 @@
                         filtro2 = Integer.parseInt(r.getString("Filtro"));
                         nombre2 = r.getString("Nombre");
                     }
-                    sta.executeUpdate("update Intercambio set Estado='acepetada',fecha='" + fecha1 + "' where IDInter = " + IDInter + ";");
+                    sta.executeUpdate("update Intercambio set Estado='aceptada',fecha='" + fecha1 + "' where IDInter = " + IDInter + ";");
                     sta.executeUpdate("update Logro set Img=" + img1 + ",Filtro=" + filtro1 + ",Nombre='" + nombre1 + "',fecha='" + fecha1 + "' where  IDLogro= " + IDdogoRe + ";");
                     sta.executeUpdate("update Logro set Img=" + img2 + ",Filtro=" + filtro2 + ",Nombre='" + nombre2 + "',fecha='" + fecha1 + "' where  IDLogro= " + IDdodoDa + ";");
                     out.println("<script>alert('Intercambio realizado exitosamente')</script>");

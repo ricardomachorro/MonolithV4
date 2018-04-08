@@ -14,7 +14,7 @@
             HttpSession sesion = request.getSession();
 
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>

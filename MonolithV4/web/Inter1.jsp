@@ -21,7 +21,7 @@
             HttpSession sesion = request.getSession();
 
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -33,16 +33,16 @@
                 int IDimg = 0;
                 int numRe = 0;
                 String filtro = "";
-                String numDa = request.getParameter("memo");
-                String UsuRe = request.getParameter("UsuarioRe");
-                //esta mamada >:V
-                numRe = Integer.parseInt(request.getParameter("numRe"));
+                try {
+                    String numDa = request.getParameter("memo");
+                    String UsuRe = request.getParameter("UsuarioRe");
+                    //esta mamada >:V
+                    numRe = Integer.parseInt(request.getParameter("numRe"));
 
-                IDimg = Integer.parseInt(request.getParameter("IDimg"));
+                    IDimg = Integer.parseInt(request.getParameter("IDimg"));
 
-                filtro = request.getParameter("filtro");
-
-                Calendar fechita = new GregorianCalendar();
+                    filtro = request.getParameter("filtro");
+                    Calendar fechita = new GregorianCalendar();
                 int año = fechita.get(Calendar.YEAR);
                 int mes = fechita.get(Calendar.MONTH);
                 int dia = fechita.get(Calendar.DAY_OF_MONTH);
@@ -85,9 +85,16 @@
                         out.println("<script>location.replace('Inter.jsp');</script>");
                     } catch (SQLException error) {
                         out.print(error.toString());
+
                     }
 
                 }
+                } catch (java.lang.NumberFormatException e) {
+                    out.println("<script>alert('Dogo no seleccionado')</script>");
+                    out.println("<script>location.replace('Inter.jsp');</script>");
+                }
+
+                
             }
 
 

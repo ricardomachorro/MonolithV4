@@ -23,7 +23,7 @@
             HttpSession sesion = request.getSession();
 
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -127,9 +127,8 @@
                                     <div class="form-group">
                                         <label for="nombre">Selecciona el dogo que deseas intercambiar</label>
                                         <select name="memo" id="memo" class="custom-select" onChange="changecontent(this)" required="">
-                                            <option value="1" selected>Seleciona al dogo</option>
+                                            <option value="hola" selected>Seleciona al dogo</option>
                                             <%
-
                                                 int IDusuario = 0;
                                                 Connection con = null;
                                                 Statement sta = null;
