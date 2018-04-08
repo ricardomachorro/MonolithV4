@@ -1,0 +1,31 @@
+body{
+    background-color:#e9ecef;
+}
+
+.panel-heading{
+    background-color:#9EC3DE;
+}
+
+.ContenedorModulo{
+   padding:15px;
+}
+
+.ElementosModulo{
+    margin-top:7px;
+    margin-bottom:7px;
+}
+
+
+
+#ImagenExplicacion{
+    margin-top:62px;
+    height:322px;
+    width:322px;
+}
+
+#IconoChat{
+    height:30px;
+    width:30px;
+    margin-right:19px;
+}
+

@@ -27,8 +27,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
-        <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
-        <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
+        <link href="Css/AyudaCSS.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -74,5 +73,68 @@
                 </ul>
             </div>
         </nav>
+
+        <div class="container-fluid">
+            <div class="row ContenedorModulo">
+                <div class="col-sm-12 col-md-4 col-lg-4 ElementosModulo ">
+                    <nav class="navbar  navbar-light bg-light">
+                        <a class="navbar-brand" >
+                            <img src="img/question-mark.svg" id="IconoChat" class="d-inline-block align-top" alt="">
+                            ¿Tienes Problemas?
+                        </a>
+                    </nav>
+
+                    <div class="card-deck">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">Si tiene alguna duda con el sistema, o problematica con este, en esta parte del 
+                                    sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
+                                    cualquiera de las dudas que podria tener
+                                </p>
+                                <h5 class="card-text">¿Si no funciona?</h5>
+                                <p class="card-text">
+                                    En el caso de no funcionar el cat proporcionado se tnedran los siguientes formas de
+                                    contacto con el equipo de desarrollo
+                                </p>
+                                <ul>
+                                    <li>Telefono:53 47 08 95</li>
+                                    <li>Correo:hawkward.ipn@gmail.com</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     
+                    
+                    <nav class="navbar  navbar-light bg-light" style="margin-top:30px;">
+                        <a class="navbar-brand" >
+                            <img src="img/question-mark.svg" id="IconoChat" class="d-inline-block align-top" alt="">
+                            ¿Tienes Problemas?
+                        </a>
+                    </nav>
+                    
+                     <div class="card-deck">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">Si tiene alguna duda con el sistema, o problematica con este, en esta parte del 
+                                    sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
+                                    cualquiera de las dudas que podria tener
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-8  ElementosModulo">
+                    <nav class="navbar  navbar-light bg-light">
+                        <a class="navbar-brand" href="#">
+                            <img src="img/speech-bubble.svg" id="IconoChat" class="d-inline-block align-top" alt="">
+                            Bootstrap
+                        </a>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
     </body>
 </html>
