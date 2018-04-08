@@ -28,6 +28,11 @@ body{
     width:"100%";
 }
 
+SeccionNuevaActividad input[type='date']{
+    width:"100%";
+}
+
+
 .SeccionNuevaActividad button{
     background-color:#0062cc;
     height:40px;
@@ -73,9 +78,14 @@ body{
 }
 
 .btn-activity img{
-    height:1px;
-    width:1px;
+    height:30px;
+    width:30px;
     margin:1px;
+}
+
+.GrupoBotonesActividad{
+    margin-left:12px;
+    margin-top:6px;
 }
 
 #BtnGuardar{
@@ -90,6 +100,17 @@ body{
    background-color:#f7d494;
 }
 
+
+.SeccionEliminarCategoria input[type='text']{
+    width:"100%";
+}
+
+.eccionEliminarCategoria button{
+    background-color:#0062cc;
+    height:40px;
+    width:100%;
+}
+
 .ContenedoresLaterales{
     margin-top:10px;
 }
@@ -100,7 +121,7 @@ body{
 }
 
 .ListasLaterales{
-    height:450px;
+    height:1050px;
     overflow-y:scroll;
 }
 
