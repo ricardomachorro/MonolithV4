@@ -20,9 +20,8 @@
         <script src="js/jquery.validate.js"></script>
         <%
             HttpSession sesion = request.getSession();
-
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -83,7 +82,6 @@
                     IDusuario = Integer.parseInt(r.getString("IDUsuario"));
                     puntos = Integer.parseInt(r.getString("Puntos"));
                 }
-
         %>
         <div class="container">
             <div class="row ">
@@ -132,25 +130,20 @@
                                 perrito = "dogo" + numpe + ".jpg";
                                 nombre = r.getString("Nombre");
                                 fecha = r.getString("fecha");
-
                         %>
                         <div class="card">
                             <img src="img/<%=perrito%>" class="card-img-top <%=fil%>" alt="" width=250px" height="250px">
                             <div class="card-body">
                                 <h5 class="card-title"><%=nombre%></h5>
                                 <p>El dogo se consiguio el <%=fecha%></p>
-
                             </div>
                         </div>
-
                         <%   }
                                 } catch (SQLException error) {
                                     out.print(error.toString());
                                 }
                             }
                         %>
-
-
                     </div>
                 </div>
             </div>

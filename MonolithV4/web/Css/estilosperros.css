@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/03/2018, 03:59:21 PM
+    Author     : memo0
+*/
 .filtro1{
     width: 100%;
     filter: grayscale(100%);
@@ -49,14 +58,8 @@ filter: hue-rotate(45deg);
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
 }
+
 .filtro10{
-    width: 100%;
-    filter: drop-shadow(10px -16px 30px black);
-    -webkit-filter: drop-shadow(10px -16px 30px black);
-    -moz-filter: drop-shadow(10px -16px 30px black);
-}
-.filtro11{
     width: 100%;
     
 }
-

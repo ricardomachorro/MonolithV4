@@ -21,9 +21,8 @@
         <script src="js/jquery.validate.js"></script>
         <%
             HttpSession sesion = request.getSession();
-
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -127,9 +126,8 @@
                                     <div class="form-group">
                                         <label for="nombre">Selecciona el dogo que deseas intercambiar</label>
                                         <select name="memo" id="memo" class="custom-select" onChange="changecontent(this)" required="">
-                                            <option value="1" selected>Seleciona al dogo</option>
+                                            <option value="hola" selected>Seleciona al dogo</option>
                                             <%
-
                                                 int IDusuario = 0;
                                                 Connection con = null;
                                                 Statement sta = null;
@@ -180,7 +178,6 @@
                                         <label for="mensaje">Usuario a quien se lo propones</label>
                                         <input type="text" name="UsuarioRe" id="UsuarioRe" placeholder="UsuarioRe" class="form-control" onkeypress="return soloenteros(event);"onpaste="return false"required="">
                                     </div>
-
                                     <div class="form-group">
                                         <label for="mensaje">Numero que deseas</label>
                                         <input type="number" name="numRe" id="numRe" placeholder="numRe" class="form-control" onpaste="return false" required="">
@@ -191,7 +188,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col">
@@ -219,7 +215,6 @@
                                 int imgchida = 0;
                                 r = sta.executeQuery("select * from Intercambio where UsuarioRe='" + usuario + "' and Estado='proceso'  order by IDInter DESC");
                                 while (r.next()) {
-
                                     conta++;
                                     IDinter = Integer.parseInt(r.getString("IDInter"));
                                     idusuda = Integer.parseInt(r.getString("IDusuarioDa"));
@@ -235,7 +230,6 @@
                                     estado = r.getString("Estado");
                                     fecha = r.getString("fecha");
                         %>
-
                         <div class="card">
                             <div class="card-header" role="tab" id="heading<%=conta%>">
                                 <h5 class="mb-0">
@@ -256,7 +250,6 @@
                                 </div>
                                 <div class="col-4">
                                     <img src="img/dogo<%=imgchida%>.jpg" class="card-img-top img-fluid <%=filtroDa%>" alt="" width=250px" height="250px">
-
                                     <form method="post" action="SoliAcep.jsp?id=<%=IDinter%>">
                                         <button type="submit" class="btn btn-primary" >Aceptar</button>
                                     </form>

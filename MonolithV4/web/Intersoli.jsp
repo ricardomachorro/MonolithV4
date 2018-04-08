@@ -22,7 +22,7 @@
             HttpSession sesion = request.getSession();
             
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -105,7 +105,6 @@
                                 int imgchida = 0;
                                 r = sta.executeQuery("select * from Intercambio where UsuarioDa='" + usuario + "' or UsuarioRe='" + usuario + "'  order by IDInter DESC  ");
                                 while (r.next()) {
-
                                     conta++;
                                     idusuda = Integer.parseInt(r.getString("IDusuarioDa"));
                                     idusure = Integer.parseInt(r.getString("IDusuarioRe"));
@@ -137,7 +136,6 @@
                                             memo = "Solicitud";
                                         }
                                     }
-
                         %>
                         
                             <div class="card">
@@ -161,7 +159,6 @@
                                     </div>
                                     <div class="col-4">
                                         <img src="img/dogo<%=imgchida%>.jpg" class="card-img-top img-fluid <%=filtroDa%>" alt="" width=250px" height="250px">
-
                                     </div>
                                 </div>
                             </div>
@@ -172,8 +169,6 @@
                                 }
                             }
                         %>
-
-
                     </div>
                 </div>
             </div>

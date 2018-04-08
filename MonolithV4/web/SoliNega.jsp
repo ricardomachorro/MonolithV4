@@ -12,9 +12,8 @@
         <title>JSP Page</title>
         <%
             HttpSession sesion = request.getSession();
-
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -28,7 +27,6 @@
                 int dia = fechita.get(Calendar.DAY_OF_MONTH);
                 int meschido = mes + 1;
                 String fecha1 = "" + año + "-" + meschido + "-" + dia;
-
                 try {
                     Connection con = null;
                     Statement sta = null;
@@ -44,7 +42,6 @@
                     out.print(error.toString());
                 }
             }
-
         %>
     </body>
 </html>

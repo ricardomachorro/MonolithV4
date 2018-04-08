@@ -13,9 +13,8 @@
         <title>JSP Page</title>
         <%
             HttpSession sesion = request.getSession();
-
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
@@ -26,7 +25,7 @@
                 Random rand = new Random();
                 int n = rand.nextInt(100) + 1;
                 int img = rand.nextInt(7) + 1;
-                int fil = rand.nextInt(11) + 1;
+                int fil = rand.nextInt(10) + 1;
                 Calendar fechita = new GregorianCalendar();
                 int año = fechita.get(Calendar.YEAR);
                 int mes = fechita.get(Calendar.MONTH);
@@ -34,7 +33,6 @@
                 int meschido = mes + 1;
                 String fecha1 = "" + año + "-" + meschido + "-" + dia;
                 int costo1 = 0;
-
                 try {
                     Connection con = null;
                     Statement sta = null;
@@ -43,7 +41,6 @@
                     con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
                     sta = con.createStatement();
                     r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
-
                     if (r.next()) {
                         IDusuario = Integer.parseInt(r.getString("IDUsuario"));
                         costo1 = Integer.parseInt(r.getString("Puntos"));
@@ -56,7 +53,6 @@
                     out.print(error.toString());
                 }
             }
-
         %>
     </body>
 </html>

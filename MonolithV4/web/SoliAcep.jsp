@@ -20,14 +20,12 @@
         <script src="js/jquery.validate.js"></script>
         <%
             HttpSession sesion = request.getSession();
-
             if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.jsp');</script>");
+                out.println("<script>location.replace('index.html');</script>");
             } else {
                 String usuario = sesion.getAttribute("usuario").toString();
         %>
         <script>
-
             function changecontent() {
                 var texto = document.getElementById("memo").value;
                 var imagen = texto.substring(4, 5);
@@ -108,7 +106,6 @@
                                     <select name="memo" id="memo" class="custom-select" onChange="changecontent(this)" required="">
                                         <option value="1" selected>Seleciona al dogo</option>
                                         <%
-
                                             Connection con = null;
                                             Statement sta = null;
                                             ResultSet r = null;
@@ -126,13 +123,11 @@
                                             String fecha1 = "" + año + "-" + meschido + "-" + dia;
                                             String estado = "";
                                             String perroDa = "";
-
                                             try {
                                                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                 con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
                                                 sta = con.createStatement();
                                                 r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
-
                                                 if (r.next()) {
                                                     IDusuario = Integer.parseInt(r.getString("IDUsuario"));
                                                 }
@@ -141,7 +136,6 @@
                                                     perroDa = "dogo #" + r.getString("dogoRe");
                                                 }
                                                 r = sta.executeQuery("select * from Logro where IDusuario=" + IDusuario + " and Nombre='" + perroDa + "'");
-
                                                 while (r.next()) {
                                                     estado = "";
                                                     coun++;
@@ -176,16 +170,12 @@
                                 <div class="form-group">
                                     <img name="marco" id="marco" src="img/Doggo.jpg" class="" alt="" width=250px" height="250px">
                                 </div>
-
                                 <input class="btn btn-primary" type="submit" value="Intercambiar" <%=estado%>>
                             </form>
                         </div>
-
                         <div class="card">
                             <img src="img/inter.png" class="card-image-top img-fluid" alt="">
-
                         </div>
-
                         <div class="card">
                             <%
                                 String dogoda = "";
@@ -205,7 +195,6 @@
                                     while (r.next()) {
                                         imgDa = Integer.parseInt(r.getString("Img"));
                                     }
-
                                 } catch (SQLException error) {
                                     out.print(error.toString());
                                 }
