@@ -50,7 +50,13 @@
                         <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
                     </li>
 
                 </ul>
