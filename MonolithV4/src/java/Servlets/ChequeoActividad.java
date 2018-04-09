@@ -45,21 +45,12 @@ public class ChequeoActividad extends HttpServlet {
         try{
             Database2 db=new Database2();
             String Opccion=request.getParameter("Opccion");
-           
             HttpSession s = request.getSession();
             String Usuario = s.getAttribute("usuario").toString();
-            String IDActividad=request.getParameter("IDActividad");
-            int IDActReal=Integer.parseInt(IDActividad);
-            db.CambiarEstadoActividad(IDActReal); 
-            int ActividadesHechas=db.ContadorActividadesFinalizadas(Usuario);
-              int ActividadesNoHechas=db.ContadorActividadesFaltantes(Usuario);
-                 response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write(Integer.toString(ActividadesNoHechas));
-            /*
+         String IDActividad=request.getParameter("IDActividad");
+            int IDActReal=Integer.parseInt(IDActividad);        
             if(Opccion.equalsIgnoreCase("1")){ 
-            String IDActividad=request.getParameter("IDActividad");
-            int IDActReal=Integer.parseInt(IDActividad);
-            db.CambiarEstadoActividad(IDActReal); 
+             db.CambiarEstadoActividad(IDActReal);
             int ActividadesHechas=db.ContadorActividadesFinalizadas(Usuario);
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(Integer.toString(ActividadesHechas));
@@ -67,7 +58,7 @@ public class ChequeoActividad extends HttpServlet {
                 int ActividadesNoHechas=db.ContadorActividadesFaltantes(Usuario);
               response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(Integer.toString(ActividadesNoHechas));
-            }*/
+            }
             
        
 
