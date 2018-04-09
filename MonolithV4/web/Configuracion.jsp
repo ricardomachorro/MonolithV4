@@ -78,11 +78,11 @@
                     <div class="card-body">
                         <h2 class="card-title" id="TituloConfiguraciones">Configuraciones Anteriores</h2>
                         <ul class="list-group list-group-flush" id="ListaConfiguracion">
-                            <li class="list-group-item">Nombre Usuario:</li>
-                            <li class="list-group-item">Edad:</li>
-                            <li class="list-group-item">Pais:</li>
-                            <li class="list-group-item">Direccion:</li>
-                            <li class="list-group-item">Correo:</li>
+                            <li class="list-group-item" id="ListaNombre">Nombre Usuario:</li>
+                            <li class="list-group-item" id="ListaEdad">Edad:</li>
+                            <li class="list-group-item" id="ListaPais">Pais:</li>
+                            <li class="list-group-item" id="ListaDireccion">Direccion:</li>
+                            <li class="list-group-item" id="ListaCorreo">Correo:</li>
                         </ul>
 
 
@@ -92,35 +92,39 @@
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
                         <h2 class="card-title" >Cambio Configuraciones</h2>
-                        <form>
+                        
                             <div class="form-group">
                                 <label >Nombre Usuario</label>
-                                <input  class="form-control"  placeholder="Nombre Usuario">
+                                <input id="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
                             </div>
                             <div class="form-group">
                                 <label >Edad</label>
-                                <input  class="form-control"  placeholder="Edad Usuario">
+                                <input id="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
                             </div>
                             <div class="form-group">
                                 <label >Pais</label>
-                                <input  class="form-control"  placeholder="Pais">
+                                <input id="txtPaisUsuario" class="form-control"  placeholder="Pais">
                             </div>
                             <div class="form-group">
                                 <label >Direccion</label>
-                                <input  class="form-control"  placeholder="Direccion">
+                                <input  id="txtDirecUsuario" class="form-control"  placeholder="Direccion">
+                            </div>
+                            <div class="form-group">
+                                <label >Correo</label>
+                                <input  id="txtCorreo" class="form-control"  placeholder="Correo">
                             </div>
                             <div class="form-group">
                                 <label >Contraseña</label>
-                                <input  class="form-control"  placeholder="Contrsaeña">
+                                <input  id="txtContra" class="form-control"  placeholder="Contrsaeña">
                             </div>
                             <div class="form-group">
                                 <label >Confirmar Contraseña</label>
                                 <input  class="form-control"  placeholder="Confirme Contraseña">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
                             </div>
-                        </form>
+                        
                     </div>  
                 </div>
             </div>
@@ -128,3 +132,42 @@
     </div>                   
 </body>
 </html>
+<script>
+    $("#btnCambio").click(function(){
+        var NombreNuevo=$("#txtNombreUsuario").val();
+        var EdadUsuario=$("#txtEdadUsuario").val();
+        var PaisUsuario=$("#txtPaisUsuario").val();
+        var CorreoUsuario=$("#txtCorreo").val();
+        var DirecUsaurio=$("#txtDirecUsuario").val();
+        var ContraUsuario=$("#txtContra").val();
+        $.ajax({
+            url: "ActualizarUsuario",
+            type: 'post',
+            data:{
+                Nombre:NombreNuevo,
+                Edad:EdadUsuario,
+                Pais:PaisUsuario,
+                Direc:DirecUsaurio,
+                Correo:ContraUsuario,
+                Contra:ContraUsuario
+            },
+            success:function(){
+               $("#ListaNombre").text("Nombre Usuario: "+NombreNuevo);
+               $("#ListaEdad").text("Edad: " +EdadUsuario);
+               $("#ListaPais").text("Pais: "+PaisUsuario);
+               $("#ListaDireccion").text("Direccion: "+DirecUsaurio);
+               $("#ListaCorreo").text("Correo: "+CorreoUsuario);
+               $("#txtNombreUsuario").val("");
+               $("#txtEdadUsuario").val("");
+               $("#txtPaisUsuario").val("");
+               $("#txtCorreo").val("");
+               $("#txtDirecUsuario").val("");
+               $("#txtContra").val("");
+            },error:{
+                
+            }
+        });
+    });
+    
+</script>
+
