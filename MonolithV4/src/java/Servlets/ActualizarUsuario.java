@@ -43,9 +43,23 @@ public class ActualizarUsuario extends HttpServlet{
         
         try {
             Database2 db = new Database2();
-            HttpSession sesion = request.getSession();   
-            
-           
+            HttpSession sesion = request.getSession();
+           String Usuario = sesion.getAttribute("usuario").toString();
+           String Nombre=request.getParameter("Nombre").toString();
+           String Edad=request.getParameter("Edad").toString();
+           int edad=Integer.parseInt(Edad);
+           String Pais=request.getParameter("Pais").toString();
+           String Direc=request.getParameter("Direc").toString();
+           String Correo=request.getParameter("Correo").toString();
+           String Contra=request.getParameter("Contra").toString();
+           u.setNombre(Nombre);
+           u.setEdad(edad);
+           u.setPais(Pais);
+           u.setDireccion(Direc);
+           u.setCorreo(Correo);
+           u.setPassword(Contra);
+            db.ActualizarUsuario(u, Usuario);
+            u.setPuntos(2);
         }catch(Exception ex){
            response.sendRedirect("Error404.jsp");
         }

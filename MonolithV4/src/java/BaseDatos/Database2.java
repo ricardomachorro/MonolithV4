@@ -271,19 +271,20 @@ public class Database2 {
     }
     
     public void ActualizarUsuario(Usuario user,String UsuarioOriginal){
-        String sql="update Usaurio set NombreUsuario=?,Correo=?,Edad=?,Pais=?,Direccion=?,Contrasena=? where IDUsuario=?";
+        String sql="update Usuario set NombreUsuario=?,Correo=?,Edad=?,Pais=?,Direccion=?,Contrasena=? where IDUsuario=?";
         try{
             int idUsuario=IdentificarUsuario(UsuarioOriginal);
             ps = c.prepareStatement(sql);
             ps.setString(1, user.getNombre());
             ps.setString(2,user.getCorreo());
             ps.setInt(3, user.getEdad());
-            ps.setString(4, user.getDireccion());
-            ps.setString(5, user.getPassword());
-            ps.setInt(6, idUsuario);
+            ps.setString(4, user.getPais());
+            ps.setString(5, user.getDireccion());
+            ps.setString(6, user.getPassword());
+            ps.setInt(7, idUsuario);
             ps.executeUpdate();
         }catch(Exception ex){
-            
+            System.out.print(ex.toString());
         }
     }
     
