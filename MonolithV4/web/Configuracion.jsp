@@ -20,9 +20,6 @@
     } catch (Exception ex) {
 
     }
-    
-
-
 
 
 %>
@@ -82,11 +79,24 @@
                     <div class="card-body">
                         <h2 class="card-title" id="TituloConfiguraciones">Configuraciones Anteriores</h2>
                         <ul class="list-group list-group-flush" id="ListaConfiguracion">
-                            <li class="list-group-item" id="ListaNombre">Nombre Usuario:</li>
+                            <%
+                                Statement stcons2 = conexion.createStatement();
+                                String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
+                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where NombreUsuario='"+ UsuarioBusqueda1+"'");
+                                if (rscons2.next()) {
+                                    
+                                 out.println("<li class='list-group-item' id='ListaNombre'>Nombre Usuario: " + rscons2.getString("NombreUsuario") + "</li>");
+                                 out.println("<li class='list-group-item' id='ListaEdad'>Edad: " + rscons2.getString("Edad") + "</li>");
+                                 out.println("<li class='list-group-item' id='ListaPais'>Pais: " + rscons2.getString("Pais") + "</li>");
+                                 out.println("<li class='list-group-item' id='ListaDireccion'>Pais: " + rscons2.getString("Direccion") + "</li>");
+                                 out.println("<li class='list-group-item' id='ListaCorreo'>Pais: " + rscons2.getString("Correo") + "</li>");
+                                }
+                            %>
+                            <!--<li class="list-group-item" id="ListaNombre">Nombre Usuario:</li>
                             <li class="list-group-item" id="ListaEdad">Edad:</li>
                             <li class="list-group-item" id="ListaPais">Pais:</li>
                             <li class="list-group-item" id="ListaDireccion">Direccion:</li>
-                            <li class="list-group-item" id="ListaCorreo">Correo:</li>
+                            <li class="list-group-item" id="ListaCorreo">Correo:</li>-->
                         </ul>
 
 
@@ -96,39 +106,39 @@
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
                         <h2 class="card-title" >Cambio Configuraciones</h2>
-                        
-                            <div class="form-group">
-                                <label >Nombre Usuario</label>
-                                <input id="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
-                            </div>
-                            <div class="form-group">
-                                <label >Edad</label>
-                                <input id="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
-                            </div>
-                            <div class="form-group">
-                                <label >Pais</label>
-                                <input id="txtPaisUsuario" class="form-control"  placeholder="Pais">
-                            </div>
-                            <div class="form-group">
-                                <label >Direccion</label>
-                                <input  id="txtDirecUsuario" class="form-control"  placeholder="Direccion">
-                            </div>
-                            <div class="form-group">
-                                <label >Correo</label>
-                                <input  id="txtCorreo" class="form-control"  placeholder="Correo">
-                            </div>
-                            <div class="form-group">
-                                <label >Contraseña</label>
-                                <input  id="txtContra" class="form-control"  placeholder="Contrsaeña">
-                            </div>
-                            <div class="form-group">
-                                <label >Confirmar Contraseña</label>
-                                <input  class="form-control"  placeholder="Confirme Contraseña">
-                            </div>
-                            <div class="col-auto">
-                                <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
-                            </div>
-                        
+
+                        <div class="form-group">
+                            <label >Nombre Usuario</label>
+                            <input id="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
+                        </div>
+                        <div class="form-group">
+                            <label >Edad</label>
+                            <input id="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
+                        </div>
+                        <div class="form-group">
+                            <label >Pais</label>
+                            <input id="txtPaisUsuario" class="form-control"  placeholder="Pais">
+                        </div>
+                        <div class="form-group">
+                            <label >Direccion</label>
+                            <input  id="txtDirecUsuario" class="form-control"  placeholder="Direccion">
+                        </div>
+                        <div class="form-group">
+                            <label >Correo</label>
+                            <input  id="txtCorreo" class="form-control"  placeholder="Correo">
+                        </div>
+                        <div class="form-group">
+                            <label >Contraseña</label>
+                            <input  id="txtContra" class="form-control"  placeholder="Contrsaeña">
+                        </div>
+                        <div class="form-group">
+                            <label >Confirmar Contraseña</label>
+                            <input  class="form-control"  placeholder="Confirme Contraseña">
+                        </div>
+                        <div class="col-auto">
+                            <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
+                        </div>
+
                     </div>  
                 </div>
             </div>
@@ -137,40 +147,40 @@
 </body>
 </html>
 <script>
-    $("#btnCambio").click(function(){
-        var NombreNuevo=$("#txtNombreUsuario").val();
-        var EdadUsuario=$("#txtEdadUsuario").val();
-        var PaisUsuario=$("#txtPaisUsuario").val();
-        var CorreoUsuario=$("#txtCorreo").val();
-        var DirecUsaurio=$("#txtDirecUsuario").val();
-        var ContraUsuario=$("#txtContra").val();
+    $("#btnCambio").click(function () {
+        var NombreNuevo = $("#txtNombreUsuario").val();
+        var EdadUsuario = $("#txtEdadUsuario").val();
+        var PaisUsuario = $("#txtPaisUsuario").val();
+        var CorreoUsuario = $("#txtCorreo").val();
+        var DirecUsaurio = $("#txtDirecUsuario").val();
+        var ContraUsuario = $("#txtContra").val();
         $.ajax({
             url: "ActualizarUsuario",
             type: 'post',
-            data:{
-                Nombre:NombreNuevo,
-                Edad:EdadUsuario,
-                Pais:PaisUsuario,
-                Direc:DirecUsaurio,
-                Correo:ContraUsuario,
-                Contra:ContraUsuario
+            data: {
+                Nombre: NombreNuevo,
+                Edad: EdadUsuario,
+                Pais: PaisUsuario,
+                Direc: DirecUsaurio,
+                Correo: ContraUsuario,
+                Contra: ContraUsuario
             },
-            success:function(){
-               $("#ListaNombre").text("Nombre Usuario: "+NombreNuevo);
-               $("#ListaEdad").text("Edad: " +EdadUsuario);
-               $("#ListaPais").text("Pais: "+PaisUsuario);
-               $("#ListaDireccion").text("Direccion: "+DirecUsaurio);
-               $("#ListaCorreo").text("Correo: "+CorreoUsuario);
-               $("#txtNombreUsuario").val("");
-               $("#txtEdadUsuario").val("");
-               $("#txtPaisUsuario").val("");
-               $("#txtCorreo").val("");
-               $("#txtDirecUsuario").val("");
-               $("#txtContra").val("");
-            },error:{
-                
+            success: function () {
+                $("#ListaNombre").text("Nombre Usuario: " + NombreNuevo);
+                $("#ListaEdad").text("Edad: " + EdadUsuario);
+                $("#ListaPais").text("Pais: " + PaisUsuario);
+                $("#ListaDireccion").text("Direccion: " + DirecUsaurio);
+                $("#ListaCorreo").text("Correo: " + CorreoUsuario);
+                $("#txtNombreUsuario").val("");
+                $("#txtEdadUsuario").val("");
+                $("#txtPaisUsuario").val("");
+                $("#txtCorreo").val("");
+                $("#txtDirecUsuario").val("");
+                $("#txtContra").val("");
+            }, error: {
+
             }
         });
     });
-    
+
 </script>
