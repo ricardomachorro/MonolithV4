@@ -15,7 +15,7 @@ Edad int,
 Pais varchar(50),
 Direccion varchar(200),
 Contrasena varchar(70),
-Tipo,Usuario int,
+TipoUsuario int,
 Puntos int not null);
 
 select * from Usuario;

@@ -29,11 +29,12 @@
         <title>Configuracion</title>
         <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
-        <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <script src="js/FormularioConfiguracion.js"></script>
+          <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
     </head>
     <body style="background-color:#e9ecef;">
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -106,30 +107,30 @@
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
                         <h2 class="card-title" >Cambio Configuraciones</h2>
-
+                        <form id="Cambio">
                         <div class="form-group">
                             <label >Nombre Usuario</label>
-                            <input id="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
+                            <input id="txtNombreUsuario" name="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
                         </div>
                         <div class="form-group">
                             <label >Edad</label>
-                            <input id="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
+                            <input id="txtEdadUsuario" name="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
                         </div>
                         <div class="form-group">
                             <label >Pais</label>
-                            <input id="txtPaisUsuario" class="form-control"  placeholder="Pais">
+                            <input id="txtPaisUsuario" name="txtPaisUsuario" class="form-control"  placeholder="Pais">
                         </div>
                         <div class="form-group">
                             <label >Direccion</label>
-                            <input  id="txtDirecUsuario" class="form-control"  placeholder="Direccion">
+                            <input  id="txtDirecUsuario" name="txtDirecUsuario" class="form-control"  placeholder="Direccion">
                         </div>
                         <div class="form-group">
                             <label >Correo</label>
-                            <input  id="txtCorreo" class="form-control"  placeholder="Correo">
+                            <input  id="txtCorreo" name="txtCorreo" class="form-control"  placeholder="Correo">
                         </div>
                         <div class="form-group">
                             <label >Contraseña</label>
-                            <input  id="txtContra" class="form-control"  placeholder="Contrsaeña">
+                            <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contrsaeña">
                         </div>
                         <div class="form-group">
                             <label >Confirmar Contraseña</label>
@@ -138,7 +139,7 @@
                         <div class="col-auto">
                             <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
                         </div>
-
+                        </form>
                     </div>  
                 </div>
             </div>
@@ -148,6 +149,7 @@
 </html>
 <script>
     $("#btnCambio").click(function () {
+        var NombreOld=$("#UsuarioName").val();
         var NombreNuevo = $("#txtNombreUsuario").val();
         var EdadUsuario = $("#txtEdadUsuario").val();
         var PaisUsuario = $("#txtPaisUsuario").val();
@@ -158,6 +160,7 @@
             url: "ActualizarUsuario",
             type: 'post',
             data: {
+                NombreAntiguo:NombreOld,
                 Nombre: NombreNuevo,
                 Edad: EdadUsuario,
                 Pais: PaisUsuario,
@@ -165,7 +168,7 @@
                 Correo: ContraUsuario,
                 Contra: ContraUsuario
             },
-            success: function () {
+            success: function (data) {
                 $("#ListaNombre").text("Nombre Usuario: " + NombreNuevo);
                 $("#ListaEdad").text("Edad: " + EdadUsuario);
                 $("#ListaPais").text("Pais: " + PaisUsuario);
@@ -177,6 +180,8 @@
                 $("#txtCorreo").val("");
                 $("#txtDirecUsuario").val("");
                 $("#txtContra").val("");
+                $("#UsuarioName").text(NombreNuevo);
+                 
             }, error: {
 
             }
