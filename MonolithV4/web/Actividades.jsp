@@ -393,7 +393,8 @@
 
                         $.ajax({
                             url: "IngresarActividad",
-                            data: {NombreActivity: NombreActividad.toString(),
+                            data: {
+                                NombreActivity: NombreActividad.toString(),
                                 CategoriaActividad: NombreCategoria.toString()
 
                             },
@@ -428,6 +429,10 @@
 
                                 $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
                                 $("#NuevaActividadtxt").val("");
+                                
+                                if ($("#ListaCategorias").find("#" + NombreCategoria).length === 0) {
+                                    $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +  NombreCategoria+ "</li>");
+                                }
 
                                 $(".CheckBoxActividades").click(function () {
                                     var IDActividad = $(this).attr("id");
