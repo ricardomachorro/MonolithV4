@@ -33,8 +33,7 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
-        <script src="js/FormularioConfiguracion.js"></script>
-          <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
+        <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
     </head>
     <body style="background-color:#e9ecef;">
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -83,14 +82,14 @@
                             <%
                                 Statement stcons2 = conexion.createStatement();
                                 String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
-                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where NombreUsuario='"+ UsuarioBusqueda1+"'");
+                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where NombreUsuario='" + UsuarioBusqueda1 + "'");
                                 if (rscons2.next()) {
-                                    
-                                 out.println("<li class='list-group-item' id='ListaNombre'>Nombre Usuario: " + rscons2.getString("NombreUsuario") + "</li>");
-                                 out.println("<li class='list-group-item' id='ListaEdad'>Edad: " + rscons2.getString("Edad") + "</li>");
-                                 out.println("<li class='list-group-item' id='ListaPais'>Pais: " + rscons2.getString("Pais") + "</li>");
-                                 out.println("<li class='list-group-item' id='ListaDireccion'>Pais: " + rscons2.getString("Direccion") + "</li>");
-                                 out.println("<li class='list-group-item' id='ListaCorreo'>Pais: " + rscons2.getString("Correo") + "</li>");
+
+                                    out.println("<li class='list-group-item' id='ListaNombre'>Nombre Usuario: " + rscons2.getString("NombreUsuario") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaEdad'>Edad: " + rscons2.getString("Edad") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaPais'>Pais: " + rscons2.getString("Pais") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaDireccion'>Pais: " + rscons2.getString("Direccion") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaCorreo'>Pais: " + rscons2.getString("Correo") + "</li>");
                                 }
                             %>
                             <!--<li class="list-group-item" id="ListaNombre">Nombre Usuario:</li>
@@ -108,37 +107,37 @@
                     <div class="card-body">
                         <h2 class="card-title" >Cambio Configuraciones</h2>
                         <form id="Cambio">
-                        <div class="form-group">
-                            <label >Nombre Usuario</label>
-                            <input id="txtNombreUsuario" name="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
-                        </div>
-                        <div class="form-group">
-                            <label >Edad</label>
-                            <input id="txtEdadUsuario" name="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
-                        </div>
-                        <div class="form-group">
-                            <label >Pais</label>
-                            <input id="txtPaisUsuario" name="txtPaisUsuario" class="form-control"  placeholder="Pais">
-                        </div>
-                        <div class="form-group">
-                            <label >Direccion</label>
-                            <input  id="txtDirecUsuario" name="txtDirecUsuario" class="form-control"  placeholder="Direccion">
-                        </div>
-                        <div class="form-group">
-                            <label >Correo</label>
-                            <input  id="txtCorreo" name="txtCorreo" class="form-control"  placeholder="Correo">
-                        </div>
-                        <div class="form-group">
-                            <label >Contraseña</label>
-                            <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contrsaeña">
-                        </div>
-                        <div class="form-group">
-                            <label >Confirmar Contraseña</label>
-                            <input  class="form-control"  placeholder="Confirme Contraseña">
-                        </div>
-                        <div class="col-auto">
-                            <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
-                        </div>
+                            <div class="form-group">
+                                <label >Nombre Usuario</label>
+                                <input id="txtNombreUsuario" name="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
+                            </div>
+                            <div class="form-group">
+                                <label >Edad</label>
+                                <input id="txtEdadUsuario" name="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
+                            </div>
+                            <div class="form-group">
+                                <label >Pais</label>
+                                <input id="txtPaisUsuario" name="txtPaisUsuario" class="form-control"  placeholder="Pais">
+                            </div>
+                            <div class="form-group">
+                                <label >Direccion</label>
+                                <input  id="txtDirecUsuario" name="txtDirecUsuario" class="form-control"  placeholder="Direccion">
+                            </div>
+                            <div class="form-group">
+                                <label >Correo</label>
+                                <input  id="txtCorreo" name="txtCorreo" class="form-control"  placeholder="Correo">
+                            </div>
+                            <div class="form-group">
+                                <label >Contraseña</label>
+                                <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contrsaeña">
+                            </div>
+                            <div class="form-group">
+                                <label >Confirmar Contraseña</label>
+                                <input  class="form-control"  placeholder="Confirme Contraseña">
+                            </div>
+                            <div class="col-auto">
+                                <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
+                            </div>
                         </form>
                     </div>  
                 </div>
@@ -149,43 +148,118 @@
 </html>
 <script>
     $("#btnCambio").click(function () {
-        var NombreOld=$("#UsuarioName").val();
-        var NombreNuevo = $("#txtNombreUsuario").val();
-        var EdadUsuario = $("#txtEdadUsuario").val();
-        var PaisUsuario = $("#txtPaisUsuario").val();
-        var CorreoUsuario = $("#txtCorreo").val();
-        var DirecUsaurio = $("#txtDirecUsuario").val();
-        var ContraUsuario = $("#txtContra").val();
-        $.ajax({
-            url: "ActualizarUsuario",
-            type: 'post',
-            data: {
-                NombreAntiguo:NombreOld,
-                Nombre: NombreNuevo,
-                Edad: EdadUsuario,
-                Pais: PaisUsuario,
-                Direc: DirecUsaurio,
-                Correo: ContraUsuario,
-                Contra: ContraUsuario
-            },
-            success: function (data) {
-                $("#ListaNombre").text("Nombre Usuario: " + NombreNuevo);
-                $("#ListaEdad").text("Edad: " + EdadUsuario);
-                $("#ListaPais").text("Pais: " + PaisUsuario);
-                $("#ListaDireccion").text("Direccion: " + DirecUsaurio);
-                $("#ListaCorreo").text("Correo: " + CorreoUsuario);
-                $("#txtNombreUsuario").val("");
-                $("#txtEdadUsuario").val("");
-                $("#txtPaisUsuario").val("");
-                $("#txtCorreo").val("");
-                $("#txtDirecUsuario").val("");
-                $("#txtContra").val("");
-                $("#UsuarioName").text(NombreNuevo);
-                 
-            }, error: {
 
+        $.validator.addMethod("letras", function (value, element) {
+            return this.optional(element) || /^[a-z]+$/i.test(value);
+        }, "Ponga letras solamente");
+
+
+
+        $("#Cambio").validate({
+
+            rules: {
+                txtNombreUsuario: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 15
+                },
+                txtEdadUsuario: {
+                    required: true,
+                    digits: true,
+                    maxlength: 3
+                }, txtPaisUsuario: {
+                    required: true,
+                    letras: true,
+                    minlength: 3,
+                    maxlength: 30
+                }, txtDirecUsuario: {
+                    required: true,
+                    minlength: 12,
+                    maxlength: 40
+                }, txtCorreo: {
+                    required: true,
+                    email: true
+                }, txtContra: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                }
+            }, messages: {
+                txtNombreUsuario: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese un nombre de usuario de 8 caracteres en adelante",
+                    maxlength: "Ingrese un nombre de usuario de menos de 15 caracteres en adelante"
+                },
+                txtEdadUsuario: {
+                    required: "Llene el campo",
+                    digits: "Ponga un numero valido",
+                    maxlength: "Ingrese una edad valida"
+                }, txtPaisUsuario: {
+                    required: "Llene el campo",
+                    letras: "Ponga un dato solo con letras",
+                    minlength: "Ingrese un pais valido",
+                    maxlength: "Ingrese un pais valido"
+                }, txtDirecUsuario: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese una direccón valida",
+                    maxlength: "Ingrese una direccion mas corta"
+                }, txtCorreo: {
+                    required: "Llene el campo",
+                    email: "De un correo valido"
+                }, txtContra: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese una contraseña de al menos 8 caracteres",
+                    maxlength: "Ingrese una contraseña de menos 20 caracteres"
+                }
+            }, submitHandler: function (form) {
+                var NombreOld = $("#UsuarioName").val();
+                var NombreNuevo = $("#txtNombreUsuario").val();
+                var EdadUsuario = $("#txtEdadUsuario").val();
+                var PaisUsuario = $("#txtPaisUsuario").val();
+                var CorreoUsuario = $("#txtCorreo").val();
+                var DirecUsaurio = $("#txtDirecUsuario").val();
+                var ContraUsuario = $("#txtContra").val();
+
+
+                $.ajax({
+                    url: "ActualizarUsuario",
+                    type: 'post',
+                    data: {
+                        NombreAntiguo: NombreOld,
+                        Nombre: NombreNuevo,
+                        Edad: EdadUsuario,
+                        Pais: PaisUsuario,
+                        Direc: DirecUsaurio,
+                        Correo: ContraUsuario,
+                        Contra: ContraUsuario
+                    },
+                    success: function (data) {
+                        $("#ListaNombre").text("Nombre Usuario: " + NombreNuevo);
+                        $("#ListaEdad").text("Edad: " + EdadUsuario);
+                        $("#ListaPais").text("Pais: " + PaisUsuario);
+                        $("#ListaDireccion").text("Direccion: " + DirecUsaurio);
+                        $("#ListaCorreo").text("Correo: " + CorreoUsuario);
+                        $("#txtNombreUsuario").val("");
+                        $("#txtEdadUsuario").val("");
+                        $("#txtPaisUsuario").val("");
+                        $("#txtCorreo").val("");
+                        $("#txtDirecUsuario").val("");
+                        $("#txtContra").val("");
+                        $("#UsuarioName").text(NombreNuevo);
+
+                    }, error: {
+
+                    }
+                });
             }
+
         });
+
+
+
+
+
+
     });
 
 </script>
