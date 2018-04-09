@@ -5,6 +5,7 @@ body {
 
 .container-fluid {
     margin-bottom:20px;
+    overflow-y:scroll;
 }
 
 /*Ambos contenedores*/

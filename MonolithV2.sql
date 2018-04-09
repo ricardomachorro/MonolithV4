@@ -27,11 +27,6 @@ create table Validacion(
 	adendum varchar (50) not null
 );
 
-#Comprobacion bien brgas de usuarios
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('Cubic_85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 0);
-select * from Usuario;
-
-
 create table Categoria(
 	IDCategoria int auto_increment not null primary key,
 	NombreCategoria varchar(100) not null,
@@ -60,35 +55,31 @@ create table Grupo(
 	foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
 );
 
-#Comprobacion bien brgas de grupos
-insert into Grupo(NombreGrupo, UsuarioLider) values('Hawkward', 1);
-insert into Grupo(NombreGrupo, UsuarioLider) values('Fisica', 1);
-select * from Grupo;
-
 create table Tarea(
 	IDTarea int not null primary key auto_increment,
+    IDGrupo int,
 	Nombre nvarchar(100),
 	Fecha datetime,
-	Estado boolean
+	Estado boolean,
+    foreign key(IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
 
-#Comprobacion bien brgas de tareas
-insert into Tarea(Nombre,Fecha,Estado) values('Modulo grupos', '1000-01-01 00:00:00', false);
-insert into Tarea(Nombre,Fecha,Estado) values('Tesina', '1000-01-01 00:00:00', false);
-insert into Tarea(Nombre,Fecha,Estado) values('Resnick', '1000-01-01 00:00:00', false);
-
-create table TareaUsuario(
-	IDTareaUsuario int not null auto_increment primary key,
-	IDTarea int,
-	IDGrupo int,
-	foreign key (IDTarea) references Tarea(IDTarea) on update cascade on delete cascade,
+create table Miembros(
+	IDMiembro int not null auto_increment primary key,
+    IDUsuario int,
+    IDGrupo int,
+    foreign key(IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade,
     foreign key (IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
 
-#Comprobacion bien brgas de tareausuario
-insert into TareaUsuario(IDTarea, IDGrupo) values(1,1);
-insert into TareaUsuario(IDTarea, IDGrupo) values(2,1);
-insert into TareaUsuario(IDTarea, IDGrupo) values(3,2);
+create table TareaMiembro(
+	IDTareaMiembro int not null auto_increment primary key,
+    IDTarea int,
+    IDMiembro int,
+    foreign key (IDTarea) references Tarea(IDTarea) on update cascade on delete cascade,
+    foreign key (IDMiembro) references Miembros(IDMiembro) on update cascade on delete cascade
+);
+
 
 /*Aqui terminan las tablas para el modulo grupos :v */
 

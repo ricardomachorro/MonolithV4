@@ -10,6 +10,7 @@
 <html>
     <head>
         <%
+            /**/
             //Variables de sesion
             HttpSession sesion = request.getSession();
             String nomUsuario = sesion.getAttribute("usuario").toString();
@@ -90,7 +91,7 @@
             <div class="row">
                 <!-- Lado derecho - Contenedor principal -->
                 <div class="col-lg-8 col-md-8 col-sm-12">
-                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-content" id="ContenidoGrupos">
                         <%
                             String query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
                             Statement st = con.createStatement();
@@ -98,6 +99,7 @@
 
                             String nombreGrupo;
                             while (rs.next()) {
+                                //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
                         %>
                         <!--Inicio de un grupo-->
@@ -144,7 +146,7 @@
                                         <div class='row rowListaTareas'>
                                             <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
                                             <div class='col-12' <%out.println("id='listaTareas-" + nombreGrupo + "'");%>>
-
+                                                
                                             </div>
                                             <!--Fin lista de tareas-->
                                         </div>
@@ -189,11 +191,13 @@
                                 <!--Aqui van los grupos listados (Inicio)-->
                                 <div id="lista-grupos">
                                     <%
+                                        //Agrego un listado de todos los grupos del usuario
                                         Statement st2 = con.createStatement();
                                         ResultSet rs2 = st2.executeQuery(query);
                                         query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
                                         String grupo;
                                         while (rs2.next()) {
+                                            //Desplegando el listado de grupos
                                             grupo = (String) rs2.getString("NombreGrupo");
                                     %>
                                     <a class="list-group-item list-group-item-action" 
@@ -232,16 +236,16 @@
                                                 <form>
                                                     <div class="form-row">
                                                         <div class="form-group col-12">
-                                                            <input type="text" class="form-control" placeholder="Nombre grupo">
+                                                            <input type="text" class="form-control" placeholder="Nombre grupo" name="nuevoGrupo" id="nuevoGrupo">
                                                         </div>
                                                         <div class="col-9">
-                                                            <input type="email" class="form-control" placeholder="Correo del integrante">
+                                                            <input type="email" class="form-control" placeholder="Correo del integrante" name="miembro" id="miembro">
                                                         </div>
                                                         <div class="col-3">
-                                                            <button class="form-control">Agregar</button>
+                                                            <button class="form-control" type="reset" id="agregarMiembro">Agregar</button>
                                                         </div>
                                                         <div class="form-group col-12">
-                                                            <ul class="form-control list-group agregarMiembro">
+                                                            <ul class="form-control list-group agregarMiembro" id="ListaMiembros">
                                                                 <!--
                                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                                     Nombre miembro
@@ -256,7 +260,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary form-control">Guardar</button>
+                                                        <button type="submit" class="btn btn-primary form-control" id="btnCrearGrupo" value='<%out.print(nomUsuario);%>'>Guardar</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -276,7 +280,7 @@
             <!--Fin lado izquierdo-->
         </div>
         <!--Fin contenedor-->
-
+        
         <!--SCRIPTS-->
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -284,7 +288,114 @@
         <script src="js/jquery.validate.js"></script>
 
         <script>
-
+            //Array de miembros de un nuevo grupo
+            var miembrosNG = [];
+            
+            /*FUNCION PARA EL EVENTO DE AGREGAR UN MIEMBRO NUEVO A UN GRUPO NUEVO*/
+            $("#agregarMiembro").click( //Agregar miembro al formulario para el nuevo grupo
+                function() {
+                    var nuevoMiembro = $("#miembro").val().toString();
+                    
+                    $.ajax( {
+                        url: "AgregarMiembro",
+                        data: {
+                            correoMiembro: nuevoMiembro
+                        },
+                        type: 'post',
+                        success: function (data) {//data trae el nombre del usuario
+                            $("#ListaMiembros").prepend(//Para insertar html
+                                $( //Todo el nuevo contenido
+                                    "<li class='list-group-item d-flex justify-content-between align-items-center'>"+
+                                        data.toString()+//El nombre del miembro alv
+                                        "<span class='badge'>"+
+                                            "<button type='button' class='close' aria-label='Close'>"+
+                                                "<span aria-hidden='true'>&times;</span>"+
+                                            "</button>"+
+                                        "</span>"+
+                                    "</li>"
+                                )
+                            );
+                            miembrosNG.push(data.toString());
+                        },
+                        error: function () {
+                            alert("Error buscando miembro");
+                        },
+                        complete: function () {
+                        }
+                    } );
+                }
+            );
+    
+            /*FUNCION PARA EL EVENTO DE CREAR UN GRUPO NUEVO*/
+            $("#btnCrearGrupo").click(
+                function() {
+                    //Traigo el nombre del grupo
+                    var nuevoGrupo = $("#nuevoGrupo").val().toString();
+                    var usuario = $("#btnCrearGrupo").val().toString();
+                    $.ajax( {
+                        url: "CrearGrupo",
+                        data: {//Envio el nombre del grupo y los miembros
+                            nomNuevoGrupo: nuevoGrupo,
+                            lider: usuario
+                        },
+                        type: 'post',
+                        success: function () {
+                            $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
+                                //contenido
+                                    "<div class='tab-pane fade active' id='panel-g" + nuevoGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nuevoGrupo + "'>"+ //Contendor del grupo
+                                        //Cabecera
+                                        "<div class='card-deck'>"+
+                                            "<div class='card Contenedor'>"+
+                                                "<div class='card-body'>"+
+                                                    "<div class='row'>"+
+                                                        "<div class='col d-flex align-items-center justify-content-center'>"+
+                                                            "<h2>"+ 
+                                                                    nuevoGrupo + //Titulo
+                                                            "</h2>"+ 
+                                                        "</div>"+
+                                                    "</div>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                        //Cuerpo
+                                        "<div class='card-deck'>"+
+                                            "<div class='card'>"+
+                                                "<div class='card-body'>"+
+                                                    //Agregar tarea
+                                                    "<form>"+
+                                                        "<div class='form-row align-items-center'>"+
+                                                            "<div class='col-sm-5 mt-2'>"+
+                                                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>"+
+                                                            "</div>"+
+                                                            "<div class='col-sm-5 mt-2'>"+
+                                                                "<div class='input-group'>"+
+                                                                    "<div class='input-group-prepend'>"+
+                                                                        "<div class='input-group-text'>@</div>"+
+                                                                    "</div>"+
+                                                                    "<input type='text' class='form-control' placeholder='Correo'>"+
+                                                                "</div>"+
+                                                            "</div>"+
+                                                            "<div class='col-sm-2 d-flex justify-content-center mt-2'>"+
+                                                                "<button type='submit' class='btn btn-primary'>Agregar</button>"+
+                                                            "</div>"+ 
+                                                        "</div>"+
+                                                    "</form>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                    "</div>"
+                                
+                            );
+                        },
+                        error: function () {
+                            console.log("Hubo un error")
+                            alert("Error creando grupo");
+                        },
+                        complete: function () {
+                        }
+                    } );
+                }
+            );
         </script>
     </body>
 </html>

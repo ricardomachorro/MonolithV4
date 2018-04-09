@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Error 404</title>
+        <title>Monolith - Error</title>
 
         <!-- Etiquetas meta -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
