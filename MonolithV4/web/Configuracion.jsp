@@ -133,7 +133,7 @@
                             </div>
                             <div class="form-group">
                                 <label >Confirmar Contraseña</label>
-                                <input  class="form-control"  placeholder="Confirme Contraseña">
+                                <input  id="txtContraRepeat" name="txtContraRepeat" class="form-control"  placeholder="Confirme Contraseña">
                             </div>
                             <div class="col-auto">
                                 <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
@@ -183,6 +183,9 @@
                     required: true,
                     minlength: 3,
                     maxlength: 20
+                },txtContraRepeat:{
+                    required: true,
+                    equalTo: "#txtContra"
                 }
             }, messages: {
                 txtNombreUsuario: {
@@ -210,6 +213,9 @@
                     required: "Llene el campo",
                     minlength: "Ingrese una contraseña de al menos 8 caracteres",
                     maxlength: "Ingrese una contraseña de menos 20 caracteres"
+                },txtContraRepeat:{
+                    required: "Llene el campo",
+                    equalTo: "La contraseña esta mal puesta"
                 }
             }, submitHandler: function (form) {
                 var NombreOld = $("#UsuarioName").val();
