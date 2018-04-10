@@ -429,9 +429,9 @@
 
                                 $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + ContadorNoFinalizadas);
                                 $("#NuevaActividadtxt").val("");
-                                
+
                                 if ($("#ListaCategorias").find("#" + NombreCategoria).length === 0) {
-                                    $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" +  NombreCategoria+ "</li>");
+                                    $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" + NombreCategoria + "</li>");
                                 }
 
                                 $(".CheckBoxActividades").click(function () {
@@ -458,7 +458,7 @@
                                                     $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
 
                                                 }, error: function (data) {
-                                                    alert("Error chequeando");
+
                                                 },
                                                 complete: function (data) {
 
@@ -466,7 +466,7 @@
                                             });
                                         },
                                         error: function () {
-                                            alert("Error chequenado");
+
                                         },
                                         complete: function () {
 
@@ -614,7 +614,7 @@
                                 $("#ActividadesNoFinalizadas").text("Actividades no finalizadas: " + data);
 
                             }, error: function (data) {
-                                alert("Error chequeando");
+
                             },
                             complete: function (data) {
 
@@ -622,7 +622,7 @@
                         });
                     },
                     error: function () {
-                        alert("Error chequenado");
+
                     },
                     complete: function () {
 
