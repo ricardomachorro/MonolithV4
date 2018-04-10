@@ -303,5 +303,28 @@ public class Database2 {
     }
         return ActividadesFinzalizadas;
     }
+    
+    
+     public boolean CambiarEstadoActividad(int IDActividad) {
+        boolean ActividadCambiadaExitosa = false;
+        boolean Estado = false;
+        try {
+            Estado=ActividadEstado(IDActividad);
+            String sql="";
+            if(Estado){
+                 sql = "update Actividad set Estado=false where IDActividad="+ IDActividad+"";
+            }else{
+                  sql = "update Actividad set Estado= true where IDActividad="+ IDActividad+"";
+            }
+            
+            st = c.createStatement();
+            st.executeUpdate(sql);
+            
+        } catch (Exception ex) {
+
+        }
+
+        return ActividadCambiadaExitosa;
+    }
 
 }
