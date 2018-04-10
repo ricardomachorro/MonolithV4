@@ -110,26 +110,23 @@ public class Database2 {
         return ActActualizada;
     }
     
-    public boolean CambiarEstadoActividad(int IDActividad) {
-        boolean ActividadCambiadaExitosa = false;
-        boolean Estado = false;
+   private boolean ActividadEstado(int IDActividad) {
+        boolean EstadoActividad = false;
+        
         try {
-            Estado=ActividadEstado(IDActividad);
-            String sql="";
-            if(Estado){
-                 sql = "update Actividad set Estado=false where IDActividad="+ IDActividad+"";
-            }else{
-                  sql = "update Actividad set Estado= true where IDActividad="+ IDActividad+"";
+            String sql1 = "Select * from Actividad where IDActividad=?";
+            ps = c.prepareStatement(sql1);
+            ps.setInt(1,IDActividad);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                EstadoActividad = rs.getBoolean("Estado");
+                
             }
-            
-            st = c.createStatement();
-            st.executeUpdate(sql);
-            
         } catch (Exception ex) {
 
         }
 
-        return ActividadCambiadaExitosa;
+        return EstadoActividad;
     }
 
     public void EliminarActividad(int IDActividad){
