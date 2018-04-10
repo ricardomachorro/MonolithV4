@@ -93,14 +93,26 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="tab-content" id="ContenidoGrupos">
                         <%
+                            //Para grupos
                             String query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(query);
-
                             String nombreGrupo;
+                            //Para las tareas de los grupos
+                            int idGrupo;
+                            String queryTarea = "select * from Tarea where IDGrupo=?;";
+                            PreparedStatement ps = con.prepareStatement(queryTarea);
+                            ResultSet rsTarea;
+                            int nTarea;
+                            String nomTarea;
+                            String fecha;
+                            boolean estado;
+                            String idConcatenada;
+                            
                             while (rs.next()) {
                                 //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
+                                idGrupo = rs.getInt("IDGrupo");
                         %>
                         <!--Inicio de un grupo-->
                         <div class="tab-pane fade" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
@@ -146,7 +158,62 @@
                                         <div class='row rowListaTareas'>
                                             <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
                                             <div class='col-12' <%out.println("id='listaTareas-" + nombreGrupo + "'");%>>
-                                                
+                                                <%
+                                                    ps.setInt(1, idGrupo);
+                                                    rsTarea = ps.executeQuery();
+                                                    while(rsTarea.next()){
+                                                        nTarea = rsTarea.getInt("IDTarea");
+                                                        nomTarea = rsTarea.getString("Nombre");
+                                                        fecha = rsTarea.getDate("Fecha").toString();
+                                                        estado = rsTarea.getBoolean("Estado");
+                                                        idConcatenada = nTarea + nombreGrupo;
+                                                        %>
+                                                        <!--Inicio tarea-->
+                                                        <div class="card mt-3">
+                                                            <!--Inicio parte visible-->
+                                                            <div class="card-header" <%out.print("id='headTarea-"+idConcatenada+"'");%>>
+                                                                <div class="row">
+                                                                    <!--Nombre tarea-->
+                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                        <h5 class="mb-0">
+                                                                            <!--btn para hacer que se despliegue la parte invisible-->
+                                                                            <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
+                                                                            <%out.print("data-target='#tarea-"+idConcatenada+"'");%> aria-expanded="false" 
+                                                                            <%out.print("aria-controls='tarea-"+idConcatenada+"'");%>>
+                                                                                <h3 <%out.print("id='"+nomTarea+"-"+idConcatenada+"'");%>>
+                                                                                    <%out.print(nomTarea);%>
+                                                                                </h3>
+                                                                            </button>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <!--Fecha limite-->
+                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                        <small class="text-muted" <%out.print("id='fechaTarea-"+idConcatenada+"'");%>>
+                                                                            <%out.print(fecha);%>
+                                                                        </small>
+                                                                    </div>
+                                                                    <!--Miembros-->
+                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                        <div class="dropdown">
+                                                                            <button class="btn btn-secondary dropdown-toggle" type="button" 
+                                                                                    <%out.print("id='menuMiembros-"+idConcatenada+"'");%> data-toggle="dropdown" 
+                                                                                    aria-haspopup="true" aria-expanded="false">
+                                                                                Miembros
+                                                                            </button>
+                                                                            <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
+                                                                                 id="dropdown-miembros-NombreGrupo">
+                                                                                        
+                                                                            </div>    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Fin parte visible-->
+                                                        </div>
+                                                        <!--Fin tarea-->
+                                                        <%
+                                                    };
+                                                %>
                                             </div>
                                             <!--Fin lista de tareas-->
                                         </div>
@@ -332,68 +399,32 @@
                     //Traigo el nombre del grupo
                     var nuevoGrupo = $("#nuevoGrupo").val().toString();
                     var usuario = $("#btnCrearGrupo").val().toString();
+                    var peto = "no peta";
                     $.ajax( {
                         url: "CrearGrupo",
                         data: {//Envio el nombre del grupo y los miembros
-                            nomNuevoGrupo: nuevoGrupo,
-                            lider: usuario
+                            nomNuevoGrupo: nuevoGrupo
                         },
                         type: 'post',
-                        success: function () {
+                        success: function (data) {
+                            
                             $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
-                                //contenido
-                                    "<div class='tab-pane fade active' id='panel-g" + nuevoGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nuevoGrupo + "'>"+ //Contendor del grupo
-                                        //Cabecera
-                                        "<div class='card-deck'>"+
-                                            "<div class='card Contenedor'>"+
-                                                "<div class='card-body'>"+
-                                                    "<div class='row'>"+
-                                                        "<div class='col d-flex align-items-center justify-content-center'>"+
-                                                            "<h2>"+ 
-                                                                    nuevoGrupo + //Titulo
-                                                            "</h2>"+ 
-                                                        "</div>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                        //Cuerpo
-                                        "<div class='card-deck'>"+
-                                            "<div class='card'>"+
-                                                "<div class='card-body'>"+
-                                                    //Agregar tarea
-                                                    "<form>"+
-                                                        "<div class='form-row align-items-center'>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<div class='input-group'>"+
-                                                                    "<div class='input-group-prepend'>"+
-                                                                        "<div class='input-group-text'>@</div>"+
-                                                                    "</div>"+
-                                                                    "<input type='text' class='form-control' placeholder='Correo'>"+
-                                                                "</div>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-2 d-flex justify-content-center mt-2'>"+
-                                                                "<button type='submit' class='btn btn-primary'>Agregar</button>"+
-                                                            "</div>"+ 
-                                                        "</div>"+
-                                                    "</form>"+
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                    "</div>"
+                            "<p>LKSDLKJLSAKFDJLSKJFLSJFL</p>"
                                 
                             );
+                            var g = prompt("funciona?");
+                            console.log(nuevoGrupo);
                         },
                         error: function () {
-                            console.log("Hubo un error")
+                            console.log("Hubo un error");
                             alert("Error creando grupo");
+                            peto="peto";
                         },
                         complete: function () {
                         }
                     } );
+                    
+                    alert(peto);
                 }
             );
         </script>
