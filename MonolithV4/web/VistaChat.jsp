@@ -60,10 +60,7 @@
 
         <div class="container-fluid">
             <div class="row ContenedorModulo">
-                <div class="col-sm-12 col-md-4 col-lg-4 ElementosModulo ">
-                   
 
-                </div>
                 <div class="col-sm-12 col-md-8 col-lg-8  ElementosModulo">
                     <nav class="navbar  navbar-light bg-light">
                         <a class="navbar-brand" href="#">
@@ -76,16 +73,16 @@
                             <div class="row">
                                 <div class="col-12" style="height:500px;background-color:#fff;overflow-y:scroll;">
                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                    <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
+                                    <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
+                                    <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                    <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                                    <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card-deck" style="margin:12px;">
                         <div class="card">
                             <div class="row" style="padding:12px;">
@@ -98,8 +95,39 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4 ElementosModulo ">
+                    <div class="row">
+                        <div class="col-12" style="height:50px;">
+                            <nav class="navbar  navbar-light bg-light">
+                                    <a class="navbar-brand" href="#">
+                                        <img src="img/question-mark.svg" id="IconoChat" class="d-inline-block align-top" alt="">
+                                        Chat
+                                    </a>
+                                </nav>
+                        </div>
+                    </div>
+                    <div class="row" style="height:450px;overflow-y:scroll;">
+                        <div class="col-12" >
+                            <div class="card-deck">
+                                <div class="card">
+                                    <h3 class="card-title">
+                                        Usuarios con Dudas 
+                                    </h3>
+                                </div>
+
+                            </div>
+                            <div class="card-deck">
+                                <div class="card">
+                                    <h3 class="card-title">
+                                        Usuarios con Dudas 
+                                    </h3>
+                                </div>               
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
