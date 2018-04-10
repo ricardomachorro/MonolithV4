@@ -1,0 +1,58 @@
+body{
+    background-color:#e9ecef;
+}
+
+.panel-heading{
+    background-color:#9EC3DE;
+}
+
+.ContenedorModulo{
+   padding:15px;
+}
+
+.ElementosModulo{
+    margin-top:7px;
+    margin-bottom:7px;
+}
+
+.me{
+    font-size: 19px;
+    margin: -4px;
+    margin-top:9px;
+    width:100px;
+    border-right: 3px solid #60DF88 !important;
+    padding: 15px;
+    background-color: rgb(239, 255, 241);
+}
+
+.you{
+    font-size: 19px;
+    width:100px;
+    margin-top:9px;
+    margin: -4px;
+   
+    border-left: 3px solid rgb(255, 112, 0) !important;
+    padding: 15px;
+    padding-left:10px;
+    background-color: rgb(247, 247, 214);
+}
+
+.Mensaje{
+    margin-top:12px;
+    margin-bottom:12px; 
+}
+
+#ImagenExplicacion{
+    margin-top:62px;
+    height:322px;
+    width:322px;
+}
+
+#IconoChat{
+    height:30px;
+    width:30px;
+    margin-right:19px;
+}
+
+
+
