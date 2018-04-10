@@ -93,11 +93,19 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="tab-content" id="ContenidoGrupos">
                         <%
+                            //Traer el id del usaurio
+                            String queryIDUsuario = "select IDUsuario from Usuario where NombreUsuario='"+nomUsuario+"';";
+                            Statement stIDU = con.createStatement();
+                            ResultSet rsIDU = stIDU.executeQuery(queryIDUsuario);
+                            rsIDU.next();
+                            int idUsuario = rsIDU.getInt("IDUsuario");
+                            
                             //Para grupos
-                            String query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
+                            String query = "select * from Grupo inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo where Miembros.IDUsuario="+idUsuario+";";
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(query);
                             String nombreGrupo;
+                            
                             //Para las tareas de los grupos
                             int idGrupo;
                             String queryTarea = "select * from Tarea where IDGrupo=?;";
@@ -109,6 +117,11 @@
                             boolean estado;
                             String idConcatenada;
                             
+                            //Para miembros asignados a una tarea
+                            String queryMiembros = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro where TareaMiembro.IDTarea=?;";
+                            PreparedStatement psMiembros = con.prepareStatement(queryMiembros);
+                            ResultSet rsMiembros;
+                            String nombreMiembro;
                             while (rs.next()) {
                                 //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
@@ -164,7 +177,7 @@
                                                     while(rsTarea.next()){
                                                         nTarea = rsTarea.getInt("IDTarea");
                                                         nomTarea = rsTarea.getString("Nombre");
-                                                        fecha = rsTarea.getDate("Fecha").toString();
+                                                        fecha = rsTarea.getTimestamp("Fecha").toString();
                                                         estado = rsTarea.getBoolean("Estado");
                                                         idConcatenada = nTarea + nombreGrupo;
                                                         %>
@@ -180,9 +193,9 @@
                                                                             <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
                                                                             <%out.print("data-target='#tarea-"+idConcatenada+"'");%> aria-expanded="false" 
                                                                             <%out.print("aria-controls='tarea-"+idConcatenada+"'");%>>
-                                                                                <h3 <%out.print("id='"+nomTarea+"-"+idConcatenada+"'");%>>
-                                                                                    <%out.print(nomTarea);%>
-                                                                                </h3>
+                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                                                <%out.print(nomTarea);%>
+                                                                                </span>
                                                                             </button>
                                                                         </h5>
                                                                     </div>
@@ -198,21 +211,80 @@
                                                                             <button class="btn btn-secondary dropdown-toggle" type="button" 
                                                                                     <%out.print("id='menuMiembros-"+idConcatenada+"'");%> data-toggle="dropdown" 
                                                                                     aria-haspopup="true" aria-expanded="false">
-                                                                                Miembros
+                                                                                    Miembros
                                                                             </button>
                                                                             <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
                                                                                  id="dropdown-miembros-NombreGrupo">
-                                                                                        
-                                                                            </div>    
+                                                                                <%
+                                                                                    psMiembros.setInt(1, nTarea);
+                                                                                    rsMiembros = psMiembros.executeQuery();
+                                                                                    if(rsMiembros.next()){
+                                                                                        rsMiembros.beforeFirst();
+                                                                                        while(rsMiembros.next()){
+                                                                                            nombreMiembro = rsMiembros.getString("NombreUsuario");
+                                                                                %>
+                                                                                            <button class="dropdown-item disabled" type="button"><%out.print(nombreMiembro);%></button>
+                                                                                <%
+                                                                                        };
+                                                                                        rsMiembros.close();//Fin del resulset que trae a los mimbros asignados a una tarea
+                                                                                    } else {
+                                                                                %>
+                                                                                    <button class="dropdown-item disabled" type="button">No hay miembros asignados</button>
+                                                                                <%  } %>
+                                                                            </div>
                                                                         </div>
+                                                                    </div>
+                                                                    <!--Checkbox para marcar actividad-->
+                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                        <%if(estado) {%>
+                                                                            <input class="acabarTarea float-right" type="checkbox" checked>
+                                                                        <%} else {%>
+                                                                            <input class="acabarTarea float-right checado" type="checkbox">
+                                                                         <% } %>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <!--Fin parte visible-->
+                                                            <!--Inicio parte colapsable-->
+                                                            <div <%out.print("id='tarea-"+idConcatenada+"' class='collapse' aria-labelledby='headTarea-"+idConcatenada+"' data-parent='#listaTareas-"+nombreGrupo+"'");%>>
+                                                                <div class="card-body">
+                                                                    <form>
+                                                                        <!--Inicio formulario para modificar actividad-->
+                                                                        <div class="form-row">
+                                                                            <div class="col-sm-3">
+                                                                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                            </div>
+
+                                                                            <div class="col-sm-3">
+                                                                                <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Fin formulario para modificar actividad-->
+                                                                        <!--Inicio opciones-->
+                                                                        <div class="form-row mt-2">
+                                                                            <div class="col-sm-6">
+                                                                                <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Fin opciones-->
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!--Fin parte colapsable-->
                                                         </div>
                                                         <!--Fin tarea-->
                                                         <%
                                                     };
+                                                    rsTarea.close();//Fin del resulset que trae a todas las actividades de un grupo
                                                 %>
                                             </div>
                                             <!--Fin lista de tareas-->
@@ -226,6 +298,7 @@
                         <!--Fin de un grupo-->
                         <%
                             };
+                            rs.close();//Fin del resulset que trae a todos los grupos de un usuario
                         %>       
                     </div>
                 </div>
@@ -261,7 +334,13 @@
                                         //Agrego un listado de todos los grupos del usuario
                                         Statement st2 = con.createStatement();
                                         ResultSet rs2 = st2.executeQuery(query);
-                                        query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario where Usuario.NombreUsuario='" + nomUsuario + "'";
+                                        /*
+                                        select * from Grupo 
+inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario 
+inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo
+where Usuario.NombreUsuario='memo_wolf' or Miembros.IDUsuario=2;
+                                        */
+                                        query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo where Usuario.NombreUsuario='" + nomUsuario + "'";
                                         String grupo;
                                         while (rs2.next()) {
                                             //Desplegando el listado de grupos
@@ -277,6 +356,7 @@
                                     </a>
                                     <%
                                         }
+                                        rs2.close();
                                     %>
                                     <!--
                                     <a class="list-group-item list-group-item-action" id="lista-gNombreGrupo" data-toggle="list" href="#panel-gNombreGrupo" role="tab" aria-controls="gNombreGrupo">
@@ -416,7 +496,7 @@
                             console.log(nuevoGrupo);
                         },
                         error: function () {
-                            console.log("Hubo un error");
+                            console.log(Error);
                             alert("Error creando grupo");
                             peto="peto";
                         },

@@ -48,11 +48,11 @@ create table Actividad(
 /*Aqui empiezan las tablas para el modulo grupos :v*/
 create table Grupo(
 	IDGrupo int not null primary key auto_increment,
-	NombreGrupo nvarchar(100) not null,
-	UsuarioLider int,
+	NombreGrupo nvarchar(100) not null
+	#UsuarioLider int,
 	/*PuntoReunion int,*/
-	foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
-	foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
+	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
+	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
 );
 
 create table Tarea(
@@ -64,12 +64,19 @@ create table Tarea(
     foreign key(IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
 
+create table catRol(
+	IDRol int not null auto_increment primary key,
+    rol varchar(15)
+);
+
 create table Miembros(
 	IDMiembro int not null auto_increment primary key,
     IDUsuario int,
     IDGrupo int,
+    IDRol int,
     foreign key(IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade,
-    foreign key (IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
+    foreign key (IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade,
+    foreign key (IDRol) references catRol(IDRol)
 );
 
 create table TareaMiembro(
@@ -80,7 +87,8 @@ create table TareaMiembro(
     foreign key (IDMiembro) references Miembros(IDMiembro) on update cascade on delete cascade
 );
 
-
+insert into catRol(rol) values('Lider');
+insert into catRol(rol) values('Miembro');
 /*Aqui terminan las tablas para el modulo grupos :v */
 
 create table Nota(
