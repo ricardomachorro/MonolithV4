@@ -128,7 +128,7 @@
                                 idGrupo = rs.getInt("IDGrupo");
                         %>
                         <!--Inicio de un grupo-->
-                        <div class="tab-pane fade" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
+                        <div class="tab-pane fade grupo" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
 
                             <!--Inicio titulo contenedor-->
                             <div class='card-deck'>
@@ -340,7 +340,7 @@
                                             //Desplegando el listado de grupos
                                             grupo = (String) rs2.getString("NombreGrupo");
                                     %>
-                                    <a class="list-group-item list-group-item-action" 
+                                    <a class="list-group-item list-group-item-action grupoLista" 
                                        <%out.println(" id='lista-g"+grupo+"' data-toggle='list' href='#panel-g"+grupo+"' role='tab' aria-controls='g"+grupo+"'");%>
                                     >
                                         <img src="img/group.svg" alt="ic_grupos">
@@ -353,7 +353,7 @@
                                         rs2.close();
                                     %>
                                     <!--
-                                    <a class="list-group-item list-group-item-action" id="lista-gNombreGrupo" data-toggle="list" href="#panel-gNombreGrupo" role="tab" aria-controls="gNombreGrupo">
+                                    <a class="list-group-item list-group-item-action grupoLista" id="lista-gNombreGrupo" data-toggle="list" href="#panel-gNombreGrupo" role="tab" aria-controls="gNombreGrupo">
                                         <img src="img/group.svg" alt="ic_grupos">
                                             Nombre grupo
                                     </a>
@@ -456,7 +456,7 @@
                                     "</li>"
                                 )
                             );
-                            miembrosNG.push(data.toString());
+                            miembrosNG.push(data.toString());//Agregar el nombre del miembro al array
                         },
                         error: function () {
                             alert("Error buscando miembro");
@@ -477,10 +477,15 @@
                     $.ajax( {
                         url: "CrearGrupo",
                         data: {//Envio el nombre del grupo y los miembros
-                            nomNuevoGrupo: nuevoGrupo
+                            nomNuevoGrupo: nuevoGrupo,
+                            lider: usuario
                         },
                         type: 'post',
                         success: function (data) {
+                            //Desaparecer elementos
+                            $("div.grupo").removeClass("active");
+                            $("a.grupoLista").removeClass("active");
+                            //LADO DERECHO
                             $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
                                 "<div class='tab-pane fade show active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
                                         //Inicio titulo contenedor
@@ -533,6 +538,13 @@
                                         "</div>"+
                                         //Fin cuerpo contenedor
                                 "</div>"
+                            );
+                            //LADO IZQUIERDO
+                            $("#list-tab").prepend(//Inserto el grupo a la lista de grupos
+                                "<a class='list-group-item list-group-item-action active' id='lista-g"+nuevoGrupo+"' data-toggle='list' href='#panel-g"+nuevoGrupo+"' role='tab' aria-controls='g"+nuevoGrupo+"'>"+
+                                        "<img src='img/group.svg' alt='ic_grupos'>"+
+                                        nuevoGrupo+
+                                "</a>"
                             );
                         },
                         error: function () {
