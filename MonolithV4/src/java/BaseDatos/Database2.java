@@ -155,24 +155,7 @@ public class Database2 {
         }
     }
     
-    private boolean ActividadEstado(int IDActividad) {
-        boolean EstadoActividad = false;
-        
-        try {
-            String sql1 = "Select * from Actividad where IDActividad=?";
-            ps = c.prepareStatement(sql1);
-            ps.setInt(1,IDActividad);
-            rs = ps.executeQuery();
-            if(rs.next()) {
-                EstadoActividad = rs.getBoolean("Estado");
-                
-            }
-        } catch (Exception ex) {
-
-        }
-
-        return EstadoActividad;
-    }
+    
     
     public int TipoUsuario(Usuario user){
         int tipo=0;
