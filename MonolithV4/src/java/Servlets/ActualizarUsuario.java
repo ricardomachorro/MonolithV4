@@ -1,3 +1,4 @@
+
 package Servlets;
 import BaseDatos.Database2;
 import Objetos.Usuario;
@@ -58,7 +59,8 @@ public class ActualizarUsuario extends HttpServlet{
            u.setCorreo(Correo);
            u.setPassword(Contra);
             db.ActualizarUsuario(u, Usuario);
-            u.setPuntos(2);
+            sesion.removeAttribute("usuario");
+            sesion.setAttribute("usuario",u.getNombre());
         }catch(Exception ex){
            response.sendRedirect("Error404.jsp");
         }
@@ -72,3 +74,4 @@ public class ActualizarUsuario extends HttpServlet{
     
     
 }
+

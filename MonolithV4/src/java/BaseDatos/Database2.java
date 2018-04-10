@@ -115,11 +115,15 @@ public class Database2 {
         boolean Estado = false;
         try {
             Estado=ActividadEstado(IDActividad);
-            String sql = "update Actividad set Estado=? where IDActividad=?";
-            ps = c.prepareStatement(sql);
-            ps.setBoolean(1,!Estado);
-            ps.setInt(2, IDActividad);
-            ps.executeUpdate();
+            String sql="";
+            if(Estado){
+                 sql = "update Actividad set Estado=false where IDActividad="+ IDActividad+"";
+            }else{
+                  sql = "update Actividad set Estado= true where IDActividad="+ IDActividad+"";
+            }
+            
+            st = c.createStatement();
+            st.executeUpdate(sql);
             
         } catch (Exception ex) {
 
