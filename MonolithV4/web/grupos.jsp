@@ -38,9 +38,9 @@
         <title>Grupos</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="Css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="Css/BarraDeInicioSesion.css">
-        <link rel="stylesheet" type="text/css" href="Css/Grupos.css">
+        <!--<link rel="stylesheet" type="text/Css" href="Css/bootstrap.min.css">-->
+        <link rel="stylesheet" type="text/Css" href="Css/BarraDeInicioSesion.css">
+        <link rel="stylesheet" type="text/Css" href="Css/Grupos.css">
     </head>
     <body>
         <!--Inicio barra de navegacion-->
@@ -334,12 +334,6 @@
                                         //Agrego un listado de todos los grupos del usuario
                                         Statement st2 = con.createStatement();
                                         ResultSet rs2 = st2.executeQuery(query);
-                                        /*
-                                        select * from Grupo 
-inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario 
-inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo
-where Usuario.NombreUsuario='memo_wolf' or Miembros.IDUsuario=2;
-                                        */
                                         query = "select * from Grupo inner join Usuario on Grupo.UsuarioLider=Usuario.IDUsuario inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo where Usuario.NombreUsuario='" + nomUsuario + "'";
                                         String grupo;
                                         while (rs2.next()) {
@@ -407,7 +401,7 @@ where Usuario.NombreUsuario='memo_wolf' or Miembros.IDUsuario=2;
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary form-control" id="btnCrearGrupo" value='<%out.print(nomUsuario);%>'>Guardar</button>
+                                                        <button type="reset" class="btn btn-primary form-control" id="btnCrearGrupo" value='<%out.print(nomUsuario);%>'>Guardar</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -479,7 +473,7 @@ where Usuario.NombreUsuario='memo_wolf' or Miembros.IDUsuario=2;
                     //Traigo el nombre del grupo
                     var nuevoGrupo = $("#nuevoGrupo").val().toString();
                     var usuario = $("#btnCrearGrupo").val().toString();
-                    var peto = "no peta";
+                    var error = Error;
                     $.ajax( {
                         url: "CrearGrupo",
                         data: {//Envio el nombre del grupo y los miembros
@@ -487,24 +481,68 @@ where Usuario.NombreUsuario='memo_wolf' or Miembros.IDUsuario=2;
                         },
                         type: 'post',
                         success: function (data) {
-                            
                             $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
-                            "<p>LKSDLKJLSAKFDJLSKJFLSJFL</p>"
-                                
+                                "<div class='tab-pane fade show active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
+                                        //Inicio titulo contenedor
+                                        "<div class='card-deck'>"+
+                                            "<div class='card Contenedor'>"+
+                                                "<div class='card-body'>"+
+                                                    "<div class='row'>"+
+                                                        "<div class='col d-flex align-items-center justify-content-center'>"+
+                                                            nuevoGrupo+
+                                                        "</div>"+
+                                                    "</div>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                        //Fin titulo contenedor
+                                        //Inicio cuerpo contenedor
+                                        "<div class='card-deck'>"+
+                                            "<div class='card'>"+
+                                                "<div class='card-body'>"+
+                                                    //Inicio agregar tarea
+                                                    "<form>"+
+                                                        "<div class='form-row align-items-center'>"+
+                                                            "<div class='col-sm-5 mt-2'>"+
+                                                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>"+
+                                                            "</div>"+
+                                                            "<div class='col-sm-5 mt-2'>"+
+                                                                "<div class='input-group'>"+
+                                                                    "<div class='input-group-prepend'>"+
+                                                                        "<div class='input-group-text'>@</div>"+
+                                                                    "</div>"+
+                                                                    "<input type='text' class='form-control' placeholder='Correo'>"+
+                                                                "</div>"+
+                                                            "</div>"+
+                                                            "<div class='col-sm-2 d-flex justify-content-center mt-2'>"+
+                                                                "<button type='submit' class='btn btn-primary'>Agregar</button>"+
+                                                            "</div>"+
+                                                        "</div>"+
+                                                    "</form>"+
+                                                    //Fin agregar tarea
+                                                    //Inicio contenedor de lista de tareas
+                                                    "<div class='row rowListaTareas'>"+
+                                                        //Inicio lista de tareas
+                                                        "<div class='col-12' id='listaTareas-"+nuevoGrupo+"'"+
+                                                        "</div>"+
+                                                        //Fin lista de tareas
+                                                    "</div>"+
+                                                    //Fin contenedor de lista de tareas
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                        //Fin cuerpo contenedor
+                                "</div>"
                             );
-                            var g = prompt("funciona?");
-                            console.log(nuevoGrupo);
                         },
                         error: function () {
-                            console.log(Error);
-                            alert("Error creando grupo");
-                            peto="peto";
+                            prompt("Hubo un error :'v = " +Error);
+                            error = Error;
                         },
                         complete: function () {
                         }
                     } );
-                    
-                    alert(peto);
+                    console.log(error);
                 }
             );
         </script>
