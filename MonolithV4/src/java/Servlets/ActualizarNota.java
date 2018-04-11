@@ -7,6 +7,7 @@ package Servlets;
 
 import BaseDatos.Database2;
 import java.io.IOException;
+import Objetos.Nota;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +38,17 @@ public class ActualizarNota extends HttpServlet{
         try {
             Database2 db=new Database2();
             HttpSession s = request.getSession();
+            Nota nota=new Nota();
+            String Usuario=s.getAttribute("usuario").toString();
+            String TituloNota=request.getParameter("TitleNota");
+            String Contenido=request.getParameter("Contenido");
+            String AntiguoTitulo=request.getParameter("Anterior");
+            nota.setUsuario(Usuario);
+            nota.setTitulo(TituloNota);
+            nota.setContenido(Contenido);
+            db.ActualizarNota(nota, AntiguoTitulo);
             
-
+            
         } catch (Exception ex) {
             String e=ex.toString();
               System.out.println(ex.toString());

@@ -260,8 +260,8 @@
                         required: "Llene el Campo "
                     }
                 }, submitHandler: function (form) {
-                    var TituloNota = $("#txtNuevaNota").val();
-                    var Contenido = $("#txtContenidoNota").val();
+                   var TituloNota = $("#txtNuevaNota").val();
+                   var Contenido = $("#txtContenidoNota").val();
                    var TituloAnterior=$(".TituloNota").val();
                         $.ajax({
                             url: "ActualizarNota",
@@ -277,10 +277,6 @@
                             }
 
                         });
-                    
-
-
-
                 }
             });
         });

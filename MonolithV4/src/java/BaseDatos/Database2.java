@@ -37,6 +37,13 @@ public class Database2 {
         }
     }
     
+    public void ActualizarNota(Nota note, String NombreAnterior)throws Exception{
+        int IDUsuario=IdentificarUsuario(note.getUsuario());
+        String sql="update Nota set Nombre='"+note.getTitulo()+"' set Contenido='"+note.getContenido()+"' where Nombre='"+NombreAnterior+"' and IDUauario="+IDUsuario;
+         st=c.createStatement();
+        st.executeUpdate(sql);
+    }
+    
     private boolean NotaExistente(Nota note) throws Exception{
         boolean existe=false;
         String sql="Select * from Nota inner join Usuario on Nota.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='"+note.getUsuario()+"' and Nota.Nombre='"+note.getTitulo()+"'";
