@@ -135,7 +135,7 @@
                                         Statement st2 = conexion.createStatement();
                                         ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
                                         while (rs2.next()) {
-                                            out.println(" <li id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'>" + rs2.getString("Nombre") + "</li>");
+                                            out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'>" + rs2.getString("Nombre") + "</li>");
                                         }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
@@ -214,7 +214,7 @@
                                 TitleNota: TituloNota,
                                 ContenidoNota: Contenido
                             }, success: function () {
-                                $("#ListaNotas").prepend("<li id='" + TituloNota + "'>" + TituloNota + "</li>");
+                                $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'>" + TituloNota + "</li>");
                             }, error: {
 
                             }
@@ -223,6 +223,61 @@
                     } else {
                         alert("Nota repetida");
                     }
+
+
+
+                }
+            });
+        });
+
+        $(".NotasListas").click(function () {
+            var ElementoSeleccionado = $(this).attr("id");
+            $.ajax({
+                url: "PonerNota",
+                type: 'post',
+                data: {
+                   NombreElemento:ElementoSeleccionado
+                }, success: function (data) {
+                    alert(data);
+                    $(".TituloNota").text(ElementoSeleccionado);
+                    $("#txtContenidoNota").val(data);
+                }, error: {
+
+                }
+            });
+
+
+        });
+        
+        $("#BotonActNota").click(function(){
+            $("#IngresoNotaForm").validate({
+                rules: {
+                    txtNuevaNota: {
+                        required: true
+                    }
+                }, messages: {
+                    txtNuevaNota: {
+                        required: "Llene el Campo "
+                    }
+                }, submitHandler: function (form) {
+                    var TituloNota = $("#txtNuevaNota").val();
+                    var Contenido = $("#txtContenidoNota").val();
+                   var TituloAnterior=$(".TituloNota").val();
+                        $.ajax({
+                            url: "ActualizarNota",
+                            type: 'post',
+                            data: {
+                                TitleNota: TituloNota,
+                                ContenidoNota: Contenido,
+                                Anterior:TituloAnterior
+                            }, success: function () {
+                            
+                            }, error: {
+
+                            }
+
+                        });
+                    
 
 
 

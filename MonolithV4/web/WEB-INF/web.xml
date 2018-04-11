@@ -76,4 +76,12 @@
         <servlet-name>GuardarNota</servlet-name>
         <url-pattern>/GuardarNota</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PonerNota</servlet-name>
+        <servlet-class>Servlets.PonerNota</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PonerNota</servlet-name>
+        <url-pattern>/PonerNota</url-pattern>
+    </servlet-mapping>
 </web-app>

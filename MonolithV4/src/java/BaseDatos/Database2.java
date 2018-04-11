@@ -48,6 +48,17 @@ public class Database2 {
         
         return existe;
     }
+    
+    public String NotaContenido(String Usuario, String Nota) throws Exception{
+        String Contenido="";
+        String sql="Select * from Nota inner join Usuario on Nota.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='"+Usuario+"' and Nota.Nombre='"+Nota+"'";
+        st=c.createStatement();
+        rs=st.executeQuery(sql);
+        while(rs.next()){
+          Contenido=rs.getString("Contenido");
+        }
+        return Contenido;
+    }
 
     public int IngresoActividad(Actividad act) {
         int IDActividad=0;
