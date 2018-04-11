@@ -215,6 +215,25 @@
                                 ContenidoNota: Contenido
                             }, success: function () {
                                 $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'>" + TituloNota + "</li>");
+                                
+                                 $(".NotasListas").click(function () {
+            var ElementoSeleccionado = $(this).attr("id");
+            $.ajax({
+                url: "PonerNota",
+                type: 'post',
+                data: {
+                   NombreElemento:ElementoSeleccionado
+                }, success: function (data) {
+                    $(".TituloNota").text(ElementoSeleccionado);
+                    $("#txtContenidoNota").val(data);
+                }, error: {
+
+                }
+            });
+
+
+        });
+                                
                             }, error: {
 
                             }
@@ -238,7 +257,6 @@
                 data: {
                    NombreElemento:ElementoSeleccionado
                 }, success: function (data) {
-                    alert(data);
                     $(".TituloNota").text(ElementoSeleccionado);
                     $("#txtContenidoNota").val(data);
                 }, error: {
