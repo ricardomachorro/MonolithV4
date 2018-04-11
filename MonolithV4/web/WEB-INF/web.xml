@@ -68,4 +68,12 @@
         <servlet-name>ActualizarUsuario</servlet-name>
         <url-pattern>/ActualizarUsuario</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GuardarNota</servlet-name>
+        <servlet-class>Servlets.GuardarNota</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GuardarNota</servlet-name>
+        <url-pattern>/GuardarNota</url-pattern>
+    </servlet-mapping>
 </web-app>

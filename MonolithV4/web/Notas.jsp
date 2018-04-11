@@ -81,19 +81,24 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="card-deck"  >
                         <div class="card IngresoNota">
-                            <h2>
+                            <h2 class="TituloNota" id="0">
                                 Titulo Nota 
                             </h2>
-                            <div class="row">
-                                <form id="IngresoNotaForm">
-                                    <div class="col-lg-8 col-md-6 col-sm-12">
+                            <form id="IngresoNotaForm">
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
                                         <input type="text" id="txtNuevaNota" name="txtNuevaNota" class="form-control" placeholder="Nueva Nota" >
                                     </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
                                         <button class="btn-primary" id="BotonNuevaNota" >Agregar nota<img src="img/add-square-button.svg" ></button>  
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <button class="btn-primary" id="BotonActNota" >Actualizar nota<img src="img/add-square-button.svg" ></button>  
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="card-deck"  >
@@ -125,7 +130,7 @@
                     <div class="card-deck" >
                         <div class="card ListasLaterales" style="height:850px;"  >
                             <div class="card-body" >
-                                <ul id="ListaCategorias">
+                                <ul id="ListaNotas">
                                     <%
                                         Statement st2 = conexion.createStatement();
                                         ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
@@ -200,19 +205,27 @@
                 }, submitHandler: function (form) {
                     var TituloNota = $("#txtNuevaNota").val();
                     var Contenido = $("#txtContenidoNota").val();
-                    $.ajax({
-                        url: "EliminarActividad",
-                        type: 'post',
-                        data: {
-                            TitleNota: TituloNota,
-                            ContenidoNota:Contenido
-                        },success:{
-                            
-                        },error:{
-                            
-                        }
+                    var NotasRepetidas = $("#ListaNotas").find("#" + TituloNota).length;
+                    if (NotasRepetidas === 0) {
+                        $.ajax({
+                            url: "GuardarNota",
+                            type: 'post',
+                            data: {
+                                TitleNota: TituloNota,
+                                ContenidoNota: Contenido
+                            }, success: function () {
+                                $("#ListaNotas").prepend("<li id='" + TituloNota + "'>" + TituloNota + "</li>");
+                            }, error: {
 
-                    });
+                            }
+
+                        });
+                    } else {
+                        alert("Nota repetida");
+                    }
+
+
+
                 }
             });
         });

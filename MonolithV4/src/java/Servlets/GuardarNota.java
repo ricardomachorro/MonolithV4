@@ -40,16 +40,19 @@ public class GuardarNota extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            Database2 db=new Database2();
             HttpSession s = request.getSession();
             String Usuario = s.getAttribute("usuario").toString();
-            String NotaTitulo = request.getParameter(" TitleNota");
+            String NotaTitulo = request.getParameter("TitleNota");
             String Contenido = request.getParameter("ContenidoNota");
            Nota note=new Nota();
            note.setUsuario(Usuario);
            note.setTitulo(NotaTitulo);
            note.setContenido(Contenido);
+           db.IngresarNota(note);
 
         } catch (Exception ex) {
+            String e=ex.toString();
               System.out.println(ex.toString());
         }
 

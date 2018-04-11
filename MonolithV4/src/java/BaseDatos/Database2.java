@@ -29,11 +29,22 @@ public class Database2 {
     }
     
     public void IngresarNota(Nota note) throws Exception{
-        
+        if(!NotaExistente(note)){
+         int IDUsuario=IdentificarUsuario(note.getUsuario());
+        String sql="insert into Nota (Nombre,Contenido,IDUsuario) values('"+note.getTitulo()+"','"+note.getContenido()+"',"+IDUsuario+")";
+        st=c.createStatement();
+        st.executeUpdate(sql);
+        }
     }
     
-    private boolean NotaExistente() throws Exception{
+    private boolean NotaExistente(Nota note) throws Exception{
         boolean existe=false;
+        String sql="Select * from Nota inner join Usuario on Nota.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='"+note.getUsuario()+"' and Nota.Nombre='"+note.getTitulo()+"'";
+        st=c.createStatement();
+        rs=st.executeQuery(sql);
+        while(rs.next()){
+            existe=true;
+        }
         
         return existe;
     }
