@@ -110,6 +110,35 @@ public class Database2 {
         return ActActualizada;
     }
     
+    private void AgregarPuntos(String Usuario) throws Exception{
+        int Puntos=PuntosUsuario(Usuario) +1;
+        String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
+          st=c.createStatement();
+          
+    }
+    
+    private void Eliminarpuntos(String Usuario) throws Exception{
+        int Puntos=PuntosUsuario(Usuario);
+        if( Puntos!=0 || Puntos!=-1){
+            Puntos=Puntos-1;
+           String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
+          st=c.createStatement();
+        }
+        
+    }
+    
+    private int PuntosUsuario(String Usuario) throws Exception{
+        int puntos=-1;
+         String sql="Select * from Usuario where NombreUsuario='"+Usuario+"'";
+          st=c.createStatement();
+          rs=st.executeQuery(sql);
+          while(rs.next()){
+              puntos=rs.getInt("Puntos");
+          }
+        return puntos;
+    }
+    
+    
    private boolean ActividadEstado(int IDActividad) {
         boolean EstadoActividad = false;
         
@@ -305,7 +334,7 @@ public class Database2 {
     }
     
     
-     public boolean CambiarEstadoActividad(int IDActividad) {
+     public boolean CambiarEstadoActividad(int IDActividad,String Usuario) {
         boolean ActividadCambiadaExitosa = false;
         boolean Estado = false;
         try {
@@ -313,8 +342,11 @@ public class Database2 {
             String sql="";
             if(Estado){
                  sql = "update Actividad set Estado=false where IDActividad="+ IDActividad+"";
+                 Eliminarpuntos(Usuario);
+                 
             }else{
                   sql = "update Actividad set Estado= true where IDActividad="+ IDActividad+"";
+                  AgregarPuntos(Usuario);
             }
             
             st = c.createStatement();

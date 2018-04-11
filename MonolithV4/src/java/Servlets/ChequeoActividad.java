@@ -50,7 +50,7 @@ public class ChequeoActividad extends HttpServlet {
          String IDActividad=request.getParameter("IDActividad");
             int IDActReal=Integer.parseInt(IDActividad);        
             if(Opccion.equalsIgnoreCase("1")){ 
-             db.CambiarEstadoActividad(IDActReal);
+             db.CambiarEstadoActividad(IDActReal,Usuario);
             int ActividadesHechas=db.ContadorActividadesFinalizadas(Usuario);
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(Integer.toString(ActividadesHechas));
