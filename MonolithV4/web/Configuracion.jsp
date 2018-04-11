@@ -44,7 +44,7 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                   <li class="nav-item">
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
@@ -53,7 +53,12 @@
                     <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio" >Logros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
@@ -129,7 +134,7 @@
                             </div>
                             <div class="form-group">
                                 <label >Contraseña</label>
-                                <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contrsaeña">
+                                <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contraseña">
                             </div>
                             <div class="form-group">
                                 <label >Confirmar Contraseña</label>
@@ -170,7 +175,7 @@
                 }, txtPaisUsuario: {
                     required: true,
                     letras: true,
-                    minlength: 3,
+                    minlength: 2,
                     maxlength: 30
                 }, txtDirecUsuario: {
                     required: true,

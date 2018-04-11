@@ -28,7 +28,7 @@ adendum varchar (50) not null
 );
 
 select *from Usuario;
-
+update Usuario  set TipoUsuario=1 where IDUsuario >0;
 
 create table Categoria(IDCategoria int auto_increment not null primary key,
 NombreCategoria varchar(100) not null,
@@ -48,23 +48,51 @@ foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/);
 select * from actividad;
 delete from actividad where IDActividad>1;
 
-create table Grupo(IDGrupo int not null primary key auto_increment,
-Nombre varchar(100) not null,
-UsuarioLider int,
-PuntoReunion int,
-foreign key(UsuarioLider) references Usuario(IDUsuario),
-foreign key (PuntoReunion) references Localizacion(IDLocalizacion));
-
-create table Tarea(IDTarea int not null primary key auto_increment,
-Nombre varchar(100),
-Fecha date,
-Estado boolean);
-
-create table TareaUsuario(IDTareaUsuario int not null auto_increment primary key,
-IDTarea int,
-IDGrupo int,
-foreign key (IDTarea) references Tarea(IDTarea)
+/*Aqui empiezan las tablas para el modulo grupos :v*/
+create table Grupo(
+	IDGrupo int not null primary key auto_increment,
+	NombreGrupo nvarchar(100) not null
+	#UsuarioLider int,
+	/*PuntoReunion int,*/
+	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
+	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
 );
+
+create table Tarea(
+	IDTarea int not null primary key auto_increment,
+    IDGrupo int,
+	Nombre nvarchar(100),
+	Fecha datetime,
+	Estado boolean,
+    foreign key(IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
+);
+
+create table catRol(
+	IDRol int not null auto_increment primary key,
+    rol varchar(15)
+);
+
+create table Miembros(
+	IDMiembro int not null auto_increment primary key,
+    IDUsuario int,
+    IDGrupo int,
+    IDRol int,
+    foreign key(IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade,
+    foreign key (IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade,
+    foreign key (IDRol) references catRol(IDRol)
+);
+
+create table TareaMiembro(
+	IDTareaMiembro int not null auto_increment primary key,
+    IDTarea int,
+    IDMiembro int,
+    foreign key (IDTarea) references Tarea(IDTarea) on update cascade on delete cascade,
+    foreign key (IDMiembro) references Miembros(IDMiembro) on update cascade on delete cascade
+);
+
+insert into catRol(rol) values('Lider');
+insert into catRol(rol) values('Miembro');
+/*Aqui terminan las tablas para el modulo grupos :v */
 
 create table Nota(IDNota int not null auto_increment primary key,
 Nombre varchar(100),
