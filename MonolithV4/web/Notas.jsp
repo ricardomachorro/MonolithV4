@@ -75,15 +75,34 @@
                 </ul>
             </div>
         </nav>
-         <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <!--Contenedor Principal-->
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    
-
-
-                    
-      
+                    <div class="card-deck"  >
+                        <div class="card IngresoNota">
+                            <h2>
+                                Titulo Nota 
+                            </h2>
+                            <div class="row">
+                                <form id="IngresoNotaForm">
+                                    <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <input type="text" id="txtNuevaNota" name="txtNuevaNota" class="form-control" placeholder="Nueva Nota" >
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <button class="btn-primary" id="BotonNuevaNota" >Agregar nota<img src="img/add-square-button.svg" ></button>  
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-deck"  >
+                        <div class="card ContenidoNota">
+                            <textarea id="txtContenidoNota" class="text" name="message" rows="6" cols="6">
+                            
+                            </textarea>
+                        </div>
+                    </div>   
                 </div>
                 <!--Fin Contenedor Principal-->
                 <!--Contenedor Lateral-->
@@ -93,42 +112,25 @@
                             <div class="card-body" >
                                 <div class="row">
                                     <div class="col-sm-6 col-md-8 col-lg-8">
-                                        <h1>Categorias</h1>
+                                        <h1>Notas</h1>
                                     </div>
                                     <div class="col-sm-6 col-md-4 col-lg-4">
-                                        <img class="float-right" src="img/folderOrange.svg">
+                                        <img class="float-right" src="img/post-it.svg">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-deck">
-                        <div class="card"  >
-                            <div class="card-body" >
-                                <form id="EliminarCategoriaform">
-                                    <div class="row SeccionEliminarCategoria" >
 
-                                        <div class="col-lg-8 col-md-6 col-sm-12">
-                                            <input type="text" id="EliminarActividadtxt" name="EliminarActividadtxt" class="form-control" placeholder="Categoria a Elimininar" >
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <button class="btn-primary" id="BtnEliminarCategoria">Eliminar Categoria</button>  
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card-deck" >
                         <div class="card ListasLaterales" style="height:850px;"  >
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
                                     <%
                                         Statement st2 = conexion.createStatement();
-                                        ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+                                        ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
                                         while (rs2.next()) {
-                                            out.println(" <li id='" + rs2.getString("NombreCategoria") + "'><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
+                                            out.println(" <li id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'>" + rs2.getString("Nombre") + "</li>");
                                         }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
@@ -184,4 +186,38 @@
             </div>
         </div>
     </body>
+    <script>
+        $("#BotonNuevaNota").click(function () {
+            $("#IngresoNotaForm").validate({
+                rules: {
+                    txtNuevaNota: {
+                        required: true
+                    }
+                }, messages: {
+                    txtNuevaNota: {
+                        required: "Llene el Campo "
+                    }
+                }, submitHandler: function (form) {
+                    var TituloNota = $("#txtNuevaNota").val();
+                    var Contenido = $("#txtContenidoNota").val();
+                    $.ajax({
+                        url: "EliminarActividad",
+                        type: 'post',
+                        data: {
+                            TitleNota: TituloNota,
+                            ContenidoNota:Contenido
+                        },success:{
+                            
+                        },error:{
+                            
+                        }
+
+                    });
+                }
+            });
+        });
+
+
+
+    </script>
 </html>

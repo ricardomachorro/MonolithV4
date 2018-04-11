@@ -60,7 +60,7 @@ public class IngresoPrograma extends HttpServlet {
                 if(db.TipoUsuario(u)==1){
                     response.sendRedirect("Actividades.jsp");
                 }else  if(db.TipoUsuario(u)==2){
-                    response.sendRedirect("Servicio");
+                    response.sendRedirect("Servicio.jsp");
                 }
                 
             }else{

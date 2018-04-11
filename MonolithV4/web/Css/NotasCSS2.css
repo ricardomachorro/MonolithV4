@@ -6,6 +6,31 @@ body{
     margin-bottom:20px;
 }
 
+.IngresoNota{
+    margin:12px;
+    padding:12px;
+}
+
+.IngresoNota button{
+    background-color:#0062cc;
+    height:40px;
+    width:100%;
+}
+
+.IngresoNota img{
+    height:20px;
+    margin:8px;
+}
+
+.ContenidoNota{
+    height:820px;
+    padding:13px;
+}
+
+.ContenidoNota textArea{
+    height:770px;
+    padding:12px;
+}
 
 .SeccionEliminarCategoria input[type='text']{
     width:"100%";

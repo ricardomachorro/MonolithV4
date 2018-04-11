@@ -27,6 +27,16 @@ public class Database2 {
         st = c.createStatement();
 
     }
+    
+    public void IngresarNota(Nota note) throws Exception{
+        
+    }
+    
+    private boolean NotaExistente() throws Exception{
+        boolean existe=false;
+        
+        return existe;
+    }
 
     public int IngresoActividad(Actividad act) {
         int IDActividad=0;
