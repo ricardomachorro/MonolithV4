@@ -153,7 +153,7 @@ public class Database2 {
         int Puntos=PuntosUsuario(Usuario) +1;
         String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();
-          
+          st.executeUpdate(sql);
     }
     
     private void Eliminarpuntos(String Usuario) throws Exception{
@@ -162,6 +162,8 @@ public class Database2 {
             Puntos=Puntos-1;
            String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();
+          st=c.createStatement();
+          st.executeUpdate(sql);
         }
         
     }

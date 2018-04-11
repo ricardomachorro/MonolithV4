@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.json.*;
 
 @WebServlet(name = "PonerNota", urlPatterns = {"/PonerNota"})
-public class ponerNota extends HttpServlet{
+public class PonerNota extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

@@ -215,25 +215,25 @@
                                 ContenidoNota: Contenido
                             }, success: function () {
                                 $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'>" + TituloNota + "</li>");
-                                
-                                 $(".NotasListas").click(function () {
-            var ElementoSeleccionado = $(this).attr("id");
-            $.ajax({
-                url: "PonerNota",
-                type: 'post',
-                data: {
-                   NombreElemento:ElementoSeleccionado
-                }, success: function (data) {
-                    $(".TituloNota").text(ElementoSeleccionado);
-                    $("#txtContenidoNota").val(data);
-                }, error: {
 
-                }
-            });
+                                $(".NotasListas").click(function () {
+                                    var ElementoSeleccionado = $(this).attr("id");
+                                    $.ajax({
+                                        url: "PonerNota",
+                                        type: 'post',
+                                        data: {
+                                            NombreElemento: ElementoSeleccionado
+                                        }, success: function (data) {
+                                            $(".TituloNota").text(ElementoSeleccionado);
+                                            $("#txtContenidoNota").val(data);
+                                        }, error: {
+
+                                        }
+                                    });
 
 
-        });
-                                
+                                });
+
                             }, error: {
 
                             }
@@ -255,7 +255,7 @@
                 url: "PonerNota",
                 type: 'post',
                 data: {
-                   NombreElemento:ElementoSeleccionado
+                    NombreElemento: ElementoSeleccionado
                 }, success: function (data) {
                     $(".TituloNota").text(ElementoSeleccionado);
                     $("#txtContenidoNota").val(data);
@@ -266,8 +266,8 @@
 
 
         });
-        
-        $("#BotonActNota").click(function(){
+
+        $("#BotonActNota").click(function () {
             $("#IngresoNotaForm").validate({
                 rules: {
                     txtNuevaNota: {
@@ -278,23 +278,23 @@
                         required: "Llene el Campo "
                     }
                 }, submitHandler: function (form) {
-                   var TituloNota = $("#txtNuevaNota").val();
-                   var Contenido = $("#txtContenidoNota").val();
-                   var TituloAnterior=$(".TituloNota").val();
-                        $.ajax({
-                            url: "ActualizarNota",
-                            type: 'post',
-                            data: {
-                                TitleNota: TituloNota,
-                                ContenidoNota: Contenido,
-                                Anterior:TituloAnterior
-                            }, success: function () {
-                            
-                            }, error: {
+                    var TituloNota = $("#txtNuevaNota").val();
+                    var Contenido = $("#txtContenidoNota").val();
+                    var TituloAnterior = $(".TituloNota").val();
+                    $.ajax({
+                        url: "ActualizarNota",
+                        type: 'post',
+                        data: {
+                            TitleNota: TituloNota,
+                            ContenidoNota: Contenido,
+                            Anterior: TituloAnterior
+                        }, success: function () {
 
-                            }
+                        }, error: {
 
-                        });
+                        }
+
+                    });
                 }
             });
         });
