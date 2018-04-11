@@ -158,7 +158,7 @@ public class Database2 {
     
     private void Eliminarpuntos(String Usuario) throws Exception{
         int Puntos=PuntosUsuario(Usuario);
-        if( Puntos!=0 || Puntos!=-1){
+        if( Puntos>0){
             Puntos=Puntos-1;
            String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();
