@@ -541,15 +541,14 @@
                             );
                             //LADO IZQUIERDO
                             $("#list-tab").prepend(//Inserto el grupo a la lista de grupos
-                                "<a class='list-group-item list-group-item-action active' id='lista-g"+nuevoGrupo+"' data-toggle='list' href='#panel-g"+nuevoGrupo+"' role='tab' aria-controls='g"+nuevoGrupo+"'>"+
+                                "<a class='list-group-item list-group-item-action active grupoLista' id='lista-g"+nuevoGrupo+"' data-toggle='list' href='#panel-g"+nuevoGrupo+"' role='tab' aria-controls='g"+nuevoGrupo+"'>"+
                                         "<img src='img/group.svg' alt='ic_grupos'>"+
                                         nuevoGrupo+
                                 "</a>"
                             );
                         },
                         error: function () {
-                            prompt("Hubo un error :'v = " +Error);
-                            error = Error;
+                            alert("Hubo un error :'v ");
                         },
                         complete: function () {
                         }

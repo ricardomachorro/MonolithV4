@@ -58,6 +58,7 @@ public class Database2 {
 
                 RegistroExitoso = true; //Registro exitoso
             }
+            rs.close();
         } catch (Exception ex) {
             System.out.println(ex.toString() + "Error de Database2");
         }
@@ -76,6 +77,7 @@ public class Database2 {
             if (rs.next()) { //Evalua si se hizo query
                 IngresoExitoso = true;
             }
+            rs.close();
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage() + " :'v");
         }
@@ -93,16 +95,22 @@ public class Database2 {
             if(rs.next()) { //Si sale algo
                 nombreMiembro = rs.getString("NombreUsuario"); //Asigno el nombre de usuario
             }
+            rs.close();
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
         return nombreMiembro;//Regreso el nombre de usuario
     }
     
-    public int idUsuario(){
+    public int idUsuario(String nombre){
         int idUsuario = 0;
+        String queryID = "select IDUsuario from Usuario where NombreUsuario='"+nombre+"';";
         try {
-            
+            rs = st.executeQuery(queryID);
+            if(rs.next()){
+                idUsuario = rs.getInt("IDUsuario");
+            }
+            rs.close();
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
