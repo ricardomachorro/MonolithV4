@@ -22,7 +22,6 @@ create table Usuario(
 	Puntos int not null
 );
 
-update Usuario set TipoUsuario=2 where IDUsuario=5;
 select * from Usuario;
 
 create table Validacion(
@@ -117,8 +116,8 @@ create table Logro(
 	fecha date not null
 );
 
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',80);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',30);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) values('memo1','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,30);
 insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(1,2,5,'dogo #97','2017-05-12');
 insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(2,1,7,'dogo #12','2017-03-01');
 select * from Logro;
@@ -141,9 +140,11 @@ create table Intercambio(
 );
 select * from Intercambio;
 
-create table Estampa(IDEstampa int not null auto_increment primary key,
-Nombre varchar (100),
-Costo int);
+create table Estampa(
+	IDEstampa int not null auto_increment primary key,
+	Nombre varchar (100),
+	Costo int
+);
 
 create table LogroUsuario(
 	IDLogroUsuario int not null auto_increment primary key,
