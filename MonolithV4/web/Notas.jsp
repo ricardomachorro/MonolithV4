@@ -62,7 +62,7 @@
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
+                            <img src="img/user.svg" class="ImagenesBarraInicio" > <%out.println(Usuario);%>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
                             <a class="dropdown-item" id="UsuarioName" >Usuario: <%                                out.println(Usuario);

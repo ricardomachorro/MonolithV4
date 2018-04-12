@@ -432,7 +432,7 @@
 
         <script>
             //Array de miembros de un nuevo grupo
-            var miembrosNG = [];
+            var miembrosNG = "";
             
             /*FUNCION PARA EL EVENTO DE AGREGAR UN MIEMBRO NUEVO A UN GRUPO NUEVO*/
             $("#agregarMiembro").click( //Agregar miembro al formulario para el nuevo grupo
@@ -458,7 +458,7 @@
                                     "</li>"
                                 )
                             );
-                            miembrosNG.push(data.toString());//Agregar el nombre del miembro al array
+                            miembrosNG=miembrosNG+","+data.toString();//Agregar el nombre del miembro al array
                         },
                         error: function () {
                             alert("Error buscando miembro");
@@ -475,15 +475,15 @@
                     //Traigo el nombre del grupo
                     var nuevoGrupo = $("#nuevoGrupo").val().toString();
                     var usuario = $("#btnCrearGrupo").val().toString();
-                    var error = Error;
                     $.ajax( {
                         url: "CrearGrupo",
                         data: {//Envio el nombre del grupo y los miembros
                             nomNuevoGrupo: nuevoGrupo,
-                            lider: usuario
+                            lider: usuario,
+                            miembros: miembrosNG
                         },
                         type: 'post',
-                        success: function (data) {
+                        success: function () {
                             //Desaparecer elementos
                             $("div.grupo").removeClass("active");
                             $("a.grupoLista").removeClass("active");
@@ -555,7 +555,12 @@
                         complete: function () {
                         }
                     } );
-                    console.log(error);
+                }
+            );
+    
+            $(button.close).click(
+                function() {
+                    
                 }
             );
         </script>

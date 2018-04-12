@@ -1,7 +1,6 @@
 package Servlets;
 
 import BaseDatos.Database2;
-import Objetos.Grupo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,17 +40,14 @@ public class AgregarMiembro extends HttpServlet {
             Database2 db = new Database2();
             //Para las variables de sesion
             HttpSession s = request.getSession();
-            //Objeto grupo
-            Grupo grupo = new Grupo();
             
             //Traigo el parametro correoMiembro de la data de ajax
             String correoMiembro = request.getParameter("correoMiembro");
             //Traigo el nombre del usuario de la bd buscandolo por su correo
             String nombreMiembro = db.consultarMiembro(correoMiembro);
-            
-            
-            
-            //Envio el nombre del usuario/miembro
+            //Traigo la id del usuario
+            int IDMiembro = db.IdentificarUsuario(nombreMiembro);
+            //Envio el nombre del usuario/miembro y su id
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(nombreMiembro);
         } catch (Exception e) {
