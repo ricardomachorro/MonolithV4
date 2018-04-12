@@ -11,24 +11,27 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Database2 {
-
+    
+    //Datos para la conexion
     String driver = "com.mysql.jdbc.Driver";
     String ruta = "jdbc:mysql://localhost/MonolithV2";
     String usuario = "root";
     String clave = "n0m3l0";
+    
     Connection c = null;
     Statement st = null;
-    PreparedStatement ps = null;
+    PreparedStatement ps = null; //Secuencia facil de ejecutar xd
     ResultSet rs = null;
 
     public Database2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        //Conexion a la BD
         Class.forName(driver).newInstance();
-        c = DriverManager.getConnection(ruta, usuario, clave);
-        st = c.createStatement();
-
+        this.c = DriverManager.getConnection(this.ruta, this.usuario, this.clave);
+        //Metodo para ejecutar secuencias sql
+        this.st = c.createStatement();
     }
     
-    public void IngresarNota(Nota note) throws Exception{
+    public void IngresarNota(Nota note) throws Exception{//NOtas
         if(!NotaExistente(note)){
          int IDUsuario=IdentificarUsuario(note.getUsuario());
         String sql="insert into Nota (Nombre,Contenido,IDUsuario) values('"+note.getTitulo()+"','"+note.getContenido()+"',"+IDUsuario+")";
@@ -37,14 +40,14 @@ public class Database2 {
         }
     }
     
-    public void ActualizarNota(Nota note, String NombreAnterior)throws Exception{
+    public void ActualizarNota(Nota note, String NombreAnterior)throws Exception{ //Notas
         int IDUsuario=IdentificarUsuario(note.getUsuario());
         String sql="update Nota set Nombre='"+note.getTitulo()+"' set Contenido='"+note.getContenido()+"' where Nombre='"+NombreAnterior+"' and IDUauario="+IDUsuario;
          st=c.createStatement();
         st.executeUpdate(sql);
     }
     
-    private boolean NotaExistente(Nota note) throws Exception{
+    private boolean NotaExistente(Nota note) throws Exception{//Notas
         boolean existe=false;
         String sql="Select * from Nota inner join Usuario on Nota.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='"+note.getUsuario()+"' and Nota.Nombre='"+note.getTitulo()+"'";
         st=c.createStatement();
@@ -56,7 +59,7 @@ public class Database2 {
         return existe;
     }
     
-    public String NotaContenido(String Usuario, String Nota) throws Exception{
+    public String NotaContenido(String Usuario, String Nota) throws Exception{//Notas
         String Contenido="";
         String sql="Select * from Nota inner join Usuario on Nota.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='"+Usuario+"' and Nota.Nombre='"+Nota+"'";
         st=c.createStatement();
@@ -67,7 +70,7 @@ public class Database2 {
         return Contenido;
     }
 
-    public int IngresoActividad(Actividad act) {
+    public int IngresoActividad(Actividad act) {//Actividades
         int IDActividad=0;
         try {
             
@@ -105,7 +108,7 @@ public class Database2 {
         return  IDActividad;
     }
 
-    public boolean ActualizacionActividad(int IDActividad,String Nombre,String Categoria,String Fecha,String Usuario){
+    public boolean ActualizacionActividad(int IDActividad,String Nombre,String Categoria,String Fecha,String Usuario){//Actividades
         boolean ActActualizada=false;
         try{
             if(CategoriaExistente(Categoria, IdentificarUsuario(Usuario))){
@@ -144,19 +147,19 @@ public class Database2 {
             }
             
         }catch(Exception ex){
-            
+            System.out.println("Error: " + ex.getMessage());
         }
         return ActActualizada;
     }
     
-    private void AgregarPuntos(String Usuario) throws Exception{
+    private void AgregarPuntos(String Usuario) throws Exception{//Logros
         int Puntos=PuntosUsuario(Usuario) +1;
         String sql="update Usuario set Puntos="+Puntos+" where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();
           st.executeUpdate(sql);
     }
     
-    private void Eliminarpuntos(String Usuario) throws Exception{
+    private void Eliminarpuntos(String Usuario) throws Exception{//Logros
         int Puntos=PuntosUsuario(Usuario);
         if( Puntos>0){
             Puntos=Puntos-1;
@@ -168,7 +171,7 @@ public class Database2 {
         
     }
     
-    private int PuntosUsuario(String Usuario) throws Exception{
+    private int PuntosUsuario(String Usuario) throws Exception{//Logros
         int puntos=-1;
          String sql="Select * from Usuario where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();
@@ -180,7 +183,7 @@ public class Database2 {
     }
     
     
-   private boolean ActividadEstado(int IDActividad) {
+   private boolean ActividadEstado(int IDActividad) {//Actividades
         boolean EstadoActividad = false;
         
         try {
@@ -195,11 +198,10 @@ public class Database2 {
         } catch (Exception ex) {
 
         }
-
         return EstadoActividad;
     }
 
-    public void EliminarActividad(int IDActividad){
+    public void EliminarActividad(int IDActividad){//Actividades
         try {
             String sql1 = "delete from Actividad where IDActividad=?";
             ps = c.prepareStatement(sql1);
@@ -211,7 +213,7 @@ public class Database2 {
         }
     }
     
-    public void EliminarCategoria( String Usuario, String Categoria){
+    public void EliminarCategoria( String Usuario, String Categoria){//Actividades
         try{
             
             int IDUsuario=IdentificarUsuario(Usuario);    
@@ -224,9 +226,7 @@ public class Database2 {
             
         }
     }
-    
-    
-    
+
     public int TipoUsuario(Usuario user){
         int tipo=0;
         try {
@@ -244,7 +244,7 @@ public class Database2 {
         return tipo;
     }
 
-    public boolean IngresoUsuario(Usuario user) {
+    public boolean IngresoUsuario(Usuario user) {//Index
         boolean RegistroExitoso = false;
         String sql1 = "select * from Usuario where NombreUsuario=?";
         String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos,TipoUsuario) values(?,?,?,?,?,?,?,?)";
@@ -252,9 +252,12 @@ public class Database2 {
             ps = c.prepareStatement(sql1);
             ps.setString(1, user.getNombre());
             rs = ps.executeQuery();
-            boolean n=rs.next();
-           if(!rs.next()) {
+            boolean n = rs.next();
+            
+            if(!rs.next()) {//Evalua que no halla otro usuario registrado con el mismo nombre
+                //Inicia
                 ps = c.prepareStatement(sql2);
+                //Llena
                 ps.setString(1, user.getNombre());
                 ps.setString(2, user.getCorreo());
                 ps.setInt(3, user.getEdad());
@@ -263,8 +266,10 @@ public class Database2 {
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
                 ps.setInt(8,1);
+                //Ejecuta
                 ps.executeUpdate();
-                RegistroExitoso = true;
+                
+                RegistroExitoso = true; //Registro exitoso
             }
         } catch (Exception ex) {
             System.out.println(ex.toString() + "Error de Database2");
@@ -272,42 +277,44 @@ public class Database2 {
         return RegistroExitoso;
     }
 
-    public boolean IngresoPrograma(Usuario u) {
+    public boolean IngresoPrograma(Usuario u) {//Registro
         boolean IngresoExitoso = false;
         try {
             String sql = "select * from Usuario where NombreUsuario=? and Contrasena=?";
-            ps = c.prepareStatement(sql);
-            ps.setString(1, u.getNombre());
-            ps.setString(2, u.getPassword());
-            rs = ps.executeQuery();
-            if (rs.next()) {
+            ps = c.prepareStatement(sql); //Inserta secuencia
+            ps.setString(1, u.getNombre()); //Primer signo de interrogacion
+            ps.setString(2, u.getPassword()); //Segundo signo de interrogacion
+            rs = ps.executeQuery(); //Se hace query
+            if (rs.next()) {//Evalua si se hizo query
                 IngresoExitoso = true;
             }
         } catch (Exception ex) {
-
+            System.out.println("Error: " + ex.getMessage());
         }
 
         return IngresoExitoso;
     }
 
-    public int IdentificarUsuario(String Nombre) {
+    public int IdentificarUsuario(String Nombre) {//Cualquiera
         int ID = 0;
+        String sql = "Select IDUsuario from Usuario where NombreUsuario=?";
         try {
-            String sql = "Select * from Usuario where NombreUsuario=?";
             ps = c.prepareStatement(sql);
             ps.setString(1, Nombre);
             rs = ps.executeQuery();
             if (rs.next()) {
                 ID = rs.getInt("IDUsuario");
             }
+            rs.close();
         } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
             return ID;
         }
 
         return ID;
     }
 
-    public boolean CategoriaExistente(String Categoria, int IDUsuario) {
+    public boolean CategoriaExistente(String Categoria, int IDUsuario) {//Actividades
         boolean Repetida = false;
         try {
             String sql = "select * from Categoria where NombreCategoria=? and IDUsuario=?";
@@ -324,7 +331,7 @@ public class Database2 {
         return Repetida;
     }
     
-    public void ActualizarUsuario(Usuario user,String UsuarioOriginal){
+    public void ActualizarUsuario(Usuario user,String UsuarioOriginal){//Configuracion
         String sql="update Usuario set NombreUsuario=?,Correo=?,Edad=?,Pais=?,Direccion=?,Contrasena=? where IDUsuario=?";
         try{
             int idUsuario=IdentificarUsuario(UsuarioOriginal);
@@ -342,7 +349,7 @@ public class Database2 {
         }
     }
     
-    public int ContadorActividadesFaltantes(String NombreUsuario){
+    public int ContadorActividadesFaltantes(String NombreUsuario){//Actividades
         int ActividadesFaltantes=0;
         try{
             String sql="select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.NombreUsuario=? and Actividad.Estado=0";
@@ -358,7 +365,7 @@ public class Database2 {
         return ActividadesFaltantes;
     }
     
-    public int ContadorActividadesFinalizadas(String NombreUsuario){
+    public int ContadorActividadesFinalizadas(String NombreUsuario){//Actividades
         int ActividadesFinzalizadas=0;
         try{
             String sql="select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.NombreUsuario=? and Actividad.Estado>0";
@@ -375,7 +382,7 @@ public class Database2 {
     }
     
     
-     public boolean CambiarEstadoActividad(int IDActividad,String Usuario) {
+     public boolean CambiarEstadoActividad(int IDActividad,String Usuario) {//Actividades
         boolean ActividadCambiadaExitosa = false;
         boolean Estado = false;
         try {
@@ -399,5 +406,38 @@ public class Database2 {
 
         return ActividadCambiadaExitosa;
     }
-
+     
+     /*Inicio de los metodos para grupos*/
+    public String consultarMiembro(String correoMiembro){
+        String nombreMiembro = "";
+        try {
+            //Query a ejecutar
+            String sqlBuscarMiembro = "select NombreUsuario from Usuario where Correo='"+correoMiembro+"';";
+            //Ejecuto query
+            rs = st.executeQuery(sqlBuscarMiembro);
+            if(rs.next()) { //Si sale algo
+                nombreMiembro = rs.getString("NombreUsuario"); //Asigno el nombre de usuario
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return nombreMiembro;//Regreso el nombre de usuario
+    }
+    
+    public int idUsuario(String nombre){
+        int idUsuario = 0;
+        String queryID = "select IDUsuario from Usuario where NombreUsuario='"+nombre+"';";
+        try {
+            rs = st.executeQuery(queryID);
+            if(rs.next()){
+                idUsuario = rs.getInt("IDUsuario");
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return idUsuario;
+    }
+    /*Fin metodos para grupos*/
 }

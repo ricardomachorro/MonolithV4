@@ -44,19 +44,19 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
+                        <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio">Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio">Grupos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio" >Logros</a>
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio">Ayuda</a>
                     </li>
 
                 </ul>
