@@ -2,14 +2,6 @@ drop database if exists MonolithV2;
 create database MonolithV2;
 use MonolithV2;
 
-create table Localizacion(
-	IDLocalizacion int auto_increment primary key not null,
-	Nombre varchar (100),
-	Latitud varchar(40) not null, 
-	Longitud varchar (40) not null,
-	Region varchar (100) not null
-);
-
 create table Usuario(
 	IDUsuario int auto_increment primary key not null,
 	NombreUsuario varchar(100),
@@ -23,12 +15,12 @@ create table Usuario(
 );
 
 select * from Usuario;
-
+/*
 create table Validacion(
 	IdAdendum int primary key not null auto_increment,
 	Nombre varchar(20) not null,
 	adendum varchar (50) not null
-);
+);*/
 
 create table Categoria(
 	IDCategoria int auto_increment not null primary key,
