@@ -15,6 +15,14 @@ create table Usuario(
 );
 
 select * from Usuario;
+
+create table Conversacion(IDConversacion int not null primary key auto_increment,
+DueñoCuentaUsuario int,UsuarioExterno int,
+foreign key (DueñoCuentaUsuario) references Usuario(IDUsuario) on update cascade on delete cascade,
+foreign key (UsuarioExterno) references Usuario(IDUsuario) on update cascade on delete cascade);
+
+create table Mensaje (IDMensaje int not null primary key auto_increment, Contenido nvarchar (100),fecha date,
+ Conversacion int, foreign key (Conversacion) references Conversacion(IDConversacion));
 /*
 create table Validacion(
 	IdAdendum int primary key not null auto_increment,
@@ -157,3 +165,4 @@ create table  EstampaUsaurio(
 	foreign key (IDUsuario) references Usuario(IDUsuario),
 	foreign key (IDEstampa) references Estampa(IDEstampa)
 );
+
