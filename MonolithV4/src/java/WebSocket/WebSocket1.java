@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import javax.json.Json;
+import com.google.gson.JsonObject;
 
 @ServerEndpoint("/WebSocket1")
 public class WebSocket1 {
