@@ -38,7 +38,7 @@ public class WebSocket1 {
                 iterator.next().getBasicRemote().sendText(message);
             }
         }
-        return null;
+        return message;
     }
     
    

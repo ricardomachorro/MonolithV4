@@ -38,7 +38,6 @@
         var webSocket=new WebSocket("ws://localhost:8080/MonolithV4/WebSocket1");
         webSocket.onmessage=function processMessage(message){
             var jsonData=message.data;
-            
                 mensaje.value+=jsonData.message+"\n";
             
         }
