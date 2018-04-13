@@ -2,14 +2,6 @@ drop database if exists MonolithV2;
 create database MonolithV2;
 use MonolithV2;
 
-create table Localizacion(
-	IDLocalizacion int auto_increment primary key not null,
-	Nombre varchar (100),
-	Latitud varchar(40) not null, 
-	Longitud varchar (40) not null,
-	Region varchar (100) not null
-);
-
 create table Usuario(
 	IDUsuario int auto_increment primary key not null,
 	NombreUsuario varchar(100),
@@ -18,20 +10,37 @@ create table Usuario(
 	Pais varchar(50),
 	Direccion varchar(200),
 	Contrasena varchar(70),
+	TipoUsuario int,
 	Puntos int not null
 );
+select * from Usuario;
 
+create table Conversacion(
+	IDConversacion int not null primary key auto_increment,
+	DueñoCuentaUsuario int,UsuarioExterno int,
+	foreign key (DueñoCuentaUsuario) references Usuario(IDUsuario) on update cascade on delete cascade,
+	foreign key (UsuarioExterno) references Usuario(IDUsuario) on update cascade on delete cascade
+);
+
+create table Mensaje (
+	IDMensaje int not null primary key auto_increment, 
+	Contenido nvarchar (100),
+	fecha date,
+	Conversacion int, 
+	foreign key (Conversacion) references Conversacion(IDConversacion)
+ );
+/*
 create table Validacion(
 	IdAdendum int primary key not null auto_increment,
 	Nombre varchar(20) not null,
 	adendum varchar (50) not null
-);
+);*/
 
 create table Categoria(
 	IDCategoria int auto_increment not null primary key,
 	NombreCategoria varchar(100) not null,
 	IDUsuario int not null,
-	foreign key (IDUsuario) references Usuario(IDUsuario)
+	foreign key (IDUsuario) references Usuario(IDUsuario) on update cascade on delete cascade
 );
 
 create table Actividad(
@@ -41,8 +50,8 @@ create table Actividad(
 	IDCategoria int,
 	/*IDLocalizacion int,*/
 	Estado boolean,
-	foreign key (IDCategoria) references Categoria(IDCategoria)/*,
-    foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/
+	foreign key (IDCategoria) references Categoria(IDCategoria) on update cascade on delete cascade  /*,
+	foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/
 );
 
 /*Aqui empiezan las tablas para el modulo grupos :v*/
@@ -50,9 +59,9 @@ create table Grupo(
 	IDGrupo int not null primary key auto_increment,
 	NombreGrupo nvarchar(100) not null
 	#UsuarioLider int,
-	/*PuntoReunion int,*/
-	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
-	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
+	#PuntoReunion int,
+	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade,
+	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade
 );
 
 create table Tarea(
@@ -94,16 +103,46 @@ insert into catRol(rol) values('Miembro');
 create table Nota(
 	IDNota int not null auto_increment primary key,
 	Nombre varchar(100),
-	Conteneido text,
+	Contenido text,
 	IDUsuario int,
 	foreign key (IDUsuario) references Usuario(IDUsuario)
 );
+select * from Nota;
 
 create table Logro(
 	IDLogro int not null auto_increment primary key,
-	Nombre varchar(100),
-	Descripcion text,
-	Costo int
+	IDUsuario int not null,
+	Img int not null,
+	Filtro int not null,
+	Nombre varchar(100) not null,
+	fecha date not null
+);
+/*
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
+values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
+values('memo1','memo@fdsed.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,30);
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
+values(1,2,5,'dogo #97','2017-05-12');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
+values(2,1,7,'dogo #12','2017-03-01');
+select * from Logro;
+select * from Usuario;
+*/
+create table Intercambio(
+	IDInter int not null auto_increment primary key,
+	IDusuarioDa int not null,
+	IDusuarioRe int not null,
+	UsuarioDa varchar(100) not null,
+	UsuarioRe varchar(100) not null,
+	IDdogoDa int not null,
+	IDdogoRe int not null,
+	FiltroDa varchar(100) not null,
+	ImgdogoDa int not null,
+	dogoDa varchar(100) not null,
+	dogoRe int not null,
+	Estado varchar(100) not null,
+	fecha date not null
 );
 
 create table Estampa(
@@ -127,3 +166,4 @@ create table  EstampaUsaurio(
 	foreign key (IDUsuario) references Usuario(IDUsuario),
 	foreign key (IDEstampa) references Estampa(IDEstampa)
 );
+

@@ -46,17 +46,14 @@ public class AgregarMiembro extends HttpServlet {
             Database2 db = new Database2();
             //Para las variables de sesion
             HttpSession s = request.getSession();
-            //Objeto grupo
-            Grupo grupo = new Grupo();
             
             //Traigo el parametro correoMiembro de la data de ajax
             String correoMiembro = request.getParameter("correoMiembro");
             //Traigo el nombre del usuario de la bd buscandolo por su correo
             String nombreMiembro = db.consultarMiembro(correoMiembro);
-            
-            grupol.set
-            
-            //Envio el nombre del usuario/miembro
+            //Traigo la id del usuario
+            int IDMiembro = db.IdentificarUsuario(nombreMiembro);
+            //Envio el nombre del usuario/miembro y su id
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(nombreMiembro);
         } catch (Exception e) {

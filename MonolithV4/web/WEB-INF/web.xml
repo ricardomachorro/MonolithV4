@@ -32,5 +32,12 @@
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
     
-    
+    <servlet>
+        <servlet-name>CrearGrupo</servlet-name>
+        <servlet-class>CrearGrupo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CrearGrupo</servlet-name>
+        <url-pattern>/CrearGrupo</url-pattern>
+    </servlet-mapping>
 </web-app>

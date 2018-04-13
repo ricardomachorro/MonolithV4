@@ -10,7 +10,6 @@
 <html>
     <head>
         <%
-            /**/
             //Variables de sesion
             HttpSession sesion = request.getSession();
             String nomUsuario = sesion.getAttribute("usuario").toString();
@@ -57,13 +56,16 @@
                         <a class="nav-link" href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="grupos.html"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupos</a>
+                        <a class="nav-link" href="grupos.html"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Ayuda</a>
                     </li>
                 </ul>
 
@@ -430,7 +432,7 @@
 
         <script>
             //Array de miembros de un nuevo grupo
-            var miembrosNG = [];
+            var miembrosNG = "";
             
             /*FUNCION PARA EL EVENTO DE AGREGAR UN MIEMBRO NUEVO A UN GRUPO NUEVO*/
             $("#agregarMiembro").click( //Agregar miembro al formulario para el nuevo grupo
@@ -456,7 +458,7 @@
                                     "</li>"
                                 )
                             );
-                            miembrosNG.push(data.toString());//Agregar el nombre del miembro al array
+                            miembrosNG=miembrosNG+","+data.toString();//Agregar el nombre del miembro al array
                         },
                         error: function () {
                             alert("Error buscando miembro");
@@ -473,21 +475,21 @@
                     //Traigo el nombre del grupo
                     var nuevoGrupo = $("#nuevoGrupo").val().toString();
                     var usuario = $("#btnCrearGrupo").val().toString();
-                    var error = Error;
                     $.ajax( {
                         url: "CrearGrupo",
                         data: {//Envio el nombre del grupo y los miembros
                             nomNuevoGrupo: nuevoGrupo,
-                            lider: usuario
+                            lider: usuario,
+                            miembros: miembrosNG
                         },
                         type: 'post',
-                        success: function (data) {
+                        success: function () {
                             //Desaparecer elementos
                             $("div.grupo").removeClass("active");
                             $("a.grupoLista").removeClass("active");
                             //LADO DERECHO
                             $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
-                                "<div class='tab-pane fade show active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
+                                "<div class='tab-pane fade show grupo active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
                                         //Inicio titulo contenedor
                                         "<div class='card-deck'>"+
                                             "<div class='card Contenedor'>"+
@@ -553,9 +555,10 @@
                         complete: function () {
                         }
                     } );
-                    console.log(error);
                 }
             );
+    
+           
         </script>
     </body>
 </html>

@@ -83,9 +83,28 @@ public class Database2 {
         }
         return IngresoExitoso;
     }
+    
+    public int IdentificarUsuario(String Nombre) {//Cualquiera
+        int ID = 0;
+        String sql = "Select IDUsuario from Usuario where NombreUsuario=?";
+        try {
+            ps = c.prepareStatement(sql);
+            ps.setString(1, Nombre);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                ID = rs.getInt("IDUsuario");
+            }
+            rs.close();
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+            return ID;
+        }
+
+        return ID;
+    }
 
     /*Inicio de los metodos para grupos*/
-    public String consultarMiembro(String correoMiembro){
+    public String consultarMiembro(String correoMiembro) throws Exception{
         String nombreMiembro = "";
         try {
             //Query a ejecutar
@@ -97,23 +116,54 @@ public class Database2 {
             }
             rs.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: " + e.toString());
         }
         return nombreMiembro;//Regreso el nombre de usuario
     }
     
-    public int idUsuario(String nombre){
-        int idUsuario = 0;
-        String queryID = "select IDUsuario from Usuario where NombreUsuario='"+nombre+"';";
+    public void crearGrupo(Grupo g) throws Exception{
+        String nombreGrupo = g.getNombreGrupo();
+        int IDLider = g.getIDLider();
+        int IDMiembros[] = g.getMiembros();
+        int IDGrupo;
+        int idMiembro;
+        
+        String queryNG = "into Grupo(NombreGrupo) values('"+nombreGrupo+"');";
+        String queryLider;
+        String queryMiembro;
         try {
-            rs = st.executeQuery(queryID);
-            if(rs.next()){
-                idUsuario = rs.getInt("IDUsuario");
+            st = c.createStatement();
+            st.execute(queryNG);//creo el grupo
+            IDGrupo = IDGrupo(nombreGrupo);//Traigo su id
+            
+            queryLider = "insert into Miembros(IDUsuario,IDGrupo,IDRol) values("+IDLider+","+IDGrupo+",1);";
+            st.execute(queryLider);//Le agrego al lider
+            
+            if(IDMiembros.length!=0){//Agrego miembros sies que hay :v
+                for(int i=0; i<IDMiembros.length; i++) {
+                    idMiembro = IDMiembros[i];
+                    queryMiembro = "insert into Miembros(IDUsuario,IDGrupo,IDRol) values("+idMiembro+","+IDGrupo+",2);";
+                    st.execute(queryMiembro);
+                }
             }
-            rs.close();
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        return idUsuario;
+    }
+    
+    public int IDGrupo(String nombreGrupo) throws Exception{
+        int id = 0;
+        String query = "select IDGrupo from Grupo where NombreGrupo='"+nombreGrupo+"';";
+        try {
+            st = c.createStatement();
+            rs = st.executeQuery(query);
+            if(rs.next()){
+                id = rs.getInt("IDGrupo");
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        }
+        return id;
     }
 }
