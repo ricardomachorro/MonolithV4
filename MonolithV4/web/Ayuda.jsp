@@ -34,6 +34,19 @@
         <script src="js/jquery.validate.js"></script>
         <title>Ayuda</title>
     </head>
+    <script>
+        var webSocket=new WebSocket("ws://localhost:8080/MonolithV4/WebSocket1");
+        webSocket.onmessage=function processMessage(message){
+            var jsonData=JSON.parse(message.data);
+            
+                mensaje.value+=jsonData.message+"\n";
+            
+        }
+         function sendMessage(){
+                webSocket.send(Texto.value);
+                Texto.value="";
+            }
+    </script>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="true" aria-label="Toggle navigation">
@@ -138,7 +151,7 @@
                     <div class="card-deck" style="margin:12px;">
                         <div class="card">
                             <div class="row">
-                                <div class="col-12" style="height:500px;background-color:#fff;overflow-y:scroll;">
+                                <div class="col-12" id="SeccionMensaje" style="height:500px;background-color:#fff;overflow-y:scroll;">
                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
                                      <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
                                      <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
@@ -152,12 +165,15 @@
                     
                     <div class="card-deck" style="margin:12px;">
                         <div class="card">
+                            <textarea id="mensaje" readonly="readonly" rows="10" cols="45">
+                                
+                            </textarea>
                             <div class="row" style="padding:12px;">
                                 <div class="col-lg-10 col-md-6 col-sm-12">
-                                    <input type="text"  style="width:100%;"  class="form-control" placeholder="Mensaje" >
+                                    <input type="text" id="Texto"  style="width:100%;"  class="form-control" placeholder="Mensaje" >
                                 </div>
                                 <div class="col-lg-2 col-md-6 col-sm-12">
-                                    <button class="btn-primary" style="width:100%;;height:40px" ><img src="img/sent-mail.svg" style="width:30px;height:30px;margin-right:17px;">Enviar</button>  
+                                    <button class="btn-primary" style="width:100%;;height:40px" onclick="sendMessage();"><img src="img/sent-mail.svg" style="width:30px;height:30px;margin-right:17px;">Enviar</button>  
                                 </div>
                             </div>
                         </div>
