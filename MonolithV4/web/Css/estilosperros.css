@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/03/2018, 03:59:21 PM
+    Author     : memo0
+*/
+.filtro1{
+    width: 100%;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+}
+.filtro2{
+    width: 100%;
+    filter: sepia(80%);
+    -webkit-filter: sepia(80%);
+    -moz-filter: sepia(80%);
+}
+.filtro3{
+    width: 100%;
+    filter: saturate(10);
+    -webkit-filter: saturate(10);
+    -moz-filter: saturate(10);
+}
+.filtro4{
+    width: 100%;
+    filter: hue-rotate(90deg);
+    -webkit-filter: hue-rotate(90deg);
+    -moz-filter: hue-rotate(90deg);
+}
+.filtro5{
+    width: 100%;
+    -webkit-filter: hue-rotate(45deg);
+filter: hue-rotate(45deg);
+}
+.filtro6{
+    width: 100%;
+    opacity: 0.5;
+}
+.filtro7{
+    width: 100%;
+    filter: brightness(150%);
+    -webkit-filter: brightness(150%);
+    -moz-filter: brightness(150%);
+}
+.filtro8{
+    width: 100%;
+    filter: contrast(200%);
+    -webkit-filter: contrast(200%);
+    -moz-filter: contrast(200%);
+}
+.filtro9{
+    width: 100%;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+}
+
+.filtro10{
+    width: 100%;
+    
+}

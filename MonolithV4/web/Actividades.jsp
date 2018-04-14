@@ -1,11 +1,6 @@
+<%@page import="java.sql.*, java.io.*,java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%/*
-    HttpSession sesion = request.getSession();
-    String Usuario = sesion.getAttribute("usuario").toString();
-    String Password = sesion.getAttribute("password").toString();
-     */
-%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,7 +12,14 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <%/*
+            HttpSession sesion = request.getSession();
 
+            if (sesion.getAttribute("usuario") == null) {
+                out.println("<script>location.replace('index.html');</script>");
+            } else {
+                String usuario = sesion.getAttribute("usuario").toString();*/
+        %>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -37,7 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">

@@ -6,6 +6,7 @@
 package BaseDatos;
 import java.sql.*;
 import Objetos.*;
+import javax.servlet.http.HttpSession;
 public class Database2 {
     
      String driver = "com.mysql.jdbc.Driver";
@@ -64,8 +65,43 @@ public class Database2 {
         }catch(Exception ex){
         
     }
-        
         return IngresoExitoso;
     }
     
+    public int IDusu(String u){
+        int IDUsuario = 0;
+        try{
+            String sql="select * from Usuario where NombreUsuario=?";
+            
+            
+            ps=c.prepareStatement(sql);
+            ps.setString(1,u);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                IDUsuario=Integer.parseInt(rs.getString("IDUsuario"));
+            }
+        }catch(Exception ex){
+            
+        }
+        
+        return IDUsuario;
+    }
+    
+    public boolean Agregardogo(Logro log){
+        boolean agregado= false;
+        try{
+            String sql="select * from Usuario where NombreUsuario=?";
+            
+            
+            ps=c.prepareStatement(sql);
+            //ps.setString(1,u);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                //IDUsuario=Integer.parseInt(rs.getString("IDUsuario"));
+            }
+        }catch(Exception ex){
+            
+        }
+        return agregado;
+    }
 }
