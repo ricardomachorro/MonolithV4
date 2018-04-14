@@ -20,6 +20,7 @@
         <script src="js/jquery.validate.js"></script>
         <%
             HttpSession sesion = request.getSession();
+
             if (sesion.getAttribute("usuario") == null) {
                 out.println("<script>location.replace('index.html');</script>");
             } else {
@@ -36,19 +37,16 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio">Actividades</a>
+                        <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio">Grupos</a>
+                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio" >Grupo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
+                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio">Ayuda</a>
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
@@ -85,6 +83,7 @@
                     IDusuario = Integer.parseInt(r.getString("IDUsuario"));
                     puntos = Integer.parseInt(r.getString("Puntos"));
                 }
+
         %>
         <div class="container">
             <div class="row ">
@@ -115,9 +114,7 @@
                     <h3>Tienes un total de <%=puntos%> puntos</h3>
                 </div>
                 <div class="col-3">
-                    <form action="LogrosAgre.jsp" method="post">
                         <a type="button" class="btn btn-primary" href="Inter.jsp">Intercambios</a>
-                    </form>
                 </div>
             </div>
             <div class="row mt-3 mb-3">
@@ -133,20 +130,25 @@
                                 perrito = "dogo" + numpe + ".jpg";
                                 nombre = r.getString("Nombre");
                                 fecha = r.getString("fecha");
+
                         %>
                         <div class="card">
                             <img src="img/<%=perrito%>" class="card-img-top <%=fil%>" alt="" width=250px" height="250px">
                             <div class="card-body">
                                 <h5 class="card-title"><%=nombre%></h5>
                                 <p>El dogo se consiguio el <%=fecha%></p>
+
                             </div>
                         </div>
+
                         <%   }
                                 } catch (SQLException error) {
                                     out.print(error.toString());
                                 }
                             }
                         %>
+
+
                     </div>
                 </div>
             </div>

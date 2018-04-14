@@ -12,6 +12,7 @@
         <title>JSP Page</title>
         <%
             HttpSession sesion = request.getSession();
+
             if (sesion.getAttribute("usuario") == null) {
                 out.println("<script>location.replace('index.html');</script>");
             } else {
@@ -27,6 +28,7 @@
                 int dia = fechita.get(Calendar.DAY_OF_MONTH);
                 int meschido = mes + 1;
                 String fecha1 = "" + año + "-" + meschido + "-" + dia;
+
                 try {
                     Connection con = null;
                     Statement sta = null;
@@ -37,11 +39,12 @@
                     //sta.executeUpdate("Insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values("+IDusuario+"," + img + "," + fil + ",'perro #" + n + "','" + fecha1 + "')");
                     sta.executeUpdate("update Intercambio set Estado='negado',fecha='" + fecha1 + "' where IDInter = " + IDInter + ";");
                     out.println("<script>alert('Intercambio negado')</script>");
-                    out.println("<script>location.replace('Logros.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 } catch (SQLException error) {
                     out.print(error.toString());
                 }
             }
+
         %>
     </body>
 </html>

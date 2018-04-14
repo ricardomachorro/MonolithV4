@@ -19,6 +19,7 @@
         <title>JSP Page</title>
         <%
             HttpSession sesion = request.getSession();
+
             if (sesion.getAttribute("usuario") == null) {
                 out.println("<script>location.replace('index.html');</script>");
             } else {
@@ -70,7 +71,7 @@
                     sta.executeUpdate("update Logro set Img=" + img1 + ",Filtro=" + filtro1 + ",Nombre='" + nombre1 + "',fecha='" + fecha1 + "' where  IDLogro= " + IDdogoRe + ";");
                     sta.executeUpdate("update Logro set Img=" + img2 + ",Filtro=" + filtro2 + ",Nombre='" + nombre2 + "',fecha='" + fecha1 + "' where  IDLogro= " + IDdodoDa + ";");
                     out.println("<script>alert('Intercambio realizado exitosamente')</script>");
-                    out.println("<script>location.replace('Logros.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 } catch (SQLException error) {
                     out.print(error.toString());
                 }

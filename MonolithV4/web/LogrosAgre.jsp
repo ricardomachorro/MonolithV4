@@ -13,6 +13,7 @@
         <title>JSP Page</title>
         <%
             HttpSession sesion = request.getSession();
+
             if (sesion.getAttribute("usuario") == null) {
                 out.println("<script>location.replace('index.html');</script>");
             } else {
@@ -33,6 +34,7 @@
                 int meschido = mes + 1;
                 String fecha1 = "" + año + "-" + meschido + "-" + dia;
                 int costo1 = 0;
+
                 try {
                     Connection con = null;
                     Statement sta = null;
@@ -41,6 +43,7 @@
                     con = DriverManager.getConnection("jdbc:mysql://localhost/MonolithV2", "root", "n0m3l0");
                     sta = con.createStatement();
                     r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
+
                     if (r.next()) {
                         IDusuario = Integer.parseInt(r.getString("IDUsuario"));
                         costo1 = Integer.parseInt(r.getString("Puntos"));
@@ -48,11 +51,12 @@
                     int costochido = costo1 - 5;
                     sta.executeUpdate("Insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(" + IDusuario + "," + img + "," + fil + ",'dogo #" + n + "','" + fecha1 + "')");
                     sta.executeUpdate("update Usuario set Puntos=" + costochido + " where IDUsuario = " + IDusuario + ";");
-                    out.println("<script>location.replace('Logros.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 } catch (SQLException error) {
                     out.print(error.toString());
                 }
             }
+
         %>
     </body>
 </html>
