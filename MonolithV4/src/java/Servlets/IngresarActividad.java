@@ -5,12 +5,16 @@
  */
 package Servlets;
 
-import BaseDatos.DataBase;
+import BaseDatos.Database2;
+import Objetos.Actividad;
 import Objetos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import javax.jms.Session;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,25 +22,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
+import javax.json.*;
 
 @WebServlet(name = "IngresarActividad", urlPatterns = {"/IngresarActividad"})
-public class IngresarActividad  extends HttpServlet{
+public class IngresarActividad extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Ingreso</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Ingreso at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -49,12 +44,25 @@ public class IngresarActividad  extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            
-        }catch(Exception ex){
-            
+        try {
+             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            HttpSession s = request.getSession();
+            String Usuario = s.getAttribute("usuario").toString();
+            String Clase = request.getParameter("CategoriaActividad");
+            String Titulo = request.getParameter("NombreActivity");
+            String Fecha=request.getParameter("FechaActividad");
+            Actividad act = new Actividad();
+            act.setCategoria(Clase);
+            act.setUsuario(Usuario);
+            act.setTitulo(Titulo);
+            Database2 db = new Database2();
+           int IDActividad=db.IngresoActividad(act);
+           response.setContentType("text/html;charset=UTF-8");
+           response.getWriter().write(Integer.toString(IDActividad));
+
+        } catch (Exception ex) {
+              System.out.println(ex.toString());
         }
-  
 
     }
 
