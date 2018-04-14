@@ -68,4 +68,40 @@ public class Database2 {
         return IngresoExitoso;
     }
     
+    public int IDusu(String u){
+        int IDUsuario = 0;
+        try{
+            String sql="select * from Usuario where NombreUsuario=?";
+            
+            
+            ps=c.prepareStatement(sql);
+            ps.setString(1,u);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                IDUsuario=Integer.parseInt(rs.getString("IDUsuario"));
+            }
+        }catch(Exception ex){
+            
+        }
+        
+        return IDUsuario;
+    }
+    
+    public boolean Agregardogo(Logro log){
+        boolean agregado= false;
+        try{
+            String sql="select * from Usuario where NombreUsuario=?";
+            
+            
+            ps=c.prepareStatement(sql);
+            //ps.setString(1,u);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                //IDUsuario=Integer.parseInt(rs.getString("IDUsuario"));
+            }
+        }catch(Exception ex){
+            
+        }
+        return agregado;
+    }
 }

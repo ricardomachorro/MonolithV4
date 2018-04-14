@@ -34,7 +34,7 @@
                 int numRe = 0;
                 String filtro = "";
                 try {
-                    String numDa = request.getParameter("memo");
+                    String numDa = request.getParameter("memop2");
                     String UsuRe = request.getParameter("UsuarioRe");
                     //esta mamada >:V
                     numRe = Integer.parseInt(request.getParameter("numRe"));
@@ -82,7 +82,7 @@
                             out.println("<script>location.replace('Inter.jsp');</script>");
                         }
 
-                        out.println("<script>location.replace('Inter.jsp');</script>");
+                        out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                     } catch (SQLException error) {
                         out.print(error.toString());
 
@@ -91,7 +91,7 @@
                 }
                 } catch (java.lang.NumberFormatException e) {
                     out.println("<script>alert('Dogo no seleccionado')</script>");
-                    out.println("<script>location.replace('Inter.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 }
 
                 

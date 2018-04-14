@@ -63,7 +63,6 @@ Nombre varchar(100),
 Conteneido text,
 IDUsuario int,
 foreign key (IDUsuario) references Usuario(IDUsuario));
-/*desde aqui le modifique*/
 
 create table Logro(
 IDLogro int not null auto_increment primary key,
@@ -97,9 +96,10 @@ fecha date not null
 );
 select * from Intercambio;
 
+create table Estampa(IDEstampa int not null auto_increment primary key,
+Nombre varchar (100),
+Costo int);
 
-
-/*aqui termine*/
 create table LogroUsuario(IDLogroUsuario int not null auto_increment primary key,
 IDUsuario int not null,
 IDLogro int not null,

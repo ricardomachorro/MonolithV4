@@ -51,7 +51,7 @@
                     int costochido = costo1 - 5;
                     sta.executeUpdate("Insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) values(" + IDusuario + "," + img + "," + fil + ",'dogo #" + n + "','" + fecha1 + "')");
                     sta.executeUpdate("update Usuario set Puntos=" + costochido + " where IDUsuario = " + IDusuario + ";");
-                    out.println("<script>location.replace('Logros.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 } catch (SQLException error) {
                     out.print(error.toString());
                 }

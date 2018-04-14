@@ -114,9 +114,7 @@
                     <h3>Tienes un total de <%=puntos%> puntos</h3>
                 </div>
                 <div class="col-3">
-                    <form action="LogrosAgre.jsp" method="post">
                         <a type="button" class="btn btn-primary" href="Inter.jsp">Intercambios</a>
-                    </form>
                 </div>
             </div>
             <div class="row mt-3 mb-3">

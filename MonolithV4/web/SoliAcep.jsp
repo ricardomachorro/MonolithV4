@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Intercambios</title>
+        <title>Intercambio</title>
         <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
-        <link href="Css/GruposCSS.css" rel="stylesheet" type="text/css">
+        <link href="Css/logros.css" rel="stylesheet" type="text/css">
         <link href="Css/estilosperros.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -70,7 +70,7 @@
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
@@ -88,12 +88,7 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row ">
-                <div class="col-12">
-                    <a type="button" class="btn btn-primary" href="Inter.jsp">Regresar</a>
-                    <center><h1>Intercambio</h1></center>
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col">
                     <%
@@ -182,7 +177,9 @@
                         </div>
 
                         <div class="card">
-                            <img src="img/inter.png" class="card-image-top img-fluid" alt="">
+                            <br>
+                            <br><br><br>
+                            <img src="img/inter.png" class="card-image-center img-fluid" alt="">
 
                         </div>
 

@@ -1,31 +1,35 @@
-<web-app>
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>IngresoUsuario</servlet-name>
         <servlet-class>Servlets.IngresoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IngresoPrograma</servlet-name>
+        <servlet-class>Servlets.IngresoPrograma</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IngresarActividad</servlet-name>
+        <servlet-class>Servlets.IngresarActividad</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Agregar</servlet-name>
+        <servlet-class>Logros.Agregar</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>IngresoUsuario</servlet-name>
         <url-pattern>/IngresoUsuario</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>IngresoPrograma</servlet-name>
-        <servlet-class>Servlets.IngresoPrograma</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>IngresoPrograma</servlet-name>
         <url-pattern>/IngresoPrograma</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>IngresarActividad</servlet-name>
-        <servlet-class>Servlets.IngresarActividad</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>IngresarActividad</servlet-name>
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
-    
-    
+    <servlet-mapping>
+        <servlet-name>Agregar</servlet-name>
+        <url-pattern>/Agregar</url-pattern>
+    </servlet-mapping>
 </web-app>
