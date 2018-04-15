@@ -66,7 +66,7 @@
                         <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio">Ayuda</a>

@@ -56,13 +56,13 @@
                         <a class="nav-link" href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="grupos.html"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
+                        <a class="nav-link" href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="Ayuda.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Ayuda</a>
