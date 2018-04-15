@@ -17,9 +17,9 @@ insert into Grupo(NombreGrupo) values('Fisica');#ID=2
 select * from Grupo;
 
 #Comprobacion bien brgas de tarea
-insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Modulo grupos', 1,'1000-01-01 00:00:00', false);#ID=1
-insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Tesina', 1,'1000-01-01 00:00:00', true);#ID=2
-insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Resnick', 2,'1000-01-01 00:00:00', false);#ID=3
+insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Modulo grupos', 1,'1000-01-01', false);#ID=1
+insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Tesina', 1,'1000-01-01', true);#ID=2
+insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Resnick', 2,'1000-01-01', false);#ID=3
 select * from Tarea;
 
 #Comprobacion bien vrgas de miembros

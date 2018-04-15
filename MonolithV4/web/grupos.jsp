@@ -95,7 +95,7 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="tab-content" id="ContenidoGrupos">
                         <%
-                            //Traer el id del usaurio
+                            //Traer el id del usuario
                             String queryIDUsuario = "select IDUsuario from Usuario where NombreUsuario='"+nomUsuario+"';";
                             Statement stIDU = con.createStatement();
                             ResultSet rsIDU = stIDU.executeQuery(queryIDUsuario);
@@ -118,6 +118,7 @@
                             String fecha;
                             boolean estado;
                             String idConcatenada;
+                            String idGrupoConcatenada;
                             
                             //Para miembros asignados a una tarea
                             String queryMiembros = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro where TareaMiembro.IDTarea=?;";
@@ -128,6 +129,7 @@
                                 //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
                                 idGrupo = rs.getInt("IDGrupo");
+                                idGrupoConcatenada = idGrupo + nombreGrupo;
                         %>
                         <!--Inicio de un grupo-->
                         <div class="tab-pane fade grupo" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
@@ -149,22 +151,27 @@
                             <div class='card-deck'>
                                 <div class='card'>
                                     <div class='card-body'>
-                                        <!--Inicio agregar tarea-->
-                                        <form>
+                                        <!--Inicio agregar tarea -->
+                                        <form <%out.println("id='FormularioNuevaTarea"+nombreGrupo+"'");%>>
                                             <div class='form-row align-items-center'>
                                                 <div class='col-sm-5 mt-2'>
-                                                    <input type='text' class='form-control' placeholder='Ingresa una tarea'>
+                                                    <input type='text' class='form-control' placeholder='Ingresa una tarea' 
+                                                           <%out.println("id='txtNuevaTarea"+nombreGrupo+"'");%> name='txtNuevaTarea'>
                                                 </div>
                                                 <div class='col-sm-5 mt-2'>
                                                     <div class='input-group'>
                                                         <div class='input-group-prepend'>
                                                             <div class='input-group-text'>@</div>
                                                         </div>
-                                                        <input type='text' class='form-control' placeholder='Correo'>
+                                                        <input type='text' class='form-control' placeholder='Correo' 
+                                                               <%out.println("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
                                                     </div>
                                                 </div>
                                                 <div class='col-sm-2 d-flex justify-content-center mt-2'>
-                                                    <button type='submit' class='btn btn-primary'>Agregar</button>
+                                                    <button  class='btn btn-primary btnAgregarTarea' 
+                                                            id='<%out.println(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
+                                                        Agregar
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -179,7 +186,7 @@
                                                     while(rsTarea.next()){
                                                         nTarea = rsTarea.getInt("IDTarea");
                                                         nomTarea = rsTarea.getString("Nombre");
-                                                        fecha = rsTarea.getTimestamp("Fecha").toString();
+                                                        fecha = rsTarea.getDate("Fecha").toString();
                                                         estado = rsTarea.getBoolean("Estado");
                                                         idConcatenada = nTarea + nombreGrupo;
                                                         %>
@@ -254,27 +261,27 @@
                                                                         <!--Inicio formulario para modificar actividad-->
                                                                         <div class="form-row">
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>">
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                                <input type="date" class="form-control" id="fecha" name="fecha" value="<%out.print(fecha);%>">
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                                <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro asignado">
                                                                             </div>
 
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                                <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro asignado">
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin formulario para modificar actividad-->
                                                                         <!--Inicio opciones-->
                                                                         <div class="form-row mt-2">
                                                                             <div class="col-sm-6">
-                                                                                <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;">Modificar</button>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;">Eliminar</button>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin opciones-->
@@ -385,7 +392,7 @@
                                                             <input type="email" class="form-control" placeholder="Correo del integrante" name="miembro" id="miembro">
                                                         </div>
                                                         <div class="col-3">
-                                                            <button class="form-control" type="reset" id="agregarMiembro">Agregar</button>
+                                                            <button class="form-control" type="button" id="agregarMiembro">Agregar</button>
                                                         </div>
                                                         <div class="form-group col-12">
                                                             <ul class="form-control list-group agregarMiembro" id="ListaMiembros">
@@ -429,136 +436,7 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
-
-        <script>
-            //Array de miembros de un nuevo grupo
-            var miembrosNG = "";
-            
-            /*FUNCION PARA EL EVENTO DE AGREGAR UN MIEMBRO NUEVO A UN GRUPO NUEVO*/
-            $("#agregarMiembro").click( //Agregar miembro al formulario para el nuevo grupo
-                function() {
-                    var nuevoMiembro = $("#miembro").val().toString();
-                    
-                    $.ajax( {
-                        url: "AgregarMiembro",
-                        data: {
-                            correoMiembro: nuevoMiembro
-                        },
-                        type: 'post',
-                        success: function (data) {//data trae el nombre del usuario
-                            $("#ListaMiembros").prepend(//Para insertar html
-                                $( //Todo el nuevo contenido
-                                    "<li class='list-group-item d-flex justify-content-between align-items-center'>"+
-                                        data.toString()+//El nombre del miembro alv
-                                        "<span class='badge'>"+
-                                            "<button type='button' class='close' aria-label='Close'>"+
-                                                "<span aria-hidden='true'>&times;</span>"+
-                                            "</button>"+
-                                        "</span>"+
-                                    "</li>"
-                                )
-                            );
-                            miembrosNG=miembrosNG+","+data.toString();//Agregar el nombre del miembro al array
-                        },
-                        error: function () {
-                            alert("Error buscando miembro");
-                        },
-                        complete: function () {
-                        }
-                    } );
-                }
-            );
-    
-            /*FUNCION PARA EL EVENTO DE CREAR UN GRUPO NUEVO*/
-            $("#btnCrearGrupo").click(
-                function() {
-                    //Traigo el nombre del grupo
-                    var nuevoGrupo = $("#nuevoGrupo").val().toString();
-                    var usuario = $("#btnCrearGrupo").val().toString();
-                    $.ajax( {
-                        url: "CrearGrupo",
-                        data: {//Envio el nombre del grupo y los miembros
-                            nomNuevoGrupo: nuevoGrupo,
-                            lider: usuario,
-                            miembros: miembrosNG
-                        },
-                        type: 'post',
-                        success: function () {
-                            //Desaparecer elementos
-                            $("div.grupo").removeClass("active");
-                            $("a.grupoLista").removeClass("active");
-                            //LADO DERECHO
-                            $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
-                                "<div class='tab-pane fade show grupo active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
-                                        //Inicio titulo contenedor
-                                        "<div class='card-deck'>"+
-                                            "<div class='card Contenedor'>"+
-                                                "<div class='card-body'>"+
-                                                    "<div class='row'>"+
-                                                        "<div class='col d-flex align-items-center justify-content-center'>"+
-                                                            nuevoGrupo+
-                                                        "</div>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                        //Fin titulo contenedor
-                                        //Inicio cuerpo contenedor
-                                        "<div class='card-deck'>"+
-                                            "<div class='card'>"+
-                                                "<div class='card-body'>"+
-                                                    //Inicio agregar tarea
-                                                    "<form>"+
-                                                        "<div class='form-row align-items-center'>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<div class='input-group'>"+
-                                                                    "<div class='input-group-prepend'>"+
-                                                                        "<div class='input-group-text'>@</div>"+
-                                                                    "</div>"+
-                                                                    "<input type='text' class='form-control' placeholder='Correo'>"+
-                                                                "</div>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-2 d-flex justify-content-center mt-2'>"+
-                                                                "<button type='submit' class='btn btn-primary'>Agregar</button>"+
-                                                            "</div>"+
-                                                        "</div>"+
-                                                    "</form>"+
-                                                    //Fin agregar tarea
-                                                    //Inicio contenedor de lista de tareas
-                                                    "<div class='row rowListaTareas'>"+
-                                                        //Inicio lista de tareas
-                                                        "<div class='col-12' id='listaTareas-"+nuevoGrupo+"'"+
-                                                        "</div>"+
-                                                        //Fin lista de tareas
-                                                    "</div>"+
-                                                    //Fin contenedor de lista de tareas
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                        //Fin cuerpo contenedor
-                                "</div>"
-                            );
-                            //LADO IZQUIERDO
-                            $("#list-tab").prepend(//Inserto el grupo a la lista de grupos
-                                "<a class='list-group-item list-group-item-action active grupoLista' id='lista-g"+nuevoGrupo+"' data-toggle='list' href='#panel-g"+nuevoGrupo+"' role='tab' aria-controls='g"+nuevoGrupo+"'>"+
-                                        "<img src='img/group.svg' alt='ic_grupos'>"+
-                                        nuevoGrupo+
-                                "</a>"
-                            );
-                        },
-                        error: function () {
-                            alert("Hubo un error :'v ");
-                        },
-                        complete: function () {
-                        }
-                    } );
-                }
-            );
-    
-           
-        </script>
+        <script src="js/grupos.js"></script>
+        
     </body>
 </html>

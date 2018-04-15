@@ -128,7 +128,7 @@ public class Database2 {
         int IDGrupo;
         int idMiembro;
         
-        String queryNG = "into Grupo(NombreGrupo) values('"+nombreGrupo+"');";
+        String queryNG = "insert into Grupo(NombreGrupo) values('"+nombreGrupo+"');";
         String queryLider;
         String queryMiembro;
         try {

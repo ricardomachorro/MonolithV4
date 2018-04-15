@@ -68,7 +68,7 @@ create table Tarea(
 	IDTarea int not null primary key auto_increment,
     IDGrupo int,
 	Nombre nvarchar(100),
-	Fecha datetime,
+	Fecha date,
 	Estado boolean,
     foreign key(IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
