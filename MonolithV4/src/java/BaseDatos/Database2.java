@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BaseDatos;
 
 import java.sql.*;
@@ -166,4 +161,40 @@ public class Database2 {
         }
         return id;
     }
+    
+    public void crearTarea(Tarea a) throws Exception{
+        //Asigno los datos alv
+        String Nombre = a.getNombreTarea();
+        int IDGrupo = a.getIdGrupoTarea();
+        Date Fecha = a.getFechaTarea();
+        int IDMiembro = a.getIdMiembroTarea();
+        int idTarea = 1;
+        
+        String queryCrearTarea = "insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('"+Nombre+"', "+IDGrupo+",'"+Fecha+"', false);";
+        String queryIDTarea = "select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);";
+        try {
+            st = c.createStatement();
+            st.execute(queryCrearTarea);//Creo la nueva tarea
+            //Traigo la id de esa tarea para asignarla
+            rs = st.executeQuery(queryIDTarea);
+            while(rs.next()) {
+                idTarea = rs.getInt("IDTarea");
+            }
+            asignarMiembro(idTarea,IDMiembro);
+            
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error de Database2");
+        }
+    }
+    
+    public void asignarMiembro(int IDTarea, int IDMiembro) throws Exception {
+        try{
+            String queryAsigMiembro = "insert into TareaMiembro("+IDTarea+","+IDMiembro+") values (2,1);";
+            st = c.createStatement();
+            st.execute(queryAsigMiembro);
+        } catch (Exception e){
+            System.out.println("Error agregando miembro: " + e.toString());
+        }
+    }
+    /*Fin de los metodos para grupos*/
 }

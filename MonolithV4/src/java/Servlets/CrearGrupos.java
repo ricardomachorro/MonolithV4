@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import java.io.IOException;
@@ -49,7 +44,7 @@ public class CrearGrupos extends HttpServlet {
             //Traigo los parametros de la data de ajax
             String nombreGrupo = request.getParameter("nomNuevoGrupo");
             String nombreLider = request.getParameter("lider");
-            String stringMiembros = request.getParameter("miembros");//>:v
+            String stringMiembros = request.getParameter("miembros");
             
             /*Parametros que usare para ingresar datos a la db desde el objeto*/
             //Array de strings a array de int's

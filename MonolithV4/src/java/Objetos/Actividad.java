@@ -32,7 +32,7 @@ public class Actividad {
         return FechaLimite;
     }
 
-    public void setFechaLimite(Date FechaLimite) {
+    public void setFeDatechaLimite(Date FechaLimite) {
         this.FechaLimite = FechaLimite;
     }
 

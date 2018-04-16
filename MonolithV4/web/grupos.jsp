@@ -163,7 +163,7 @@
                                                         <div class='input-group-prepend'>
                                                             <div class='input-group-text'>@</div>
                                                         </div>
-                                                        <input type='text' class='form-control' placeholder='Correo' 
+                                                        <input type='text' class='form-control' placeholder='Nombre del miembro' 
                                                                <%out.println("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
                                                     </div>
                                                 </div>
@@ -278,10 +278,10 @@
                                                                         <!--Inicio opciones-->
                                                                         <div class="form-row mt-2">
                                                                             <div class="col-sm-6">
-                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;">Modificar</button>
+                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;">Modificar actividad</button>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;">Eliminar</button>
+                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;">Eliminar actividad</button>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin opciones-->

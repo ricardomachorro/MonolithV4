@@ -21,6 +21,7 @@ insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Modulo grupos', 1,'1000-0
 insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Tesina', 1,'1000-01-01', true);#ID=2
 insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('Resnick', 2,'1000-01-01', false);#ID=3
 select * from Tarea;
+#select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);
 
 #Comprobacion bien vrgas de miembros
 insert into Miembros(IDUsuario,IDGrupo,IDRol) values(1,1,1);#ID=1

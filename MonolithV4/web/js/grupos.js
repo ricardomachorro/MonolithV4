@@ -140,7 +140,7 @@ $("#btnCrearGrupo").click(
 
 /*FUNCION PARA EL EVENTO DE AGREGAR UNA TAREA*/
 function agregarTarea(e) {
-    var idT = e.id.toString();//id del elemento presionado (btn)  
+    var idT = e.id.toString();//id del boton presionado, es el nombre del grupo
     var nombreTarea = "";
     var miembroTarea = "";
     var idConcatenada = "";
@@ -150,119 +150,143 @@ function agregarTarea(e) {
     var fechaTarea = "";//Para acumular el valor de fecha
 
 //    Pruebas
-     console.log("id btn: " + idT);
-      console.log("id grupo: " + document.getElementById(idT).form.id.toString());
-//      var idForm = document.getElementById(idT).form.id.toString(); //id del formulario donde esta el btn, el cual es el nombre del grupo
+//    console.log("id btn: " + idT);
+//    console.log("id grupo: " + document.getElementById(idT).form.id.toString());
+//    var idForm = document.getElementById(idT).form.id.toString(); //id del formulario donde esta el btn, el cual es el nombre del grupo
      
     $("#FormularioNuevaTarea"+idT).validate({//Validacion >:v
         rules: {
             txtNuevaTarea: {
                 required: true
+            },
+            txtMiembro: {
+                required: true
             }
         },
         messages: {
             txtNuevaTarea: {
-                required: "Llene el Campo"
+                required: "Nombre obligatorio"
+            },
+            txtMiembro: {
+                required: "Miembro obligatorio"
             }
         },
         submitHandler: function (form) {
-            console.log("Iniciado...");
             //Para el nombre de la tarea
             nombreTarea = $("#txtNuevaTarea"+idT).val();
-            console.log("Nombre tarea: " + nombreTarea);
             miembroTarea = $("#txtMiembro"+idT).val();
-            console.log("Miembro. " + miembroTarea);
             idConcatenada = contadorTarea + nombreTarea;
-            console.log("idConcatenada: " + idConcatenada);
             //Para la fecha
             objFecha = new Date();
             mes = objFecha.getMonth() + 1;//Un mes mas tarde
-            dia = objFecha.getDay() + 1;//Un dia despues
-            fechaTarea = objFecha.getFullYear() + "-" + mes + "-" + dia;
-            console.log("fecha: " + fechaTarea);
-            //Agregando tarea a la lista de tareas del grupo
-            $("#listaTareas-" + idT).prepend(
-                "<!--Inicio tarea-->"+
-                "<div class='card mt-3'>"+
-                    "<!--Inicio parte visible-->"+
-                        "<div class='card-header' id='headTarea-"+idConcatenada+"'>"+
-                            "<div class='row'>"+
-                                "<!--Nombre tarea-->"+
-                                "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
-                                    "<h5 class='mb-0'>"+
-                                        "<!--btn para hacer que se despliegue la parte invisible-->"+
-                                        "<button class='btn btn-link p-0 collapsed' data-toggle='collapse'"+
-                                        "data-target='#tarea-"+idConcatenada+"' aria-expanded='false'"+
-                                        "aria-controls='tarea-"+idConcatenada+"'>"+
-                                            "<span class='d-inline-block text-truncate' style='max-width: 150px;'>"+
-                                                nombreTarea+
-                                            "</span>"+
-                                        "</button>"+
-                                    "</h5>"+
-                                "</div>"+
-                                "<!--Fecha limite-->"+
-                                "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
-                                    "<small class='text-muted' id='fechaTarea-"+idConcatenada+"'>"+
-                                        fechaTarea+
-                                    "</small>"+
-                                "</div>"+
-                                "<!--Miembros-->"+
-                                "<div class='col-sm-3 d-flex align-items-center justify-content-center'>"+
-                                    "<div class='dropdown'>"+
-                                        "<button class='btn btn-secondary dropdown-toggle' type='button'"+
-                                            "id='menuMiembros-"+idConcatenada+"' data-toggle='dropdown'"+
-                                            "aria-haspopup='true' aria-expanded='false'> Miembros"+
-                                        "</button>"+
-                                        "<div class='dropdown-menu' aria-labelledby='menuMiembros my-2'"+
-                                            "id='dropdown-miembros-NombreGrupo'>"+
-                                            "<button class='dropdown-item disabled' type='button'>"+miembroTarea+"</button>"+
+            dia = objFecha.getDate();
+            fechaTarea = objFecha.getFullYear() + "-0" + mes + "-" + dia;
+//            Pruebas lokas xd
+//            console.log("idConcatenada: " + idConcatenada);
+//            console.log("Miembro. " + miembroTarea);
+//            console.log("Iniciado...");
+//            console.log("Nombre tarea: " + nombreTarea);
+//            console.log("fecha: " + fechaTarea);
+            $.ajax( {
+                url: "AgregarTarea",
+                data: {
+                    nomTarea: nombreTarea,
+                    nomGrupo: idT,
+                    fechaTarea: fechaTarea,
+                    nomMiembro: miembroTarea
+                },
+                type: 'post',
+                success: function () {
+                    $("#listaTareas-" + idT).prepend(//Agregando tarea a la lista de tareas del grupo
+                        "<!--Inicio tarea-->"+
+                        "<div class='card mt-3'>"+
+                            "<!--Inicio parte visible-->"+
+                                "<div class='card-header' id='headTarea-"+idConcatenada+"'>"+
+                                    "<div class='row'>"+
+                                        "<!--Nombre tarea-->"+
+                                        "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
+                                            "<h5 class='mb-0'>"+
+                                                "<!--btn para hacer que se despliegue la parte invisible-->"+
+                                                "<button class='btn btn-link p-0 collapsed' data-toggle='collapse'"+
+                                                "data-target='#tarea-"+idConcatenada+"' aria-expanded='false'"+
+                                                "aria-controls='tarea-"+idConcatenada+"'>"+
+                                                    "<span class='d-inline-block text-truncate' style='max-width: 150px;'>"+
+                                                        nombreTarea+
+                                                    "</span>"+
+                                                "</button>"+
+                                            "</h5>"+
+                                        "</div>"+
+                                        "<!--Fecha limite-->"+
+                                        "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
+                                            "<small class='text-muted' id='fechaTarea-"+idConcatenada+"'>"+
+                                                fechaTarea+
+                                            "</small>"+
+                                        "</div>"+
+                                        "<!--Miembros-->"+
+                                        "<div class='col-sm-3 d-flex align-items-center justify-content-center'>"+
+                                            "<div class='dropdown'>"+
+                                                "<button class='btn btn-secondary dropdown-toggle' type='button'"+
+                                                    "id='menuMiembros-"+idConcatenada+"' data-toggle='dropdown'"+
+                                                    "aria-haspopup='true' aria-expanded='false'> Miembros"+
+                                                "</button>"+
+                                                "<div class='dropdown-menu' aria-labelledby='menuMiembros my-2'"+
+                                                    "id='dropdown-miembros-NombreGrupo'>"+
+                                                    "<button class='dropdown-item disabled' type='button'>"+miembroTarea+"</button>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</div>"+
+                                        "<!--Checkbox para marcar actividad-->"+
+                                        "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
+                                            "<input class='acabarTarea float-right checado' type='checkbox'>"+
                                         "</div>"+
                                     "</div>"+
                                 "</div>"+
-                                "<!--Checkbox para marcar actividad-->"+
-                                "<div class='col-sm-3 d-flex align-items-center justify-content-center my-2'>"+
-                                    "<input class='acabarTarea float-right checado' type='checkbox'>"+
+                            "<!--Fin parte visible-->"+
+                            "<!--Inicio parte colapsable-->"+
+                                "<div id='tarea-"+idConcatenada+"' class='collapse' aria-labelledby='headTarea-"+idConcatenada+"' data-parent='#listaTareas-"+idT+"'>"+
+                                    "<div class='card-body'>"+
+                                        "<form>"+
+                                            "<!--Inicio formulario para modificar actividad-->"+
+                                            "<div class='form-row'>"+
+                                                "<div class='col-sm-3'>"+
+                                                    "<input type='text' class='form-control' id='tarea' name='tarea' placeholder='Cambiar nombre tarea' value='"+nombreTarea+"'>"+
+                                                "</div>"+
+                                                "<div class='col-sm-3'>"+
+                                                    "<input type='text' class='form-control' id='fecha' name='fecha' placeholder='Cambiar nombre tarea' value='"+fechaTarea+"'>"+
+                                                "</div>"+
+                                                "<div class='col-sm-3'>"+
+                                                    "<input type='text' class='form-control' id='eliMiembro' name='eliMiembro' placeholder='Eliminar miembro asignado'>"+
+                                                "</div>"+
+                                                "<div class='col-sm-3'>"+
+                                                    "<input type='text' class='form-control' id='agrMiembro' name='agrMiembro' placeholder='Agregar miembro asignado'>"+
+                                                "</div>"+
+                                            "</div>"+
+                                            "<!--Fin formulario para modificar actividad-->"+
+                                            "<!--Inicio opciones-->"+
+                                            "<div class='form-row mt-2'>"+
+                                                "<div class='col-sm-6'>"+
+                                                    "<button type='button' class='btn btn-outline-warning mb-2 btnModificar' style='width: 100%;'>Modificar actividad</button>"+
+                                                "</div>"+
+                                                "<div class='col-sm-6'>"+
+                                                    "<button type='button' class='btn btn-outline-danger mb-2 btnEliminar' style='width: 100%;'>Eliminar actividad</button>"+
+                                                "</div>"+
+                                            "</div>"+
+                                            "<!--Fin opciones-->"+
+                                        "</form>"+
+                                    "</div>"+
                                 "</div>"+
-                            "</div>"+
+                            "<!--Fin parte colapsable-->"+
                         "</div>"+
-                    "<!--Fin parte visible-->"+
-                    "<!--Inicio parte colapsable-->"+
-                        "<div id='tarea-"+idConcatenada+"' class='collapse' aria-labelledby='headTarea-"+idConcatenada+"' data-parent='#listaTareas-"+idT+"'>"+
-                            "<div class='card-body'>"+
-                                "<form>"+
-                                    "<!--Inicio formulario para modificar actividad-->"+
-                                    "<div class='form-row'>"+
-                                        "<div class='col-sm-3'>"+
-                                            "<input type='text' class='form-control' id='tarea' name='tarea' placeholder='Cambiar nombre tarea' value='"+nombreTarea+"'>"+
-                                        "</div>"+
-                                        "<div class='col-sm-3'>"+
-                                            "<input type='text' class='form-control' id='fecha' name='fecha' placeholder='Cambiar nombre tarea' value='"+fechaTarea+"'>"+
-                                        "</div>"+
-                                        "<div class='col-sm-3'>"+
-                                            "<input type='text' class='form-control' id='eliMiembro' name='eliMiembro' placeholder='Eliminar miembro asignado'>"+
-                                        "</div>"+
-                                        "<div class='col-sm-3'>"+
-                                            "<input type='text' class='form-control' id='agrMiembro' name='agrMiembro' placeholder='Agregar miembro asignado'>"+
-                                        "</div>"+
-                                    "</div>"+
-                                    "<!--Fin formulario para modificar actividad-->"+
-                                    "<!--Inicio opciones-->"+
-                                    "<div class='form-row mt-2'>"+
-                                        "<div class='col-sm-6'>"+
-                                            "<button type='button' class='btn btn-outline-warning mb-2 btnModificar' style='width: 100%;'>Modificar</button>"+
-                                        "</div>"+
-                                        "<div class='col-sm-6'>"+
-                                            "<button type='button' class='btn btn-outline-danger mb-2 btnEliminar' style='width: 100%;'>Eliminar</button>"+
-                                        "</div>"+
-                                    "</div>"+
-                                    "<!--Fin opciones-->"+
-                                "</form>"+
-                            "</div>"+
-                        "</div>"+
-                    "<!--Fin parte colapsable-->"+
-                "</div>"+
-                "<!--Fin tarea-->"
-            );
+                        "<!--Fin tarea-->"
+                    );
+                },
+                error: function () {
+                    alert("Error");
+                },
+                complete: function () {
+                    
+                }
+            } );
         }
     });
     
