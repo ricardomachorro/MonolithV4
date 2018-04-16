@@ -73,10 +73,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <img src="img/user.svg" class="ImagenesBarraInicio" > 
-                            <%out.println(nomUsuario);%>
+                            <%out.print(nomUsuario);%>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%out.println(nomUsuario);%></a>
+                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%out.print(nomUsuario);%></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
                                 Configuracion</a>
@@ -132,7 +132,7 @@
                                 idGrupoConcatenada = idGrupo + nombreGrupo;
                         %>
                         <!--Inicio de un grupo-->
-                        <div class="tab-pane fade grupo" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
+                        <div class="tab-pane fade grupo" <%out.print("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
 
                             <!--Inicio titulo contenedor-->
                             <div class='card-deck'>
@@ -140,7 +140,7 @@
                                     <div class='card-body'>
                                         <div class='row'>
                                             <div class='col d-flex align-items-center justify-content-center'>
-                                                <%out.println("<h2>" + nombreGrupo + "</h2>");%>
+                                                <%out.print("<h2>" + nombreGrupo + "</h2>");%>
                                             </div>
                                         </div>
                                     </div>
@@ -152,11 +152,11 @@
                                 <div class='card'>
                                     <div class='card-body'>
                                         <!--Inicio agregar tarea -->
-                                        <form <%out.println("id='FormularioNuevaTarea"+nombreGrupo+"'");%>>
+                                        <form <%out.print("id='FormularioNuevaTarea"+nombreGrupo+"'");%>>
                                             <div class='form-row align-items-center'>
                                                 <div class='col-sm-5 mt-2'>
                                                     <input type='text' class='form-control' placeholder='Ingresa una tarea' 
-                                                           <%out.println("id='txtNuevaTarea"+nombreGrupo+"'");%> name='txtNuevaTarea'>
+                                                           <%out.print("id='txtNuevaTarea"+nombreGrupo+"'");%> name='txtNuevaTarea'>
                                                 </div>
                                                 <div class='col-sm-5 mt-2'>
                                                     <div class='input-group'>
@@ -164,12 +164,12 @@
                                                             <div class='input-group-text'>@</div>
                                                         </div>
                                                         <input type='text' class='form-control' placeholder='Nombre del miembro' 
-                                                               <%out.println("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
+                                                               <%out.print("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
                                                     </div>
                                                 </div>
                                                 <div class='col-sm-2 d-flex justify-content-center mt-2'>
                                                     <button  class='btn btn-primary btnAgregarTarea' 
-                                                            id='<%out.println(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
+                                                            id='<%out.print(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
                                                         Agregar
                                                     </button>
                                                 </div>
@@ -179,7 +179,7 @@
                                         <!--Inicio contenedor de lista de tareas-->
                                         <div class='row rowListaTareas'>
                                             <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
-                                            <div class='col-12' <%out.println("id='listaTareas-" + nombreGrupo + "'");%>>
+                                            <div class='col-12' <%out.print("id='listaTareas-" + nombreGrupo + "'");%>>
                                                 <%
                                                     ps.setInt(1, idGrupo);
                                                     rsTarea = ps.executeQuery();
@@ -278,10 +278,16 @@
                                                                         <!--Inicio opciones-->
                                                                         <div class="form-row mt-2">
                                                                             <div class="col-sm-6">
-                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;">Modificar actividad</button>
+                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;"
+                                                                                        >
+                                                                                    Modificar actividad
+                                                                                </button>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;">Eliminar actividad</button>
+                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;"
+                                                                                        onclick="eliminarTarea(<%out.print(nTarea);%>);">
+                                                                                    Eliminar actividad
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin opciones-->
@@ -354,7 +360,7 @@
                                     >
                                         <img src="img/group.svg" alt="ic_grupos">
                                         <%
-                                            out.println(grupo);
+                                            out.print(grupo);
                                         %>
                                     </a>
                                     <%

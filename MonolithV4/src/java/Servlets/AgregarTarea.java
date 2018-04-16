@@ -64,7 +64,7 @@ public class AgregarTarea extends HttpServlet {
             t.setIdMiembroTarea(idMiembro);
             
             //Creo la tarea (Al mismo tiempo se le asigna el miembro)
-            
+            db.crearTarea(t);
             
         } catch (Exception e) {
             System.out.println("Error: " + e + " :'v");

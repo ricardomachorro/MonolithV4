@@ -265,10 +265,16 @@ function agregarTarea(e) {
                                             "<!--Inicio opciones-->"+
                                             "<div class='form-row mt-2'>"+
                                                 "<div class='col-sm-6'>"+
-                                                    "<button type='button' class='btn btn-outline-warning mb-2 btnModificar' style='width: 100%;'>Modificar actividad</button>"+
+                                                    "<button type='button' class='btn btn-outline-warning mb-2 btnModificar' style='width: 100%;'"+
+                                                        ">"+
+                                                        "Modificar actividad"+
+                                                    "</button>"+
                                                 "</div>"+
                                                 "<div class='col-sm-6'>"+
-                                                    "<button type='button' class='btn btn-outline-danger mb-2 btnEliminar' style='width: 100%;'>Eliminar actividad</button>"+
+                                                    "<button type='button' class='btn btn-outline-danger mb-2 btnEliminar' style='width: 100%;'"+
+                                                        ">"+
+                                                        "Eliminar actividad"+
+                                                    "</button>"+
                                                 "</div>"+
                                             "</div>"+
                                             "<!--Fin opciones-->"+
@@ -293,3 +299,11 @@ function agregarTarea(e) {
     contadorTarea++;
 }
 
+/*FUNCION PARA EL EVENTO DE ELIMINAR UNA TAREA*/
+function eliminarTarea(idTarea) {
+    var borrar;
+    borrar = confirm("¿Estas seguro que quieres eliminar esta tarea?");
+    if(borrar===true) {
+        
+    }
+}

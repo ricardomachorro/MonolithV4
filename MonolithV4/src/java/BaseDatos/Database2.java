@@ -189,7 +189,7 @@ public class Database2 {
     
     public void asignarMiembro(int IDTarea, int IDMiembro) throws Exception {
         try{
-            String queryAsigMiembro = "insert into TareaMiembro("+IDTarea+","+IDMiembro+") values (2,1);";
+            String queryAsigMiembro = "insert into TareaMiembro(IDTarea,IDMiembro) values ("+IDTarea+","+IDMiembro+");";
             st = c.createStatement();
             st.execute(queryAsigMiembro);
         } catch (Exception e){
