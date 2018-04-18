@@ -8,6 +8,18 @@ $("#agregarMiembro").click(//Agregar miembro al formulario para el nuevo grupo
         function () {
             var nuevoMiembro = $("#miembro").val().toString();
             nomGrupo = $("#nuevoGrupo").val().toString();
+            //Inicia validacion
+            $("#CrearGrupo").validate({
+                rules: {
+                    nuevoGrupo: {
+                        required: true
+                    },
+                    miembro: {
+                        required: true
+                    }
+                }
+            });
+            //Este ajax trae el nombre de usuario a partir de un correo
             $.ajax({
                 url: "AgregarMiembro",
                 data: {
@@ -117,7 +129,7 @@ $("#btnCrearGrupo").click(
                                 "</div>"
                                 );
                         //LADO IZQUIERDO
-                        $("#list-tab").prepend(//Inserto el grupo a la lista de grupos
+                        $("#lista-gruposAregados").prepend(//Inserto el grupo a la lista de grupos
                                 "<a class='list-group-item list-group-item-action active grupoLista' id='lista-g" + nuevoGrupo + "' data-toggle='list' href='#panel-g" + nuevoGrupo + "' role='tab' aria-controls='g" + nuevoGrupo + "'>" +
                                 "<img src='img/group.svg' alt='ic_grupos'>" +
                                 nuevoGrupo +
@@ -154,23 +166,37 @@ function agregarTarea(e) {
 //    console.log("id grupo: " + document.getElementById(idT).form.id.toString());
 //    var idForm = document.getElementById(idT).form.id.toString(); //id del formulario donde esta el btn, el cual es el nombre del grupo
      
-    $("#FormularioNuevaTarea"+idT).validate({//Validacion >:v
+    $("#FormularioNuevaTarea"+idT).validate({//Validacion >:v https://jqueryvalidation.org/files/demo/bootstrap/index.html
+        //https://jqueryvalidation.org/files/demo/bootstrap/index.html
         rules: {
             txtNuevaTarea: {
                 required: true
             },
             txtMiembro: {
-                required: true
+                required: true,
+                email: true
             }
         },
         messages: {
             txtNuevaTarea: {
-                required: "Nombre obligatorio"
+                required: "Ingresa el nombre de la tarea"
             },
             txtMiembro: {
-                required: "Miembro obligatorio"
+                required: "Asigna a un miembro"
             }
         },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+                            // Add the `help-block` class to the error element
+                            error.addClass( "help-block" );
+                            error.insertAfter(element);
+			},
+        highlight: function ( element, errorClass, validClass ) {
+                        $(element).parents(".form-control").addClass("has-error").removeClass("has-success");
+                    },
+        unhighlight: function (element, errorClass, validClass) {
+			$(element).parents(".form-control").addClass("has-success").removeClass("has-error");
+                    },
         submitHandler: function (form) {
             //Para el nombre de la tarea
             nombreTarea = $("#txtNuevaTarea"+idT).val();

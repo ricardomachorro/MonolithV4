@@ -375,6 +375,9 @@
                                     -->
                                 </div>
                                 <!--Grupos listados (Final)-->
+                                <!--Inicio grupos agregados-->
+                                <div id="lista-gruposAregados"></div>
+                                <!--Fin grupos agregados-->
                                 <!--BTN PARA COLAPSAR-->
                                 <a class="list-group-item list-group-item-action btn" data-toggle="collapse" href="#agregarGrupo" 
                                    role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -389,7 +392,7 @@
                                                 <h5>Nuevo grupo</h5>
                                             </div>
                                             <div>
-                                                <form>
+                                                <form id="CrearGrupo">
                                                     <div class="form-row">
                                                         <div class="form-group col-12">
                                                             <input type="text" class="form-control" placeholder="Nombre grupo" name="nuevoGrupo" id="nuevoGrupo">

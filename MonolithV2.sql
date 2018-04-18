@@ -167,3 +167,4 @@ create table  EstampaUsaurio(
 	foreign key (IDEstampa) references Estampa(IDEstampa)
 );
 
+show tables;
