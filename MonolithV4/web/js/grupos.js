@@ -173,8 +173,7 @@ function agregarTarea(e) {
                 required: true
             },
             txtMiembro: {
-                required: true,
-                email: true
+                required: true
             }
         },
         messages: {
@@ -185,10 +184,10 @@ function agregarTarea(e) {
                 required: "Asigna a un miembro"
             }
         },
-        errorElement: "em",
+        errorElement: "div",
         errorPlacement: function (error, element) {
                             // Add the `help-block` class to the error element
-                            error.addClass( "help-block" );
+                            error.addClass("invalid-feedback");
                             error.insertAfter(element);
 			},
         highlight: function ( element, errorClass, validClass ) {
