@@ -325,10 +325,26 @@ function agregarTarea(e) {
 }
 
 /*FUNCION PARA EL EVENTO DE ELIMINAR UNA TAREA*/
-function eliminarTarea(idTarea) {
+function eliminarTarea(Tarea, elemento) {
+    var idTarea = Tarea.id;
+    var idElemento = elemento.id;
     var borrar;
     borrar = confirm("¿Estas seguro que quieres eliminar esta tarea?");
     if(borrar===true) {
-        
+        $.ajax( {
+            url: "EliminarTarea",
+            data: {
+                idTarea: idTarea
+            },
+            success: function () {
+                $("#"+idElemento).remove();
+            },
+            error: function () {
+            },
+            complete: function () {
+            }
+        });
     }
 }
+
+//Para la bd http://programandoointentandolo.com/2013/11/como-ejecutar-un-procedimiento-almacenado-desde-java-con-jdbc.html
