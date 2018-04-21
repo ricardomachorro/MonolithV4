@@ -56,13 +56,21 @@ public class IngresoUsuario extends HttpServlet {
         
         try {
             Database2 db = new Database2();
-            HttpSession sesion = request.getSession();   
+            HttpSession sesion = request.getSession();
+            /*
             Nombre=request.getParameter("nombre").toString();
             Edad = Integer.parseInt(request.getParameter("edad").toString());
             Pais = request.getParameter("pais").toString();
             Direccion =request.getParameter("direccion").toString();
             Correo = request.getParameter("correo").toString();
-            Password =  request.getParameter("contra").toString();
+            Password =  request.getParameter("contra").toString();*/
+            Nombre=request.getParameter("NomUsuario");
+            String age=request.getParameter("Age");
+            Edad = Integer.parseInt(age);
+            Pais = request.getParameter("PaisUsuario");
+            Direccion =request.getParameter("DirUsuario");
+            Correo = request.getParameter("CorreoUsuario");
+            Password =  request.getParameter("ContraUsuario");
             u.setNombre(Nombre);
             u.setEdad(Edad);
             u.setPais(Pais);
