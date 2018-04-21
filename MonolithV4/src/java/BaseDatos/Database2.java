@@ -246,18 +246,13 @@ public class Database2 {
 
     public boolean IngresoUsuario(Usuario user) {//Index
         boolean RegistroExitoso = false;
-        String sql1 = "select * from Usuario where NombreUsuario=?";
+      
         String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos,TipoUsuario) values(?,?,?,?,?,?,?,?)";
         try {
-            ps = c.prepareStatement(sql1);
-            ps.setString(1, user.getNombre());
-            rs = ps.executeQuery();
-            boolean n = rs.next();
-            
-            if(!rs.next()) {//Evalua que no halla otro usuario registrado con el mismo nombre
-                //Inicia
+            if(!UsuarioRepetido(user) && !CorreoRepetido(user)) {//Evalua que no halla otro usuario registrado con el mismo nombre
+                
                 ps = c.prepareStatement(sql2);
-                //Llena
+                
                 ps.setString(1, user.getNombre());
                 ps.setString(2, user.getCorreo());
                 ps.setInt(3, user.getEdad());
@@ -269,12 +264,35 @@ public class Database2 {
                 //Ejecuta
                 ps.executeUpdate();
                 
-                RegistroExitoso = true; //Registro exitoso
+                RegistroExitoso = true; 
+                
+               
+                
             }
         } catch (Exception ex) {
             System.out.println(ex.toString() + "Error de Database2");
         }
         return RegistroExitoso;
+    }
+    
+    public boolean UsuarioRepetido(Usuario user) throws Exception{
+        boolean Repetido=false;
+         String sql1 = "select * from Usuario where NombreUsuario=?";
+          ps = c.prepareStatement(sql1);
+            ps.setString(1, user.getNombre());
+            rs = ps.executeQuery();
+           Repetido = rs.next();
+        return Repetido;
+    }
+    
+    public boolean CorreoRepetido(Usuario user) throws Exception{
+        boolean Repetido=false;
+         String sql1 = "select * from Usuario where Correo=?";
+          ps = c.prepareStatement(sql1);
+            ps.setString(1, user.getCorreo());
+            rs = ps.executeQuery();
+           Repetido = rs.next();
+        return Repetido;
     }
 
     public boolean IngresoPrograma(Usuario u) {//Registro

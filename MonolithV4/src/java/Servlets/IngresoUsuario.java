@@ -9,22 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-
-
-
 @WebServlet(name = "IngresoUsuario", urlPatterns = {"/IngresoUsuario"})
 public class IngresoUsuario extends HttpServlet {
-    
+
     private String Nombre;
     private String Correo;
     private String Password;
     private int Edad;
     private String Pais;
     private String Direccion;
-  
-    
-    
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -53,7 +47,7 @@ public class IngresoUsuario extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         Usuario u = new Usuario();
-        
+
         try {
             Database2 db = new Database2();
             HttpSession sesion = request.getSession();
@@ -64,30 +58,43 @@ public class IngresoUsuario extends HttpServlet {
             Direccion =request.getParameter("direccion").toString();
             Correo = request.getParameter("correo").toString();
             Password =  request.getParameter("contra").toString();*/
-            Nombre=request.getParameter("NomUsuario");
-            String age=request.getParameter("Age");
+            Nombre = request.getParameter("NomUsuario");
+            String age = request.getParameter("Age");
             Edad = Integer.parseInt(age);
             Pais = request.getParameter("PaisUsuario");
-            Direccion =request.getParameter("DirUsuario");
+            Direccion = request.getParameter("DirUsuario");
             Correo = request.getParameter("CorreoUsuario");
-            Password =  request.getParameter("ContraUsuario");
+            Password = request.getParameter("ContraUsuario");
             u.setNombre(Nombre);
             u.setEdad(Edad);
             u.setPais(Pais);
             u.setDireccion(Direccion);
             u.setCorreo(Correo);
             u.setPassword(Password);
-            if(db.IngresoUsuario(u)){
+            if (db.IngresoUsuario(u)) {
+                String ParametrosHash = u.getNombre() + u.getCorreo();
+                int HashCode = ParametrosHash.hashCode();
+                int adendum;
+                if (HashCode < 0) {
+                    adendum = HashCode * -1;
+                } else {
+                    adendum = HashCode;
+                }
                 sesion.setAttribute("usuario", u.getNombre());
-                sesion.setAttribute("password",u.getPassword());
-               // response.sendRedirect("Actividades.jsp");
-            }else{
-                 response.sendRedirect("Error404.jsp");
+                sesion.setAttribute("password", u.getPassword());
+                //response.sendRedirect("Actividades.jsp");
+            } else if (db.UsuarioRepetido(u)) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("UsuarioRepetido");
+            } else if (db.CorreoRepetido(u)) {
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("CorreoRepetido");
             }
-            
-           
-        }catch(Exception ex){
-           response.sendRedirect("Error404.jsp");
+
+        } catch (Exception ex) {
+            response.sendRedirect("Error404.jsp");
         }
 
     }
@@ -96,5 +103,5 @@ public class IngresoUsuario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-    
+
 }
