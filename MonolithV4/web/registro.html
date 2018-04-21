@@ -52,7 +52,7 @@
                         <label class="entrada" style="">Direccion</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="path" name="direccion" placeholder="Direccion" >
+                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="direccion" name="direccion" placeholder="Direccion" >
                     </div>
                 </div>
                 <div class="form-group row" style="width:100%;">
@@ -192,8 +192,8 @@
                         type: "POST",
                         error: {
 
-                        }, success: function () {
-
+                        }, success: function (data) {
+                                  window.location.href="Actividades.jsp";
                         }
 
                     });

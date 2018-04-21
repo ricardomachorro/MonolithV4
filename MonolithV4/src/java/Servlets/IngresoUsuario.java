@@ -80,7 +80,7 @@ public class IngresoUsuario extends HttpServlet {
             if(db.IngresoUsuario(u)){
                 sesion.setAttribute("usuario", u.getNombre());
                 sesion.setAttribute("password",u.getPassword());
-                response.sendRedirect("Actividades.jsp");
+               // response.sendRedirect("Actividades.jsp");
             }else{
                  response.sendRedirect("Error404.jsp");
             }
