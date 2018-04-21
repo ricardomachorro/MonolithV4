@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Actividades"
+            android:icon="@drawable/ic_library_books_black_24dp"
+            android:title="@string/actividades" />
+        <item
+            android:id="@+id/Notas"
+            android:icon="@drawable/ic_note_add_black_24dp"
+            android:title="@string/notas" />
+        <item
+            android:id="@+id/Logros"
+            android:icon="@drawable/ic_card_giftcard_black_24dp"
+            android:title="@string/logros" />
+        <item
+            android:id="@+id/Grupos"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="@string/grupos" />
+    </group>
+
+    <item android:title="@string/personalizacion">
+        <menu>
+            <item
+                android:id="@+id/Configuracion"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/configuracion" />
+        </menu>
+    </item>
+
+</menu>

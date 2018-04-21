@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">monolith movil</string>
+    <string name="registrate">Registrate</string>
+    <string name="sin_cuenta">¿No tienes cuenta?</string>
+    <string name="monolith">Monolith</string>
+    <string name="ingresa">Ingresa a tu cuenta</string>
+    <string name="nombre">Nombre de usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="recuperar"><u><a href="RecuperarPassword.class">¿Olvidaste tu contraseña o usuario?</a></u></string>
+    <string name="correo">Correo electrónico</string>
+    <string name="confirmar_correo">Confirmar correo</string>
+    <string name="edad">Edad</string>
+    <string name="confirmar_contra">Confirmar contraseña</string>
+    <string name="registrame">Registrarme</string>
+    <string name="registro">Registro</string>
+    <string name="restablecimiento">Restablecimiento</string>
+    <string name="de_contraseña">de contraseña</string>
+    <string name="tv1">Escribe la dirección de correo</string>
+    <string name="tv2">electrónico con la que te</string>
+    <string name="tv3">registraste. Te enviaremos un</string>
+    <string name="tv4">correo con tu nombre de</string>
+    <string name="tv5">usuario y contraseña.</string>
+    <string name="tv6">Dirección de correo electrónico</string>
+    <string name="enviar">Enviar</string>
+    <string name="regresar">Regresar</string>
+    <string name="blanco"> </string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="Correo_Empresa">hawkward.ipn@gmail.com</string>
+    <string name="actividades">Actividades</string>
+    <string name="notas">Notas</string>
+    <string name="logros">Logros</string>
+    <string name="grupos">Grupos</string>
+    <string name="configuracion">Configuración</string>
+    <string name="personalizacion">Personalización</string>
+    <string name="pais">Pais</string>
+    <string name="direccion">Dirección</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+</resources>
+
