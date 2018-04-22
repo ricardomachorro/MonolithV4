@@ -247,7 +247,7 @@ public class Database2 {
     public boolean IngresoUsuario(Usuario user) {//Index
         boolean RegistroExitoso = false;
       
-        String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos,TipoUsuario) values(?,?,?,?,?,?,?,?)";
+        String sql2 = "insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,Puntos,TipoUsuario,Validado) values(?,?,?,?,?,?,?,?,?)";
         try {
             if(!UsuarioRepetido(user) && !CorreoRepetido(user)) {//Evalua que no halla otro usuario registrado con el mismo nombre
                 
@@ -261,13 +261,23 @@ public class Database2 {
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
                 ps.setInt(8,1);
+                ps.setString(9,"No");
                 //Ejecuta
                 ps.executeUpdate();
                 
+                String ParametrosHash = user.getNombre() + user.getPassword();
+                int HashCode = ParametrosHash.hashCode();
+                int adendum;
+                if (HashCode < 0) {
+                    adendum = HashCode * -1;
+                } else {
+                    adendum = HashCode;
+                }
+                
+                RegistrarValidacion(user.getNombre(),adendum);
+                
                 RegistroExitoso = true; 
-                
-               
-                
+ 
             }
         } catch (Exception ex) {
             System.out.println(ex.toString() + "Error de Database2");
@@ -275,6 +285,41 @@ public class Database2 {
         return RegistroExitoso;
     }
     
+    public boolean RegistrarValidacion(String Usuario,int Adendum)throws Exception{
+        boolean RegistroValidacion=false;
+        String sql3="insert into Validacion (Nombre,adendum) values (?,?)";
+         ps = c.prepareStatement(sql3);
+         ps.setString(1, Usuario);
+         ps.setInt(2,Adendum);
+         ps.executeUpdate();
+         RegistroValidacion=true;
+        return RegistroValidacion;
+    }
+    
+    public String ResultadoFinalValidacion(String NombreUsuario) throws Exception {
+        String Resultado="";
+         String sql="select * from Validacion where Nombre=?";
+         ps = c.prepareStatement(sql);
+         ps.setString(1, NombreUsuario);
+         rs=ps.executeQuery();
+         if(rs.next()){
+           Resultado=rs.getString("adendum");
+         }
+        
+        
+        return Resultado;
+    }
+    
+    public void DarValidoUsuario(String Usuario) throws Exception{
+        String sql1="update Usuario set Validado='Si' where NombreUsuario=?";
+        ps=c.prepareStatement(sql1);
+        ps.setString(1,Usuario);
+        ps.executeUpdate();
+        String sql2="delete from Validacion where Nombre=?";
+        ps=c.prepareStatement(sql2);
+        ps.setString(1,Usuario);
+        ps.executeUpdate();
+    }
     public boolean UsuarioRepetido(Usuario user) throws Exception{
         boolean Repetido=false;
          String sql1 = "select * from Usuario where NombreUsuario=?";

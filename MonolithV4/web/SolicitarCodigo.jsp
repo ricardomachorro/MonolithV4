@@ -110,14 +110,19 @@
                            url:"ComparacionCodigo",
                            type:'post',
                            data:{
-                                NomUsuarioCom: NombreUsuario.toString(),
-                                CodigoCom: Codigo.toString(),
-                                ContraCom:Codigo.toString();
+                                NomUsuarioCom: NombreUsuario,
+                                CodigoCom: Codigo,
+                                ContraCom:Contra
                                
                            },error:function(data){
                                
                            },success:function(data){
-                               
+                               if(data==="UsuarioValidado"){
+                                   alert("Validacion Exitosa");
+                                   window.location.href="Actividades.jsp"
+                               }else if(data==="UsuarioNoValidado"){
+                                   alert("Validacion Fallida");
+                               }
                            }
                        });
                     
