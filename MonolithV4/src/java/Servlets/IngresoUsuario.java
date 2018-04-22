@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import modelo.Email;
 
 @WebServlet(name = "IngresoUsuario", urlPatterns = {"/IngresoUsuario"})
 public class IngresoUsuario extends HttpServlet {
@@ -80,9 +81,32 @@ public class IngresoUsuario extends HttpServlet {
                 } else {
                     adendum = HashCode;
                 }
-                sesion.setAttribute("usuario", u.getNombre());
-                sesion.setAttribute("password", u.getPassword());
+                sesion.setAttribute("correo", u.getCorreo());
+                //sesion.setAttribute("usuario", u.getNombre());
+                //sesion.setAttribute("password", u.getPassword());
                 //response.sendRedirect("Actividades.jsp");
+                
+            Email email = new Email();
+
+            String de = "hawkward.ipn@gmail.com";
+            String clave = "TheH4wK_fl1l7*5";
+            String para =u.getCorreo();
+            String mensaje = "Se ha enviado el siguiente código de verificación: " + adendum + ", por favor ingreselo en la página.\n\n" + "Si recibió este correo por equivocación por favor ignorelo.\n\n" + "Gracias.";
+            String asunto = "Verificación de Correo Electrónico";
+                
+            boolean resultado = email.enviarCorreo(de, clave, para, mensaje, asunto);
+            
+            if(resultado){
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("Ok");
+            }else{
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("ErrorCorreo");
+            }
+            
+                 
             } else if (db.UsuarioRepetido(u)) {
                 response.setContentType("text/plain");
                 response.setCharacterEncoding("UTF-8");

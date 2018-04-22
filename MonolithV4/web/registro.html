@@ -193,7 +193,16 @@
                         error: {
 
                         }, success: function (data) {
-                                  window.location.href="Actividades.jsp";
+                                if(data==="Ok"){
+                                  window.location.href="SolicitarCodigo.jsp";
+                               }else if(data==="ErrorCorreo"){
+                                    alert("Error enviando correo");
+                                }else if(data==="UsuarioRepetido"){
+                                    alert("Usuario ya registrado previamente intente con otro");
+                                }else if(data==="CorreoRepetido"){
+                                    alert("Correo ya registrado previamente intente con otro");
+                                }
+                                 
                         }
 
                     });

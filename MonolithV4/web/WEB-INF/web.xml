@@ -8,7 +8,14 @@
         <servlet-name>IngresoUsuario</servlet-name>
         <url-pattern>/IngresoUsuario</url-pattern>
     </servlet-mapping>
-    
+     <servlet>
+        <servlet-name>ComparacionCodigo</servlet-name>
+        <servlet-class>Servlets.ComparacionCodigo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ComparacionCodigo</servlet-name>
+        <url-pattern>/ComparacionCodigo</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>IngresoPrograma</servlet-name>
         <servlet-class>Servlets.IngresoPrograma</servlet-class>
