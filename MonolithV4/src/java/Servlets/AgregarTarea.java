@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AgregarTarea", urlPatterns = {"/AgregarTarea"})
 public class AgregarTarea extends HttpServlet {
-
+    private int idTarea;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,7 +31,19 @@ public class AgregarTarea extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //https://stackoverflow.com/questions/4112686/how-to-use-servlets-and-ajax
+        try {
+            //Inicializo la bd
+            Database2 db = new Database2();
+            //Envio la id de la tarea
+            idTarea = db.traerIDTarea();
+        } catch (Exception e) {
+            System.out.println("Error: " + e + " :'v");
+        }
+        String id = Integer.toString(idTarea);
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(id);
     }
 
     @Override

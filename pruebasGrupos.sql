@@ -60,3 +60,9 @@ where TareaMiembro.IDTarea=2;
 select * from Grupo 
 inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo
 where Miembros.IDUsuario=1;
+
+#Traer la id maxima de tarea :v/
+select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);
+
+#Eliminar una tarea
+delete from Tarea where IDTarea=4;

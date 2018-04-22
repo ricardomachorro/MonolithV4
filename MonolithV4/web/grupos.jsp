@@ -118,7 +118,6 @@
                             String fecha;
                             boolean estado;
                             String idConcatenada;
-                            String idGrupoConcatenada;
                             
                             //Para miembros asignados a una tarea
                             String queryMiembros = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro where TareaMiembro.IDTarea=?;";
@@ -129,7 +128,6 @@
                                 //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
                                 idGrupo = rs.getInt("IDGrupo");
-                                idGrupoConcatenada = idGrupo + nombreGrupo;
                         %>
                         <!--Inicio de un grupo-->
                         <div class="tab-pane fade grupo" <%out.print("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
@@ -191,7 +189,7 @@
                                                         idConcatenada = nTarea + nombreGrupo;
                                                         %>
                                                         <!--Inicio tarea-->
-                                                        <div class="card mt-3">
+                                                        <div class="card mt-3" <%out.print("id='Tarea-"+idConcatenada+"'");%>>
                                                             <!--Inicio parte visible-->
                                                             <div class="card-header" <%out.print("id='headTarea-"+idConcatenada+"'");%>>
                                                                 <div class="row">
@@ -285,7 +283,7 @@
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                                 <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;"
-                                                                                        onclick="eliminarTarea(<%out.print(nTarea);%>);">
+                                                                                        onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>);">
                                                                                     Eliminar actividad
                                                                                 </button>
                                                                             </div>

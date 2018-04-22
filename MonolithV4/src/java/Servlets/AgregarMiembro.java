@@ -51,8 +51,6 @@ public class AgregarMiembro extends HttpServlet {
             String correoMiembro = request.getParameter("correoMiembro");
             //Traigo el nombre del usuario de la bd buscandolo por su correo
             String nombreMiembro = db.consultarMiembro(correoMiembro);
-            //Traigo la id del usuario
-            int IDMiembro = db.IdentificarUsuario(nombreMiembro);
             //Envio el nombre del usuario/miembro y su id
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(nombreMiembro);

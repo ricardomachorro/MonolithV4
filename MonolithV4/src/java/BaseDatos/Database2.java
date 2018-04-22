@@ -181,7 +181,7 @@ public class Database2 {
                 idTarea = rs.getInt("IDTarea");
             }
             asignarMiembro(idTarea,IDMiembro);
-            
+            rs.close();
         } catch (Exception e) {
             System.out.println(e.toString() + " - Error de Database2");
         }
@@ -194,6 +194,33 @@ public class Database2 {
             st.execute(queryAsigMiembro);
         } catch (Exception e){
             System.out.println("Error agregando miembro: " + e.toString());
+        }
+    }
+    
+    public int traerIDTarea() throws Exception {
+        int idTarea = 0;
+        String queryIDTarea = "select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);";
+        try {
+            st = c.createStatement();
+            rs = st.executeQuery(queryIDTarea);
+            while(rs.next()) {
+                idTarea = rs.getInt("IDTarea");
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error");
+        }
+        return idTarea;
+    }
+    
+    public void eliminarTarea(int idTarea) throws Exception {
+        String queryEliminar = "delete from Tarea where IDTarea=?;";
+        try {
+            ps = c.prepareStatement(queryEliminar);
+            ps.setInt(1, idTarea);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error");
         }
     }
     /*Fin de los metodos para grupos*/

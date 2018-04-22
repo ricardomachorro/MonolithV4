@@ -98,18 +98,18 @@ $("#btnCrearGrupo").click(
                                 "<form>" +
                                 "<div class='form-row align-items-center'>" +
                                 "<div class='col-sm-5 mt-2'>" +
-                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>" +
+                                "<input type='text' class='form-control' placeholder='Ingresa una tarea' id='txtNuevaTarea"+nuevoGrupo+"' name='txtNuevaTarea'>" +
                                 "</div>" +
                                 "<div class='col-sm-5 mt-2'>" +
                                 "<div class='input-group'>" +
                                 "<div class='input-group-prepend'>" +
                                 "<div class='input-group-text'>@</div>" +
                                 "</div>" +
-                                "<input type='text' class='form-control' placeholder='Correo'>" +
+                                "<input type='text' class='form-control' placeholder='Ingresar miembro' id='txtMiembro"+nuevoGrupo+"' name='txtMiembro'>" +
                                 "</div>" +
                                 "</div>" +
                                 "<div class='col-sm-2 d-flex justify-content-center mt-2'>" +
-                                "<button type='submit' class='btn btn-primary'>Agregar</button>" +
+                                "<button type='submit' class='btn btn-primary' id='"+nuevoGrupo+"' onclick='agregarTarea(this);' name='txtMiembroNT'>Agregar</button>" +
                                 "</div>" +
                                 "</div>" +
                                 "</form>" +
@@ -160,7 +160,8 @@ function agregarTarea(e) {
     var mes;
     var dia;
     var fechaTarea = "";//Para acumular el valor de fecha
-
+    var idTarea;
+    console.log(idT);
 //    Pruebas
 //    console.log("id btn: " + idT);
 //    console.log("id grupo: " + document.getElementById(idT).form.id.toString());
@@ -196,21 +197,22 @@ function agregarTarea(e) {
         unhighlight: function (element, errorClass, validClass) {
 			$(element).parents(".form-control").addClass("has-success").removeClass("has-error");
                     },
-        submitHandler: function (form) {
+        submitHandler: function () {
             //Para el nombre de la tarea
             nombreTarea = $("#txtNuevaTarea"+idT).val();
             miembroTarea = $("#txtMiembro"+idT).val();
-            idConcatenada = contadorTarea + nombreTarea;
+            idConcatenada = "4" + nombreTarea;
             //Para la fecha
             objFecha = new Date();
             mes = objFecha.getMonth() + 1;//Un mes mas tarde
             dia = objFecha.getDate();
             fechaTarea = objFecha.getFullYear() + "-0" + mes + "-" + dia;
+            var exitoso;
 //            Pruebas lokas xd
 //            console.log("idConcatenada: " + idConcatenada);
 //            console.log("Miembro. " + miembroTarea);
 //            console.log("Iniciado...");
-//            console.log("Nombre tarea: " + nombreTarea);
+            console.log("Nombre tarea: " + nombreTarea);
 //            console.log("fecha: " + fechaTarea);
             $.ajax( {
                 url: "AgregarTarea",
@@ -221,10 +223,12 @@ function agregarTarea(e) {
                     nomMiembro: miembroTarea
                 },
                 type: 'post',
-                success: function () {
+                success: function (data) {
+                    exitoso = true;
+                    idTarea = "4"+idT;
                     $("#listaTareas-" + idT).prepend(//Agregando tarea a la lista de tareas del grupo
                         "<!--Inicio tarea-->"+
-                        "<div class='card mt-3'>"+
+                        "<div class='card mt-3' id='Tarea-'"+idTarea+">"+
                             "<!--Inicio parte visible-->"+
                                 "<div class='card-header' id='headTarea-"+idConcatenada+"'>"+
                                     "<div class='row'>"+
@@ -297,7 +301,7 @@ function agregarTarea(e) {
                                                 "</div>"+
                                                 "<div class='col-sm-6'>"+
                                                     "<button type='button' class='btn btn-outline-danger mb-2 btnEliminar' style='width: 100%;'"+
-                                                        ">"+
+                                                        "onclick='eliminarTarea('"+idTarea+"',"+data.toString()+");'>"+
                                                         "Eliminar actividad"+
                                                     "</button>"+
                                                 "</div>"+
@@ -318,6 +322,12 @@ function agregarTarea(e) {
                     
                 }
             } );
+            if(exitoso===true){
+                $.get("AgregarTarea", function(responseText){
+                    idTarea = responseText+idT;
+                    alert(idTarea);
+                });
+            }
         }
     });
     
@@ -325,9 +335,8 @@ function agregarTarea(e) {
 }
 
 /*FUNCION PARA EL EVENTO DE ELIMINAR UNA TAREA*/
-function eliminarTarea(Tarea, elemento) {
-    var idTarea = Tarea.id;
-    var idElemento = elemento.id;
+function eliminarTarea(Tarea, idTarea) {
+    var idElemento = "Tarea-"+Tarea;
     var borrar;
     borrar = confirm("¿Estas seguro que quieres eliminar esta tarea?");
     if(borrar===true) {
@@ -336,6 +345,7 @@ function eliminarTarea(Tarea, elemento) {
             data: {
                 idTarea: idTarea
             },
+            type: 'POST',
             success: function () {
                 $("#"+idElemento).remove();
             },

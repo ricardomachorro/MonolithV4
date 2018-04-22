@@ -1,5 +1,6 @@
 package Servlets;
 
+import BaseDatos.Database2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,6 +33,18 @@ public class EliminarTarea extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            //Inicializo la bd
+            Database2 db = new Database2();
+            //Traigo el parametro idTarea de la data de ajax
+            String idTarea = request.getParameter("idTarea");
+            //Combierto la id a int
+            int id = Integer.parseInt(idTarea);
+            //Borro la tarea
+            db.eliminarTarea(id);
+        } catch (Exception e) {
+            System.out.println("Error: " + e + " :'v");
+        }
         
     }
 
