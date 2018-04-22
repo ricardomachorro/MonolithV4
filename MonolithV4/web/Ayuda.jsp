@@ -107,15 +107,9 @@
                                     sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
                                     cualquiera de las dudas que podria tener
                                 </p>
-                                <h5 class="card-text">¿Si no funciona?</h5>
-                                <p class="card-text">
-                                    En el caso de no funcionar el cat proporcionado se tnedran los siguientes formas de
-                                    contacto con el equipo de desarrollo
-                                </p>
-                                <ul>
-                                    <li>Telefono:53 47 08 95</li>
-                                    <li>Correo:hawkward.ipn@gmail.com</li>
-                                </ul>
+                                <img src="img/businessman.svg" style="height:350px;width:550px; margin:22px;">
+                                <h5 class="card-text"></h5>
+                             
                             </div>
                         </div>
                     </div>
@@ -124,17 +118,21 @@
                     <nav class="navbar  navbar-light bg-light" style="margin-top:30px;">
                         <a class="navbar-brand" >
                             <img src="img/question-mark.svg" id="IconoChat" class="d-inline-block align-top" alt="">
-                            ¿Tienes Problemas?
+                            ¿Si no funciona?
                         </a>
                     </nav>
 
                     <div class="card-deck">
                         <div class="card">
                             <div class="card-body">
-                                <p class="card-text">Si tiene alguna duda con el sistema, o problematica con este, en esta parte del 
-                                    sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
-                                    cualquiera de las dudas que podria tener
+                                <p class="card-text">
+                                    En el caso de no funcionar el cat proporcionado se tnedran los siguientes formas de
+                                    contacto con el equipo de desarrollo
                                 </p>
+                                <ul>
+                                    <li>Telefono:53 47 08 95</li>
+                                    <li>Correo:hawkward.ipn@gmail.com</li>
+                                </ul>
 
                             </div>
                         </div>
@@ -151,7 +149,7 @@
                     <div class="card-deck" style="margin:12px;">
                         <div class="card">
                             <div class="row">
-                                <div class="col-12" id="SeccionMensaje" style="height:500px;background-color:#fff;overflow-y:scroll;">
+                                <div class="col-12" id="SeccionMensaje" style="height:700px;background-color:#fff;overflow-y:scroll;">
                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
                                      <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
                                      <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
@@ -165,9 +163,7 @@
                     
                     <div class="card-deck" style="margin:12px;">
                         <div class="card">
-                            <textarea id="mensaje" readonly="readonly" rows="10" cols="45">
-                                
-                            </textarea>
+                           
                             <div class="row" style="padding:12px;">
                                 <div class="col-lg-10 col-md-6 col-sm-12">
                                     <input type="text" id="Texto"  style="width:100%;"  class="form-control" placeholder="Mensaje" >

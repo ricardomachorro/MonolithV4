@@ -1,4 +1,3 @@
-
 package Servlets;
 
 import BaseDatos.Database2;
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "IngresoPrograma", urlPatterns = {"/IngresoPrograma"})
 public class IngresoPrograma extends HttpServlet {
-    
+
     private String Nombre;
     private String Contraseña;
-    
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -46,30 +45,35 @@ public class IngresoPrograma extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         Usuario u = new Usuario();
-        
+
         try {
             Database2 db = new Database2();
-            HttpSession sesion = request.getSession();   
-            Nombre=request.getParameter("usuario").toString();
-            Contraseña =  request.getParameter("contrasenia").toString();
+            HttpSession sesion = request.getSession();
+            Nombre = request.getParameter("usuario").toString();
+            Contraseña = request.getParameter("contrasenia").toString();
             u.setNombre(Nombre);
             u.setPassword(Contraseña);
-            if(db.IngresoPrograma(u)){
-                sesion.setAttribute("usuario", u.getNombre());
-                sesion.setAttribute("password",u.getPassword());
-                if(db.TipoUsuario(u)==1){
-                    response.sendRedirect("Actividades.jsp");
-                }else  if(db.TipoUsuario(u)==2){
-                    response.sendRedirect("Servicio.jsp");
+            if (db.IngresoPrograma(u)) {
+                if (db.UsuarioValidado(u.getNombre())) {
+                    sesion.setAttribute("usuario", u.getNombre());
+                    sesion.setAttribute("password", u.getPassword());
+                    if (db.TipoUsuario(u) == 1) {
+                        response.sendRedirect("Actividades.jsp");
+                    } else if (db.TipoUsuario(u) == 2) {
+                        response.sendRedirect("Servicio.jsp");
+                    }
+                } else {
+                   String Correo= db.EncontrarCorreo(u.getNombre());
+                    sesion.setAttribute("correo",Correo);
+                    
                 }
-                
-            }else{
-                 response.sendRedirect("Error404.jsp");
+
+            } else {
+                response.sendRedirect("UsuarioNoRegistrado.html");
             }
-            
-           
-        }catch(Exception ex){
-           response.sendRedirect("Error404.jsp");
+
+        } catch (Exception ex) {
+            response.sendRedirect("Error404.jsp");
         }
 
     }
@@ -78,6 +82,5 @@ public class IngresoPrograma extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-    
+
 }
-    

@@ -128,15 +128,6 @@ custom-checkbox {
     border: 1px solid #bbb;
   }
 
-  input[type="checkbox"] {
-    display: none;
+ 
 
-    &:checked ~ .icon:before {
-      background: lightgreen;
-    }
-  }
-}
-
-label.error {
-  color: red;
 }

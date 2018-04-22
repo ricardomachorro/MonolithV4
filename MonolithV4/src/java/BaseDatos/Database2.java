@@ -305,11 +305,37 @@ public class Database2 {
          if(rs.next()){
            Resultado=rs.getString("adendum");
          }
-        
-        
+    
         return Resultado;
     }
     
+    public String EncontrarCorreo(String Usuario) throws Exception{
+        String Correo="";
+        String sql="Select * from Usuario where NombreUsuario=?";
+        ps=c.prepareStatement(sql);
+        ps.setString(1,Usuario);
+        rs=ps.executeQuery();
+        if(rs.next()){
+            Correo=rs.getString("Correo");
+        }
+        return Correo;
+    }
+    
+    public boolean UsuarioValidado(String Usuario)throws Exception{
+        boolean Validacion=false;
+        String sql="Select * from Usuario where NombreUsuario=?";
+        String ValorVali="";
+        ps=c.prepareStatement(sql);
+        ps.setString(1,Usuario);
+        rs=ps.executeQuery();
+        if(rs.next()){
+            ValorVali=rs.getString("Validado");
+        }
+        if(ValorVali.equalsIgnoreCase("Si")){
+            Validacion=true;
+        }
+        return Validacion;
+    }
     public void DarValidoUsuario(String Usuario) throws Exception{
         String sql1="update Usuario set Validado='Si' where NombreUsuario=?";
         ps=c.prepareStatement(sql1);
@@ -357,6 +383,9 @@ public class Database2 {
 
         return IngresoExitoso;
     }
+    
+    
+   
 
     public int IdentificarUsuario(String Nombre) {//Cualquiera
         int ID = 0;
