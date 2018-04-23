@@ -108,6 +108,12 @@
                             ResultSet rs = st.executeQuery(query);
                             String nombreGrupo;
                             
+                            //Para el rol
+                            String traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                            Statement stRol = con.createStatement();
+                            ResultSet rsRol;
+                            int rol;
+                            
                             //Para las tareas de los grupos
                             int idGrupo;
                             String queryTarea = "select * from Tarea where IDGrupo=?;";
@@ -140,6 +146,23 @@
                                             <div class='col d-flex align-items-center justify-content-center'>
                                                 <%out.print("<h2>" + nombreGrupo + "</h2>");%>
                                             </div>
+                                            <%  traerRol = traerRol+idGrupo+";";
+                                                rsRol = stRol.executeQuery(traerRol);
+                                                rsRol.next();
+                                                rol = rsRol.getInt("IDRol");
+                                                if(rol==1){
+                                                    
+                                            %>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
+                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>);">Eliminar grupo</button>
+                                                </div>
+                                            </div>
+                                            <% } 
+                                                traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                                            %>
                                         </div>
                                     </div>
                                 </div>

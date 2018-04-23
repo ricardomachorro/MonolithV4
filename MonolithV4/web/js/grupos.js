@@ -428,3 +428,26 @@ function estadoTarea(idTarea, checkbox) {
         }
     });
 }
+
+function eliminarGrupo(idGrupo){
+    var borrar;
+    borrar = confirm("¿Estas seguro que quieres eliminar este grupo?");
+    if(borrar===true) {
+        $.ajax({
+            url: "EliminarGrupo",
+            data: {
+                Grupo: idGrupo
+            },
+            type: 'POST',
+            success: function () {
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            },
+            complete: function (jqXHR, textStatus) {
+
+            }
+        });
+    }
+}

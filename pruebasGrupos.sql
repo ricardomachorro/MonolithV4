@@ -69,3 +69,6 @@ delete from Tarea where IDTarea=4;
 
 #Desagnar un miembro
 #delete from TareaMiembro where IDTarea=3 and IDMiembro=1;
+
+#Buscar el rol del usaurio
+select IDRol from Miembros where IDUsuario=2 and IDGrupo=1;
