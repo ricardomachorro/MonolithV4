@@ -42,7 +42,7 @@ public class Database2 {
     
     public void ActualizarNota(Nota note, String NombreAnterior)throws Exception{ //Notas
         int IDUsuario=IdentificarUsuario(note.getUsuario());
-        String sql="update Nota set Nombre='"+note.getTitulo()+"' set Contenido='"+note.getContenido()+"' where Nombre='"+NombreAnterior+"' and IDUauario="+IDUsuario;
+        String sql="update Nota set Nombre='"+note.getTitulo()+"', Contenido='"+note.getContenido()+"' where Nombre='"+NombreAnterior+"' and IDUsuario="+IDUsuario;
          st=c.createStatement();
         st.executeUpdate(sql);
     }

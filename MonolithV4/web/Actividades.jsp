@@ -309,6 +309,7 @@
                         <div class="card ListasLaterales" style="height:850px;"  >
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
+                                    <li class="Todos" id="Todos"><img src='img/folderOrange.svg'>Todos</li>
                                     <%
                                         Statement st2 = conexion.createStatement();
                                         ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
@@ -697,6 +698,18 @@
 
                     }
                 });
+            });
+            
+            $("#ListaCategorias li").click( function(){
+                var Categoria=$(this).attr("class");
+                var nombreCategoria=$(this).attr("id");
+                if(Categoria==="Todos"){
+                    $("#ContenedorCartasActividades").children().show();
+                }else{
+                $("#ContenedorCartasActividades").children().not("."+nombreCategoria).hide();
+                $("#ContenedorCartasActividades").children("."+nombreCategoria).show();
+                }
+                
             });
 
             $("#BtnEliminarCategoria").click(function () {

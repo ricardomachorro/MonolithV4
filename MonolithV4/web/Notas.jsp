@@ -81,7 +81,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="card-deck"  >
                         <div class="card IngresoNota">
-                            <h2 class="TituloNota" id="0">
+                            <h2 class="TituloNota" id="TituloNota">
                                 Titulo Nota 
                             </h2>
                             <form id="IngresoNotaForm">
@@ -135,7 +135,7 @@
                                         Statement st2 = conexion.createStatement();
                                         ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
                                         while (rs2.next()) {
-                                            out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'>" + rs2.getString("Nombre") + "</li>");
+                                            out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'><a='txt"+rs2.getString("Nombre") +"'>" + rs2.getString("Nombre") + "<a></li>");
                                         }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
@@ -214,7 +214,7 @@
                                 TitleNota: TituloNota,
                                 ContenidoNota: Contenido
                             }, success: function () {
-                                $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'>" + TituloNota + "</li>");
+                                $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'><a id='txt"+TituloNota+"'>" + TituloNota + "</a></li>");
 
                                 $(".NotasListas").click(function () {
                                     var ElementoSeleccionado = $(this).attr("id");
@@ -280,7 +280,7 @@
                 }, submitHandler: function (form) {
                     var TituloNota = $("#txtNuevaNota").val();
                     var Contenido = $("#txtContenidoNota").val();
-                    var TituloAnterior = $(".TituloNota").val();
+                    var TituloAnterior = $("#TituloNota").text();
                     $.ajax({
                         url: "ActualizarNota",
                         type: 'post',
@@ -288,8 +288,10 @@
                             TitleNota: TituloNota,
                             ContenidoNota: Contenido,
                             Anterior: TituloAnterior
-                        }, success: function () {
-
+                        }, success: function (data) {
+                                 var elementocambio=$("#ListaNotas").find( "#" + TituloAnterior);
+                                 elementocambio.find("a").val(TituloNota);
+                                
                         }, error: {
 
                         }

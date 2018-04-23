@@ -41,7 +41,7 @@ public class ActualizarNota extends HttpServlet{
             Nota nota=new Nota();
             String Usuario=s.getAttribute("usuario").toString();
             String TituloNota=request.getParameter("TitleNota");
-            String Contenido=request.getParameter("Contenido");
+            String Contenido=request.getParameter("ContenidoNota");
             String AntiguoTitulo=request.getParameter("Anterior");
             nota.setUsuario(Usuario);
             nota.setTitulo(TituloNota);
