@@ -535,7 +535,7 @@ public class Database2 {
         int IDGrupo;
         int idMiembro;
         
-        String queryNG = "into Grupo(NombreGrupo) values('"+nombreGrupo+"');";
+        String queryNG = "insert into Grupo(NombreGrupo) values('"+nombreGrupo+"');";
         String queryLider;
         String queryMiembro;
         try {
@@ -573,6 +573,107 @@ public class Database2 {
         }
         return id;
     }
-    /*Fin metodos para grupos*/
+    
+    public void crearTarea(Tarea a) throws Exception{
+        //Asigno los datos alv
+        String Nombre = a.getNombreTarea();
+        int IDGrupo = a.getIdGrupoTarea();
+        Date Fecha = a.getFechaTarea();
+        int IDMiembro = a.getIdMiembroTarea();
+        int idTarea = 1;
+        
+        String queryCrearTarea = "insert into Tarea(Nombre,IDGrupo,Fecha,Estado) values('"+Nombre+"', "+IDGrupo+",'"+Fecha+"', false);";
+        String queryIDTarea = "select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);";
+        try {
+            st = c.createStatement();
+            st.execute(queryCrearTarea);//Creo la nueva tarea
+            //Traigo la id de esa tarea para asignarla
+            rs = st.executeQuery(queryIDTarea);
+            while(rs.next()) {
+                idTarea = rs.getInt("IDTarea");
+            }
+            asignarMiembro(idTarea,IDMiembro);
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error de Database2");
+        }
+    }
+    
+    public void asignarMiembro(int IDTarea, int IDMiembro) throws Exception {
+        try{
+            String queryAsigMiembro = "insert into TareaMiembro(IDTarea,IDMiembro) values ("+IDTarea+","+IDMiembro+");";
+            st = c.createStatement();
+            st.execute(queryAsigMiembro);
+        } catch (Exception e){
+            System.out.println("Error agregando miembro: " + e.toString());
+        }
+    }
+    
+    public int traerIDTarea() throws Exception {
+        int idTarea = 0;
+        String queryIDTarea = "select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);";
+        try {
+            st = c.createStatement();
+            rs = st.executeQuery(queryIDTarea);
+            while(rs.next()) {
+                idTarea = rs.getInt("IDTarea");
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error");
+        }
+        return idTarea;
+    }
+    
+    public void eliminarTarea(int idTarea) throws Exception {
+        String queryEliminar = "delete from Tarea where IDTarea=?;";
+        try {
+            ps = c.prepareStatement(queryEliminar);
+            ps.setInt(1, idTarea);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " - Error");
+        }
+    }
+    
+    public void actualizarTarea(Tarea t) {
+        //Asignando datos alv
+        String Nombre = t.getNombreTarea();
+        Date Fecha = t.getFechaTarea();
+        int IDTarea = t.getIdTarea();
+        String query = "update Tarea set Nombre='"+Nombre+"',Fecha='"+Fecha+"' where IDTarea="+IDTarea+";";
+        try {
+            st = c.createStatement();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println("Error actualizando tarea: " + e.toString());
+        }
+    }
+    
+    public void desasignarMiembro(int IDTarea, int IDMiembro) throws Exception {
+        String queryDasigMiembro = "delete from TareaMiembro where IDTarea="+IDTarea+" and IDMiembro="+IDMiembro+";";
+        try{
+            st = c.createStatement();
+            st.execute(queryDasigMiembro);
+        } catch (Exception e){
+            System.out.println("Error quitando miembro: " + e.toString());
+        }
+    }
+    
+    public void CambiarEstadoTarea(int IDTarea, int estado) {
+        String cambio;
+        try {
+            if(estado==1){
+                cambio = "update Tarea set Estado=true where IDTarea="+IDTarea+";";
+            } else {
+                cambio = "update Tarea set Estado=false where IDTarea="+IDTarea+";";
+            }
+            st = c.createStatement();
+            st.execute(cambio);
+        } catch (Exception e) {
+            System.out.println("Error cambiando estado: " + e.toString());
+        }
+    }
+    /*Fin de los metodos para grupos*/
 
 }

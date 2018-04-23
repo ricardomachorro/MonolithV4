@@ -1,5 +1,9 @@
 package Objetos;
 
+/**
+ *
+ * @author Alumno
+ */
 public class Grupo {
     private String nombreGrupo;
     private String[] nomTareas;
