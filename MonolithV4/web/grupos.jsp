@@ -37,7 +37,7 @@
         <title>Grupos</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!--<link rel="stylesheet" type="text/Css" href="Css/bootstrap.min.css">-->
+        <link rel="stylesheet" type="text/Css" href="Css/bootstrap.min.css">
         <link rel="stylesheet" type="text/Css" href="Css/BarraDeInicioSesion.css">
         <link rel="stylesheet" type="text/Css" href="Css/Grupos.css">
     </head>
@@ -56,7 +56,7 @@
                         <a class="nav-link" href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
+                        <a class="nav-link" href="grupos.html"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
@@ -73,10 +73,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <img src="img/user.svg" class="ImagenesBarraInicio" > 
-                            <%out.println(nomUsuario);%>
+                            <%out.print(nomUsuario);%>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%out.println(nomUsuario);%></a>
+                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%out.print(nomUsuario);%></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
                                 Configuracion</a>
@@ -95,7 +95,7 @@
                 <div class="col-lg-8 col-md-8 col-sm-12">
                     <div class="tab-content" id="ContenidoGrupos">
                         <%
-                            //Traer el id del usaurio
+                            //Traer el id del usuario
                             String queryIDUsuario = "select IDUsuario from Usuario where NombreUsuario='"+nomUsuario+"';";
                             Statement stIDU = con.createStatement();
                             ResultSet rsIDU = stIDU.executeQuery(queryIDUsuario);
@@ -130,7 +130,7 @@
                                 idGrupo = rs.getInt("IDGrupo");
                         %>
                         <!--Inicio de un grupo-->
-                        <div class="tab-pane fade grupo" <%out.println("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
+                        <div class="tab-pane fade grupo" <%out.print("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
 
                             <!--Inicio titulo contenedor-->
                             <div class='card-deck'>
@@ -138,7 +138,7 @@
                                     <div class='card-body'>
                                         <div class='row'>
                                             <div class='col d-flex align-items-center justify-content-center'>
-                                                <%out.println("<h2>" + nombreGrupo + "</h2>");%>
+                                                <%out.print("<h2>" + nombreGrupo + "</h2>");%>
                                             </div>
                                         </div>
                                     </div>
@@ -149,22 +149,27 @@
                             <div class='card-deck'>
                                 <div class='card'>
                                     <div class='card-body'>
-                                        <!--Inicio agregar tarea-->
-                                        <form>
+                                        <!--Inicio agregar tarea -->
+                                        <form <%out.print("id='FormularioNuevaTarea"+nombreGrupo+"'");%>>
                                             <div class='form-row align-items-center'>
                                                 <div class='col-sm-5 mt-2'>
-                                                    <input type='text' class='form-control' placeholder='Ingresa una tarea'>
+                                                    <input type='text' class='form-control' placeholder='Ingresa una tarea' 
+                                                           <%out.print("id='txtNuevaTarea"+nombreGrupo+"'");%> name='txtNuevaTarea'>
                                                 </div>
                                                 <div class='col-sm-5 mt-2'>
                                                     <div class='input-group'>
                                                         <div class='input-group-prepend'>
                                                             <div class='input-group-text'>@</div>
                                                         </div>
-                                                        <input type='text' class='form-control' placeholder='Correo'>
+                                                        <input type='text' class='form-control' placeholder='Nombre del miembro' 
+                                                               <%out.print("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
                                                     </div>
                                                 </div>
                                                 <div class='col-sm-2 d-flex justify-content-center mt-2'>
-                                                    <button type='submit' class='btn btn-primary'>Agregar</button>
+                                                    <button  class='btn btn-primary btnAgregarTarea' 
+                                                            id='<%out.print(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
+                                                        Agregar
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -172,19 +177,19 @@
                                         <!--Inicio contenedor de lista de tareas-->
                                         <div class='row rowListaTareas'>
                                             <!--Inicio lista de tareas (IMPORTANTE CAMBIAR ID'S por grupo)-->
-                                            <div class='col-12' <%out.println("id='listaTareas-" + nombreGrupo + "'");%>>
+                                            <div class='col-12' <%out.print("id='listaTareas-" + nombreGrupo + "'");%>>
                                                 <%
                                                     ps.setInt(1, idGrupo);
                                                     rsTarea = ps.executeQuery();
                                                     while(rsTarea.next()){
                                                         nTarea = rsTarea.getInt("IDTarea");
                                                         nomTarea = rsTarea.getString("Nombre");
-                                                        fecha = rsTarea.getTimestamp("Fecha").toString();
+                                                        fecha = rsTarea.getDate("Fecha").toString();
                                                         estado = rsTarea.getBoolean("Estado");
                                                         idConcatenada = nTarea + nombreGrupo;
                                                         %>
                                                         <!--Inicio tarea-->
-                                                        <div class="card mt-3">
+                                                        <div class="card mt-3" <%out.print("id='Tarea-"+idConcatenada+"'");%>>
                                                             <!--Inicio parte visible-->
                                                             <div class="card-header" <%out.print("id='headTarea-"+idConcatenada+"'");%>>
                                                                 <div class="row">
@@ -195,7 +200,7 @@
                                                                             <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
                                                                             <%out.print("data-target='#tarea-"+idConcatenada+"'");%> aria-expanded="false" 
                                                                             <%out.print("aria-controls='tarea-"+idConcatenada+"'");%>>
-                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;" <%out.print("id='valorNombreTarea-"+idConcatenada+"'");%>>
                                                                                 <%out.print(nomTarea);%>
                                                                                 </span>
                                                                             </button>
@@ -203,7 +208,7 @@
                                                                     </div>
                                                                     <!--Fecha limite-->
                                                                     <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-                                                                        <small class="text-muted" <%out.print("id='fechaTarea-"+idConcatenada+"'");%>>
+                                                                        <small class="text-muted" <%out.print("id='valorFechaTarea-"+idConcatenada+"'");%>>
                                                                             <%out.print(fecha);%>
                                                                         </small>
                                                                     </div>
@@ -216,7 +221,7 @@
                                                                                     Miembros
                                                                             </button>
                                                                             <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
-                                                                                 id="dropdown-miembros-NombreGrupo">
+                                                                                 <%out.print("id='dropdown-miembros-"+idConcatenada+"'");%>>
                                                                                 <%
                                                                                     psMiembros.setInt(1, nTarea);
                                                                                     rsMiembros = psMiembros.executeQuery();
@@ -239,9 +244,9 @@
                                                                     <!--Checkbox para marcar actividad-->
                                                                     <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
                                                                         <%if(estado) {%>
-                                                                            <input class="acabarTarea float-right" type="checkbox" checked>
+                                                                        <input class="acabarTarea float-right" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)" checked>
                                                                         <%} else {%>
-                                                                            <input class="acabarTarea float-right checado" type="checkbox">
+                                                                            <input class="acabarTarea float-right checado" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)">
                                                                          <% } %>
                                                                     </div>
                                                                 </div>
@@ -252,29 +257,35 @@
                                                                 <div class="card-body">
                                                                     <form>
                                                                         <!--Inicio formulario para modificar actividad-->
-                                                                        <div class="form-row">
+                                                                        <div class="form-row ElementosCambios">
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea">
+                                                                                <input type="text" class="form-control" <%out.print("id='nomTarea-"+idConcatenada+"'");%> name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>"/>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="date" class="form-control" id="fecha" name="fecha">
+                                                                                <input type="date" class="form-control dFecha" <%out.print("id='fechaTarea-"+idConcatenada+"'");%> name="fecha"/>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro">
+                                                                                <input type="text" class="form-control" <%out.print("id='eliMiembroTarea-"+idConcatenada+"'");%> name="eliMiembro" placeholder="Eliminar miembro asignado"/>
                                                                             </div>
 
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro">
+                                                                                <input type="text" class="form-control" <%out.print("id='agrMiembroTarea-"+idConcatenada+"'");%> name="agrMiembro" placeholder="Agregar miembro asignado"/>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin formulario para modificar actividad-->
                                                                         <!--Inicio opciones-->
                                                                         <div class="form-row mt-2">
                                                                             <div class="col-sm-6">
-                                                                                <button type="submit" class="btn btn-outline-warning mb-2" style="width: 100%;">Modificar</button>
+                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;"
+                                                                                        onclick="actualizarTarea('<%out.print(nombreGrupo);%>',<%out.print(nTarea);%>);">
+                                                                                    Modificar actividad
+                                                                                </button>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2" style="width: 100%;">Eliminar</button>
+                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;idGrupo"
+                                                                                        onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>,<%out.print(idGrupo);%>);">
+                                                                                    Eliminar actividad
+                                                                                </button>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin opciones-->
@@ -347,7 +358,7 @@
                                     >
                                         <img src="img/group.svg" alt="ic_grupos">
                                         <%
-                                            out.println(grupo);
+                                            out.print(grupo);
                                         %>
                                     </a>
                                     <%
@@ -362,6 +373,9 @@
                                     -->
                                 </div>
                                 <!--Grupos listados (Final)-->
+                                <!--Inicio grupos agregados-->
+                                <div id="lista-gruposAregados"></div>
+                                <!--Fin grupos agregados-->
                                 <!--BTN PARA COLAPSAR-->
                                 <a class="list-group-item list-group-item-action btn" data-toggle="collapse" href="#agregarGrupo" 
                                    role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -376,7 +390,7 @@
                                                 <h5>Nuevo grupo</h5>
                                             </div>
                                             <div>
-                                                <form>
+                                                <form id="CrearGrupo">
                                                     <div class="form-row">
                                                         <div class="form-group col-12">
                                                             <input type="text" class="form-control" placeholder="Nombre grupo" name="nuevoGrupo" id="nuevoGrupo">
@@ -385,7 +399,7 @@
                                                             <input type="email" class="form-control" placeholder="Correo del integrante" name="miembro" id="miembro">
                                                         </div>
                                                         <div class="col-3">
-                                                            <button class="form-control" type="reset" id="agregarMiembro">Agregar</button>
+                                                            <button class="form-control" type="button" id="agregarMiembro">Agregar</button>
                                                         </div>
                                                         <div class="form-group col-12">
                                                             <ul class="form-control list-group agregarMiembro" id="ListaMiembros">
@@ -429,140 +443,7 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
-
-        <script>
-            //Array de miembros de un nuevo grupo
-            var miembrosNG = "";
-            
-            /*FUNCION PARA EL EVENTO DE AGREGAR UN MIEMBRO NUEVO A UN GRUPO NUEVO*/
-            $("#agregarMiembro").click( //Agregar miembro al formulario para el nuevo grupo
-                function() {
-                    var nuevoMiembro = $("#miembro").val().toString();
-                    
-                    $.ajax( {
-                        url: "AgregarMiembro",
-                        data: {
-                            correoMiembro: nuevoMiembro
-                        },
-                        type: 'post',
-                        success: function (data) {//data trae el nombre del usuario
-                            $("#ListaMiembros").prepend(//Para insertar html
-                                $( //Todo el nuevo contenido
-                                    "<li class='list-group-item d-flex justify-content-between align-items-center'>"+
-                                        data.toString()+//El nombre del miembro alv
-                                        "<span class='badge'>"+
-                                            "<button type='button' class='close' aria-label='Close'>"+
-                                                "<span aria-hidden='true'>&times;</span>"+
-                                            "</button>"+
-                                        "</span>"+
-                                    "</li>"
-                                )
-                            );
-                            miembrosNG=miembrosNG+","+data.toString();//Agregar el nombre del miembro al array
-                        },
-                        error: function () {
-                            alert("Error buscando miembro");
-                        },
-                        complete: function () {
-                        }
-                    } );
-                }
-            );
-    
-            /*FUNCION PARA EL EVENTO DE CREAR UN GRUPO NUEVO*/
-            $("#btnCrearGrupo").click(
-                function() {
-                    //Traigo el nombre del grupo
-                    var nuevoGrupo = $("#nuevoGrupo").val().toString();
-                    var usuario = $("#btnCrearGrupo").val().toString();
-                    $.ajax( {
-                        url: "CrearGrupo",
-                        data: {//Envio el nombre del grupo y los miembros
-                            nomNuevoGrupo: nuevoGrupo,
-                            lider: usuario,
-                            miembros: miembrosNG
-                        },
-                        type: 'post',
-                        success: function () {
-                            //Desaparecer elementos
-                            $("div.grupo").removeClass("active");
-                            $("a.grupoLista").removeClass("active");
-                            //LADO DERECHO
-                            $("#ContenidoGrupos").prepend( //Inserto a tarjeta que contiene al nuevo grupo
-                                "<div class='tab-pane fade show grupo active' id='panel-g"+nuevoGrupo+"' role='tabpanel' aria-labelledby='lista-g"+nuevoGrupo+"'>"+
-                                        //Inicio titulo contenedor
-                                        "<div class='card-deck'>"+
-                                            "<div class='card Contenedor'>"+
-                                                "<div class='card-body'>"+
-                                                    "<div class='row'>"+
-                                                        "<div class='col d-flex align-items-center justify-content-center'>"+
-                                                            nuevoGrupo+
-                                                        "</div>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                        //Fin titulo contenedor
-                                        //Inicio cuerpo contenedor
-                                        "<div class='card-deck'>"+
-                                            "<div class='card'>"+
-                                                "<div class='card-body'>"+
-                                                    //Inicio agregar tarea
-                                                    "<form>"+
-                                                        "<div class='form-row align-items-center'>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<input type='text' class='form-control' placeholder='Ingresa una tarea'>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-5 mt-2'>"+
-                                                                "<div class='input-group'>"+
-                                                                    "<div class='input-group-prepend'>"+
-                                                                        "<div class='input-group-text'>@</div>"+
-                                                                    "</div>"+
-                                                                    "<input type='text' class='form-control' placeholder='Correo'>"+
-                                                                "</div>"+
-                                                            "</div>"+
-                                                            "<div class='col-sm-2 d-flex justify-content-center mt-2'>"+
-                                                                "<button type='submit' class='btn btn-primary'>Agregar</button>"+
-                                                            "</div>"+
-                                                        "</div>"+
-                                                    "</form>"+
-                                                    //Fin agregar tarea
-                                                    //Inicio contenedor de lista de tareas
-                                                    "<div class='row rowListaTareas'>"+
-                                                        //Inicio lista de tareas
-                                                        "<div class='col-12' id='listaTareas-"+nuevoGrupo+"'"+
-                                                        "</div>"+
-                                                        //Fin lista de tareas
-                                                    "</div>"+
-                                                    //Fin contenedor de lista de tareas
-                                                "</div>"+
-                                            "</div>"+
-                                        "</div>"+
-                                        //Fin cuerpo contenedor
-                                "</div>"
-                            );
-                            //LADO IZQUIERDO
-                            $("#list-tab").prepend(//Inserto el grupo a la lista de grupos
-                                "<a class='list-group-item list-group-item-action active grupoLista' id='lista-g"+nuevoGrupo+"' data-toggle='list' href='#panel-g"+nuevoGrupo+"' role='tab' aria-controls='g"+nuevoGrupo+"'>"+
-                                        "<img src='img/group.svg' alt='ic_grupos'>"+
-                                        nuevoGrupo+
-                                "</a>"
-                            );
-                        },
-                        error: function () {
-                            alert("Hubo un error :'v ");
-                        },
-                        complete: function () {
-                        }
-                    } );
-                }
-            );
-    
-            $(button.close).click(
-                function() {
-                    
-                }
-            );
-        </script>
+        <script src="js/grupos.js"></script>
+        
     </body>
 </html>

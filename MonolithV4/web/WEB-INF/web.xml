@@ -1,4 +1,58 @@
+
 <web-app>
+    <servlet>
+        <servlet-name>AgregarMiembro</servlet-name>
+        <servlet-class>Servlets.AgregarMiembro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AgregarMiembro</servlet-name>
+        <url-pattern>/AgregarMiembro</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AgregarTarea</servlet-name>
+        <servlet-class>Servlets.AgregarTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AgregarTarea</servlet-name>
+        <url-pattern>/AgregarTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CambiarTarea</servlet-name>
+        <servlet-class>Servlets.CambiarTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CambiarTarea</servlet-name>
+        <url-pattern>/CambiarTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CrearGrupos</servlet-name>
+        <servlet-class>Servlets.CrearGrupos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CrearGrupos</servlet-name>
+        <url-pattern>/CrearGrupos</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EliminarTarea</servlet-name>
+        <servlet-class>Servlets.EliminarTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarTarea</servlet-name>
+        <url-pattern>/EliminarTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EstadoTarea</servlet-name>
+        <servlet-class>Servlets.EstadoTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EstadoTarea</servlet-name>
+        <url-pattern>/EstadoTarea</url-pattern>
+    </servlet-mapping>
     
     <servlet>
         <servlet-name>IngresoUsuario</servlet-name>
