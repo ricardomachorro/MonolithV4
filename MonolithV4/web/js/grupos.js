@@ -400,3 +400,31 @@ function actualizarTarea(nombreGrupo,idTarea,idGrupo) {
     }
 }
 //Para la bd http://programandoointentandolo.com/2013/11/como-ejecutar-un-procedimiento-almacenado-desde-java-con-jdbc.html
+
+function estadoTarea(idTarea, checkbox) {
+    var estado = checkbox.checked;
+    var mandarEstado;
+    if(estado===true){
+        mandarEstado=1;
+    } else{
+        mandarEstado=0;
+    }
+    
+    $.ajax({
+        url: "EstadoTarea",
+        data: {
+            Estado: mandarEstado,
+            Tarea: idTarea
+        },
+        type: 'POST',
+        success: function () {
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            
+        },
+        complete: function (jqXHR, textStatus) {
+            
+        }
+    });
+}

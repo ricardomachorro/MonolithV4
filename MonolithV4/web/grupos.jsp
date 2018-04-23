@@ -244,9 +244,9 @@
                                                                     <!--Checkbox para marcar actividad-->
                                                                     <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
                                                                         <%if(estado) {%>
-                                                                            <input class="acabarTarea float-right" type="checkbox" checked>
+                                                                        <input class="acabarTarea float-right" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)" checked>
                                                                         <%} else {%>
-                                                                            <input class="acabarTarea float-right checado" type="checkbox">
+                                                                            <input class="acabarTarea float-right checado" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)">
                                                                          <% } %>
                                                                     </div>
                                                                 </div>

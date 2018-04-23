@@ -247,5 +247,20 @@ public class Database2 {
             System.out.println("Error quitando miembro: " + e.toString());
         }
     }
+    
+    public void CambiarEstadoTarea(int IDTarea, int estado) {
+        String cambio;
+        try {
+            if(estado==1){
+                cambio = "update Tarea set Estado=true where IDTarea="+IDTarea+";";
+            } else {
+                cambio = "update Tarea set Estado=false where IDTarea="+IDTarea+";";
+            }
+            st = c.createStatement();
+            st.execute(cambio);
+        } catch (Exception e) {
+            System.out.println("Error cambiando estado: " + e.toString());
+        }
+    }
     /*Fin de los metodos para grupos*/
 }

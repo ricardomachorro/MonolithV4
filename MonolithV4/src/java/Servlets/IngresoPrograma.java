@@ -52,8 +52,8 @@ public class IngresoPrograma extends HttpServlet {
             Database2 db = new Database2();
             //SESION
             HttpSession sesion = request.getSession();   
-            this.Nombre = request.getParameter("usuario").toString();
-            this.Contraseña =  request.getParameter("contrasenia").toString();
+            this.Nombre = request.getParameter("usuario");
+            this.Contraseña =  request.getParameter("contrasenia");
             //OBJETO
             u.setNombre(Nombre);
             u.setPassword(Contraseña);
