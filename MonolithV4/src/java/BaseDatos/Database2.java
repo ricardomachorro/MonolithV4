@@ -201,30 +201,41 @@ public class Database2 {
         return EstadoActividad;
     }
 
-    public void EliminarActividad(int IDActividad){//Actividades
-        try {
+    public boolean EliminarActividad(int IDActividad) throws Exception{//Actividades
+            boolean Exito=false;
             String sql1 = "delete from Actividad where IDActividad=?";
             ps = c.prepareStatement(sql1);
             ps.setInt(1,IDActividad);
             ps.execute();
-           
-        } catch (Exception ex) {
-
-        }
+            String sql2="select * from Actividad where IDActividad=?";
+             ps = c.prepareStatement(sql2);
+            ps.setInt(1,IDActividad);
+            rs=ps.executeQuery();
+            if(!rs.next()){
+               Exito=true; 
+            }
+            
+         return Exito;
     }
     
-    public void EliminarCategoria( String Usuario, String Categoria){//Actividades
-        try{
-            
+    public boolean EliminarCategoria( String Usuario, String Categoria) throws Exception{//Actividades
+        boolean Exito=false;
             int IDUsuario=IdentificarUsuario(Usuario);    
             String sql1 = "delete from Categoria where IDUsuario=? and NombreCategoria=?";
           ps = c.prepareStatement(sql1);
             ps.setInt(1,IDUsuario);
             ps.setString(2,Categoria);
             ps.execute();
-        }catch(Exception ex){
             
-        }
+            String sql2="select * from Categoria where IDUsuario=? and NombreCategoria=?";
+             ps = c.prepareStatement(sql2);
+           ps.setInt(1,IDUsuario);
+            ps.setString(2,Categoria);
+            rs=ps.executeQuery();
+            if(!rs.next()){
+               Exito=true; 
+            }
+        return Exito;
     }
 
     public int TipoUsuario(Usuario user){
@@ -563,4 +574,5 @@ public class Database2 {
         return id;
     }
     /*Fin metodos para grupos*/
+
 }
