@@ -727,7 +727,7 @@
                                 $("#EliminarActividadtxt").val("");
                                 $("." + NombreCategoriatext).remove();
                             },
-                            complete: function () {
+                            complete: function (data) {
 
                             }
 
