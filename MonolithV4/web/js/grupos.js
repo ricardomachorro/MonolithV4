@@ -161,7 +161,6 @@ function agregarTarea(e) {
     var dia;
     var fechaTarea = "";//Para acumular el valor de fecha
     var idTarea;
-    console.log(idT);
 //    Pruebas
 //    console.log("id btn: " + idT);
 //    console.log("id grupo: " + document.getElementById(idT).form.id.toString());
@@ -212,7 +211,7 @@ function agregarTarea(e) {
 //            console.log("idConcatenada: " + idConcatenada);
 //            console.log("Miembro. " + miembroTarea);
 //            console.log("Iniciado...");
-            console.log("Nombre tarea: " + nombreTarea);
+//            console.log("Nombre tarea: " + nombreTarea);
 //            console.log("fecha: " + fechaTarea);
             $.ajax( {
                 url: "AgregarTarea",
@@ -357,4 +356,47 @@ function eliminarTarea(Tarea, idTarea) {
     }
 }
 
+
+function actualizarTarea(nombreGrupo,idTarea,idGrupo) { 
+    var idConcatenada = idTarea + nombreGrupo;
+    var nombreTarea = $("#nomTarea-"+idConcatenada).val().toString();
+    var miembroEliminado = $("#eliMiembroTarea-"+idConcatenada).val().toString();
+    var miembroAgregado = $("#agrMiembroTarea-"+idConcatenada).val().toString();
+    var fechaTarea = document.getElementById("fechaTarea-"+idConcatenada).value.toString();
+    var aceptar;
+    if((miembroEliminado!=="")&&(miembroAgregado!=="")){
+            alert("Solo puedes cambiar un miembro a la vez");
+    } else{
+        confirm(nombreTarea+"\n"+miembroAgregado+"\n"+miembroEliminado+"\n"+fechaTarea);
+        aceptar = confirm("¿Estas seguro que quieres hacer cambios a esta tarea?");
+        if(aceptar===true){
+                $.ajax({
+                    url: "CambiarTarea",
+                    data: {
+                        idTarea: idTarea.toString(),
+                        newNombre: nombreTarea.toString(),
+                        newMiembro: miembroAgregado.toString(),
+                        newFecha: fechaTarea.toString(),
+                        byeMiembro: miembroEliminado.toString()
+                    },
+                    type: 'POST',
+                    success: function () {
+                        //Elemento  id='valorNombreTarea-"+idConcatenada+"'
+                        $("#valorNombreTarea-"+idConcatenada).text(nombreTarea);
+                        //Elemento  id='valorFechaTarea-"+idConcatenada+"'
+                        $("#valorFechaTarea-"+idConcatenada).text(fechaTarea);
+                        //Elemento  id='dropdown-miembros-"+idConcatenada+"'
+                        $("#dropdown-miembros-"+idConcatenada).append("<button class='dropdown-item disabled' type='button>"+miembroAgregado+"</button>");
+                    },
+                    error: function () {
+
+                    },
+                    complete: function () {
+
+                    }
+                });
+
+        }
+    }
+}
 //Para la bd http://programandoointentandolo.com/2013/11/como-ejecutar-un-procedimiento-almacenado-desde-java-con-jdbc.html

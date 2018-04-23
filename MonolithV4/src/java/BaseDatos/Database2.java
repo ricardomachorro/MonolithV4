@@ -223,5 +223,29 @@ public class Database2 {
             System.out.println(e.toString() + " - Error");
         }
     }
+    
+    public void actualizarTarea(Tarea t) {
+        //Asignando datos alv
+        String Nombre = t.getNombreTarea();
+        Date Fecha = t.getFechaTarea();
+        int IDTarea = t.getIdTarea();
+        String query = "update Tarea set Nombre='"+Nombre+"',Fecha='"+Fecha+"' where IDTarea="+IDTarea+";";
+        try {
+            st = c.createStatement();
+            st.execute(query);
+        } catch (Exception e) {
+            System.out.println("Error actualizando tarea: " + e.toString());
+        }
+    }
+    
+    public void desasignarMiembro(int IDTarea, int IDMiembro) throws Exception {
+        String queryDasigMiembro = "delete from TareaMiembro where IDTarea="+IDTarea+" and IDMiembro="+IDMiembro+";";
+        try{
+            st = c.createStatement();
+            st.execute(queryDasigMiembro);
+        } catch (Exception e){
+            System.out.println("Error quitando miembro: " + e.toString());
+        }
+    }
     /*Fin de los metodos para grupos*/
 }

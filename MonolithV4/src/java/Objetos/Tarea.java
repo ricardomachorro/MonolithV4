@@ -8,6 +8,7 @@ import java.sql.Date;
  */
 public class Tarea {
     private String nombreTarea;
+    private int idTarea;
     private int IdGrupoTarea;
     private Date fechaTarea;
     private int idMiembroTarea;
@@ -42,5 +43,13 @@ public class Tarea {
 
     public void setIdMiembroTarea(int idMiembroTarea) {
         this.idMiembroTarea = idMiembroTarea;
+    }
+
+    public int getIdTarea() {
+        return idTarea;
+    }
+
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
     }
 }

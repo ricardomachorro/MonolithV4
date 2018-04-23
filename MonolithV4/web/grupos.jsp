@@ -200,7 +200,7 @@
                                                                             <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
                                                                             <%out.print("data-target='#tarea-"+idConcatenada+"'");%> aria-expanded="false" 
                                                                             <%out.print("aria-controls='tarea-"+idConcatenada+"'");%>>
-                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;" <%out.print("id='valorNombreTarea-"+idConcatenada+"'");%>>
                                                                                 <%out.print(nomTarea);%>
                                                                                 </span>
                                                                             </button>
@@ -208,7 +208,7 @@
                                                                     </div>
                                                                     <!--Fecha limite-->
                                                                     <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-                                                                        <small class="text-muted" <%out.print("id='fechaTarea-"+idConcatenada+"'");%>>
+                                                                        <small class="text-muted" <%out.print("id='valorFechaTarea-"+idConcatenada+"'");%>>
                                                                             <%out.print(fecha);%>
                                                                         </small>
                                                                     </div>
@@ -221,7 +221,7 @@
                                                                                     Miembros
                                                                             </button>
                                                                             <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
-                                                                                 id="dropdown-miembros-NombreGrupo">
+                                                                                 <%out.print("id='dropdown-miembros-"+idConcatenada+"'");%>>
                                                                                 <%
                                                                                     psMiembros.setInt(1, nTarea);
                                                                                     rsMiembros = psMiembros.executeQuery();
@@ -257,19 +257,19 @@
                                                                 <div class="card-body">
                                                                     <form>
                                                                         <!--Inicio formulario para modificar actividad-->
-                                                                        <div class="form-row">
+                                                                        <div class="form-row ElementosCambios">
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>">
+                                                                                <input type="text" class="form-control" <%out.print("id='nomTarea-"+idConcatenada+"'");%> name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>"/>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="date" class="form-control" id="fecha" name="fecha" value="<%out.print(fecha);%>">
+                                                                                <input type="date" class="form-control dFecha" <%out.print("id='fechaTarea-"+idConcatenada+"'");%> name="fecha"/>
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="eliMiembro" name="eliMiembro" placeholder="Eliminar miembro asignado">
+                                                                                <input type="text" class="form-control" <%out.print("id='eliMiembroTarea-"+idConcatenada+"'");%> name="eliMiembro" placeholder="Eliminar miembro asignado"/>
                                                                             </div>
 
                                                                             <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" id="agrMiembro" name="agrMiembro" placeholder="Agregar miembro asignado">
+                                                                                <input type="text" class="form-control" <%out.print("id='agrMiembroTarea-"+idConcatenada+"'");%> name="agrMiembro" placeholder="Agregar miembro asignado"/>
                                                                             </div>
                                                                         </div>
                                                                         <!--Fin formulario para modificar actividad-->
@@ -277,13 +277,13 @@
                                                                         <div class="form-row mt-2">
                                                                             <div class="col-sm-6">
                                                                                 <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;"
-                                                                                        >
+                                                                                        onclick="actualizarTarea('<%out.print(nombreGrupo);%>',<%out.print(nTarea);%>);">
                                                                                     Modificar actividad
                                                                                 </button>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;"
-                                                                                        onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>);">
+                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;idGrupo"
+                                                                                        onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>,<%out.print(idGrupo);%>);">
                                                                                     Eliminar actividad
                                                                                 </button>
                                                                             </div>

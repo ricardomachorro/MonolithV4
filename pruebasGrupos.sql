@@ -66,3 +66,6 @@ select IDTarea from Tarea where IDTarea=(select max(IDTarea) from Tarea);
 
 #Eliminar una tarea
 delete from Tarea where IDTarea=4;
+
+#Desagnar un miembro
+#delete from TareaMiembro where IDTarea=3 and IDMiembro=1;

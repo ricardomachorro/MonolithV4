@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xmlns="http://java.sun.com/xml/ns/javaee"
-     xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-     id="WebApp_ID" version="2.5">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
         <servlet-name>IngresoUsuario</servlet-name>
         <servlet-class>Servlets.IngresoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CambiarTarea</servlet-name>
+        <servlet-class>Servlets.CambiarTarea</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>IngresoUsuario</servlet-name>
         <url-pattern>/IngresoUsuario</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>IngresoPrograma</servlet-name>
         <servlet-class>Servlets.IngresoPrograma</servlet-class>
@@ -22,7 +20,6 @@
         <servlet-name>IngresoPrograma</servlet-name>
         <url-pattern>/IngresoPrograma</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>IngresarActividad</servlet-name>
         <servlet-class>Servlets.IngresarActividad</servlet-class>
@@ -31,5 +28,8 @@
         <servlet-name>IngresarActividad</servlet-name>
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>CambiarTarea</servlet-name>
+        <url-pattern>/CambiarTarea</url-pattern>
+    </servlet-mapping>
 </web-app>
