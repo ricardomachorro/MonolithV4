@@ -310,13 +310,13 @@
                             <div class="card-body" >
                                 <ul id="ListaCategorias">
                                     <li class="Todos" id="Todos"><img src='img/folderOrange.svg'>Todos</li>
-                                    <%
-                                        Statement st2 = conexion.createStatement();
-                                        ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
-                                        while (rs2.next()) {
-                                            out.println(" <li id='" + rs2.getString("NombreCategoria") + "'><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
-                                        }
-                                    %>
+                                        <%
+                                            Statement st2 = conexion.createStatement();
+                                            ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+                                            while (rs2.next()) {
+                                                out.println(" <li id='" + rs2.getString("NombreCategoria") + "'><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
+                                            }
+                                        %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
 
 
@@ -436,6 +436,18 @@
                                 if ($("#ListaCategorias").find("#" + NombreCategoria).length === 0) {
                                     $("#ListaCategorias").prepend("<li id='" + NombreCategoria + "'><img src='img/folderOrange.svg'>" + NombreCategoria + "</li>");
                                 }
+
+                                $("#ListaCategorias li").click(function () {
+                                    var Categoria = $(this).attr("class");
+                                    var nombreCategoria = $(this).attr("id");
+                                    if (Categoria === "Todos") {
+                                        $("#ContenedorCartasActividades").children().show();
+                                    } else {
+                                        $("#ContenedorCartasActividades").children().not("." + nombreCategoria).hide();
+                                        $("#ContenedorCartasActividades").children("." + nombreCategoria).show();
+                                    }
+
+                                });
 
                                 $(".CheckBoxActividades").click(function () {
                                     var IDActividad = $(this).attr("id");
@@ -699,17 +711,17 @@
                     }
                 });
             });
-            
-            $("#ListaCategorias li").click( function(){
-                var Categoria=$(this).attr("class");
-                var nombreCategoria=$(this).attr("id");
-                if(Categoria==="Todos"){
+
+            $("#ListaCategorias li").click(function () {
+                var Categoria = $(this).attr("class");
+                var nombreCategoria = $(this).attr("id");
+                if (Categoria === "Todos") {
                     $("#ContenedorCartasActividades").children().show();
-                }else{
-                $("#ContenedorCartasActividades").children().not("."+nombreCategoria).hide();
-                $("#ContenedorCartasActividades").children("."+nombreCategoria).show();
+                } else {
+                    $("#ContenedorCartasActividades").children().not("." + nombreCategoria).hide();
+                    $("#ContenedorCartasActividades").children("." + nombreCategoria).show();
                 }
-                
+
             });
 
             $("#BtnEliminarCategoria").click(function () {
