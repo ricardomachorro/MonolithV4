@@ -135,7 +135,7 @@
                                         Statement st2 = conexion.createStatement();
                                         ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
                                         while (rs2.next()) {
-                                            out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'><a='txt"+rs2.getString("Nombre") +"'>" + rs2.getString("Nombre") + "<a></li>");
+                                            out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'><a>" + rs2.getString("Nombre") + "<a></li>");
                                         }
                                     %>
                                     <!-- <li><img src="img/folderOrange.svg">asssa</li>-->
@@ -214,7 +214,7 @@
                                 TitleNota: TituloNota,
                                 ContenidoNota: Contenido
                             }, success: function () {
-                                $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'><a id='txt"+TituloNota+"'>" + TituloNota + "</a></li>");
+                                $("#ListaNotas").prepend("<li class='NotasListas' id='" + TituloNota + "'><img src='img/post-it.svg'><a>" + TituloNota + "</a></li>");
 
                                 $(".NotasListas").click(function () {
                                     var ElementoSeleccionado = $(this).attr("id");
@@ -289,8 +289,9 @@
                             ContenidoNota: Contenido,
                             Anterior: TituloAnterior
                         }, success: function (data) {
-                                 var elementocambio=$("#ListaNotas").find( "#" + TituloAnterior);
-                                 elementocambio.find("a").val(TituloNota);
+                                 var elementocambio=$("#ListaNotas").children( "#" + TituloAnterior);
+                                elementocambio.closest("a").text(TituloNota);
+                               elementocambio.attr("id",TituloNota);
                                 
                         }, error: {
 

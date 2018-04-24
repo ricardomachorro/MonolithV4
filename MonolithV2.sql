@@ -22,12 +22,12 @@ adendum nvarchar(50) not null
 );
 
 select *from validacion;
-delete from validacion where IdAdendum>0;
+#delete from validacion where IdAdendum>0;
 select * from Usuario;
-delete from Usuario where IDUsuario>2;
+#delete from Usuario where IDUsuario>2;
 select * from Validacion where adendum='';
 
-delete from Validacion where Nombre='rick1234';
+/*delete from Validacion where Nombre='rick1234';*/
 
 create table Conversacion(IDConversacion int not null primary key auto_increment,
 DueñoCuentaUsuario int,UsuarioExterno int,
@@ -63,23 +63,22 @@ create table Actividad(
 );
 
 select * from actividad;
-delete from actividad where IDActividad>1;
-
+#delete from actividad where IDActividad>1;
 /*Aqui empiezan las tablas para el modulo grupos :v*/
 create table Grupo(
 	IDGrupo int not null primary key auto_increment,
 	NombreGrupo nvarchar(100) not null
 	#UsuarioLider int,
-	/*PuntoReunion int,*/
-	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade/*,
-	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade*/
+	#PuntoReunion int,
+	#foreign key(UsuarioLider) references Usuario(IDUsuario) on update cascade on delete cascade,
+	#foreign key (PuntoReunion) references Localizacion(IDLocalizacion) on update cascade on delete cascade
 );
 
 create table Tarea(
 	IDTarea int not null primary key auto_increment,
     IDGrupo int,
 	Nombre nvarchar(100),
-	Fecha datetime,
+	Fecha date,
 	Estado boolean,
     foreign key(IDGrupo) references Grupo(IDGrupo) on update cascade on delete cascade
 );
@@ -128,18 +127,7 @@ create table Logro(
 	Nombre varchar(100) not null,
 	fecha date not null
 );
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
-values('rick','sasaas@gmail.com',21,'mexico','dasfdsfsdfsadfsd','memo',2,'Si',80);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
-values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,'Si',80);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
-values('memo1','memo@fdsed.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,'Si',30);
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
-values(1,2,5,'dogo #97','2017-05-12');
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
-values(2,1,7,'dogo #12','2017-03-01');
-select * from Logro;
-select * from Usuario;
+
 
 create table Intercambio(
 	IDInter int not null auto_increment primary key,
