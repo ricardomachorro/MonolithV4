@@ -49,6 +49,15 @@
                 else
                     return str;
             }
+           function mandardatosuwu(){
+               var texto = document.getElementById("memo").value;
+               var xd = "nel";
+               if(texto==xd){
+                   alert('No seleccionaste un doggo >:c');
+               }else{
+                   document.forms['respeta'].submit();
+               }
+            }
         </script>
     </head>
     <body>
@@ -64,7 +73,7 @@
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio" >Grupo</a>
+                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
@@ -91,7 +100,7 @@
             </div>
         </nav>
         <div class="container">
-            
+
             <div class="row">
                 <div class="col">
                     <%
@@ -99,12 +108,12 @@
                         int IDInter = Integer.parseInt(request.getParameter("id"));%>
                     <div class="card-group mt-3">
                         <div class="card">
-                            <form action="SoliReal.jsp?id=<%=IDInter%>" method="post">
+                            <form action="SoliReal.jsp?id=<%=IDInter%>" name="respeta" method="post">
 
                                 <div class="form-group">
                                     <h2><label for="nombre">Selecciona el dogo que deseas intercambiar</label></h2>
-                                    <select name="memo" id="memo" class="custom-select" onChange="changecontent(this)" required="">
-                                        <option value="1" selected>Seleciona al dogo</option>
+                                    <select name="memo" id="memo" class="custom-select" onChange="changecontent(this)" required>
+                                        <option value="nel" selected>Seleciona al dogo</option>
                                         <%
 
                                             Connection con = null;
@@ -175,7 +184,7 @@
                                     <img name="marco" id="marco" src="img/Doggo.jpg" class="" alt="" width=250px" height="250px">
                                 </div>
 
-                                <input class="btn btn-primary" type="submit" value="Intercambiar" <%=estado%>>
+                                        <input class="btn btn-primary" type="button" onclick="mandardatosuwu();" value="Intercambiar" <%=estado%>>
                             </form>
                         </div>
 
