@@ -15,7 +15,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
         <script>
-            function solonumeros(e){
+            function solonumeros(e) {
                 var keyword;
                 if (window.event) {
                     keyword = e.keyCode;//explorer
@@ -62,6 +62,12 @@
                     return str.substring(0, str.indexOf(char));
                 else
                     return str;
+            }
+            function memoacep(){
+                document.forms['Aceptar'].submit();
+            }
+            function memonieg(){
+                document.forms['Negar'].submit();
             }
         </script>
         <%
@@ -148,9 +154,9 @@
                                     </div>
                                     <div class="col-8 TextoCartasResumenActividades" >
                                         <a >Agregar dogo</a>
-                                        <%                                            if (puntos > 0) {
+                                        <%                                            if (puntos >= 5) {
                                         %>
-                                        <form action="LogrosAgre.jsp" method="post">
+                                        <form action="Agregar" method="Post">
                                             <input type="submit" class="btn btn-primary" value="Agregar">
                                         </form> 
                                         <%
@@ -268,7 +274,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <form action="Inter1.jsp" method="post">
+                                                        <form action="Inter" method="Post">
 
                                                             <div class="form-group">
                                                                 <label for="nombre">Selecciona el dogo que deseas intercambiar</label>
@@ -375,9 +381,18 @@
                                         <div class="card-header" role="tab" id="heading<%=conta%>">
                                             <h5 class="mb-0">
                                                 <a href="#collapse<%=conta%>" data-toggle="collapse" data-parent="#acordion" aria-expanded="true" aria-controls="collapse<%=conta%>">
-                                                    Oferta de <p id="usuda" name="usuda"><%=usuda%></p>
+                                                    <p id="usuda" name="usuda">Oferta de: <%=usuda%></p>
                                                 </a>
                                             </h5>
+                                            <button type="submit" class="btn btn-primary"  onclick="memoacep();">Aceptar</button>
+                                            <button type="submit" class="btn btn-danger" onclick="memonieg();">Negar</button>
+                                            <form method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
+
+                                            </form>
+                                            <form method="post" name="Negar"  action="NegarInter?id=<%=IDinter%>">
+
+                                            </form>
+
 
                                         </div>
 
@@ -392,12 +407,7 @@
                                             <div class="col-4">
                                                 <img src="img/dogo<%=imgchida%>.jpg" class="card-img-top img-fluid <%=filtroDa%>" alt="" >
 
-                                                <form method="post" action="SoliAcep.jsp?id=<%=IDinter%>">
-                                                    <button type="submit" class="btn btn-primary" >Aceptar</button>
-                                                </form>
-                                                <form method="post" action="SoliNega.jsp?id=<%=IDinter%>">
-                                                    <button type="submit" class="btn btn-danger" >Negar</button>
-                                                </form>
+
 
                                             </div>
                                         </div>
@@ -439,12 +449,12 @@
                                         String estado1 = "";
                                         String fecha2 = "";
                                         int conta1 = 0;
-                                        
+
                                         int imgchida1 = 0;
                                         r = sta.executeQuery("select * from Intercambio where UsuarioDa='" + usuario + "' or UsuarioRe='" + usuario + "'  order by IDInter DESC  ");
                                         while (r.next()) {
                                             String tipo = "";
-                                        String memo = "";
+                                            String memo = "";
                                             conta1++;
                                             idusuda1 = Integer.parseInt(r.getString("IDusuarioDa"));
                                             idusure1 = Integer.parseInt(r.getString("IDusuarioRe"));
@@ -481,8 +491,9 @@
                                         <div class="card-header" role="tab" id="heading1<%=conta1%>">
                                             <h5 class="mb-0">
                                                 <a href="#collapse1<%=conta1%>" data-toggle="collapse" data-parent="#memo" aria-expanded="true" aria-controls="collapse<%=conta1%>">
-                                                    <%=memo%> hacia <p id="usuda" name="usuda"><%=usure1%></p>
+                                                    <p id="usuda" name="usuda"><%=memo%> hacia <%=usure1%></p>
                                                 </a>
+                                                <a type="button" class="btn btn-<%=tipo%>">Estado: <%=estado1%></a>
                                             </h5>
 
                                         </div>
@@ -492,7 +503,6 @@
                                                 <p id="fecha" name="fecha"><%=fecha2%></p>
                                                 <p id="dogoda" name="dogoda"><%=usuda1%> ofrece el <%=dogoda1%></p>
                                                 <p id="dogore" name="dogoda">a <%=usure1%> por el dogo# <%=dogore1%></p>
-                                                <a type="button" class="btn btn-<%=tipo%>">Estado: <%=estado1%></a>
 
 
                                             </div>

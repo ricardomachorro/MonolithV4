@@ -1,8 +1,3 @@
-<%-- 
-    Document   : SoliNega
-    Created on : 28/03/2018, 12:58:50 PM
-    Author     : memo0
---%>
 <%@page import="java.sql.*, java.io.*,java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -54,7 +54,7 @@
                 int img1 = 0;
                 if (usuario.equals(UsuRe)) {
                     out.println("<script>alert('Usuario no valido')</script>");
-                    out.println("<script>location.replace('Inter.jsp');</script>");
+                    out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                 } else {
                     try {
                         Connection con = null;
@@ -79,7 +79,7 @@
                             out.println("<script>alert('Oferta hecha con exito')</script>");
                         } else {
                             out.println("<script>alert('Usuario no valido')</script>");
-                            out.println("<script>location.replace('Inter.jsp');</script>");
+                            out.println("<script>location.replace('LogrosPrue.jsp');</script>");
                         }
 
                         out.println("<script>location.replace('LogrosPrue.jsp');</script>");
