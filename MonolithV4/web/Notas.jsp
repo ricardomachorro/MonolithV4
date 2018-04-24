@@ -1,5 +1,4 @@
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.sql.*" %>
 <%
@@ -289,10 +288,12 @@
                             ContenidoNota: Contenido,
                             Anterior: TituloAnterior
                         }, success: function (data) {
-                                 var elementocambio=$("#ListaNotas").children( "#" + TituloAnterior);
-                                elementocambio.closest("a").text(TituloNota);
-                               elementocambio.attr("id",TituloNota);
-                                
+                            
+                               var elementocambio=$("#ListaNotas").children( "#" + TituloAnterior);
+                               elementocambio.empty();
+                                elementocambio.append("<img src='img/post-it.svg'><a>"+TituloNota+"</a>");
+                                elementocambio.attr("id",TituloNota);
+                                $("#TituloNota").text(TituloNota);
                         }, error: {
 
                         }
