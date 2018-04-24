@@ -57,7 +57,7 @@ inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro
 where TareaMiembro.IDTarea=2;
 
 #Traer los grupos donde un usuario es miembro
-select * from Grupo 
+select * from Grupo
 inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo
 where Miembros.IDUsuario=1;
 
@@ -72,3 +72,8 @@ delete from Tarea where IDTarea=4;
 
 #Buscar el rol del usaurio
 select IDRol from Miembros where IDUsuario=2 and IDGrupo=1;
+
+#Eliminar un grupo
+#delete from Grupo where IDGrupo=1;
+
+#select * from catRol;

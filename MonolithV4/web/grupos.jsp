@@ -157,7 +157,7 @@
                                                 <button class="btn btn-light dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>);">Eliminar grupo</button>
+                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>,'<%out.print(nombreGrupo);%>');">Eliminar grupo</button>
                                                 </div>
                                             </div>
                                             <% } 
