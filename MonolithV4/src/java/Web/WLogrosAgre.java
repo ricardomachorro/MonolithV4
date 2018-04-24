@@ -35,7 +35,7 @@ public class WLogrosAgre {
             int IDusuario = db.IDusu(Usuario);
             Random rand = new Random();
             int n = rand.nextInt(100) + 1;
-            int img = rand.nextInt(7) + 1;
+            int img = rand.nextInt(14) + 1;
             int fil = rand.nextInt(10) + 1;
             Calendar fechita = new GregorianCalendar();
             int año = fechita.get(Calendar.YEAR);
