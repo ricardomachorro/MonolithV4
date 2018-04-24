@@ -37,7 +37,7 @@
         <title>Grupos</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/Css" href="Css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/Css" href="Css/bootstrap.min.css">-->
         <link rel="stylesheet" type="text/Css" href="Css/BarraDeInicioSesion.css">
         <link rel="stylesheet" type="text/Css" href="Css/Grupos.css">
     </head>
@@ -62,7 +62,7 @@
                         <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="Ayuda.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Ayuda</a>
@@ -108,6 +108,12 @@
                             ResultSet rs = st.executeQuery(query);
                             String nombreGrupo;
                             
+                            //Para el rol
+                            String traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                            Statement stRol = con.createStatement();
+                            ResultSet rsRol;
+                            int rol;
+                            
                             //Para las tareas de los grupos
                             int idGrupo;
                             String queryTarea = "select * from Tarea where IDGrupo=?;";
@@ -140,6 +146,23 @@
                                             <div class='col d-flex align-items-center justify-content-center'>
                                                 <%out.print("<h2>" + nombreGrupo + "</h2>");%>
                                             </div>
+                                            <%  traerRol = traerRol+idGrupo+";";
+                                                rsRol = stRol.executeQuery(traerRol);
+                                                rsRol.next();
+                                                rol = rsRol.getInt("IDRol");
+                                                if(rol==1){
+                                                    
+                                            %>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
+                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>,'<%out.print(nombreGrupo);%>');">Eliminar grupo</button>
+                                                </div>
+                                            </div>
+                                            <% } 
+                                                traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                                            %>
                                         </div>
                                     </div>
                                 </div>

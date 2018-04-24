@@ -674,6 +674,18 @@ public class Database2 {
             System.out.println("Error cambiando estado: " + e.toString());
         }
     }
+    
+    public void eliminarGrupo(int idGrupo){
+        String queryEliminar = "delete from Grupo where IDGrupo=?;";
+        try {
+            ps = c.prepareStatement(queryEliminar);
+            ps.setInt(1, idGrupo);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println("Error eliminando grupo: " + e.toString() + " :'v");
+        }
+    }
+    
     /*Fin de los metodos para grupos*/
 
 }

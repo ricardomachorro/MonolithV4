@@ -205,6 +205,7 @@
                     var TituloNota = $("#txtNuevaNota").val();
                     var Contenido = $("#txtContenidoNota").val();
                     var NotasRepetidas = $("#ListaNotas").find("#" + TituloNota).length;
+                    
                     if (NotasRepetidas === 0) {
                         $.ajax({
                             url: "GuardarNota",

@@ -428,3 +428,30 @@ function estadoTarea(idTarea, checkbox) {
         }
     });
 }
+
+function eliminarGrupo(idGrupo,nombreGrupo){
+    //id='panel-g" + nombreGrupo + "'
+    var borrar;
+    var idPanel = "panel-g" + nombreGrupo;
+    var idLista = "lista-g" + nombreGrupo;
+    borrar = confirm("¿Estas seguro que quieres eliminar este grupo?");
+    if(borrar===true) {
+        $.ajax({
+            url: "EliminarGrupo",
+            data: {
+                Grupo: idGrupo
+            },
+            type: 'POST',
+            success: function () {
+                $("#"+idPanel).remove();
+                $("#"+idLista).remove();
+            },
+            error: function () {
+
+            },
+            complete: function () {
+
+            }
+        });
+    }
+}

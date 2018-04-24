@@ -8,7 +8,14 @@
         <servlet-name>AgregarMiembro</servlet-name>
         <url-pattern>/AgregarMiembro</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>EliminarGrupo</servlet-name>
+        <servlet-class>Servlets.EliminarGrupo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarGrupo</servlet-name>
+        <url-pattern>/EliminarGrupo</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>AgregarTarea</servlet-name>
         <servlet-class>Servlets.AgregarTarea</servlet-class>
