@@ -102,11 +102,13 @@
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
+                            <img src="img/user.svg" class="ImagenesBarraInicio" ><%
+                                out.println(usuario);
+                                %>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" >Usuario: <%/* 
-                                out.println(Usuario);*/
+                            <a class="dropdown-item" ><%
+                                out.println(usuario);
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
@@ -382,15 +384,15 @@
                                                     <p id="usuda" name="usuda">Oferta de: <%=usuda%></p>
                                                 </a>
                                             </h5>
-                                            <button type="submit" class="btn btn-primary"  onclick="memoacep();">Aceptar</button>
-                                            <button type="submit" class="btn btn-danger" onclick="memonieg();">Negar</button>
-                                            <form method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
-
-                                            </form>
-                                            <form method="post" name="Negar"  action="SoliNega?id=<%=IDinter%>">
-
-                                            </form>
-
+                                            
+                                                <div class="row">
+                                                <form class="col-6" method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
+                                                    <button type="submit" class="btn btn-primary"  >Aceptar</button>
+                                                </form>
+                                                <form class="col-6" method="post" name="Negar"  action="SoliNega.jsp?id=<%=IDinter%>">
+                                                    <button type="submit" class="btn btn-danger">Negar</button>
+                                                </form>
+                                            </div>
 
                                         </div>
 
