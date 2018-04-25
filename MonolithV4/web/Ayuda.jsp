@@ -107,8 +107,7 @@
                                     sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
                                     cualquiera de las dudas que podria tener
                                 </p>
-                                <img src="img/businessman.svg" style="height:350px;width:550px; margin:22px;">
-                                <h5 class="card-text"></h5>
+                               
                              
                             </div>
                         </div>
