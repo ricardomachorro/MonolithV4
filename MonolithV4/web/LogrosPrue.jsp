@@ -63,7 +63,7 @@
                 else
                     return str;
             }
-            
+
         </script>
         <%
             HttpSession sesion = request.getSession();
@@ -87,28 +87,23 @@
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" ><%
-                                out.println(usuario);
-                                %>
+                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" ><%
-                                out.println(usuario);
+                            <a class="dropdown-item" >Usuario: <%/* 
+                                out.println(Usuario);*/
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
@@ -156,9 +151,9 @@
                                         <a >Agregar dogo</a>
                                         <%                                            if (puntos >= 5) {
                                         %>
-                                        <form action="LogrosAgre.jsp" method="post">
+                                        <form action="Agregar" method="Post">
                                             <input type="submit" class="btn btn-primary" value="Agregar">
-                                        </form>  
+                                        </form> 
                                         <%
                                         } else {%>
                                         <input type="submit" class="btn btn-danger" value="sin puntos">
@@ -274,7 +269,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <form action="Inter1.jsp" method="Post">
+                                                        <form action="Inter" method="Post">
 
                                                             <div class="form-group">
                                                                 <label for="nombre">Selecciona el dogo que deseas intercambiar</label>
@@ -384,12 +379,13 @@
                                                     <p id="usuda" name="usuda">Oferta de: <%=usuda%></p>
                                                 </a>
                                             </h5>
-                                            
-                                                <div class="row">
+
+
+                                            <div class="row">
                                                 <form class="col-6" method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
                                                     <button type="submit" class="btn btn-primary"  >Aceptar</button>
                                                 </form>
-                                                <form class="col-6" method="post" name="Negar"  action="SoliNega.jsp?id=<%=IDinter%>">
+                                                <form class="col-6" method="post" name="Negar"  action="NegarInter?id=<%=IDinter%>">
                                                     <button type="submit" class="btn btn-danger">Negar</button>
                                                 </form>
                                             </div>
@@ -530,3 +526,4 @@
         </div>
     </body>
 </html>
+
