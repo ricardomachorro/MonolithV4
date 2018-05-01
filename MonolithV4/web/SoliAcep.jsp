@@ -73,16 +73,13 @@
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio" >Grupo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
@@ -108,7 +105,7 @@
                         int IDInter = Integer.parseInt(request.getParameter("id"));%>
                     <div class="card-group mt-3">
                         <div class="card">
-                            <form action="SoliReal.jsp?id=<%=IDInter%>" name="respeta" method="post">
+                            <form action="AcepLogroa?id=<%=IDInter%>" name="respeta" method="post">
 
                                 <div class="form-group">
                                     <h2><label for="nombre">Selecciona el dogo que deseas intercambiar</label></h2>
@@ -243,3 +240,4 @@
         <%}%>
     </body>
 </html>
+
