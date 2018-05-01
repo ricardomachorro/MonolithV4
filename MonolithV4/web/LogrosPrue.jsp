@@ -63,12 +63,7 @@
                 else
                     return str;
             }
-            function memoacep(){
-                document.forms['Aceptar'].submit();
-            }
-            function memonieg(){
-                document.forms['Negar'].submit();
-            }
+
         </script>
         <%
             HttpSession sesion = request.getSession();
@@ -384,15 +379,16 @@
                                                     <p id="usuda" name="usuda">Oferta de: <%=usuda%></p>
                                                 </a>
                                             </h5>
-                                            <button type="submit" class="btn btn-primary"  onclick="memoacep();">Aceptar</button>
-                                            <button type="submit" class="btn btn-danger" onclick="memonieg();">Negar</button>
-                                            <form method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
 
-                                            </form>
-                                            <form method="post" name="Negar"  action="NegarInter?id=<%=IDinter%>">
 
-                                            </form>
-
+                                            <div class="row">
+                                                <form class="col-6" method="post" name="Aceptar"  action="SoliAcep.jsp?id=<%=IDinter%>">
+                                                    <button type="submit" class="btn btn-primary"  >Aceptar</button>
+                                                </form>
+                                                <form class="col-6" method="post" name="Negar"  action="NegarInter?id=<%=IDinter%>">
+                                                    <button type="submit" class="btn btn-danger">Negar</button>
+                                                </form>
+                                            </div>
 
                                         </div>
 

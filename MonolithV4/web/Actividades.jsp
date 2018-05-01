@@ -40,7 +40,7 @@
                         <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
