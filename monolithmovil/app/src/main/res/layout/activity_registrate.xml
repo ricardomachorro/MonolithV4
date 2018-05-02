@@ -76,7 +76,7 @@
         app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Agre"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"

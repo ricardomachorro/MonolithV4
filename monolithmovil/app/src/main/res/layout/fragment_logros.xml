@@ -1,29 +1,250 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alumno.monolithmovil.Logros">
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="265dp"
-            android:layout_marginEnd="150dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="264dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="@string/logros"
-            android:textSize="55sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Logros de memo"
+            android:textSize="40sp"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="8dp" />
+
+        <!--suppress AndroidMissingOnClickHandler -->
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txtpuntos"
+            android:layout_alignStart="@+id/textView19"
+
+            android:text="Agregar"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_above="@+id/txtpuntos"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Cada logro tiene un costo de 5 puntos"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="23dp"
+            tools:layout_editor_absoluteY="63dp" />
+
+        <TextView
+            android:id="@+id/txtpuntos"
+            android:layout_width="182dp"
+            android:layout_height="39dp"
+            android:layout_above="@+id/carta1"
+            android:layout_alignEnd="@+id/carta2"
+            android:gravity="center"
+            android:text="Tienes 15 puntos"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/carta1"
+            android:layout_width="370dp"
+            android:layout_height="94dp"
+            android:layout_above="@+id/carta2"
+            android:layout_alignStart="@+id/carta2"
+            android:visibility="invisible"
+            card_view:cardBackgroundColor="#ece7e7"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="159dp">
+
+            <RelativeLayout
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="290dp">
+
+                <ImageView
+                    android:id="@+id/idImagen"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/frameLayout2"
+                    android:src="@drawable/dogo5" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/idInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/idImagen"
+                    android:text="Obtenido el 30/04/2018" />
+
+                <TextView
+                    android:id="@+id/idNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/idInfo"
+                    android:layout_below="@+id/frameLayout2"
+                    android:layout_marginStart="16dp"
+                    android:text="Dogo #23"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/carta2"
+            android:layout_width="368dp"
+            android:layout_height="93dp"
+            android:layout_above="@+id/carta3"
+            android:layout_alignStart="@+id/carta3"
+            android:visibility="invisible"
+            card_view:cardBackgroundColor="#ece7e7"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="252dp">
+
+            <RelativeLayout
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="290dp">
+
+                <ImageView
+                    android:id="@+id/idImagen2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/frameLayout22"
+                    android:src="@drawable/dogo6" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/idInfo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/idImagen2"
+                    android:text="Obtenido el 30/04/2018" />
+
+                <TextView
+                    android:id="@+id/idNombre2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/idInfo2"
+                    android:layout_below="@+id/frameLayout22"
+                    android:layout_marginStart="16dp"
+                    android:text="Dogo #89"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/carta3"
+            android:layout_width="368dp"
+            android:layout_height="93dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="164dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-</FrameLayout>
+            card_view:cardBackgroundColor="#ece7e7"
+            tools:layout_editor_absoluteY="345dp">
+
+            <RelativeLayout
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="290dp">
+
+                <ImageView
+                    android:id="@+id/idImagen3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/frameLayout23"
+                    android:src="@drawable/dogo8" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/idInfo3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/idImagen3"
+                    android:text="Obtenido el 30/04/2018" />
+
+                <TextView
+                    android:id="@+id/idNombre3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/idInfo3"
+                    android:layout_below="@+id/frameLayout23"
+                    android:layout_marginStart="16dp"
+                    android:text="Dogo #117"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+</LinearLayout>

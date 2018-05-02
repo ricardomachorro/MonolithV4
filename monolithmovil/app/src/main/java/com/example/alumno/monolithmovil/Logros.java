@@ -4,9 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.support.v7.widget.AppCompatButton;
 
 
 /**
@@ -23,6 +29,8 @@ public class Logros extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -32,6 +40,7 @@ public class Logros extends Fragment {
     public Logros() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -60,11 +69,58 @@ public class Logros extends Fragment {
         }
     }
 
+    public CardView logro1;
+    public CardView logro2;
+    public CardView logro3;
+    public Button btn;
+    public TextView text;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logros, container, false);
+        View view= inflater.inflate(R.layout.fragment_logros, container, false);
+        logro1=(CardView) view.findViewById(R.id.carta1);
+        logro2=(CardView) view.findViewById(R.id.carta2);
+        logro3=(CardView) view.findViewById(R.id.carta3);
+        text=(TextView) view.findViewById(R.id.txtpuntos);
+        memo(view);
+        return view;
+    }
+    int puntos=15;
+    int contador=0;
+    public void memo(View v){
+        btn=(Button) v.findViewById(R.id.button4);
+        btn.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                contador++;
+        if(contador==1){
+            puntos=puntos-5;
+            logro1.setVisibility(View.VISIBLE);
+            text.setText("Tienes 10 puntos");
+
+        }else{
+            if(contador==2){
+                puntos=puntos-5;
+                logro2.setVisibility(View.VISIBLE);
+                text.setText("Tienes 5 puntos");
+
+            }else{
+                if(contador==3){
+                    puntos=puntos-5;
+                    logro3.setVisibility(View.VISIBLE);
+                    text.setText("Tienes 0 puntos");
+
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(),"No tienes puntos",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+            }
+
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,4 +161,5 @@ public class Logros extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
