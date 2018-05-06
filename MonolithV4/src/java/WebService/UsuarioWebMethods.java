@@ -15,7 +15,7 @@ public class UsuarioWebMethods {
     
     @WebMethod(operationName = "RegistroUsuario")
     public boolean RegistroUsuario(@WebParam(name = "NombreUsuario") String NombreUsuario,@WebParam(name = "DirecUsuario") String DirecUsuario,
-            @WebParam(name = "EdadUsuario") int EdadUsuario,@WebParam(name = "PaisUsuario") String PaisUsuario,
+            @WebParam(name = "EdadUsuario") String EdadUsuario,@WebParam(name = "PaisUsuario") String PaisUsuario,
             @WebParam(name = "CorreoUsuario") String CorreoUsuario,@WebParam(name = "ContraUsuario") String ContraUsuario) throws Exception{
         boolean Exito=false;
         Database2 db=new Database2();
@@ -24,7 +24,7 @@ public class UsuarioWebMethods {
         user.setCorreo(CorreoUsuario);
         user.setPuntos(0);
         user.setDireccion(DirecUsuario);
-        user.setEdad(EdadUsuario);
+        user.setEdad(Integer.parseInt(EdadUsuario));
         user.setPassword(ContraUsuario);
         user.setPais(PaisUsuario);
         if(db.IngresoUsuario(user)){
@@ -55,4 +55,6 @@ public class UsuarioWebMethods {
         
         return Exito;
     }
+    
+    
 }
