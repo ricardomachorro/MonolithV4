@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuPrincipal extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener,ContenedorFragment.OnFragmentInteractionListener {
 /*
 *Implements es Onfreagment.Nombredelfragment
 *
@@ -86,7 +86,7 @@ public class MenuPrincipal extends AppCompatActivity
             fragment = new Notas();
             fragmentSelec = true;
         } else if (id == R.id.Logros) {
-            fragment = new Logros();
+            fragment = new ContenedorFragment();
             fragmentSelec = true;
         } else if (id == R.id.Grupos) {
             fragment = new Grupos();
