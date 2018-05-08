@@ -95,6 +95,9 @@
                     <li class="nav-item">
                         <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio">Ayuda</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
