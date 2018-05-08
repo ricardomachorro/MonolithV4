@@ -32,20 +32,21 @@
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <link href="Css/chat.css" rel="stylesheet" type="text/css"/>
         <title>Ayuda</title>
     </head>
     <script>
-        var webSocket=new WebSocket("ws://localhost:8080/MonolithV4/WebSocket1");
-        webSocket.onmessage=function processMessage(message){
-            var jsonData=message.data;
-            
-                mensaje.value+=jsonData.message+"\n";
-            
+        var webSocket = new WebSocket("ws://localhost:8080/MonolithV4/WebSocket1");
+        webSocket.onmessage = function processMessage(message) {
+            var jsonData = message.data;
+
+            mensaje.value += jsonData.message + "\n";
+
         }
-         function sendMessage(){
-                webSocket.send(Texto.value);
-                Texto.value="";
-            }
+        function sendMessage() {
+            webSocket.send(Texto.value);
+            Texto.value = "";
+        }
     </script>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -107,8 +108,8 @@
                                     sistema se le provee a los usuarios un chat con los elementos de Soporte de Software, para responder 
                                     cualquiera de las dudas que podria tener
                                 </p>
-                               
-                             
+
+
                             </div>
                         </div>
                     </div>
@@ -145,38 +146,50 @@
                             Chat
                         </a>
                     </nav>
-                    <div class="card-deck" style="margin:12px;">
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-12" id="SeccionMensaje" style="height:700px;background-color:#fff;overflow-y:scroll;">
-                                    <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="you float-right">Hello</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
-                                     <div class="clearfix Mensaje"><blockquote class="me float-left">Hi</blockquote></div>
+                    <div class="col-md-12 chat-box ">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+
+                            </div>
+
+                            <div class="panel-body chat-widget" style="background-color: #FFF">
+                                <ul class="chat chat-messages">                
+
+
+
+
+                                </ul>
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm chat-name" placeholder="Escriba su nombre"value="<%=Usuario%>" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-sm chat-entry" placeholder="Escriba un mensaje y presione enter para enviar">
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    
-                    <div class="card-deck" style="margin:12px;">
-                        <div class="card">
-                           
-                            <div class="row" style="padding:12px;">
-                                <div class="col-lg-10 col-md-6 col-sm-12">
-                                    <input type="text" id="Texto"  style="width:100%;"  class="form-control" placeholder="Mensaje" >
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-sm-12">
-                                    <button class="btn-primary" style="width:100%;;height:40px" onclick="sendMessage();"><img src="img/sent-mail.svg" style="width:30px;height:30px;margin-right:17px;">Enviar</button>  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
+        <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+        <script src="js/chat.js" type="text/javascript"></script>
+        <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('97e8c5b3c583140e8b63', {
+            cluster: 'us2',
+            encrypted: true
+        });
+        var chat = new ChatWidget(pusher);
+
+        </script>
     </body>
 </html>

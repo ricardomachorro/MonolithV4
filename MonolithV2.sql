@@ -145,6 +145,13 @@ create table Intercambio(
 	fecha date not null
 );
 select * from Intercambio;
+create table messages(
+id int(10) primary key auto_increment,
+name varchar(255) not null,
+message varchar(1000) not null, 
+created_at timestamp default current_timestamp
+);
+select * from messages;
 
 create table Estampa(
 	IDEstampa int not null auto_increment primary key,
