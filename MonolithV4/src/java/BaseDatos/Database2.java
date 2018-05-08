@@ -171,7 +171,7 @@ public class Database2 {
         
     }
     
-    private int PuntosUsuario(String Usuario) throws Exception{//Logros
+    public int PuntosUsuario(String Usuario) throws Exception{//Logros
         int puntos=-1;
          String sql="Select * from Usuario where NombreUsuario='"+Usuario+"'";
           st=c.createStatement();

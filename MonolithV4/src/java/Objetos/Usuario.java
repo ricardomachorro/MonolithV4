@@ -1,6 +1,6 @@
-
 package Objetos;
 
+import org.json.simple.JSONObject;
 
 public class Usuario {
     
@@ -69,5 +69,22 @@ public class Usuario {
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
     }
+    
+    public JSONObject obtenerJSONUsuario(int IDUsuario, String NombreUsuario, String Correo, int Edad, String Pais, String Direccion, String Contrasena, int TipoUsuario, String Validado, int Puntos){        
+        JSONObject resultado = new JSONObject();
+        resultado.put("IDUsuario", IDUsuario);
+        resultado.put("NombreUsuario", NombreUsuario);
+        resultado.put("Correo", Correo);
+        resultado.put("Edad", Edad);
+        resultado.put("Pais", Pais);
+        resultado.put("Direccion", Direccion);
+        resultado.put("Contrasena", Contrasena);
+        resultado.put("TipoUsuario", TipoUsuario);
+        resultado.put("Validado", Validado);
+        resultado.put("Puntos", Puntos);
+        
+        return resultado;
+    }
 
 }
+

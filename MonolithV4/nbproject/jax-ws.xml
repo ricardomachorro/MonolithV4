@@ -19,6 +19,9 @@
     <service name="WAceptarInter">
       <implementation-class>Web.WAceptarInter</implementation-class>
     </service>
+    <service name="InicioSesion">
+      <implementation-class>WebService.InicioSesion</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

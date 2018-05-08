@@ -7,7 +7,9 @@ import javax.jws.WebParam;
 import BaseDatos.Database2;
 import Objetos.Usuario;
 import Seguridad.Cifrados;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 @WebService(serviceName = "UsuarioWebMethods")
 public class UsuarioWebMethods {
@@ -34,6 +36,50 @@ public class UsuarioWebMethods {
         
         return Exito;
     }
+    
+    
+    @WebMethod(operationName = "RegistroUsuarioMovil")
+    public String RegistroUsuarioMovil(@WebParam(name = "Usuario") String Usuario) throws Exception{
+        String mensaje="";
+        Database2 db=new Database2();
+        Usuario user=new Usuario();
+        JSONParser parser = new JSONParser();
+        JSONObject info = (JSONObject) parser.parse(Usuario);
+        String NombreUsuario=(String)info.get("NombreUsuario");
+        String CorreoUsuario=(String)info.get("CorreoUsuario");
+        String EdadUsuario=(String)info.get("EdadUsuario");
+        String DirecUsuario=(String)info.get("DirecUsuario");
+        String PaisUsuario=(String)info.get("PaisUsuario");
+        String ContraUsuario=(String)info.get("ContraUsuario");
+        user.setNombre(NombreUsuario);
+        user.setCorreo(CorreoUsuario);
+        user.setPuntos(0);
+        user.setDireccion(DirecUsuario);
+        user.setEdad(Integer.parseInt(EdadUsuario));
+        user.setPassword(ContraUsuario);
+        user.setPais(PaisUsuario);
+        String validado="No";
+        int TipoUsuario=0;
+        int Puntos=0;
+        if(db.UsuarioValidado(user.getNombre())){
+            String validad="Si";
+        }
+        Puntos=db.PuntosUsuario(Usuario);
+        TipoUsuario=db.TipoUsuario(user);
+        if(db.IngresoUsuario(user)){
+                    JSONObject datos = user.obtenerJSONUsuario(db.IdentificarUsuario(user.getNombre()), user.getNombre(),user.getCorreo(), user.getEdad(),user.getPais(), user.getDireccion(), user.getPassword(),TipoUsuario,validado,Puntos);   
+                    mensaje = datos.toString();
+        }else if(db.UsuarioRepetido(user)){
+            mensaje="Reptido";
+        }else{
+            mensaje="Error";
+        }
+       
+        
+        return mensaje;
+    }
+    
+    
     
     @WebMethod(operationName = "ValidacionUsuario")
     public boolean ValidacionUsuario(@WebParam(name = "NombreUsuario") String NombreUsuario,@WebParam(name = "CodigoUsuario") String CodigoUsuario,
