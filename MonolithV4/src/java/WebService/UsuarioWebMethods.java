@@ -7,6 +7,8 @@ import javax.jws.WebParam;
 import BaseDatos.Database2;
 import Objetos.Usuario;
 import Seguridad.Cifrados;
+import Objetos.ConversorJson;
+import Objetos.ObtenerDatos;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -58,21 +60,45 @@ public class UsuarioWebMethods {
         user.setEdad(Integer.parseInt(EdadUsuario));
         user.setPassword(ContraUsuario);
         user.setPais(PaisUsuario);
-        String validado="No";
-        int TipoUsuario=0;
-        int Puntos=0;
+        user.setValidado("Si");
+        
+        /*
         if(db.UsuarioValidado(user.getNombre())){
             String validad="Si";
-        }
-        Puntos=db.PuntosUsuario(Usuario);
-        TipoUsuario=db.TipoUsuario(user);
+        }*/
+   
         if(db.IngresoUsuario(user)){
-                    JSONObject datos = user.obtenerJSONUsuario(db.IdentificarUsuario(user.getNombre()), user.getNombre(),user.getCorreo(), user.getEdad(),user.getPais(), user.getDireccion(), user.getPassword(),TipoUsuario,validado,Puntos);   
+            ObtenerDatos objeto;
+            objeto = new ObtenerDatos();
+            String usr;
+            String psw;
+            int IDUsuario;
+            String NombreUser;
+            String Correo;
+            int Edad;
+            String Pais;
+            String Direccion;
+            String Contrasena;
+            int TipeUsuario;
+            String Validado;
+            int Points;
+             ConversorJson obj = new ConversorJson();
+                    IDUsuario = objeto.getIDUsuario(user.getNombre());
+                    NombreUser = objeto.getNombreUsuario(user.getNombre());
+                    Correo = objeto.getCorreo(user.getNombre());
+                    Edad = objeto.getEdad(user.getNombre());
+                    Pais = objeto.getPais(user.getNombre());
+                    Direccion = objeto.getDireccion(user.getNombre());
+                    Contrasena = objeto.getContrasena(user.getNombre());
+                    TipeUsuario = objeto.getTipoUsuario(user.getNombre());
+                    Validado = objeto.getValidado(user.getNombre());
+                    Points = objeto.getPuntos(user.getNombre());
+                   JSONObject datos = obj.obtenerJSON(IDUsuario, NombreUser, Correo, Edad, Pais, Direccion, Contrasena, TipeUsuario, Validado, Points);
                     mensaje = datos.toString();
         }else if(db.UsuarioRepetido(user)){
-            return "Repetido";
+            mensaje= "Repetido";
         }else{
-            return "Error";
+            mensaje="Error";
         }
        
       

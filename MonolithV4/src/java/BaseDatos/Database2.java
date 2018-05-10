@@ -272,7 +272,7 @@ public class Database2 {
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
                 ps.setInt(8,1);
-                ps.setString(9,"No");
+                ps.setString(9,user.getValidado());
                 //Ejecuta
                 ps.executeUpdate();
                 
