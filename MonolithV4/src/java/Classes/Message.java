@@ -1,7 +1,7 @@
 
 package Classes;
 
-import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
 
 public class Message {
     private int id;
