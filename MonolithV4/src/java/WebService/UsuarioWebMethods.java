@@ -70,12 +70,12 @@ public class UsuarioWebMethods {
                     JSONObject datos = user.obtenerJSONUsuario(db.IdentificarUsuario(user.getNombre()), user.getNombre(),user.getCorreo(), user.getEdad(),user.getPais(), user.getDireccion(), user.getPassword(),TipoUsuario,validado,Puntos);   
                     mensaje = datos.toString();
         }else if(db.UsuarioRepetido(user)){
-            mensaje="Reptido";
+            return "Repetido";
         }else{
-            mensaje="Error";
+            return "Error";
         }
        
-        
+      
         return mensaje;
     }
     
