@@ -53,10 +53,6 @@ public class ObtenerDatos {
         return IDUsuario;
     }
 
-    public void setIDUsuario(int IDUsuario) {
-        this.IDUsuario = IDUsuario;
-    }
-
     public String getNombreUsuario(String user) {
         try{
         String sql = "select NombreUsuario from Usuario where NombreUsuario = '"+user+"';";
@@ -70,8 +66,14 @@ public class ObtenerDatos {
         return NombreUsuario;
     }
 
-    public void setNombreUsuario(String NombreUsuario) {
-        this.NombreUsuario = NombreUsuario;
+    public void setNombreUsuario(String nombre, int idUsuario) {
+        String sql = "update Usuario set NombreUsuario = '"+nombre+"' where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
     }
 
     public String getCorreo(String user) {
@@ -87,8 +89,14 @@ public class ObtenerDatos {
         return Correo;
     }
 
-    public void setCorreo(String Correo) {
-        this.Correo = Correo;
+    public void setCorreo(String Correo, int idUsuario) {
+        String sql = "update Usuario set correo = '"+Correo+"' where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
     }
 
     public int getEdad(String user) {
@@ -104,8 +112,14 @@ public class ObtenerDatos {
         return Edad;
     }
 
-    public void setEdad(int Edad) {
-        this.Edad = Edad;
+    public void setEdad(int Edad, int idUsuario) {
+        String sql = "update Usuario set Edad = "+Edad+" where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
     }
 
     public String getPais(String user) {
@@ -121,8 +135,14 @@ public class ObtenerDatos {
         return Pais;
     }
 
-    public void setPais(String Pais) {
-        this.Pais = Pais;
+    public void setPais(String Pais, int idUsuario) {
+        String sql = "update Usuario set Pais = '"+Pais+"' where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
     }
 
     public String getDireccion(String user) {
@@ -138,8 +158,14 @@ public class ObtenerDatos {
         return Direccion;
     }
 
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+    public void setDireccion(String Direccion, int idUsuario) {
+        String sql = "update Usuario set Direccion = '"+Direccion+"' where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+        
     }
 
     public String getContrasena(String user) {
@@ -155,8 +181,14 @@ public class ObtenerDatos {
         return Contrasena;
     }
 
-    public void setContrasena(String Contrasena) {
-        this.Contrasena = Contrasena;
+    public void setContrasena(String Contrasena, int idUsuario) {
+        String sql = "update Usuario set Contrasena = '"+Contrasena+"' where IDUsuario = "+idUsuario+";";
+        try{
+          st.executeUpdate(sql);  
+        }catch(SQLException e){
+            System.out.println(e.toString());
+        }
+
     }
 
     public int getTipoUsuario(String user) {

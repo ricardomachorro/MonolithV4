@@ -5,8 +5,13 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import BaseDatos.Database2;
+import Objetos.ConversorJson;
 import Objetos.Usuario;
+import Objetos.ObtenerDatos;
 import Seguridad.Cifrados;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -40,7 +45,9 @@ public class UsuarioWebMethods {
     
     @WebMethod(operationName = "RegistroUsuarioMovil")
     public String RegistroUsuarioMovil(@WebParam(name = "Usuario") String Usuario) throws Exception{
-        String mensaje="";
+        String mensaje;
+        ObtenerDatos objeto;
+        objeto = new ObtenerDatos();
         Database2 db=new Database2();
         Usuario user=new Usuario();
         JSONParser parser = new JSONParser();
@@ -58,24 +65,49 @@ public class UsuarioWebMethods {
         user.setEdad(Integer.parseInt(EdadUsuario));
         user.setPassword(ContraUsuario);
         user.setPais(PaisUsuario);
-        String validado="No";
-        int TipoUsuario=0;
-        int Puntos=0;
-        if(db.UsuarioValidado(user.getNombre())){
+        String validado="Si";
+        int TipoUsuario;
+        int Puntos;
+       /* if(db.UsuarioValidado(user.getNombre())){
             String validad="Si";
-        }
+        }*/
         Puntos=db.PuntosUsuario(Usuario);
         TipoUsuario=db.TipoUsuario(user);
-        if(db.IngresoUsuario(user)){
+        if(db.IngresoUsuario(user)){/*
                     JSONObject datos = user.obtenerJSONUsuario(db.IdentificarUsuario(user.getNombre()), user.getNombre(),user.getCorreo(), user.getEdad(),user.getPais(), user.getDireccion(), user.getPassword(),TipoUsuario,validado,Puntos);   
+                    mensaje = datos.toString();*/
+            String usr;
+            String psw;
+            int IDUsuario;
+            String NombreUser;
+            String Correo;
+            int Edad;
+            String Pais;
+            String Direccion;
+            String Contrasena;
+            int TipeUsuario=0;
+            String Validado;
+            int Points=0;
+            ConversorJson obj = new ConversorJson();
+                    IDUsuario = objeto.getIDUsuario(user.getNombre());
+                    NombreUser = objeto.getNombreUsuario(user.getNombre());
+                    Correo = objeto.getCorreo(user.getNombre());
+                    Edad = objeto.getEdad(user.getNombre());
+                    Pais = objeto.getPais(user.getNombre());
+                    Direccion = objeto.getDireccion(user.getNombre());
+                    Contrasena = objeto.getContrasena(user.getNombre());
+                    TipoUsuario = objeto.getTipoUsuario(user.getNombre());
+                    Validado = objeto.getValidado(user.getNombre());
+                    Puntos = objeto.getPuntos(user.getNombre());
+                    JSONObject datos = obj.obtenerJSON(IDUsuario, NombreUser, Correo, Edad, Pais, Direccion, Contrasena, TipeUsuario, Validado, Points);
                     mensaje = datos.toString();
         }else if(db.UsuarioRepetido(user)){
-            mensaje="Reptido";
+            mensaje =  "Repetido";
         }else{
-            mensaje="Error";
+            mensaje = "Error";
         }
        
-        
+      
         return mensaje;
     }
     
@@ -102,5 +134,64 @@ public class UsuarioWebMethods {
         return Exito;
     }
     
+    
+    @WebMethod(operationName = "GuardarDatosAndroid")
+    public String GuardarDatosAndroid(@WebParam(name = "Datos") String Datos) {
+        String mensaje ;
+        ObtenerDatos objeto;
+        try {
+            objeto = new ObtenerDatos();
+
+            int IdUsuario;
+            String NombreUsuario;
+            int Edad;
+            String Pais;
+            String Direccion;
+            String Correo;
+            String Contrasena;
+
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject info = (JSONObject) parser.parse(Datos);
+                IdUsuario = Integer.parseInt((String) info.get("IdUsuario"));
+                NombreUsuario = (String) info.get("Nombre");
+                Edad = Integer.parseInt((String) info.get("Edad"));
+                Pais = (String) info.get("Pais");
+                Direccion = (String) info.get("Direccion");
+                Correo = (String) info.get("Correo");
+                Contrasena = (String) info.get("Contrasena");
+
+            } catch (ParseException error) {
+                return "error";
+            }
+
+            try {
+                objeto.setNombreUsuario(NombreUsuario, IdUsuario);
+                objeto.setEdad(Edad, IdUsuario);
+                objeto.setPais(Pais, IdUsuario);
+                objeto.setDireccion(Direccion, IdUsuario);
+                objeto.setCorreo(Correo, IdUsuario);
+                objeto.setContrasena(Contrasena, IdUsuario);
+
+                ConversorJson obj = new ConversorJson();
+                NombreUsuario = objeto.getNombreUsuario(NombreUsuario);
+                Edad = objeto.getEdad(NombreUsuario);
+                Pais = objeto.getPais(NombreUsuario);
+                Direccion = objeto.getDireccion(NombreUsuario);
+                Correo = objeto.getCorreo(NombreUsuario);
+                Contrasena = objeto.getContrasena(NombreUsuario);
+                JSONObject datos = obj.ConfigurarJSON(NombreUsuario, Edad, Pais, Direccion, Correo, Contrasena);
+                mensaje = datos.toString();
+                return mensaje;
+            } catch (Exception e) {
+                mensaje = "error";
+            }
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(UsuarioWebMethods.class.getName()).log(Level.SEVERE, null, ex);
+            mensaje = "error";
+        }
+        return mensaje;
+    }
     
 }

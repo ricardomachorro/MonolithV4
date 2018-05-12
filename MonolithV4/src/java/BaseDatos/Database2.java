@@ -272,7 +272,7 @@ public class Database2 {
                 ps.setString(6, user.getPassword());
                 ps.setInt(7, 0);
                 ps.setInt(8,1);
-                ps.setString(9,"No");
+                ps.setString(9,"Si");
                 //Ejecuta
                 ps.executeUpdate();
                 
@@ -285,7 +285,7 @@ public class Database2 {
                     adendum = HashCode;
                 }
                 
-                RegistrarValidacion(user.getNombre(),adendum);
+                //RegistrarValidacion(user.getNombre(),adendum);
                 
                 RegistroExitoso = true; 
  
@@ -295,6 +295,8 @@ public class Database2 {
         }
         return RegistroExitoso;
     }
+   
+    
     
     public boolean RegistrarValidacion(String Usuario,int Adendum)throws Exception{
         boolean RegistroValidacion=false;

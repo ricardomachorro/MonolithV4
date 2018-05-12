@@ -11,6 +11,15 @@ public class Usuario {
     private String Pais;
     private String Direccion;
     private int Puntos;
+    private String Validado;
+
+    public String getValidado() {
+        return Validado;
+    }
+
+    public void setValidado(String Validado) {
+        this.Validado = Validado;
+    }
 
     public int getPuntos() {
         return Puntos;

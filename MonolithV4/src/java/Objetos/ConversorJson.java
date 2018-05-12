@@ -25,6 +25,16 @@ public class ConversorJson {
         
         return resultado;
     }
+    public JSONObject ConfigurarJSON(String NombreUsuario, int Edad, String Pais, String Direccion, String Correo, String Contrasena){        
+        JSONObject resultado = new JSONObject();
+        resultado.put("NombreUsuario", NombreUsuario);
+        resultado.put("Edad", Edad);
+        resultado.put("Pais", Pais);
+        resultado.put("Direccion", Direccion);
+        resultado.put("Correo", Correo);
+        resultado.put("Contrasena", Contrasena);
+        return resultado;
+    }
     
     
 }
