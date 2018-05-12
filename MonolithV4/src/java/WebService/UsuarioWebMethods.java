@@ -5,10 +5,10 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import BaseDatos.Database2;
-import Objetos.ConversorJson;
 import Objetos.Usuario;
-import Objetos.ObtenerDatos;
 import Seguridad.Cifrados;
+import Objetos.ConversorJson;
+import Objetos.ObtenerDatos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,17 +65,15 @@ public class UsuarioWebMethods {
         user.setEdad(Integer.parseInt(EdadUsuario));
         user.setPassword(ContraUsuario);
         user.setPais(PaisUsuario);
-        String validado="Si";
-        int TipoUsuario;
-        int Puntos;
-       /* if(db.UsuarioValidado(user.getNombre())){
+        user.setValidado("Si");
+        
+        /*
+        if(db.UsuarioValidado(user.getNombre())){
             String validad="Si";
         }*/
-        Puntos=db.PuntosUsuario(Usuario);
-        TipoUsuario=db.TipoUsuario(user);
-        if(db.IngresoUsuario(user)){/*
-                    JSONObject datos = user.obtenerJSONUsuario(db.IdentificarUsuario(user.getNombre()), user.getNombre(),user.getCorreo(), user.getEdad(),user.getPais(), user.getDireccion(), user.getPassword(),TipoUsuario,validado,Puntos);   
-                    mensaje = datos.toString();*/
+   
+        if(db.IngresoUsuario(user)){
+            objeto = new ObtenerDatos();
             String usr;
             String psw;
             int IDUsuario;
@@ -85,10 +83,10 @@ public class UsuarioWebMethods {
             String Pais;
             String Direccion;
             String Contrasena;
-            int TipeUsuario=0;
+            int TipeUsuario;
             String Validado;
-            int Points=0;
-            ConversorJson obj = new ConversorJson();
+            int Points;
+             ConversorJson obj = new ConversorJson();
                     IDUsuario = objeto.getIDUsuario(user.getNombre());
                     NombreUser = objeto.getNombreUsuario(user.getNombre());
                     Correo = objeto.getCorreo(user.getNombre());
@@ -96,13 +94,13 @@ public class UsuarioWebMethods {
                     Pais = objeto.getPais(user.getNombre());
                     Direccion = objeto.getDireccion(user.getNombre());
                     Contrasena = objeto.getContrasena(user.getNombre());
-                    TipoUsuario = objeto.getTipoUsuario(user.getNombre());
+                    TipeUsuario = objeto.getTipoUsuario(user.getNombre());
                     Validado = objeto.getValidado(user.getNombre());
-                    Puntos = objeto.getPuntos(user.getNombre());
-                    JSONObject datos = obj.obtenerJSON(IDUsuario, NombreUser, Correo, Edad, Pais, Direccion, Contrasena, TipeUsuario, Validado, Points);
+                    Points = objeto.getPuntos(user.getNombre());
+                   JSONObject datos = obj.obtenerJSON(IDUsuario, NombreUser, Correo, Edad, Pais, Direccion, Contrasena, TipeUsuario, Validado, Points);
                     mensaje = datos.toString();
         }else if(db.UsuarioRepetido(user)){
-            mensaje =  "Repetido";
+            mensaje= "Repetido";
         }else{
             mensaje = "Error";
         }

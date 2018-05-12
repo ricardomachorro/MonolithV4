@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
-import BaseDatos.DataBase;
 import BaseDatos.Database2;
 import Objetos.Logro;
 import Objetos.Usuario;

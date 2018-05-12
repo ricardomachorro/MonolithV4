@@ -72,6 +72,7 @@ public class IngresoUsuario extends HttpServlet {
             u.setDireccion(Direccion);
             u.setCorreo(Correo);
             u.setPassword(Password);
+            u.setValidado("No");
             if (db.IngresoUsuario(u)) {
                 String ParametrosHash = u.getNombre() + u.getPassword();
                 int HashCode = ParametrosHash.hashCode();

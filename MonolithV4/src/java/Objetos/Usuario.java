@@ -13,14 +13,6 @@ public class Usuario {
     private int Puntos;
     private String Validado;
 
-    public String getValidado() {
-        return Validado;
-    }
-
-    public void setValidado(String Validado) {
-        this.Validado = Validado;
-    }
-
     public int getPuntos() {
         return Puntos;
     }
@@ -77,6 +69,14 @@ public class Usuario {
 
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
+    }
+    
+     public String getValidado() {
+        return Validado;
+    }
+
+    public void setValidado(String Validado) {
+        this.Validado = Validado;
     }
     
     public JSONObject obtenerJSONUsuario(int IDUsuario, String NombreUsuario, String Correo, int Edad, String Pais, String Direccion, String Contrasena, int TipoUsuario, String Validado, int Puntos){        

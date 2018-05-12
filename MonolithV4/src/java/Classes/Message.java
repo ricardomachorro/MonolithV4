@@ -1,7 +1,6 @@
-
 package Classes;
 
-import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
 
 public class Message {
     private int id;
@@ -51,6 +50,7 @@ public class Message {
         this.created_at = created_at;
     }
     
+    /*
     public JsonObject getJsonObject(){
         JsonObject jo = new JsonObject();
         
@@ -60,5 +60,5 @@ public class Message {
         jo.addProperty("created_at", this.getCreated_at());
         
         return jo;
-    }
+    }*/
 }
