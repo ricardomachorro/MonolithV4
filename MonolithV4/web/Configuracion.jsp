@@ -21,6 +21,7 @@
 
     }
 
+
 %>
 <html>
     <head>
@@ -28,11 +29,11 @@
         <title>Configuracion</title>
         <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
-        <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
+        <link href="Css/ConfiguracionCSS.css" rel="stylesheet" type="text/css">
     </head>
     <body style="background-color:#e9ecef;">
         <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
@@ -43,21 +44,26 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                   <li class="nav-item">
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio" >Logros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
+                            <img src="img/user.svg" class="ImagenesBarraInicio" > <%out.println(Usuario);%>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
                             <a class="dropdown-item" id="UsuarioName" >Usuario: <%                                out.println(Usuario);
@@ -78,55 +84,195 @@
                     <div class="card-body">
                         <h2 class="card-title" id="TituloConfiguraciones">Configuraciones Anteriores</h2>
                         <ul class="list-group list-group-flush" id="ListaConfiguracion">
-                            <li class="list-group-item">Nombre Usuario:</li>
-                            <li class="list-group-item">Edad:</li>
-                            <li class="list-group-item">Pais:</li>
-                            <li class="list-group-item">Direccion:</li>
-                            <li class="list-group-item">Correo:</li>
+                            <%
+                                Statement stcons2 = conexion.createStatement();
+                                String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
+                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where NombreUsuario='" + UsuarioBusqueda1 + "'");
+                                if (rscons2.next()) {
+
+                                    out.println("<li class='list-group-item' id='ListaNombre'>Nombre Usuario: " + rscons2.getString("NombreUsuario") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaEdad'>Edad: " + rscons2.getString("Edad") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaPais'>Pais: " + rscons2.getString("Pais") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaDireccion'>Pais: " + rscons2.getString("Direccion") + "</li>");
+                                    out.println("<li class='list-group-item' id='ListaCorreo'>Pais: " + rscons2.getString("Correo") + "</li>");
+                                }
+                            %>
+                            <!--<li class="list-group-item" id="ListaNombre">Nombre Usuario:</li>
+                            <li class="list-group-item" id="ListaEdad">Edad:</li>
+                            <li class="list-group-item" id="ListaPais">Pais:</li>
+                            <li class="list-group-item" id="ListaDireccion">Direccion:</li>
+                            <li class="list-group-item" id="ListaCorreo">Correo:</li>-->
                         </ul>
-                       
+
 
                     </div>
                 </div>
-                 
+
                 <div class="card" id="ConfiguracionDatos">
                     <div class="card-body">
-                         <h2 class="card-title" >Cambio Configuraciones</h2>
-                        <form>
+                        <h2 class="card-title" >Cambio Configuraciones</h2>
+                        <form id="Cambio">
                             <div class="form-group">
                                 <label >Nombre Usuario</label>
-                                <input  class="form-control"  placeholder="Nombre Usuario">
+                                <input id="txtNombreUsuario" name="txtNombreUsuario" class="form-control"  placeholder="Nombre Usuario">
                             </div>
                             <div class="form-group">
                                 <label >Edad</label>
-                                <input  class="form-control"  placeholder="Edad Usuario">
+                                <input id="txtEdadUsuario" name="txtEdadUsuario" class="form-control"  placeholder="Edad Usuario">
                             </div>
                             <div class="form-group">
                                 <label >Pais</label>
-                                <input  class="form-control"  placeholder="Pais">
+                                <input id="txtPaisUsuario" name="txtPaisUsuario" class="form-control"  placeholder="Pais">
                             </div>
                             <div class="form-group">
                                 <label >Direccion</label>
-                                <input  class="form-control"  placeholder="Direccion">
+                                <input  id="txtDirecUsuario" name="txtDirecUsuario" class="form-control"  placeholder="Direccion">
+                            </div>
+                            <div class="form-group">
+                                <label >Correo</label>
+                                <input  id="txtCorreo" name="txtCorreo" class="form-control"  placeholder="Correo">
                             </div>
                             <div class="form-group">
                                 <label >Contraseña</label>
-                                <input  class="form-control"  placeholder="Edad Usuario">
+                                <input  id="txtContra" name="txtContra" class="form-control"  placeholder="Contraseña">
                             </div>
                             <div class="form-group">
                                 <label >Confirmar Contraseña</label>
-                                <input  class="form-control"  placeholder="Confirme Contraseña">
+                                <input  id="txtContraRepeat" name="txtContraRepeat" class="form-control"  placeholder="Confirme Contraseña">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                                <button id="btnCambio" type="submit" class="btn btn-primary mb-2">Submit</button>
                             </div>
                         </form>
                     </div>  
-                    </div>
                 </div>
-
-
             </div>
-        </div>                   
-    </body>
+        </div>
+    </div>                   
+</body>
 </html>
+<script>
+    $("#btnCambio").click(function () {
+
+        $.validator.addMethod("letras", function (value, element) {
+            return this.optional(element) || /^[a-z]+$/i.test(value);
+        }, "Ponga letras solamente");
+
+
+
+        $("#Cambio").validate({
+
+            rules: {
+                txtNombreUsuario: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 15
+                },
+                txtEdadUsuario: {
+                    required: true,
+                    digits: true,
+                    maxlength: 3
+                }, txtPaisUsuario: {
+                    required: true,
+                    letras: true,
+                    minlength: 2,
+                    maxlength: 30
+                }, txtDirecUsuario: {
+                    required: true,
+                    minlength: 12,
+                    maxlength: 40
+                }, txtCorreo: {
+                    required: true,
+                    email: true
+                }, txtContra: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                },txtContraRepeat:{
+                    required: true,
+                    equalTo: "#txtContra"
+                }
+            }, messages: {
+                txtNombreUsuario: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese un nombre de usuario de 8 caracteres en adelante",
+                    maxlength: "Ingrese un nombre de usuario de menos de 15 caracteres en adelante"
+                },
+                txtEdadUsuario: {
+                    required: "Llene el campo",
+                    digits: "Ponga un numero valido",
+                    maxlength: "Ingrese una edad valida"
+                }, txtPaisUsuario: {
+                    required: "Llene el campo",
+                    letras: "Ponga un dato solo con letras",
+                    minlength: "Ingrese un pais valido",
+                    maxlength: "Ingrese un pais valido"
+                }, txtDirecUsuario: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese una direccón valida",
+                    maxlength: "Ingrese una direccion mas corta"
+                }, txtCorreo: {
+                    required: "Llene el campo",
+                    email: "De un correo valido"
+                }, txtContra: {
+                    required: "Llene el campo",
+                    minlength: "Ingrese una contraseña de al menos 8 caracteres",
+                    maxlength: "Ingrese una contraseña de menos 20 caracteres"
+                },txtContraRepeat:{
+                    required: "Llene el campo",
+                    equalTo: "La contraseña esta mal puesta"
+                }
+            }, submitHandler: function (form) {
+                var NombreOld = $("#UsuarioName").val();
+                var NombreNuevo = $("#txtNombreUsuario").val();
+                var EdadUsuario = $("#txtEdadUsuario").val();
+                var PaisUsuario = $("#txtPaisUsuario").val();
+                var CorreoUsuario = $("#txtCorreo").val();
+                var DirecUsaurio = $("#txtDirecUsuario").val();
+                var ContraUsuario = $("#txtContra").val();
+
+
+                $.ajax({
+                    url: "ActualizarUsuario",
+                    type: 'post',
+                    data: {
+                        NombreAntiguo: NombreOld,
+                        Nombre: NombreNuevo,
+                        Edad: EdadUsuario,
+                        Pais: PaisUsuario,
+                        Direc: DirecUsaurio,
+                        Correo: ContraUsuario,
+                        Contra: ContraUsuario
+                    },
+                    success: function (data) {
+                        $("#ListaNombre").text("Nombre Usuario: " + NombreNuevo);
+                        $("#ListaEdad").text("Edad: " + EdadUsuario);
+                        $("#ListaPais").text("Pais: " + PaisUsuario);
+                        $("#ListaDireccion").text("Direccion: " + DirecUsaurio);
+                        $("#ListaCorreo").text("Correo: " + CorreoUsuario);
+                        $("#txtNombreUsuario").val("");
+                        $("#txtEdadUsuario").val("");
+                        $("#txtPaisUsuario").val("");
+                        $("#txtCorreo").val("");
+                        $("#txtDirecUsuario").val("");
+                        $("#txtContra").val("");
+                        $("#UsuarioName").text(NombreNuevo);
+
+                    }, error: {
+
+                    }
+                });
+            }
+
+        });
+
+
+
+
+
+
+    });
+
+</script>
+
+

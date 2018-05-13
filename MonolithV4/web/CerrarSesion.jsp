@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <%
    HttpSession sesion = request.getSession();
-   sesion.invalidate();
-   response.sendRedirect("index.html");
+    sesion.invalidate();
+    response.sendRedirect("index.html");
+
 %>

@@ -11,9 +11,15 @@ create table Usuario(
 	Direccion varchar(200),
 	Contrasena varchar(70),
 	TipoUsuario int,
+    Validado nvarchar(70),
 	Puntos int not null
 );
-select * from Usuario;
+
+create table Validacion(
+	IdAdendum int primary key not null auto_increment,
+	Nombre nvarchar(50) not null,
+	adendum nvarchar(50) not null
+);
 
 create table Conversacion(
 	IDConversacion int not null primary key auto_increment,
@@ -24,17 +30,10 @@ create table Conversacion(
 
 create table Mensaje (
 	IDMensaje int not null primary key auto_increment, 
-	Contenido nvarchar (100),
-	fecha date,
+    Contenido nvarchar (100),fecha date,
 	Conversacion int, 
-	foreign key (Conversacion) references Conversacion(IDConversacion)
- );
-/*
-create table Validacion(
-	IdAdendum int primary key not null auto_increment,
-	Nombre varchar(20) not null,
-	adendum varchar (50) not null
-);*/
+    foreign key (Conversacion) references Conversacion(IDConversacion)
+);
 
 create table Categoria(
 	IDCategoria int auto_increment not null primary key,
@@ -48,10 +47,8 @@ create table Actividad(
 	Nombre varchar(40),
 	Fecha date,
 	IDCategoria int,
-	/*IDLocalizacion int,*/
 	Estado boolean,
-	foreign key (IDCategoria) references Categoria(IDCategoria) on update cascade on delete cascade  /*,
-	foreign key (IDLocalizacion) references Localizacion(IDLocalizacion)*/
+	foreign key (IDCategoria) references Categoria(IDCategoria) on update cascade on delete cascade
 );
 
 /*Aqui empiezan las tablas para el modulo grupos :v*/
@@ -100,6 +97,7 @@ insert into catRol(rol) values('Lider');
 insert into catRol(rol) values('Miembro');
 /*Aqui terminan las tablas para el modulo grupos :v */
 
+#Tabla para notas
 create table Nota(
 	IDNota int not null auto_increment primary key,
 	Nombre varchar(100),
@@ -107,7 +105,6 @@ create table Nota(
 	IDUsuario int,
 	foreign key (IDUsuario) references Usuario(IDUsuario)
 );
-select * from Nota;
 
 create table Logro(
 	IDLogro int not null auto_increment primary key,
@@ -117,18 +114,8 @@ create table Logro(
 	Nombre varchar(100) not null,
 	fecha date not null
 );
-/*
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,80);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('memo1','memo@fdsed.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,30);
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
-values(1,2,5,'dogo #97','2017-05-12');
-insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
-values(2,1,7,'dogo #12','2017-03-01');
-select * from Logro;
-select * from Usuario;
-*/
+
+
 create table Intercambio(
 	IDInter int not null auto_increment primary key,
 	IDusuarioDa int not null,
@@ -143,6 +130,13 @@ create table Intercambio(
 	dogoRe int not null,
 	Estado varchar(100) not null,
 	fecha date not null
+);
+
+create table messages(
+	id int(10) primary key auto_increment,
+	name varchar(255) not null,
+	message varchar(1000) not null, 
+	created_at timestamp default current_timestamp
 );
 
 create table Estampa(
@@ -167,4 +161,3 @@ create table  EstampaUsaurio(
 	foreign key (IDEstampa) references Estampa(IDEstampa)
 );
 
-show tables;

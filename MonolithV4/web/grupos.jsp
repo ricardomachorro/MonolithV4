@@ -62,7 +62,7 @@
                         <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="Logros.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"  href="Ayuda.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Ayuda</a>
@@ -418,10 +418,10 @@
                                                         <div class="form-group col-12">
                                                             <input type="text" class="form-control" placeholder="Nombre grupo" name="nuevoGrupo" id="nuevoGrupo">
                                                         </div>
-                                                        <div class="col-9">
+                                                        <div class="col-lg-9 col-md-12 col-sm-12">
                                                             <input type="email" class="form-control" placeholder="Correo del integrante" name="miembro" id="miembro">
                                                         </div>
-                                                        <div class="col-3">
+                                                        <div class="col-lg-3 col-md-12 col-sm-12">
                                                             <button class="form-control" type="button" id="agregarMiembro">Agregar</button>
                                                         </div>
                                                         <div class="form-group col-12">

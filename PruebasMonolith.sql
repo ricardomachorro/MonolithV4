@@ -1,14 +1,27 @@
 #Comprobacion bien brgas de usuarios
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('Cubic85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 10);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('MemoWolf', 'guille.rami@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 10);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('RickMacho', 'albert.macho@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 10);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('RaulRojas', 'daniel.rojsan@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 10);
-insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Puntos) 
-values('AlexUchiha', 'alejan.enriri@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('Cubic85', 'juan.nevtor@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 'Si',10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('MemoWolf', 'guille.rami@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 'Si',10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('RickMacho', 'albert.macho@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1,'Si', 10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('RaulRojas', 'daniel.rojsan@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 'Si',10);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('AlexUchiha', 'alejan.enriri@hotmail.com', 21, 'México', 'Calle. Siempre viva No.48 Mz.S','1234567890', 1, 'Si',10);
+select * from Usuario;
+
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('rick','sasaas@gmail.com',21,'mexico','dasfdsfsdfsadfsd','memo',2,'Si',80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('memo','memo@fdsad.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,'Si',80);
+insert into Usuario(NombreUsuario,Correo,Edad,Pais,Direccion,Contrasena,TipoUsuario,Validado,Puntos) 
+values('memo1','memo@fdsed.com',21,'mexico','dasfdsfsdfsadfsd','memo',1,'Si',30);
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
+values(1,2,5,'dogo #97','2017-05-12');
+insert into Logro(IDUsuario,Img,Filtro,Nombre,fecha) 
+values(2,1,7,'dogo #12','2017-03-01');
+select * from Logro;
 select * from Usuario;
 
 #Comprobacion bien brgas de grupos
@@ -57,7 +70,7 @@ inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro
 where TareaMiembro.IDTarea=2;
 
 #Traer los grupos donde un usuario es miembro
-select * from Grupo
+select * from Grupo 
 inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo
 where Miembros.IDUsuario=1;
 
@@ -69,11 +82,3 @@ delete from Tarea where IDTarea=4;
 
 #Desagnar un miembro
 #delete from TareaMiembro where IDTarea=3 and IDMiembro=1;
-
-#Buscar el rol del usaurio
-select IDRol from Miembros where IDUsuario=2 and IDGrupo=1;
-
-#Eliminar un grupo
-#delete from Grupo where IDGrupo=1;
-
-#select * from catRol;

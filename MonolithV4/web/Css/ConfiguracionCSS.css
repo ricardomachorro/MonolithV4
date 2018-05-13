@@ -1,0 +1,16 @@
+body{
+    background-color:#e9ecef;
+}
+
+#ConfiguracionDatos{
+    margin:13px;
+}
+
+#TituloConfiguraciones{
+    margin:13px;
+}
+
+#ListaConfiguracion li{
+   margin:35px;
+}
+

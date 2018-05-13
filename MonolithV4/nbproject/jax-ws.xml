@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="UsuarioWebMethods">
+      <implementation-class>WebService.UsuarioWebMethods</implementation-class>
+    </service>
+    <service name="ActividadWebMethods">
+      <implementation-class>WebService.ActividadWebMethods</implementation-class>
+    </service>
+    <service name="WLogrosAgre">
+      <implementation-class>Web.WLogrosAgre</implementation-class>
+    </service>
+    <service name="WInter">
+      <implementation-class>Web.WInter</implementation-class>
+    </service>
+    <service name="WNegarInter">
+      <implementation-class>Web.WNegarInter</implementation-class>
+    </service>
+    <service name="WAceptarInter">
+      <implementation-class>Web.WAceptarInter</implementation-class>
+    </service>
+    <service name="InicioSesion">
+      <implementation-class>WebService.InicioSesion</implementation-class>
+    </service>
+  </services>
+  <clients/>
+</jax-ws>

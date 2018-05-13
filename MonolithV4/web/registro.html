@@ -8,20 +8,20 @@
         <link href="js/bootstrap.min.js"  type="text/javascript">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/FormularioRegistro.js"></script>
+        <!--<script src="js/FormularioRegistro.js"></script>-->
         <script src="js/jquery.validate.min.js"></script>
         <link href="js/jquery-3.2.1.min.js"  type="text/javascript">
         <link href="js/jquery.validate.min.js"  type="text/javascript">
         <link href="js/bootstrap.min.js">
-        <link href="js/FormularioRegistro.js"  type="text/javascript">
-        
+        <!--<link href="js/FormularioRegistro.js"  type="text/javascript">-->
+
     </head>
     <body class="container-fluid">
         <div class="barraInicio navbar navbar-default " style="font-family:Mukta">Monolith<img  class="logo" src="img/logo.png"></div>
-        <form class="form-register " role="form" id="registro" method="POST" action="IngresoUsuario" >
+        <form class="form-register " role="form" id="registro" ><!--method="POST" action="IngresoUsuario"--> 
             <h2 class="form-titulo">Registro</h2>
             <div class="contenedor-inputs container-fluid ">
-               
+
                 <div class="form-group row" style="width:100%;">
                     <div class="col-6">
                         <label class="entrada" >Nombre Usuario</label>
@@ -30,13 +30,13 @@
                         <input type="text" class=" form-control " style="width:100%;margin-top:10px;" id="nombre" name="nombre" maxlength="16" minlength="4" placeholder="NombreUsuario" >
                     </div>
                 </div>
-                
+
                 <div class="form-group row" style="width:100%;">
                     <div class="col-6">
                         <label class="entrada">Edad</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="numero" name="edad"  placeholder="Edad" >
+                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="numero" name="numero"  placeholder="Edad" >
                     </div>
                 </div>
                 <div class="form-group row" style="width:100%;">
@@ -47,12 +47,12 @@
                         <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="pais" name="pais"  placeholder="Pais" >
                     </div>
                 </div>
-               <div class="form-group row" style="width:100%;">
+                <div class="form-group row" style="width:100%;">
                     <div class="col-6">
                         <label class="entrada" style="">Direccion</label>
                     </div>
                     <div class="col-6">
-                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="path" name="direccion" placeholder="Direccion" >
+                        <input type="text" class="form-control" style="width:100%;margin-top:10px;"  id="direccion" name="direccion" placeholder="Direccion" >
                     </div>
                 </div>
                 <div class="form-group row" style="width:100%;">
@@ -71,12 +71,144 @@
                         <input type="password" class="form-control" style="width:100%;margin-top:10px;"  id="contra" name="contra"  placeholder="Contraseña" >
                     </div>
                 </div>
-                 
-                    <div class="col-12" style="padding-left:40%;padding-right:40%;">
-                        <input class="registro"  type="submit" id="Envio" value="Registrar">
-                    </div>
-               
+
+                <div class="col-12" style="padding-left:40%;padding-right:40%;">
+                    <input class="registro"  type="submit" id="Envio" value="Registrar">
+                </div>
+
             </div>
         </form>
     </body>
+    <script>
+        $("#Envio").click(function () {
+
+            $.validator.addMethod("letras", function (value, element) {
+                return this.optional(element) || /^[a-z]+$/i.test(value);
+            }, "Ponga letras solamente");
+
+            $("#registro").validate({
+                rules: {
+                    nombre: {
+                        required: true,
+                        minlength: 8,
+                        maxlength: 15
+                    },
+                    institucion: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 40
+                    },
+                    estudios: {
+                        required: true,
+                        minlength: 7,
+                        maxlength: 30
+                    },
+                    numero: {
+                        required: true,
+                        digits: true,
+                        maxlength: 3
+                    },
+                    pais: {
+                        required: true,
+                        letras: true,
+                        minlength: 3,
+                        maxlength: 30
+                    },
+                    direccion: {
+                        required: true,
+                        minlength: 12,
+                        maxlength: 40
+                    },
+                    correo: {
+                        required: true,
+                        email: true
+                    },
+                    contra: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+
+                    }
+                },
+                messages: {
+                    nombre: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese un nombre de usuario de 8 caracteres en adelante",
+                        maxlength: "Ingrese un nombre de usuario de menos de 15 caracteres en adelante"
+                    },
+                    institucion: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese una Institucion con almenos 10 caracteres",
+                        maxlength: "Ingrese una Institucion con menos  de 40 caracteres"
+                    },
+                    estudios: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese un grado de estudios de almenos 7 caractes",
+                        maxlength: "Ingrese un grado de estudios de menos 30 caractes"
+                    },
+                    numero: {
+                        required: "Llene el campo",
+                        digits: "Ponga un numero valido",
+                        maxlength: "Ingrese una edad valida"
+                    },
+                    pais: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese un pais valido",
+                        maxlength: "Ingrese un pais valido"
+                    },
+                    direccion: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese una direccón valida",
+                        maxlength: "Ingrese una direccion valida"
+                    },
+                    correo: {
+                        required: "Llene el campo",
+                        email: "De un correo valido"
+                    },
+                    contra: {
+                        required: "Llene el campo",
+                        minlength: "Ingrese una contraseña de al menos 8 caracteres",
+                        maxlength: "Ingrese una contraseña de menos 20 caracteres"
+                    }
+                },
+                submitHandler: function (form) {
+                    var NombreUsuario = $("#nombre").val();
+                    var EdadUsuario = $("#numero").val();
+                    var PaisUsuario = $("#pais").val();
+                    var DirUsuario = $("#direccion").val();
+                    var Correousuario = $("#correo").val();
+                    var ContraUsuario = $("#contra").val();
+                    $.ajax({
+                        url: "IngresoUsuario",
+
+                        data: {
+                            NomUsuario: NombreUsuario.toString(),
+                            Age: EdadUsuario.toString(),
+                            PaisUsuario: PaisUsuario.toString(),
+                            CorreoUsuario: Correousuario.toString(),
+                            DirUsuario: DirUsuario.toString(),
+                            ContraUsuario: ContraUsuario.toString()
+                        },
+                        type: "POST",
+                        error: {
+
+                        }, success: function (data) {
+                                if(data==="Ok"){
+                                  window.location.href="SolicitarCodigo.jsp";
+                               }else if(data==="ErrorCorreo"){
+                                    alert("Error enviando correo");
+                                }else if(data==="UsuarioRepetido"){
+                                    alert("Usuario ya registrado previamente intente con otro");
+                                }else if(data==="CorreoRepetido"){
+                                    alert("Correo ya registrado previamente intente con otro");
+                                }
+                                 
+                        }
+
+                    });
+                }
+            });
+
+        });
+    </script>
 </html>

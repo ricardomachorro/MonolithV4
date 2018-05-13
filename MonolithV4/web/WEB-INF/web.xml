@@ -1,16 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+<web-app>
     <servlet>
-        <servlet-name>IngresoUsuario</servlet-name>
-        <servlet-class>Servlets.IngresoUsuario</servlet-class>
+        <servlet-name>AgregarMiembro</servlet-name>
+        <servlet-class>Servlets.AgregarMiembro</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>AgregarMiembro</servlet-name>
+        <url-pattern>/AgregarMiembro</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EliminarGrupo</servlet-name>
+        <servlet-class>Servlets.EliminarGrupo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarGrupo</servlet-name>
+        <url-pattern>/EliminarGrupo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AgregarTarea</servlet-name>
+        <servlet-class>Servlets.AgregarTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AgregarTarea</servlet-name>
+        <url-pattern>/AgregarTarea</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>CambiarTarea</servlet-name>
         <servlet-class>Servlets.CambiarTarea</servlet-class>
     </servlet>
     <servlet-mapping>
+        <servlet-name>CambiarTarea</servlet-name>
+        <url-pattern>/CambiarTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CrearGrupos</servlet-name>
+        <servlet-class>Servlets.CrearGrupos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CrearGrupos</servlet-name>
+        <url-pattern>/CrearGrupos</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EliminarTarea</servlet-name>
+        <servlet-class>Servlets.EliminarTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarTarea</servlet-name>
+        <url-pattern>/EliminarTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EstadoTarea</servlet-name>
+        <servlet-class>Servlets.EstadoTarea</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EstadoTarea</servlet-name>
+        <url-pattern>/EstadoTarea</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>IngresoUsuario</servlet-name>
+        <servlet-class>Servlets.IngresoUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>IngresoUsuario</servlet-name>
         <url-pattern>/IngresoUsuario</url-pattern>
+    </servlet-mapping>
+     <servlet>
+        <servlet-name>ComparacionCodigo</servlet-name>
+        <servlet-class>Servlets.ComparacionCodigo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ComparacionCodigo</servlet-name>
+        <url-pattern>/ComparacionCodigo</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>IngresoPrograma</servlet-name>
@@ -20,6 +85,7 @@
         <servlet-name>IngresoPrograma</servlet-name>
         <url-pattern>/IngresoPrograma</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>IngresarActividad</servlet-name>
         <servlet-class>Servlets.IngresarActividad</servlet-class>
@@ -28,8 +94,62 @@
         <servlet-name>IngresarActividad</servlet-name>
         <url-pattern>/IngresarActividad</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <servlet-class>Servlets.ChequeoActividad</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>CambiarTarea</servlet-name>
-        <url-pattern>/CambiarTarea</url-pattern>
+        <servlet-name>ChequeoActividad</servlet-name>
+        <url-pattern>/ChequeoActividad</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CambiosActividad</servlet-name>
+        <servlet-class>Servlets.CambiosActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CambiosActividad</servlet-name>
+        <url-pattern>/CambiosActividad</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EliminarActividad</servlet-name>
+        <servlet-class>Servlets.EliminarActividad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarActividad</servlet-name>
+        <url-pattern>/EliminarActividad</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <servlet-class>Servlets.EliminarCategoria</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EliminarCategoria</servlet-name>
+        <url-pattern>/EliminarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <servlet-class>Servlets.ActualizarUsuario</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActualizarUsuario</servlet-name>
+        <url-pattern>/ActualizarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GuardarNota</servlet-name>
+        <servlet-class>Servlets.GuardarNota</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GuardarNota</servlet-name>
+        <url-pattern>/GuardarNota</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PonerNota</servlet-name>
+        <servlet-class>Servlets.PonerNota</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PonerNota</servlet-name>
+        <url-pattern>/PonerNota</url-pattern>
     </servlet-mapping>
 </web-app>

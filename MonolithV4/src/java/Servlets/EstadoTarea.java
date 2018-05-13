@@ -38,7 +38,7 @@ public class EstadoTarea extends HttpServlet {
             Database2 db = new Database2();
             //Traigo los parametros del ajax
             String estadoTarea = request.getParameter("Estado");
-            String idTarea = request.getParameter("idTarea");
+            String idTarea = request.getParameter("Tarea");
             
             //Cambio las variables
             int e = Integer.parseInt(estadoTarea);
@@ -55,3 +55,5 @@ public class EstadoTarea extends HttpServlet {
     }
 
 }
+
+

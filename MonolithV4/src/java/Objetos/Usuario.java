@@ -1,6 +1,6 @@
-
 package Objetos;
 
+import org.json.simple.JSONObject;
 
 public class Usuario {
     
@@ -11,8 +11,8 @@ public class Usuario {
     private String Pais;
     private String Direccion;
     private int Puntos;
-    
-    //PUNTOS
+    private String Validado;
+
     public int getPuntos() {
         return Puntos;
     }
@@ -21,7 +21,8 @@ public class Usuario {
         this.Puntos = Puntos;
     }
     
-    //NOMBRE
+    
+    
     public String getNombre() {
         return Nombre;
     }
@@ -30,7 +31,6 @@ public class Usuario {
         this.Nombre = Nombre;
     }
 
-    //CORREO
     public String getCorreo() {
         return Correo;
     }
@@ -39,7 +39,6 @@ public class Usuario {
         this.Correo = Correo;
     }
 
-    //CONTRASEÑA
     public String getPassword() {
         return Password;
     }
@@ -48,7 +47,6 @@ public class Usuario {
         this.Password = Password;
     }
 
-    //EDAD
     public int getEdad() {
         return Edad;
     }
@@ -57,7 +55,6 @@ public class Usuario {
         this.Edad = Edad;
     }
 
-    //PAIS
     public String getPais() {
         return Pais;
     }
@@ -66,7 +63,6 @@ public class Usuario {
         this.Pais = Pais;
     }
 
-    //DIRECCION
     public String getDireccion() {
         return Direccion;
     }
@@ -74,5 +70,30 @@ public class Usuario {
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
     }
+    
+     public String getValidado() {
+        return Validado;
+    }
+
+    public void setValidado(String Validado) {
+        this.Validado = Validado;
+    }
+    
+    public JSONObject obtenerJSONUsuario(int IDUsuario, String NombreUsuario, String Correo, int Edad, String Pais, String Direccion, String Contrasena, int TipoUsuario, String Validado, int Puntos){        
+        JSONObject resultado = new JSONObject();
+        resultado.put("IDUsuario", IDUsuario);
+        resultado.put("NombreUsuario", NombreUsuario);
+        resultado.put("Correo", Correo);
+        resultado.put("Edad", Edad);
+        resultado.put("Pais", Pais);
+        resultado.put("Direccion", Direccion);
+        resultado.put("Contrasena", Contrasena);
+        resultado.put("TipoUsuario", TipoUsuario);
+        resultado.put("Validado", Validado);
+        resultado.put("Puntos", Puntos);
+        
+        return resultado;
+    }
 
 }
+
