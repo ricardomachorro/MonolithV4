@@ -201,7 +201,7 @@
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
                                                 out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
-                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: " + rs.getString("Nombre") + "  Fecha:" + rs.getString("Fecha") + " Localización:Pendiente/Nula</h5>");
+                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: " + rs.getString("Nombre") + "  Fecha:" + rs.getString("Fecha") + " </h5>");
                                                 out.println("</div>");
                                                 out.println(" <div class='col-2'>");
                                                 if (rs.getBoolean("Estado")) {
@@ -407,15 +407,15 @@
                                 var MesReal = ObjetoFecha.getMonth() + 1;
                                 var DiaReal = ObjetoFecha.getDay() + 1;
                                 var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
-                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard " + NombreCategoria + "'><div class='card ActividadCarta' id='" + data.toString() + "' >" +
+                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard "   + NombreCategoria + "'><div class='card ActividadCarta ActividadActiva' id='" + data.toString() + "' >" +
                                         "<div class='card-body'>" +
                                         "<div class='row'>" +
-                                        "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
-                                        " <h5 class='ActividadMensaje'>Nombre Actividad:" + NombreActividad.toString() + "   Fecha:" + FechaReal + " Localización:Pendiente/Nula</h5>" +
+                                        "<div class='col-10' data-toggle='collapse' href='#Col"  + data.toString() + "'>" +
+                                       "<h5 class='ActividadMensaje'>Nombre Actividad: "  + NombreActividad.toString() + "   Fecha:" + FechaReal + "</h5>" +
                                         "</div>" +
                                         "<div class='col-2'>" +
-                                        "<input class='CheckBoxActividades float-right checar' id='" + data.toString() + "'  type='checkbox' >" +
-                                        " </div>" +
+                                        "<input class='CheckBoxActividades float-right' id='" + data.toString() + "'  checked type='checkbox' >" +
+                                        " </div></div>" +
                                         "<div class='collapse row OpccionesAcividad' id='Col" + data.toString() + "' >" +
                                         " <form class='form-inline'>" +
                                         "<input class='form-control txtNombreActividad' required='true' type='text' placeholder='Nombre Activdad'>" +
