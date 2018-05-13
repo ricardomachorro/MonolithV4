@@ -30,8 +30,8 @@
 
             function changecontent() {
                 var texto = document.getElementById("memo").value;
-                var imagen = texto.substring(4, 5);
-                var filtro = texto.substring(13, 15);
+                var imagen = texto.substring(4, 6);
+                var filtro = texto.substring(14, 16);
                 var id = subStrAfterChars(texto, 'M', 'b');
                 var imagenchida = "img/dogo" + imagen + ".jpg";
                 objFondo = document.getElementById("marco");
@@ -49,14 +49,14 @@
                 else
                     return str;
             }
-           function mandardatosuwu(){
-               var texto = document.getElementById("memo").value;
-               var xd = "nel";
-               if(texto==xd){
-                   alert('No seleccionaste un doggo >:c');
-               }else{
-                   document.forms['respeta'].submit();
-               }
+            function mandardatosuwu() {
+                var texto = document.getElementById("memo").value;
+                var xd = "nel";
+                if (texto == xd) {
+                    alert('No seleccionaste un doggo >:c');
+                } else {
+                    document.forms['respeta'].submit();
+                }
             }
         </script>
     </head>
@@ -119,8 +119,8 @@
                                             String nombre = "";
                                             int id = 0;
                                             int coun = 1;
-                                            int filtro = 0;
-                                            int img = 0;
+                                            String filtro = "";
+                                            String img = "";
                                             //esta mamada >:V
                                             Calendar fechita = new GregorianCalendar();
                                             int año = fechita.get(Calendar.YEAR);
@@ -145,14 +145,25 @@
                                                     perroDa = "dogo #" + r.getString("dogoRe");
                                                 }
                                                 r = sta.executeQuery("select * from Logro where IDusuario=" + IDusuario + " and Nombre='" + perroDa + "'");
-
+                                                int filaux;
+                                                int imgaux;
                                                 while (r.next()) {
                                                     estado = "";
                                                     coun++;
                                                     nombre = r.getString("Nombre");
                                                     id = Integer.parseInt(r.getString("IDLogro"));
-                                                    filtro = Integer.parseInt(r.getString("Filtro"));
-                                                    img = Integer.parseInt(r.getString("Img"));
+                                                    filaux = Integer.parseInt(r.getString("Filtro"));
+                                                    if (filaux < 10) {
+                                                        filtro = "0" + filaux;
+                                                    } else {
+                                                        filtro = "" + filaux;
+                                                    }
+                                                    imgaux = Integer.parseInt(r.getString("Img"));
+                                                    if (imgaux < 10) {
+                                                        img = "0" + imgaux;
+                                                    } else {
+                                                        img = "" + imgaux;
+                                                    }
                                         %>
                                         <option value="img:<%=img%> filtro:<%=filtro%> id:M<%=id%>" ><%=nombre%> filtro<%=filtro%></option>
 
@@ -181,7 +192,7 @@
                                     <img name="marco" id="marco" src="img/Doggo.jpg" class="" alt="" width=250px" height="250px">
                                 </div>
 
-                                        <input class="btn btn-primary" type="button" onclick="mandardatosuwu();" value="Intercambiar" <%=estado%>>
+                                <input class="btn btn-primary" type="button" onclick="mandardatosuwu();" value="Intercambiar" <%=estado%>>
                             </form>
                         </div>
 
@@ -197,8 +208,9 @@
                                 String dogoda = "";
                                 int IDdogoda = 0;
                                 String dogofiltro = "";
-                                int imgDa = 0;
+                                String imgDa = "";
                                 String UsuDa1 = "";
+                                int memoaux = 0;
                                 try {
                                     r = sta.executeQuery("select * from Intercambio where IDInter=" + IDInter + "");
                                     while (r.next()) {
@@ -209,7 +221,12 @@
                                     }
                                     r = sta.executeQuery("select * from Logro where IDLogro=" + IDdogoda + "");
                                     while (r.next()) {
-                                        imgDa = Integer.parseInt(r.getString("Img"));
+                                        memoaux = Integer.parseInt(r.getString("Img"));
+                                        if (memoaux < 10) {
+                                            imgDa = "0" + memoaux;
+                                        } else {
+                                            imgDa = "" + memoaux;
+                                        }
                                     }
 
                                 } catch (SQLException error) {
