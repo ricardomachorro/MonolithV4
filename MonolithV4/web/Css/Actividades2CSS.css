@@ -53,14 +53,23 @@ SeccionNuevaActividad input[type='date']{
 }
 
 .ActividadCarta{
-    background-color:#9fcdff;
     margin:6px;
+}
+
+.elementos_marcados{
+  background-color: #bfd7ff;
+  height:40px;
+  padding:10px;
+  display: inline-block;
+  margin-right:32px;
+  margin-left:12px;
 }
 
 .ActividadCarta input[type="checkbox"]{
     height:25px;
     width:25px;
 }
+
 
 .OpccionesAcividad{
     padding:5px;
