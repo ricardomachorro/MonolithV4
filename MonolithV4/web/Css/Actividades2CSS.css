@@ -65,6 +65,25 @@ SeccionNuevaActividad input[type='date']{
   margin-left:12px;
 }
 
+.elementos_marcados_proximos{
+  background-color: #f49242;
+  height:40px;
+  padding:10px;
+  display: inline-block;
+  margin-right:32px;
+  margin-left:12px;
+}
+
+.elementos_marcados_urgentes{
+  background-color: #f45941;
+  height:40px;
+  padding:10px;
+  display: inline-block;
+  margin-right:32px;
+  margin-left:12px;
+}
+
+
 .ActividadCarta input[type="checkbox"]{
     height:25px;
     width:25px;
