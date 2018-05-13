@@ -44,8 +44,8 @@
             function changecontent() {
                 var texto = document.getElementById("memop2").value;
 
-                var imagen = texto.substring(4, 5);
-                var filtro = texto.substring(13, 15);
+                var imagen = texto.substring(4, 6);
+                var filtro = texto.substring(14, 16);
                 var id = subStrAfterChars(texto, 'M', 'b');
                 var imagenchida = "img/dogo" + imagen + ".jpg";
                 objFondo = document.getElementById("marco");
@@ -218,10 +218,21 @@
 
                                     <%
                                         r = sta.executeQuery("select * from Logro where IDUsuario='" + IDusuario + "'");
+                                        int filaux;
+                                        String perritoaux;
                                         while (r.next()) {
                                             numpe = Integer.parseInt(r.getString("Img"));
-                                            fil = "filtro" + r.getString("Filtro");
-                                            perrito = "dogo" + numpe + ".jpg";
+                                            filaux = Integer.parseInt(r.getString("Filtro"));
+                                            if (filaux < 10) {
+                                              fil = "filtro0" + r.getString("Filtro");
+                                            } else {
+                                                fil = "filtro" + r.getString("Filtro");
+                                            }
+                                            if (numpe < 10) {
+                                                perrito = "dogo0" + numpe + ".jpg";
+                                            } else {
+                                                perrito = "dogo" + numpe + ".jpg";
+                                            }
                                             nombre = r.getString("Nombre");
                                             fecha = r.getString("fecha");
 
@@ -280,19 +291,31 @@
                                                                         String nombre3 = "";
                                                                         int id3 = 0;
                                                                         int coun3 = 1;
-                                                                        int filtro3 = 0;
-                                                                        int img3 = 0;
+                                                                        String filtro3 = "";
+                                                                        String img3 = "";
                                                                         r = sta.executeQuery("select * from Usuario where NombreUsuario='" + usuario + "'");
                                                                         if (r.next()) {
                                                                             IDusuario3 = Integer.parseInt(r.getString("IDUsuario"));
                                                                         }
                                                                         r = sta.executeQuery("select * from Logro where IDusuario='" + IDusuario3 + "'");
+                                                                        int filaux1;
+                                                                        int imgaux;
                                                                         while (r.next()) {
                                                                             coun3++;
                                                                             nombre3 = r.getString("Nombre");
                                                                             id3 = Integer.parseInt(r.getString("IDLogro"));
-                                                                            filtro3 = Integer.parseInt(r.getString("Filtro"));
-                                                                            img3 = Integer.parseInt(r.getString("Img"));
+                                                                            filaux1 = Integer.parseInt(r.getString("Filtro"));
+                                                                            if (filaux1 < 10) {
+                                                                                filtro3 = "0" + filaux1;
+                                                                            } else {
+                                                                                filtro3 = "" + filaux1;
+                                                                            }
+                                                                            imgaux = Integer.parseInt(r.getString("Img"));
+                                                                            if (imgaux < 10) {
+                                                                                img3 = "0" + imgaux;
+                                                                            } else {
+                                                                                img3 = "" + imgaux;
+                                                                            }
                                                                     %>
                                                                     <option value="img:<%=img3%> filtro:<%=filtro3%> id:M<%=id3%>" ><%=nombre3%> filtro<%=filtro3%></option>
 
@@ -353,7 +376,8 @@
                                         String estado = "";
                                         String fecha1 = "";
                                         int conta = 0;
-                                        int imgchida = 0;
+                                        String imgchida = "";
+                                        int imgmemo2=0;
                                         r = sta.executeQuery("select * from Intercambio where UsuarioRe='" + usuario + "' and Estado='proceso'  order by IDInter DESC");
                                         while (r.next()) {
 
@@ -366,7 +390,12 @@
                                             iddogoda = Integer.parseInt(r.getString("IDdogoDa"));
                                             iddogore = Integer.parseInt(r.getString("IDdogoRe"));
                                             filtroDa = r.getString("FiltroDa");
-                                            imgchida = Integer.parseInt(r.getString("ImgdogoDa"));
+                                            imgmemo2 = Integer.parseInt(r.getString("ImgdogoDa"));
+                                            if(imgmemo2<10){
+                                                imgchida="0"+imgmemo2;
+                                            }else{
+                                                imgchida=""+imgmemo2;
+                                            }
                                             dogoda = r.getString("dogoDa");
                                             dogore = Integer.parseInt(r.getString("dogoRe"));
                                             estado = r.getString("Estado");
@@ -446,7 +475,9 @@
                                         String fecha2 = "";
                                         int conta1 = 0;
 
-                                        int imgchida1 = 0;
+                                        int filtrodamemo=0;
+                                        String imgchida1 = "";
+                                        int imgmemo=0;
                                         r = sta.executeQuery("select * from Intercambio where UsuarioDa='" + usuario + "' or UsuarioRe='" + usuario + "'  order by IDInter DESC  ");
                                         while (r.next()) {
                                             String tipo = "";
@@ -459,7 +490,12 @@
                                             iddogoda1 = Integer.parseInt(r.getString("IDdogoDa"));
                                             iddogore1 = Integer.parseInt(r.getString("IDdogoRe"));
                                             filtroDa1 = r.getString("FiltroDa");
-                                            imgchida1 = Integer.parseInt(r.getString("ImgdogoDa"));
+                                            imgmemo = Integer.parseInt(r.getString("ImgdogoDa"));
+                                            if(imgmemo<10){
+                                                imgchida1="0"+imgmemo;
+                                            }else{
+                                                imgchida1=""+imgmemo;
+                                            }
                                             dogoda1 = r.getString("dogoDa");
                                             dogore1 = Integer.parseInt(r.getString("dogoRe"));
                                             estado1 = r.getString("Estado");
