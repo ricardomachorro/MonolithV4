@@ -511,55 +511,55 @@
 
 
 
-            $(".btnSave").click(function () {
+                                $(".btnSave").click(function () {
 
-                var IDActividad = $(this).attr("id");
-                var inputNombre = $(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
-                var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
-                var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
-                var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
-                $.ajax({
-                    url: "CambiosActividad",
-                    type: 'post',
-                    data: {
-                        IDActivity: IDActividad,
-                        NombreActivity: inputNombre,
-                        FechaActividad: inputFecha,
-                        CategoriaActividad: inputCategoria
-                    },
-                    success: function () {
-                        var ObjetoFecha = new Date();
-                        var MesReal = ObjetoFecha.getMonth() + 1;
-                        var DiaReal = ObjetoFecha.getDay() + 1;
-                        var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
-                        var difFechaReal = new Date(FechaReal);
-                        var fechacambio = new Date(inputFecha);
-                        var diff = fechacambio - ObjetoFecha;
-                        var sustituciondias = Math.round((diff / (1000 * 60 * 60 * 24)) + 1);
-                        mensajeActividad.empty();
-                        if (sustituciondias > 5) {
-                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados'>" + sustituciondias + "  </p>");
-                        } else if (sustituciondias <= 5 && sustituciondias > 3) {
-                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_proximos'>" + sustituciondias + "  </p>");
-                        } else {
-                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_urgentes'>" + sustituciondias + "  </p>");
-                        }
+                                    var IDActividad = $(this).attr("id");
+                                    var inputNombre = $(this).closest(".OpccionesAcividad").find("input.txtNombreActividad").val();
+                                    var inputFecha = $(this).closest(".OpccionesAcividad").find("input.txtFecha").val();
+                                    var inputCategoria = $(this).closest(".OpccionesAcividad").find("input.txtCategoria").val();
+                                    var mensajeActividad = $(this).closest(".ActividadCarta").find("h5.ActividadMensaje");
+                                    $.ajax({
+                                        url: "CambiosActividad",
+                                        type: 'post',
+                                        data: {
+                                            IDActivity: IDActividad,
+                                            NombreActivity: inputNombre,
+                                            FechaActividad: inputFecha,
+                                            CategoriaActividad: inputCategoria
+                                        },
+                                        success: function () {
+                                            var ObjetoFecha = new Date();
+                                            var MesReal = ObjetoFecha.getMonth() + 1;
+                                            var DiaReal = ObjetoFecha.getDay() + 1;
+                                            var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
+                                            var difFechaReal = new Date(FechaReal);
+                                            var fechacambio = new Date(inputFecha);
+                                            var diff = fechacambio - ObjetoFecha;
+                                            var sustituciondias = Math.round((diff / (1000 * 60 * 60 * 24)) + 1);
+                                            mensajeActividad.empty();
+                                            if (sustituciondias > 5) {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados'>" + sustituciondias + "  </p>");
+                                            } else if (sustituciondias <= 5 && sustituciondias > 3) {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_proximos'>" + sustituciondias + "  </p>");
+                                            } else {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_urgentes'>" + sustituciondias + "  </p>");
+                                            }
 
-                        if ($("#ListaCategorias").find("#" + inputCategoria).length === 0) {
-                            $("#ListaCategorias").prepend("<li id='" + inputCategoria + "'><img src='img/folderOrange.svg'>" + inputCategoria + "</li>");
-                        }
-                    },
-                    error: {
+                                            if ($("#ListaCategorias").find("#" + inputCategoria).length === 0) {
+                                                $("#ListaCategorias").prepend("<li id='" + inputCategoria + "'><img src='img/folderOrange.svg'>" + inputCategoria + "</li>");
+                                            }
+                                        },
+                                        error: {
 
-                    },
-                    complete: function () {
+                                        },
+                                        complete: function () {
 
-                    }
+                                        }
 
-                });
+                                    });
 
 
-            });
+                                });
 
 
                                 $(".btnDrop").click(function () {
