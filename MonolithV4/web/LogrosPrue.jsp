@@ -87,23 +87,25 @@
                         <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio " >Grupo</a>
+                        <a class="nav-link"  href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio">Grupos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
+                        <a class="nav-link"  href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
+                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/icon.svg" class="ImagenesBarraInicio">Logros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="Ayuda.jsp"><img src="img/support.svg" class="ImagenesBarraInicio" >Ayuda</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
+                            <img src="img/user.svg" class="ImagenesBarraInicio" > <%out.println(usuario);%>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" >Usuario: <%/* 
-                                out.println(Usuario);*/
+                            <a class="dropdown-item" id="UsuarioName" >Usuario: <%                                out.println(usuario);
                                 %></a>
                             <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
                             <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
