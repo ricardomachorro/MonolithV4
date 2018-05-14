@@ -46,9 +46,7 @@ public class ActualizarNota extends HttpServlet{
             nota.setUsuario(Usuario);
             nota.setTitulo(TituloNota);
             nota.setContenido(Contenido);
-            db.ActualizarNota(nota, AntiguoTitulo);
-            
-            
+            db.ActualizarNota(nota, AntiguoTitulo);   
         } catch (Exception ex) {
             String e=ex.toString();
               System.out.println(ex.toString());

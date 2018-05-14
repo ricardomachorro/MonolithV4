@@ -13,7 +13,7 @@
             //Variables de sesion
             HttpSession sesion = request.getSession();
             String nomUsuario = sesion.getAttribute("usuario").toString();
-           
+
             //Variables de conexion a BD
             Connection con = null;
             String driver = "com.mysql.jdbc.Driver";
@@ -56,7 +56,7 @@
                         <a class="nav-link" href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="grupos.html"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
+                        <a class="nav-link" href="grupos.jsp"><img src="img/group.svg" class="ImagenesBarraInicio ">Grupos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Notas.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio">Notas</a>
@@ -96,24 +96,24 @@
                     <div class="tab-content" id="ContenidoGrupos">
                         <%
                             //Traer el id del usuario
-                            String queryIDUsuario = "select IDUsuario from Usuario where NombreUsuario='"+nomUsuario+"';";
+                            String queryIDUsuario = "select IDUsuario from Usuario where NombreUsuario='" + nomUsuario + "';";
                             Statement stIDU = con.createStatement();
                             ResultSet rsIDU = stIDU.executeQuery(queryIDUsuario);
                             rsIDU.next();
                             int idUsuario = rsIDU.getInt("IDUsuario");
-                            
+
                             //Para grupos
-                            String query = "select * from Grupo inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo where Miembros.IDUsuario="+idUsuario+";";
+                            String query = "select * from Grupo inner join Miembros on Grupo.IDGrupo=Miembros.IDGrupo where Miembros.IDUsuario=" + idUsuario + ";";
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(query);
                             String nombreGrupo;
-                            
+
                             //Para el rol
-                            String traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                            String traerRol = "select IDRol from Miembros where IDUsuario=" + idUsuario + " and IDGrupo=";
                             Statement stRol = con.createStatement();
                             ResultSet rsRol;
                             int rol;
-                            
+
                             //Para las tareas de los grupos
                             int idGrupo;
                             String queryTarea = "select * from Tarea where IDGrupo=?;";
@@ -124,44 +124,79 @@
                             String fecha;
                             boolean estado;
                             String idConcatenada;
-                            
+
                             //Para miembros asignados a una tarea
                             String queryMiembros = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro where TareaMiembro.IDTarea=?;";
                             PreparedStatement psMiembros = con.prepareStatement(queryMiembros);
                             ResultSet rsMiembros;
                             String nombreMiembro;
+                            int numeroMiembros;
+                            Statement stnMiembros = con.createStatement();
+                            ResultSet rsnMiembros;
+                            String[] miembrosAsignados = new String[20];
+                            String asignado = "no";
+
+                            String[] Miembros;
+                            Statement stTraerMiembros = con.createStatement();
+                            ResultSet rsTraerMiembros;
+                            int i;
+
                             while (rs.next()) {
                                 //Desplegando todos los grupos de usuario
                                 nombreGrupo = (String) rs.getString("NombreGrupo");
                                 idGrupo = rs.getInt("IDGrupo");
+                                //Para contar miembros
+                                String contarMiembros = "select count(*) from Miembros where IDGrupo=" + idGrupo + ";";
+                                rsnMiembros = stnMiembros.executeQuery(contarMiembros);
+                                rsnMiembros.next();
+                                numeroMiembros = rsnMiembros.getInt(1);
+                                Miembros = new String[numeroMiembros];
+                                //Para traer miembros
+                                String traerMiembros = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario where Miembros.IDGrupo=" + idGrupo + ";";
+                                rsTraerMiembros = stTraerMiembros.executeQuery(traerMiembros);
+                                i = 0;
+                                while (rsTraerMiembros.next()) {
+                                    Miembros[i] = rsTraerMiembros.getString("NombreUsuario");
+                                    i++;
+                                }
                         %>
                         <!--Inicio de un grupo-->
                         <div class="tab-pane fade grupo" <%out.print("id='panel-g" + nombreGrupo + "' role='tabpanel' aria-labelledby='lista-g" + nombreGrupo + "'");%>>
 
                             <!--Inicio titulo contenedor-->
                             <div class='card-deck'>
-                                <div class='card Contenedor'>
+                                <div class='card bg-info Contenedor'>
                                     <div class='card-body'>
                                         <div class='row'>
-                                            <div class='col d-flex align-items-center justify-content-center'>
+                                            <div class='col d-flex align-items-center justify-content-center text-white'>
                                                 <%out.print("<h2>" + nombreGrupo + "</h2>");%>
                                             </div>
-                                            <%  traerRol = traerRol+idGrupo+";";
+                                            <%  traerRol = traerRol + idGrupo + ";";
                                                 rsRol = stRol.executeQuery(traerRol);
                                                 rsRol.next();
                                                 rol = rsRol.getInt("IDRol");
-                                                if(rol==1){
-                                                    
+                                                if (rol == 1) {
+
+                                            %>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light dropdown-toggle bg-info border-info text-white" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
+                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>, '<%out.print(nombreGrupo);%>');">Eliminar grupo</button>
+                                                </div>
+                                            </div>
+                                            <% } else {
                                             %>
                                             <div class="dropdown">
                                                 <button class="btn btn-light dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="eliminarGrupo(<%out.print(idGrupo);%>,'<%out.print(nombreGrupo);%>');">Eliminar grupo</button>
+                                                    <button class="dropdown-item eliminarGrupo" id="UsuarioName" onclick="abandonarGrupo(<%out.print(idGrupo);%>, '<%out.print(nombreGrupo);%>',<%out.print(idUsuario);%>);">Abandonar grupo</button>
                                                 </div>
                                             </div>
-                                            <% } 
-                                                traerRol = "select IDRol from Miembros where IDUsuario="+idUsuario+" and IDGrupo=";
+                                            <%
+                                                }
+                                                traerRol = "select IDRol from Miembros where IDUsuario=" + idUsuario + " and IDGrupo=";
                                             %>
                                         </div>
                                     </div>
@@ -173,24 +208,27 @@
                                 <div class='card'>
                                     <div class='card-body'>
                                         <!--Inicio agregar tarea -->
-                                        <form <%out.print("id='FormularioNuevaTarea"+nombreGrupo+"'");%>>
+                                        <form <%out.print("id='FormularioNuevaTarea" + nombreGrupo + "'");%>>
                                             <div class='form-row align-items-center'>
                                                 <div class='col-sm-5 mt-2'>
                                                     <input type='text' class='form-control' placeholder='Ingresa una tarea' 
-                                                           <%out.print("id='txtNuevaTarea"+nombreGrupo+"'");%> name='txtNuevaTarea'>
+                                                           <%out.print("id='txtNuevaTarea" + nombreGrupo + "'");%> name='txtNuevaTarea'>
                                                 </div>
                                                 <div class='col-sm-5 mt-2'>
                                                     <div class='input-group'>
                                                         <div class='input-group-prepend'>
                                                             <div class='input-group-text'>@</div>
                                                         </div>
-                                                        <input type='text' class='form-control' placeholder='Nombre del miembro' 
-                                                               <%out.print("id='txtMiembro"+nombreGrupo+"'");%> name='txtMiembro'>
+                                                        <select class="form-control" <%out.print("id='txtMiembro" + nombreGrupo + "'");%> name='txtMiembro'>
+                                                            <%for (int j = 0; j < Miembros.length; j++) {%>
+                                                            <option><%out.print(Miembros[j]);%></option>
+                                                            <%}%>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class='col-sm-2 d-flex justify-content-center mt-2'>
                                                     <button  class='btn btn-primary btnAgregarTarea' 
-                                                            id='<%out.print(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
+                                                             id='<%out.print(nombreGrupo);%>' onclick="agregarTarea(this);" name='txtMiembroNT'>
                                                         Agregar
                                                     </button>
                                                 </div>
@@ -204,121 +242,147 @@
                                                 <%
                                                     ps.setInt(1, idGrupo);
                                                     rsTarea = ps.executeQuery();
-                                                    while(rsTarea.next()){
+                                                    while (rsTarea.next()) {
                                                         nTarea = rsTarea.getInt("IDTarea");
                                                         nomTarea = rsTarea.getString("Nombre");
                                                         fecha = rsTarea.getDate("Fecha").toString();
                                                         estado = rsTarea.getBoolean("Estado");
                                                         idConcatenada = nTarea + nombreGrupo;
-                                                        %>
-                                                        <!--Inicio tarea-->
-                                                        <div class="card mt-3" <%out.print("id='Tarea-"+idConcatenada+"'");%>>
-                                                            <!--Inicio parte visible-->
-                                                            <div class="card-header" <%out.print("id='headTarea-"+idConcatenada+"'");%>>
-                                                                <div class="row">
-                                                                    <!--Nombre tarea-->
-                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-                                                                        <h5 class="mb-0">
-                                                                            <!--btn para hacer que se despliegue la parte invisible-->
-                                                                            <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
-                                                                            <%out.print("data-target='#tarea-"+idConcatenada+"'");%> aria-expanded="false" 
-                                                                            <%out.print("aria-controls='tarea-"+idConcatenada+"'");%>>
-                                                                                <span class="d-inline-block text-truncate" style="max-width: 150px;" <%out.print("id='valorNombreTarea-"+idConcatenada+"'");%>>
-                                                                                <%out.print(nomTarea);%>
-                                                                                </span>
-                                                                            </button>
-                                                                        </h5>
-                                                                    </div>
-                                                                    <!--Fecha limite-->
-                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-                                                                        <small class="text-muted" <%out.print("id='valorFechaTarea-"+idConcatenada+"'");%>>
-                                                                            <%out.print(fecha);%>
-                                                                        </small>
-                                                                    </div>
-                                                                    <!--Miembros-->
-                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center">
-                                                                        <div class="dropdown">
-                                                                            <button class="btn btn-secondary dropdown-toggle" type="button" 
-                                                                                    <%out.print("id='menuMiembros-"+idConcatenada+"'");%> data-toggle="dropdown" 
-                                                                                    aria-haspopup="true" aria-expanded="false">
-                                                                                    Miembros
-                                                                            </button>
-                                                                            <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
-                                                                                 <%out.print("id='dropdown-miembros-"+idConcatenada+"'");%>>
-                                                                                <%
-                                                                                    psMiembros.setInt(1, nTarea);
-                                                                                    rsMiembros = psMiembros.executeQuery();
-                                                                                    if(rsMiembros.next()){
-                                                                                        rsMiembros.beforeFirst();
-                                                                                        while(rsMiembros.next()){
-                                                                                            nombreMiembro = rsMiembros.getString("NombreUsuario");
-                                                                                %>
-                                                                                            <button class="dropdown-item disabled" type="button"><%out.print(nombreMiembro);%></button>
-                                                                                <%
-                                                                                        };
-                                                                                        rsMiembros.close();//Fin del resulset que trae a los mimbros asignados a una tarea
-                                                                                    } else {
-                                                                                %>
-                                                                                    <button class="dropdown-item disabled" type="button">No hay miembros asignados</button>
-                                                                                <%  } %>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!--Checkbox para marcar actividad-->
-                                                                    <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
-                                                                        <%if(estado) {%>
-                                                                        <input class="acabarTarea float-right" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)" checked>
-                                                                        <%} else {%>
-                                                                            <input class="acabarTarea float-right checado" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>,this)">
-                                                                         <% } %>
+                                                %>
+                                                <!--Inicio tarea-->
+                                                <div class="card mt-3" <%out.print("id='Tarea-" + idConcatenada + "'");%>>
+                                                    <!--Inicio parte visible-->
+                                                    <div class="card-header" <%out.print("id='headTarea-" + idConcatenada + "'");%>>
+                                                        <div class="row">
+                                                            <!--Nombre tarea-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <h5 class="mb-0">
+                                                                    <!--btn para hacer que se despliegue la parte invisible-->
+                                                                    <button class="btn btn-link p-0 collapsed" data-toggle="collapse" 
+                                                                            <%out.print("data-target='#tarea-" + idConcatenada + "'");%> aria-expanded="false" 
+                                                                            <%out.print("aria-controls='tarea-" + idConcatenada + "'");%>>
+                                                                        <span class="d-inline-block text-truncate" style="max-width: 150px;" <%out.print("id='valorNombreTarea-" + idConcatenada + "'");%>>
+                                                                            <%out.print(nomTarea);%>
+                                                                        </span>
+                                                                    </button>
+                                                                </h5>
+                                                            </div>
+                                                            <!--Fecha limite-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <small class="text-muted" <%out.print("id='valorFechaTarea-" + idConcatenada + "'");%>>
+                                                                    <%out.print(fecha);%>
+                                                                </small>
+                                                            </div>
+                                                            <!--Miembros-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center">
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-secondary dropdown-toggle" type="button" 
+                                                                            <%out.print("id='menuMiembros-" + idConcatenada + "'");%> data-toggle="dropdown" 
+                                                                            aria-haspopup="true" aria-expanded="false">
+                                                                        Miembros
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="menuMiembros my-2" 
+                                                                         <%out.print("id='dropdown-miembros-" + idConcatenada + "'");%>>
+                                                                        <%
+                                                                            psMiembros.setInt(1, nTarea);
+                                                                            rsMiembros = psMiembros.executeQuery();
+                                                                            if (rsMiembros.next()) {
+                                                                                rsMiembros.beforeFirst();
+                                                                                miembrosAsignados = new String[20];
+                                                                                int y = 0;
+                                                                                while (rsMiembros.next()) {
+                                                                                    nombreMiembro = rsMiembros.getString("NombreUsuario");
+                                                                                    miembrosAsignados[y] = nombreMiembro;
+                                                                                    y++;
+                                                                                    
+                                                                        %>
+                                                                        <button class="dropdown-item disabled" type="button"><%out.print(nombreMiembro);%></button>
+                                                                        <%
+                                                                            };
+                                                                            rsMiembros.close();//Fin del resulset que trae a los mimbros asignados a una tarea
+                                                                        } else {
+                                                                        %>
+                                                                        <button class="dropdown-item disabled" type="button">No hay miembros asignados</button>
+                                                                        <%  } %>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!--Fin parte visible-->
-                                                            <!--Inicio parte colapsable-->
-                                                            <div <%out.print("id='tarea-"+idConcatenada+"' class='collapse' aria-labelledby='headTarea-"+idConcatenada+"' data-parent='#listaTareas-"+nombreGrupo+"'");%>>
-                                                                <div class="card-body">
-                                                                    <form>
-                                                                        <!--Inicio formulario para modificar actividad-->
-                                                                        <div class="form-row ElementosCambios">
-                                                                            <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" <%out.print("id='nomTarea-"+idConcatenada+"'");%> name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>"/>
-                                                                            </div>
-                                                                            <div class="col-sm-3">
-                                                                                <input type="date" class="form-control dFecha" <%out.print("id='fechaTarea-"+idConcatenada+"'");%> name="fecha"/>
-                                                                            </div>
-                                                                            <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" <%out.print("id='eliMiembroTarea-"+idConcatenada+"'");%> name="eliMiembro" placeholder="Eliminar miembro asignado"/>
-                                                                            </div>
-
-                                                                            <div class="col-sm-3">
-                                                                                <input type="text" class="form-control" <%out.print("id='agrMiembroTarea-"+idConcatenada+"'");%> name="agrMiembro" placeholder="Agregar miembro asignado"/>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--Fin formulario para modificar actividad-->
-                                                                        <!--Inicio opciones-->
-                                                                        <div class="form-row mt-2">
-                                                                            <div class="col-sm-6">
-                                                                                <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;"
-                                                                                        onclick="actualizarTarea('<%out.print(nombreGrupo);%>',<%out.print(nTarea);%>);">
-                                                                                    Modificar actividad
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;idGrupo"
-                                                                                        onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>,<%out.print(idGrupo);%>);">
-                                                                                    Eliminar actividad
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--Fin opciones-->
-                                                                    </form>
-                                                                </div>
+                                                            <!--Checkbox para marcar actividad-->
+                                                            <div class="col-sm-3 d-flex align-items-center justify-content-center my-2">
+                                                                <%if (estado) {%>
+                                                                <input class="acabarTarea float-right" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>, this)" checked>
+                                                                <%} else {%>
+                                                                <input class="acabarTarea float-right checado" type="checkbox" onclick="estadoTarea(<%out.print(nTarea);%>, this)">
+                                                                <% } %>
                                                             </div>
-                                                            <!--Fin parte colapsable-->
                                                         </div>
-                                                        <!--Fin tarea-->
-                                                        <%
+                                                    </div>
+                                                    <!--Fin parte visible-->
+                                                    <!--Inicio parte colapsable-->
+                                                    <div <%out.print("id='tarea-" + idConcatenada + "' class='collapse' aria-labelledby='headTarea-" + idConcatenada + "' data-parent='#listaTareas-" + nombreGrupo + "'");%>>
+                                                        <div class="card-body">
+                                                            <form>
+                                                                <!--Inicio formulario para modificar actividad-->
+                                                                <div class="form-row ElementosCambios">
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" class="form-control" <%out.print("id='nomTarea-" + idConcatenada + "'");%> name="tarea" placeholder="Cambiar nombre tarea" value="<%out.print(nomTarea);%>"/>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <input type="date" class="form-control dFecha" <%out.print("id='fechaTarea-" + idConcatenada + "'");%> name="fecha" <%out.print("value='"+fecha+"'");%>/>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select class="form-control" <%out.print("id='eliMiembroTarea-" + idConcatenada + "'");%> name="eliMiembro">
+                                                                            <option>Desasignar miembro</option>
+                                                                            <%for (int h = 0; h < miembrosAsignados.length; h++) { 
+                                                                                if(miembrosAsignados[h]!=null){
+                                                                            %>
+                                                                                <option><%out.print(miembrosAsignados[h]);%></option>
+                                                                            <%  }
+                                                                            }%>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select class="form-control" <%out.print("id='agrMiembroTarea-" + idConcatenada + "'");%> name="agrMiembro">
+                                                                            <option>Asignar miembro</option>
+                                                                            <%for (int k = 0; k < Miembros.length; k++) {
+                                                                                for(int x=0; x<miembrosAsignados.length; x++){
+                                                                                   if(Miembros[k].equals(miembrosAsignados[x])){
+                                                                                       asignado = "si";
+                                                                                   }
+                                                                                }
+                                                                                if(asignado=="no"){
+                                                                            %>
+                                                                                    <option><%out.print(Miembros[k]);%></option>
+                                                                                <%}
+                                                                                asignado="no"; 
+                                                                            }%>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin formulario para modificar actividad-->
+                                                                <!--Inicio opciones-->
+                                                                <div class="form-row mt-2">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="reset" class="btn btn-outline-warning mb-2 btnModificar" style="width: 100%;"
+                                                                                onclick="actualizarTarea('<%out.print(nombreGrupo);%>',<%out.print(nTarea);%>);">
+                                                                            Modificar actividad
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <button type="button" class="btn btn-outline-danger mb-2 btnEliminar" style="width: 100%;idGrupo"
+                                                                                onclick="eliminarTarea('<%out.print(idConcatenada);%>',<%out.print(nTarea);%>,<%out.print(idGrupo);%>);">
+                                                                            Eliminar actividad
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Fin opciones-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!--Fin parte colapsable-->
+                                                </div>
+                                                <!--Fin tarea-->
+                                                <%
                                                     };
                                                     rsTarea.close();//Fin del resulset que trae a todas las actividades de un grupo
                                                 %>
@@ -377,8 +441,8 @@
                                             grupo = (String) rs2.getString("NombreGrupo");
                                     %>
                                     <a class="list-group-item list-group-item-action grupoLista" 
-                                       <%out.println(" id='lista-g"+grupo+"' data-toggle='list' href='#panel-g"+grupo+"' role='tab' aria-controls='g"+grupo+"'");%>
-                                    >
+                                       <%out.println(" id='lista-g" + grupo + "' data-toggle='list' href='#panel-g" + grupo + "' role='tab' aria-controls='g" + grupo + "'");%>
+                                       >
                                         <img src="img/group.svg" alt="ic_grupos">
                                         <%
                                             out.print(grupo);
@@ -460,13 +524,13 @@
             <!--Fin lado izquierdo-->
         </div>
         <!--Fin contenedor-->
-        
+
         <!--SCRIPTS-->
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
         <script src="js/grupos.js"></script>
-        
+
     </body>
 </html>

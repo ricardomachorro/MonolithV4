@@ -22,6 +22,39 @@
     <service name="InicioSesion">
       <implementation-class>WebService.InicioSesion</implementation-class>
     </service>
+    <service name="WAbandonarGrupo">
+      <implementation-class>WebService.WAbandonarGrupo</implementation-class>
+    </service>
+    <service name="WActualizarNota">
+      <implementation-class>WebService.WActualizarNota</implementation-class>
+    </service>
+    <service name="WAgregarMiembro">
+      <implementation-class>WebService.WAgregarMiembro</implementation-class>
+    </service>
+    <service name="WAgregarTarea">
+      <implementation-class>WebService.WAgregarTarea</implementation-class>
+    </service>
+    <service name="WCambiarTarea">
+      <implementation-class>WebService.WCambiarTarea</implementation-class>
+    </service>
+    <service name="WCrearGrupos">
+      <implementation-class>WebService.WCrearGrupos</implementation-class>
+    </service>
+    <service name="WEliminarGrupo">
+      <implementation-class>WebService.WEliminarGrupo</implementation-class>
+    </service>
+    <service name="WEliminarTarea">
+      <implementation-class>WebService.WEliminarTarea</implementation-class>
+    </service>
+    <service name="WEstadoTarea">
+      <implementation-class>WebService.WEstadoTarea</implementation-class>
+    </service>
+    <service name="WGuardarNota">
+      <implementation-class>WebService.WGuardarNota</implementation-class>
+    </service>
+    <service name="WPonerNota">
+      <implementation-class>WebService.WPonerNota</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

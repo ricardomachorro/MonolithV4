@@ -512,7 +512,8 @@ public class Database2 {
         return ActividadCambiadaExitosa;
     }
      
-     /*Inicio de los metodos para grupos*/
+    /*Inicio de los metodos para grupos*/
+     
     public String consultarMiembro(String correoMiembro) throws Exception{
         String nombreMiembro = "";
         try {
@@ -667,6 +668,7 @@ public class Database2 {
         try {
             if(estado==1){
                 cambio = "update Tarea set Estado=true where IDTarea="+IDTarea+";";
+                agregarPuntosTarea(IDTarea);
             } else {
                 cambio = "update Tarea set Estado=false where IDTarea="+IDTarea+";";
             }
@@ -688,7 +690,35 @@ public class Database2 {
         }
     }
     
+    public void abandonarGrupo(int idGrupo, int idUsuario){
+        String queryEliminar = "delete from Miembros where IDUsuario=? and IDGrupo=?;";
+        try {
+            ps = c.prepareStatement(queryEliminar);
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idGrupo);
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println("Error eliminando grupo: " + e.toString() + " :'v");
+        }
+    }
+    
+    public void agregarPuntosTarea(int idTarea){
+        String queryMiembrosTarea = "select NombreUsuario from Usuario inner join Miembros on Usuario.IDUsuario=Miembros.IDUsuario inner join TareaMiembro on Miembros.IDMiembro=TareaMiembro.IDMiembro where TareaMiembro.IDTarea="+idTarea+";";
+        String usuarioAsigando;
+        try {
+            Statement stAPT = c.createStatement();
+            ResultSet rsAPT = stAPT.executeQuery(queryMiembrosTarea);
+            while(rsAPT.next()) {
+                usuarioAsigando = rsAPT.getString("NombreUsuario");
+                AgregarPuntos(usuarioAsigando);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        }
+    }
+    
     /*Fin de los metodos para grupos*/
+    
     public int IDusu(String u) {
         int IDUsuario = 0;
         try {
