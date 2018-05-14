@@ -1,5 +1,6 @@
 package com.example.alumno.monolithmovil;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuPrincipal extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener,ContenedorFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, PreConfiguracion.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener {
 /*
 *Implements es Onfreagment.Nombredelfragment
 *
@@ -35,9 +36,19 @@ public class MenuPrincipal extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+
+    public void CerrarSesion(){
+       Sesion sesion = new Sesion(this);
+       sesion.clearDatos ();
+        Intent SalidaPrograma = new Intent(this, MainActivity.class);
+        startActivity(SalidaPrograma);
+        finish();
+
     }
 
     @Override
@@ -66,6 +77,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            CerrarSesion ();
             return true;
         }
 
@@ -86,7 +98,7 @@ public class MenuPrincipal extends AppCompatActivity
             fragment = new Notas();
             fragmentSelec = true;
         } else if (id == R.id.Logros) {
-            fragment = new ContenedorFragment();
+            fragment = new Logros();
             fragmentSelec = true;
         } else if (id == R.id.Grupos) {
             fragment = new Grupos();

@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <!--<color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#292b3d</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF4081</color>-->
     <color name="graylight">#fafafa</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
+    <color name="colorPrimary">#00D4FF</color>
+    <color name="colorPrimaryDark">#0091ea</color>
+    <color name="colorAccent">#00d4ff</color>
+    <color name="blanco">#ffffff</color>
+    <color name="negro">#000000</color>
+    <color name="gris">#cacaca</color>
+    <color name="azul">#00b0ff</color>
+    <color name="azulMas">#0091ea</color>
+    <color name="azulGrafica">#00b0cc</color>
+    <color name="rojoGrafica">#ff0000</color>
+    <color name="grisClaro">#cdc</color>
+    <color name="griss">#f1f1f1</color>
 
 </resources>

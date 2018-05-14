@@ -7,23 +7,337 @@
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constrain"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="265dp"
-            android:layout_marginEnd="150dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="264dp"
+            android:id="@+id/titlConfiguracion"
+            android:layout_width="103dp"
+            android:layout_height="21dp"
+            android:layout_marginEnd="144dp"
+            android:layout_marginStart="145dp"
+            android:layout_marginTop="62dp"
             android:gravity="center"
             android:text="@string/configuracion"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="366dp"
+            android:layout_height="499dp"
+            android:layout_marginBottom="62dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="62dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titlConfiguracion">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="6dp"
+                app:cardBackgroundColor="@color/endblue">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titParametrosUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_purple"
+                        android:text="Parametros Usuario"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txtPmNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre" />
+
+                    <TextView
+                        android:id="@+id/txtPmEdad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edad" />
+
+                    <TextView
+                        android:id="@+id/txtPmPais"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pais" />
+
+                    <TextView
+                        android:id="@+id/txtPmDirec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Direccion" />
+
+                    <TextView
+                        android:id="@+id/txtPmCorreo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Correo" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="282dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="3dp">
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:id="@+id/textView18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Parametros de Cuenta"
+                                android:textAlignment="center" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--  <TextView
+                                android:id="@+id/LbNuevoNombre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Nombre" />-->
+
+                            <EditText
+                                android:id="@+id/txtNuevoNombre"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:ems="10"
+                                android:hint="Nombre Nuevo"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--  <TextView
+                                android:id="@+id/LbNuevaEdad"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Edad" />-->
+
+                            <EditText
+                                android:id="@+id/txtNuevaEdad"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Nueva Edad"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--  <TextView
+                                android:id="@+id/LbNuevoPais"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Pais" />-->
+
+                            <EditText
+                                android:id="@+id/txtNuevoPais"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Nuevo Pais"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--  <TextView
+                                android:id="@+id/LbNuevaDir"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Direccion" />-->
+
+                            <EditText
+                                android:id="@+id/txtNuevaDir"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Nueva Direccion"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--     <TextView
+                                android:id="@+id/LbCorreo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Correo" />-->
+
+                            <EditText
+                                android:id="@+id/txtCorreo"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Nuevo Correo"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                        <!-- <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/LbAntiguaCon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Contraseña" />
+
+                            <EditText
+                                android:id="@+id/txtAntiguaCon"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Contraseña"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>-->
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!--  <TextView
+                                android:id="@+id/LbNuevaCon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Nueva Contraseña" />-->
+
+                            <EditText
+                                android:id="@+id/txtNuevaCon"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Nueva Contraseña"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <!-- <TextView
+                                android:id="@+id/LbConfCon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Confirmar N.Contraseña" />-->
+
+                            <EditText
+                                android:id="@+id/txtConfCon"
+                                android:layout_width="275dp"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:hint="Confirmar Nueva Contraseña"
+                                android:inputType="textPersonName"
+                                android:textSize="10sp" />
+                        </TableRow>
+
+                    </TableLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="23dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSaveConf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Guardar Cambios" />
+
+                <Button
+                    android:id="@+id/btnLimpConfig"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Limpiar   Campos" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </android.support.constraint.ConstraintLayout>
+
 </FrameLayout>
+

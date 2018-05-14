@@ -39,8 +39,10 @@
     <string name="pais">Pais</string>
     <string name="direccion">Dirección</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Guardar_cambios">Guardar Cambios</string>
+    <string name="PonTuContra">Ingresa tu contraseña</string>
+    <string name="ParaContinuar">para continuar</string>
+    <string name="Continua">Continuar</string>
+    <string name="modificar">Modificar</string>
 </resources>
 
