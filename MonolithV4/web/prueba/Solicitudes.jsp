@@ -118,7 +118,14 @@
                         <%}
                             } catch (SQLException error) {
                                 out.print(error.toString());
-                            }%>
+                            }
+                            if(conta1==0){%>
+                            <div class="col-12">
+                                <h3>No hay ofertas</h3>
+                                <img src="../img/Doggo_1.jpg">
+                            </div>
+                            <%}
+                        %>
                     </div>
                 </div>
             </div>
