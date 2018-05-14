@@ -364,7 +364,7 @@ function actualizarTarea(nombreGrupo,idTarea,idGrupo) {
     var miembroAgregado = $("#agrMiembroTarea-"+idConcatenada).val().toString();
     var fechaTarea = document.getElementById("fechaTarea-"+idConcatenada).value.toString();
     var aceptar;
-    if((miembroEliminado!=="")&&(miembroAgregado!=="")){
+    if((miembroEliminado!=="Desasignar miembro")&&(miembroAgregado!=="Asignar miembro")){
             alert("Solo puedes cambiar un miembro a la vez");
     } else{
         confirm(nombreTarea+"\n"+miembroAgregado+"\n"+miembroEliminado+"\n"+fechaTarea);
@@ -420,10 +420,10 @@ function estadoTarea(idTarea, checkbox) {
         success: function () {
             
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function () {
             
         },
-        complete: function (jqXHR, textStatus) {
+        complete: function () {
             
         }
     });
@@ -440,6 +440,34 @@ function eliminarGrupo(idGrupo,nombreGrupo){
             url: "EliminarGrupo",
             data: {
                 Grupo: idGrupo
+            },
+            type: 'POST',
+            success: function () {
+                $("#"+idPanel).remove();
+                $("#"+idLista).remove();
+            },
+            error: function () {
+
+            },
+            complete: function () {
+
+            }
+        });
+    }
+}
+
+function abandonarGrupo(idGrupo,nombreGrupo,idUsuario){
+    //id='panel-g" + nombreGrupo + "'
+    var borrar;
+    var idPanel = "panel-g" + nombreGrupo;
+    var idLista = "lista-g" + nombreGrupo;
+    borrar = confirm("¿Estas seguro que quieres abandonar este grupo?");
+    if(borrar===true) {
+        $.ajax({
+            url: "AbandonarGrupo",
+            data: {
+                Grupo: idGrupo,
+                Usuario: idUsuario
             },
             type: 'POST',
             success: function () {

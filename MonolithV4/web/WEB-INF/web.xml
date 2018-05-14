@@ -152,4 +152,12 @@
         <servlet-name>PonerNota</servlet-name>
         <url-pattern>/PonerNota</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AbandonarGrupo</servlet-name>
+        <servlet-class>Servlets.AbandonarGrupo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AbandonarGrupo</servlet-name>
+        <url-pattern>/AbandonarGrupo</url-pattern>
+    </servlet-mapping>
 </web-app>

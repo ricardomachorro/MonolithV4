@@ -1,7 +1,7 @@
 <%-- 
-    Document   : SoliAcep
-    Created on : 28/03/2018, 12:58:26 PM
-    Author     : memo0
+    Document   : Interacep
+    Created on : 12/05/2018, 07:10:34 PM
+    Author     : INSPIRON
 --%>
 <%@page import="java.sql.*, java.io.*,java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,22 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Intercambio</title>
-        <link href="Css/bootstrap.css" rel="stylesheet" type="text/css">
-        <link href="Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
-        <link href="Css/logros.css" rel="stylesheet" type="text/css">
-        <link href="Css/estilosperros.css" rel="stylesheet" type="text/css">
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.validate.js"></script>
+        <title>JSP Page</title>
+        <link href="../Css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="../Css/BarraDeInicioSesion.css" rel="stylesheet" type="text/css">
+        <link href="../Css/GruposCSS.css" rel="stylesheet" type="text/css">
+        <link href="../Css/estilosperros.css" rel="stylesheet" type="text/css">
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script src="../js/popper.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/jquery.validate.js"></script>
         <%
-            HttpSession sesion = request.getSession();
-
-            if (sesion.getAttribute("usuario") == null) {
-                out.println("<script>location.replace('index.html');</script>");
-            } else {
-                String usuario = sesion.getAttribute("usuario").toString();
+            String usuario = request.getParameter("usuario");
         %>
         <script>
 
@@ -33,7 +28,7 @@
                 var imagen = texto.substring(4, 6);
                 var filtro = texto.substring(14, 16);
                 var id = subStrAfterChars(texto, 'M', 'b');
-                var imagenchida = "img/dogo" + imagen + ".jpg";
+                var imagenchida = "../img/dogo" + imagen + ".jpg";
                 objFondo = document.getElementById("marco");
                 marco.src = imagenchida;
                 document.getElementById("marco").className = "filtro" + filtro;
@@ -49,54 +44,28 @@
                 else
                     return str;
             }
-           function mandardatosuwu(){
-               var texto = document.getElementById("memo").value;
-               var xd = "nel";
-               if(texto==xd){
-                   alert('No seleccionaste un doggo >:c');
-               }else{
-                   document.forms['respeta'].submit();
-               }
+            function mandardatosuwu() {
+                var texto = document.getElementById("memo").value;
+                var xd = "nel";
+                if (texto == xd) {
+                    alert('No seleccionaste un doggo >:c');
+                } else {
+                    document.forms['respeta'].submit();
+                }
             }
+
         </script>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light  BarraDeInicio">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand"><img src="img/pawn.svg" id="LogoBarraInicio"></a>
+    <body style="background-color: #fff">
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link"  href="Actividades.jsp"><img src="img/signing-the-contract.svg" class="ImagenesBarraInicio" >Actividades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/group.svg" class="ImagenesBarraInicio" >Grupo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href=""><img src="img/post-it.svg" class="ImagenesBarraInicio" >Notas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"  href="LogrosPrue.jsp"><img src="img/post-it.svg" class="ImagenesBarraInicio" >Logros</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mr-left mt-2 mt-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="img/user.svg" class="ImagenesBarraInicio" > Usuario
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="align-content:center;">
-                            <a class="dropdown-item" href="CerrarSesion.jsp"><img src="img/enter.svg" class="ImagenesBarraInicio" > Cerrar Sesion</a>
-                            <a class="dropdown-item" href="Configuracion.jsp"><img src="img/settings-work-tool.svg" class="ImagenesBarraInicio" >
-                                Configuracion</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
         <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form class="col-6" method="post" name="Aceptar"  action="Ofertas.jsp?usuario=<%=usuario%>">
+                        <button type="submit" class="btn btn-primary"  >Regresar</button>
+                    </form>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col">
@@ -105,7 +74,7 @@
                         int IDInter = Integer.parseInt(request.getParameter("id"));%>
                     <div class="card-group mt-3">
                         <div class="card">
-                            <form action="AcepLogroa?id=<%=IDInter%>" name="respeta" method="post">
+                            <form action="Solireal.jsp?id=<%=IDInter%>" name="respeta" method="post">
 
                                 <div class="form-group">
                                     <h2><label for="nombre">Selecciona el dogo que deseas intercambiar</label></h2>
@@ -189,17 +158,17 @@
                                     <input type="text" name="filtro" id="filtro" placeholder="filtro" class="form-control"readonly="readonly">
                                 </div>
                                 <div class="form-group">
-                                    <img name="marco" id="marco" src="img/Doggo.jpg" class="" alt="" width=250px" height="250px">
+                                    <img name="marco" id="marco" src="../img/Doggo.jpg" class="" alt="a" width=250px" height="250px">
                                 </div>
 
-                                        <input class="btn btn-primary" type="button" onclick="mandardatosuwu();" value="Intercambiar" <%=estado%>>
+                                <input class="btn btn-primary" type="button" onclick="mandardatosuwu();" value="Intercambiar" <%=estado%>>
                             </form>
                         </div>
 
                         <div class="card">
                             <br>
                             <br><br><br>
-                            <img src="img/inter.png" class="card-image-center img-fluid" alt="">
+                            <img src="../img/inter.png" class="card-image-center img-fluid" alt="">
 
                         </div>
 
@@ -247,14 +216,12 @@
                                 <input type="text" name="filtr1o" id="filtro1" placeholder="filtro1" class="form-control"value="<%=dogofiltro%>"readonly="readonly">
                             </div>
                             <div class="form-group">
-                                <img name="marco1" id="marco1" src="img/dogo<%=imgDa%>.jpg" class="<%=dogofiltro%>" alt="" width=250px" height="250px">
+                                <img name="marco1" id="marco1" src="../img/dogo<%=imgDa%>.jpg" class="<%=dogofiltro%>" alt="" width=250px" height="250px">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <%}%>
     </body>
 </html>
-

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Carlos
  */
+@WebServlet(name = "CambiarTarea", urlPatterns = {"/CambiarTarea"})
 public class CambiarTarea extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -56,14 +58,15 @@ public class CambiarTarea extends HttpServlet {
             
             db.actualizarTarea(t);
             
-            if(nuevoMiembro.equals("")) {
+            if(nuevoMiembro.equals("Asignar miembro")) {
                 IDM = db.IdentificarUsuario(eliminarMiembro);
                 db.desasignarMiembro(IDT, IDM);
-            } else if(eliminarMiembro.equals("")) {
+            } else if(eliminarMiembro.equals("Desasignar miembro")) {
                 IDM = db.IdentificarUsuario(nuevoMiembro);
                 db.asignarMiembro(IDT, IDM);
             }
         } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
         }
     }
 

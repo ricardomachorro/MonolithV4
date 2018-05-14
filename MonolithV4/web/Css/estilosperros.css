@@ -7,52 +7,52 @@ and open the template in the editor.
     Created on : 19/03/2018, 03:59:21 PM
     Author     : memo0
 */
-.filtro1{
+.filtro01{
     width: 100%;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
 }
-.filtro2{
+.filtro02{
     width: 100%;
     filter: sepia(80%);
     -webkit-filter: sepia(80%);
     -moz-filter: sepia(80%);
 }
-.filtro3{
+.filtro03{
     width: 100%;
     filter: saturate(10);
     -webkit-filter: saturate(10);
     -moz-filter: saturate(10);
 }
-.filtro4{
+.filtro04{
     width: 100%;
     filter: hue-rotate(90deg);
     -webkit-filter: hue-rotate(90deg);
     -moz-filter: hue-rotate(90deg);
 }
-.filtro5{
+.filtro05{
     width: 100%;
     -webkit-filter: hue-rotate(45deg);
 filter: hue-rotate(45deg);
 }
-.filtro6{
+.filtro06{
     width: 100%;
     opacity: 0.5;
 }
-.filtro7{
+.filtro07{
     width: 100%;
     filter: brightness(150%);
     -webkit-filter: brightness(150%);
     -moz-filter: brightness(150%);
 }
-.filtro8{
+.filtro08{
     width: 100%;
     filter: contrast(200%);
     -webkit-filter: contrast(200%);
     -moz-filter: contrast(200%);
 }
-.filtro9{
+.filtro09{
     width: 100%;
     filter: blur(2px);
     -webkit-filter: blur(2px);

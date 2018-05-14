@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page language="java" import="java.sql.*" %>
 <%@ page language="java" import="Seguridad.*" %>
@@ -193,15 +195,31 @@
 
                                         <%
                                             Statement st = conexion.createStatement();
+                                            Statement difer = conexion.createStatement();
                                             ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
-
+                                            int agedifference = 0;
                                             while (rs.next()) {
+                                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                LocalDate localDate = LocalDate.now();
+                                                String FechaActual = dtf.format(localDate);
+                                                ResultSet diferenciafechas = difer.executeQuery("SELECT DATEDIFF('" + rs.getString("Fecha") + "','" + FechaActual + "')as diferencia");
+                                                if (diferenciafechas.next()) {
+                                                    agedifference = diferenciafechas.getInt("diferencia");
+                                                }
+
                                                 out.println("<div class='card-deck ActividadesCard " + rs.getString("NombreCategoria") + "'>");
                                                 out.println(" <div class='card ActividadCarta ActividadActiva' id='" + rs.getInt("IDActividad") + "' >");
                                                 out.println("<div class='card-body'>");
                                                 out.println("<div class='row '  >");
                                                 out.println("<div class='col-10' data-toggle='collapse' href='#Col" + rs.getInt("IDActividad") + "' >");
-                                                out.println("<h5 class='ActividadMensaje'>Nombre Actividad: " + rs.getString("Nombre") + "  Fecha:" + rs.getString("Fecha") + " </h5>");
+                                                if (agedifference > 5) {
+                                                    out.println("<h5 class='ActividadMensaje'>Nombre Actividad:<p class='elementos_marcados'> " + rs.getString("Nombre") + "</p>  Fecha: <p class='elementos_marcados'>" + rs.getString("Fecha") + " </p> Dias Faltantes: <p class='elementos_marcados'>" + agedifference + "</p> </h5>");
+                                                } else if (agedifference <= 5 && agedifference > 3) {
+                                                    out.println("<h5 class='ActividadMensaje'>Nombre Actividad:<p class='elementos_marcados'> " + rs.getString("Nombre") + "</p>  Fecha: <p class='elementos_marcados'>" + rs.getString("Fecha") + " </p> Dias Faltantes: <p class='elementos_marcados_proximos'>" + agedifference + "</p> </h5>");
+                                                } else {
+                                                    out.println("<h5 class='ActividadMensaje'>Nombre Actividad:<p class='elementos_marcados'> " + rs.getString("Nombre") + "</p>  Fecha: <p class='elementos_marcados'>" + rs.getString("Fecha") + " </p> Dias Faltantes: <p class='elementos_marcados_urgentes'>" + agedifference + "</p> </h5>");
+                                                }
+
                                                 out.println("</div>");
                                                 out.println(" <div class='col-2'>");
                                                 if (rs.getBoolean("Estado")) {
@@ -407,11 +425,11 @@
                                 var MesReal = ObjetoFecha.getMonth() + 1;
                                 var DiaReal = ObjetoFecha.getDay() + 1;
                                 var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
-                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard "   + NombreCategoria + "'><div class='card ActividadCarta ActividadActiva' id='" + data.toString() + "' >" +
+                                $("#ContenedorCartasActividades").prepend($("<div class='card-deck ActividadesCard " + NombreCategoria + "'><div class='card ActividadCarta ActividadActiva' id='" + data.toString() + "' >" +
                                         "<div class='card-body'>" +
                                         "<div class='row'>" +
-                                        "<div class='col-10' data-toggle='collapse' href='#Col"  + data.toString() + "'>" +
-                                       "<h5 class='ActividadMensaje'>Nombre Actividad: "  + NombreActividad.toString() + "   Fecha:" + FechaReal + "</h5>" +
+                                        "<div class='col-10' data-toggle='collapse' href='#Col" + data.toString() + "'>" +
+                                        "<h5 class='ActividadMensaje'>Nombre Actividad: <p class='elementos_marcados'>" + NombreActividad.toString() + "</p>   Fecha:<p class='elementos_marcados'>" + FechaReal + "</p>  </p> Dias Faltantes: <p class='elementos_marcados'>0</p></h5>" +
                                         "</div>" +
                                         "<div class='col-2'>" +
                                         "<input class='CheckBoxActividades float-right' id='" + data.toString() + "'  checked type='checkbox' >" +
@@ -510,7 +528,23 @@
                                             CategoriaActividad: inputCategoria
                                         },
                                         success: function () {
-                                            mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:" + inputFecha + " Localización:Pendiente/Nula");
+                                            var ObjetoFecha = new Date();
+                                            var MesReal = ObjetoFecha.getMonth() + 1;
+                                            var DiaReal = ObjetoFecha.getDay() + 1;
+                                            var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
+                                            var difFechaReal = new Date(FechaReal);
+                                            var fechacambio = new Date(inputFecha);
+                                            var diff = fechacambio - ObjetoFecha;
+                                            var sustituciondias = Math.round((diff / (1000 * 60 * 60 * 24)) + 1);
+                                            mensajeActividad.empty();
+                                            if (sustituciondias > 5) {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados'>" + sustituciondias + "  </p>");
+                                            } else if (sustituciondias <= 5 && sustituciondias > 3) {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_proximos'>" + sustituciondias + "  </p>");
+                                            } else {
+                                                mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_urgentes'>" + sustituciondias + "  </p>");
+                                            }
+
                                             if ($("#ListaCategorias").find("#" + inputCategoria).length === 0) {
                                                 $("#ListaCategorias").prepend("<li id='" + inputCategoria + "'><img src='img/folderOrange.svg'>" + inputCategoria + "</li>");
                                             }
@@ -526,6 +560,7 @@
 
 
                                 });
+
 
                                 $(".btnDrop").click(function () {
                                     var Elemento2 = $(this).closest(".ActividadCart");
@@ -665,7 +700,23 @@
                         CategoriaActividad: inputCategoria
                     },
                     success: function () {
-                        mensajeActividad.text("Nombre Actividad:" + inputNombre + "  Fecha:" + inputFecha + " Localización:Pendiente/Nula");
+                        var ObjetoFecha = new Date();
+                        var MesReal = ObjetoFecha.getMonth() + 1;
+                        var DiaReal = ObjetoFecha.getDay() + 1;
+                        var FechaReal = ObjetoFecha.getFullYear() + "-0" + MesReal + "-0" + DiaReal;
+                        var difFechaReal = new Date(FechaReal);
+                        var fechacambio = new Date(inputFecha);
+                        var diff = fechacambio - ObjetoFecha;
+                        var sustituciondias = Math.round((diff / (1000 * 60 * 60 * 24)) + 1);
+                        mensajeActividad.empty();
+                        if (sustituciondias > 5) {
+                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados'>" + sustituciondias + "  </p>");
+                        } else if (sustituciondias <= 5 && sustituciondias > 3) {
+                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_proximos'>" + sustituciondias + "  </p>");
+                        } else {
+                            mensajeActividad.append("Nombre Actividad:<p class='elementos_marcados'>" + inputNombre + "</p> Fecha:<p class='elementos_marcados'>" + inputFecha + "</p> Dias Faltantes: <p class='elementos_marcados_urgentes'>" + sustituciondias + "  </p>");
+                        }
+
                         if ($("#ListaCategorias").find("#" + inputCategoria).length === 0) {
                             $("#ListaCategorias").prepend("<li id='" + inputCategoria + "'><img src='img/folderOrange.svg'>" + inputCategoria + "</li>");
                         }
@@ -681,7 +732,6 @@
 
 
             });
-
 
             $(".btnDrop").click(function () {
                 var Elemento2 = $(this).closest(".ActividadCart");
