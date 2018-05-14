@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_card_giftcard_black_24dp"
             android:title="@string/logros" />
         <item
+            android:id="@+id/Intercambio"
+            android:icon="@drawable/ic_library_books_black_24dp"
+            android:title="@string/Intercambios" />
+        <item
             android:id="@+id/Grupos"
             android:icon="@drawable/ic_group_black_24dp"
             android:title="@string/grupos" />

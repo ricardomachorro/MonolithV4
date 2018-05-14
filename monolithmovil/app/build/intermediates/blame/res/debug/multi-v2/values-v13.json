@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "E:\\6 semestre\\GIT\\pinche union\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v13\\values-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\INSPIRON\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7ad9eda37f0ee0e62a9aa5c1c17fc6da\\res\\values-v13\\values-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "E:\\2016090386\\monolithmovil-20180505T234259Z-001\\monolithmovil\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v13\\values-v13.xml",
             "map": [
                 {

@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.alumno.monolithmovil.clases.Utilidades;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
@@ -369,6 +371,7 @@ public class Registrate extends AppCompatActivity {
                         JSONObject info = new JSONObject(resultado);
                         IDUsuario = Integer.parseInt(info.getString("IDUsuario"));
                         NombreUsuario = info.getString("NombreUsuario");
+                        Utilidades.usuario=NombreUsuario;
                         Correo = info.getString("Correo");
                         Edad = Integer.parseInt(info.getString("Edad"));
                         Pais = info.getString("Pais");

@@ -4,9 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.example.alumno.monolithmovil.clases.Utilidades;
 
 
 /**
@@ -23,6 +31,8 @@ public class Logros extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -32,6 +42,7 @@ public class Logros extends Fragment {
     public Logros() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -60,12 +71,46 @@ public class Logros extends Fragment {
         }
     }
 
+    public CardView logro1;
+    public CardView logro2;
+    public CardView logro3;
+    public Button btn;
+    public TextView text;
+    public TextView texttitu;
+    public WebView webView1;
+    public WebView webView2;
+    ProgressBar progreso;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logros, container, false);
+        View view= inflater.inflate(R.layout.fragment_logros, container, false);
+        btn=(Button)view.findViewById(R.id.btnagregar);
+        texttitu=(TextView) view.findViewById(R.id.titulotxt);
+        texttitu.setText("Logros de "+ Utilidades.usuario);
+        webView1=(WebView) view.findViewById(R.id.web);
+        webView2=(WebView)view.findViewById(R.id.weblogros);
+        webView2.loadUrl("http://"+MainActivity.IP+":8080/MonolithV4/prueba/logrover.jsp?usuario="+ Utilidades.usuario+"");
+        btn.setOnClickListener(new OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                cargarWebservice();
+            }
+        });
+        //memo(view);
+        return view;
     }
+
+    private void cargarWebservice() {
+
+
+        String url="http://"+MainActivity.IP+":8080/MonolithV4/prueba/agrelogro.jsp?nombre="+ Utilidades.usuario+"";
+        webView2.loadUrl("http://"+MainActivity.IP+":8080/MonolithV4/prueba/logrover.jsp?usuario="+ Utilidades.usuario+"");
+        webView1.loadUrl(url);
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -105,4 +150,5 @@ public class Logros extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

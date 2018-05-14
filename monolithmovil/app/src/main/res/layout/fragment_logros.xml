@@ -1,29 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.alumno.monolithmovil.Logros">
 
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/btnagregar">
+
+            <WebView
+                android:id="@+id/weblogros"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/titulotxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Logros de"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btnagregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="265dp"
-            android:layout_marginEnd="150dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="264dp"
-            android:gravity="center"
-            android:text="@string/logros"
-            android:textSize="55sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-</FrameLayout>
+            android:layout_below="@+id/titulotxt"
+            android:layout_centerHorizontal="true"
+            android:text="Agregar"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="41dp" />
+
+        <WebView
+            android:id="@+id/web"
+            android:layout_width="10px"
+            android:layout_height="10px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" >
+
+        </WebView>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuPrincipal extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, PreConfiguracion.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,Solicitudes.OnFragmentInteractionListener,Ofertas.OnFragmentInteractionListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, PreConfiguracion.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener,ContenedorFragment.OnFragmentInteractionListener,Intercambio.OnFragmentInteractionListener {
 /*
 *Implements es Onfreagment.Nombredelfragment
 *
@@ -98,13 +98,17 @@ public class MenuPrincipal extends AppCompatActivity
             fragment = new Notas();
             fragmentSelec = true;
         } else if (id == R.id.Logros) {
-            fragment = new Logros();
+            fragment = new ContenedorFragment();
             fragmentSelec = true;
         } else if (id == R.id.Grupos) {
             fragment = new Grupos();
             fragmentSelec = true;
         } else if (id == R.id.Configuracion) {
             fragment = new Configuracion();
+            fragmentSelec = true;
+        }
+        else if (id == R.id.Intercambio) {
+            fragment = new Intercambio();
             fragmentSelec = true;
         }
         if(fragmentSelec=true){
