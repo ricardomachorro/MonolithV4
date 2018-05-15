@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alumno.monolithmovil.adapters.SeccionesAct;
 import com.example.alumno.monolithmovil.adapters.SeccionesAdapter;
 import com.example.alumno.monolithmovil.clases.Utilidades;
 
@@ -37,7 +38,7 @@ public class Actividades extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestañas;
     private ViewPager viewPager;
-    View ContenedorActicidades;
+    View ContenedorActicidades,BarraTop;
 
 
     private OnFragmentInteractionListener mListener;
@@ -77,12 +78,14 @@ public class Actividades extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ContenedorActicidades=inflater.inflate ( R.layout.fragment_actividades, container, false);
+        BarraTop=inflater.inflate ( R.layout.content_menu_principal, container, false);
+
        if(Utilidades.rotacion==0){
 
            View parent = (View) container.getParent();
             if(appBar==null){
                 try{
-                    appBar=(AppBarLayout) parent.findViewById(R.id.appBarActividades);
+                    appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
                     pestañas=new TabLayout(getActivity());
                     pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
                     appBar.addView(pestañas);
@@ -118,10 +121,8 @@ public class Actividades extends Fragment {
     }
 
     private void llenarViewPager(ViewPager viewPager) {
-        SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
+        SeccionesAct adapter = new SeccionesAct(getFragmentManager());
         adapter.addFragment(new ActividadesTerminadas (),"Actividades Terminadas");
-        adapter.addFragment(new Ofertas(),"Ofertas");
-        adapter.addFragment(new Solicitudes(),"Solicitudes");
         viewPager.setAdapter(adapter);
     }
 
