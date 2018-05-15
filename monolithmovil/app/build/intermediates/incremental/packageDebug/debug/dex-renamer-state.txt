@@ -1,4 +1,4 @@
-#Mon May 14 07:30:41 CDT 2018
-base.0=E\:\\6 semestre\\GIT\\pinche union\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Tue May 15 11:56:57 CDT 2018
+base.0=E\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
