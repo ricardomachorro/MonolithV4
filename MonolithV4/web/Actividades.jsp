@@ -8,6 +8,7 @@
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
+    String IDUsuario=sesion.getAttribute("IDUsuario").toString();
     Connection conexion = null;
     String driver = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost/MonolithV2";
@@ -95,7 +96,7 @@
                                             Statement stcons2 = conexion.createStatement();
                                             String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
                                             ResultSet rscons2 = stcons2.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria "
-                                                    + "inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario where Usuario.NombreUsuario='" + UsuarioBusqueda1 + "' and Actividad.Estado>0");
+                                                    + "inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario where Usuario.IDUsuario='" +IDUsuario+ "' and Actividad.Estado>0");
                                             if (rscons2.next()) {
                                                 if (rscons2.last()) {
                                                     out.println("<a id='txtActividadesFinalizadas' >Actividades finalizadas: " + rscons2.getRow() + "</a>");
@@ -196,7 +197,7 @@
                                         <%
                                             Statement st = conexion.createStatement();
                                             Statement difer = conexion.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+                                            ResultSet rs = st.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.IDUsuario='" +IDUsuario+ "'");
                                             int agedifference = 0;
                                             while (rs.next()) {
                                                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -330,7 +331,7 @@
                                     <li class="Todos" id="Todos"><img src='img/folderOrange.svg'>Todos</li>
                                         <%
                                             Statement st2 = conexion.createStatement();
-                                            ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+                                            ResultSet rs2 = st.executeQuery("select * from Categoria inner join Usuario on Usuario.IDUsuario=Categoria.IDUsuario where Usuario.IDUsuario='" + IDUsuario + "'");
                                             while (rs2.next()) {
                                                 out.println(" <li id='" + rs2.getString("NombreCategoria") + "'><img src='img/folderOrange.svg'>" + rs2.getString("NombreCategoria") + "</li>");
                                             }

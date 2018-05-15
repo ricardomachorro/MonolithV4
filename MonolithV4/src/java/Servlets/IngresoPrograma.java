@@ -57,6 +57,7 @@ public class IngresoPrograma extends HttpServlet {
                 if (db.UsuarioValidado(u.getNombre())) {
                     sesion.setAttribute("usuario", u.getNombre());
                     sesion.setAttribute("password", u.getPassword());
+                    sesion.setAttribute("IDUsuario",db.IDusu(u.getNombre()));
                     if (db.TipoUsuario(u) == 1) {
                         response.sendRedirect("Actividades.jsp");
                     } else if (db.TipoUsuario(u) == 2) {
