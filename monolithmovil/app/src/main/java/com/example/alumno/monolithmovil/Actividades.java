@@ -1,12 +1,20 @@
 package com.example.alumno.monolithmovil;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.alumno.monolithmovil.adapters.SeccionesAdapter;
+import com.example.alumno.monolithmovil.clases.Utilidades;
 
 
 /**
@@ -26,6 +34,11 @@ public class Actividades extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private AppBarLayout appBar;
+    private TabLayout pestañas;
+    private ViewPager viewPager;
+    View ContenedorActicidades;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,15 +76,53 @@ public class Actividades extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        ContenedorActicidades=inflater.inflate ( R.layout.fragment_actividades, container, false);
+       if(Utilidades.rotacion==0){
+
+           View parent = (View) container.getParent();
+            if(appBar==null){
+                try{
+                    appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+                    pestañas=new TabLayout(getActivity());
+                    pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
+                    appBar.addView(pestañas);
+                    viewPager=(ViewPager) ContenedorActicidades.findViewById(R.id.viewActivividades);
+                    llenarViewPager(viewPager);
+                    viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                        }
+                    });
+                    pestañas.setupWithViewPager(viewPager);
+                    pestañas.setTabGravity(TabLayout.GRAVITY_FILL);
+                }catch (Exception ex){
+                    String et=ex.toString ();
+                    Log.i ("Resultdo",ex.toString ());
+                }
+
+            }
+            //pestañas.setTabGravity(TabLayout.GRAVITY_FILL);
+        }else{
+            Utilidades.rotacion=1;
+        }
         return inflater.inflate(R.layout.fragment_actividades, container, false);
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    private void llenarViewPager(ViewPager viewPager) {
+        SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
+        adapter.addFragment(new Logros(),"Logros");
+        adapter.addFragment(new Ofertas(),"Ofertas");
+        adapter.addFragment(new Solicitudes(),"Solicitudes");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
