@@ -17,7 +17,6 @@
         android:label="@string/monolith"
         android:roundIcon="@mipmap/queen"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity android:name="com.example.alumno.monolithmovil.MainActivity" >
             <intent-filter>
