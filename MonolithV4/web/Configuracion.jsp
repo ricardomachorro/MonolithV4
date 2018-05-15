@@ -6,6 +6,7 @@
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
+    String IDUsuario=sesion.getAttribute("IDUsuario").toString();
     Connection conexion = null;
     String driver = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost/MonolithV2";
@@ -87,7 +88,7 @@
                             <%
                                 Statement stcons2 = conexion.createStatement();
                                 String UsuarioBusqueda1 = sesion.getAttribute("usuario").toString();
-                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where NombreUsuario='" + UsuarioBusqueda1 + "'");
+                                ResultSet rscons2 = stcons2.executeQuery("select * from Usuario where IDUsuario='" +IDUsuario+ "'");
                                 if (rscons2.next()) {
 
                                     out.println("<li class='list-group-item' id='ListaNombre'>Nombre Usuario: " + rscons2.getString("NombreUsuario") + "</li>");

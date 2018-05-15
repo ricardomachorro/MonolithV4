@@ -5,6 +5,7 @@
     HttpSession sesion = request.getSession();
     String Usuario = sesion.getAttribute("usuario").toString();
     String Password = sesion.getAttribute("password").toString();
+    String IDUsuario=sesion.getAttribute("IDUsuario").toString();
     Connection conexion = null;
     String driver = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost/MonolithV2";
@@ -132,7 +133,7 @@
                                 <ul id="ListaNotas">
                                     <%
                                         Statement st2 = conexion.createStatement();
-                                        ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.NombreUsuario='" + Usuario + "'");
+                                        ResultSet rs2 = st2.executeQuery("select * from Nota inner join Usuario on Usuario.IDUsuario=Nota.IDUsuario where Usuario.IDUsuario='" +IDUsuario + "'");
                                         while (rs2.next()) {
                                             out.println(" <li class='NotasListas' id='" + rs2.getString("Nombre") + "'><img src='img/post-it.svg'><a>" + rs2.getString("Nombre") + "<a></li>");
                                         }
