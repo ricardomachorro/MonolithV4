@@ -82,7 +82,7 @@ public class Actividades extends Fragment {
            View parent = (View) container.getParent();
             if(appBar==null){
                 try{
-                    appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+                    appBar=(AppBarLayout) parent.findViewById(R.id.appBarActividades);
                     pestañas=new TabLayout(getActivity());
                     pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
                     appBar.addView(pestañas);
@@ -119,7 +119,7 @@ public class Actividades extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
-        adapter.addFragment(new Logros(),"Logros");
+        adapter.addFragment(new ActividadesTerminadas (),"Actividades Terminadas");
         adapter.addFragment(new Ofertas(),"Ofertas");
         adapter.addFragment(new Solicitudes(),"Solicitudes");
         viewPager.setAdapter(adapter);

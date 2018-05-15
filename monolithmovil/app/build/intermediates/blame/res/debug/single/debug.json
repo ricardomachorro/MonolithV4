@@ -3848,6 +3848,10 @@
         "source": "C:\\Users\\Ricardo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a3e1cdb09649052f2d56f986506998ba\\res\\drawable-mdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_actividades_terminadas.xml.flat",
+        "source": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\src\\main\\res\\layout\\fragment_actividades_terminadas.xml"
+    },
+    {
         "merged": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_normal.9.png.flat",
         "source": "C:\\Users\\Ricardo\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\34b3b138f59a00d2af8332b7ace6dee4\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
     },
