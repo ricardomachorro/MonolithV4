@@ -86,6 +86,7 @@ public class Actividades extends Fragment {
             if(appBar==null){
                 try{
                     appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+                    appBar.removeViews ( 1,appBar.getChildCount ()-1 );
                     pestañas=new TabLayout(getActivity());
                     pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
                     appBar.addView(pestañas);
@@ -123,6 +124,7 @@ public class Actividades extends Fragment {
     private void llenarViewPager(ViewPager viewPager) {
         SeccionesAct adapter = new SeccionesAct(getFragmentManager());
         adapter.addFragment(new ActividadesTerminadas (),"Actividades Terminadas");
+        adapter.addFragment(new Actividades_NoTerminadas (),"Actividades  No Terminadas");
         viewPager.setAdapter(adapter);
     }
 

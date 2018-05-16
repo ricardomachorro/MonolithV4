@@ -81,6 +81,7 @@ public class ContenedorFragment extends Fragment {
             View parent = (View) container.getParent();
             if(appBar==null){
                 appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+                appBar.removeViews ( 1,appBar.getChildCount ()-1 );
                 pestañas=new TabLayout(getActivity());
                 pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
                 appBar.addView(pestañas);
@@ -112,7 +113,6 @@ public class ContenedorFragment extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SeccionesAdapter adapter = new SeccionesAdapter(getFragmentManager());
-        adapter.Limpiar ();
         adapter.addFragment(new Logros(),"Logros");
         adapter.addFragment(new Ofertas(),"Ofertas");
         adapter.addFragment(new Solicitudes(),"Solicitudes");

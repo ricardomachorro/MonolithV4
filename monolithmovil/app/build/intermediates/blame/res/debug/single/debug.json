@@ -1232,6 +1232,10 @@
         "source": "C:\\Users\\Ricardo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a3e1cdb09649052f2d56f986506998ba\\res\\drawable-xxhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_actividades_categoria.xml.flat",
+        "source": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\src\\main\\res\\layout\\fragment_actividades_categoria.xml"
+    },
+    {
         "merged": "E:\\2016090386\\monolithmovil-20180505T234259Z-001\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_screen_simple.xml.flat",
         "source": "C:\\Users\\Ricardo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\a3e1cdb09649052f2d56f986506998ba\\res\\layout\\abc_screen_simple.xml"
     },
@@ -2054,6 +2058,10 @@
     {
         "merged": "E:\\6 semestre\\GIT\\pinche union\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_popup_menu_header_item_layout.xml.flat",
         "source": "C:\\Users\\INSPIRON\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7ad9eda37f0ee0e62a9aa5c1c17fc6da\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_actividades__no_terminadas.xml.flat",
+        "source": "E:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\src\\main\\res\\layout\\fragment_actividades__no_terminadas.xml"
     },
     {
         "merged": "E:\\2016090386\\monolithmovil-20180505T234259Z-001\\monolithmovil\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_list_focused_holo.9.png.flat",
