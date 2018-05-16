@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     String resultado = "";
     ProgressDialog proceso;
     ConstraintLayout constraintLayout;
-    public static final String IP = "192.168.0.388";
+    public static final String IP = "192.168.20.56";
     public static final String PUERTO = "8080";
     obtenerDatos datos;
     //

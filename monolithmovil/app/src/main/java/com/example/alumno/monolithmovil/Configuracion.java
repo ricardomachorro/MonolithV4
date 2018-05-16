@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class Configuracion extends Fragment {
     private Button btnSave,btnLimp;
     Sesion sesion;
     String resultado = "";
+    private AppBarLayout appBar;
     ConstraintLayout constraintLayout;
     Button modificar, guardar;
     ProgressDialog proceso;
@@ -82,8 +84,10 @@ public class Configuracion extends Fragment {
         // Inflate the layout for this fragment
         final View vista = inflater.inflate(R.layout.fragment_configuracion, container, false);
         constraintLayout = vista.findViewById(R.id.constrain);
+        View parent = (View) container.getParent();
         tituloConfig=vista.findViewById ( R.id.titlConfiguracion );
-
+        appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+        appBar.removeViews ( 1,appBar.getChildCount ()-1 );
         tituloParametros=vista.findViewById ( R.id.titParametrosUsuario);
         PmNombre = vista.findViewById ( R.id.txtPmNombre );
         PmEdad=vista.findViewById ( R.id.txtPmEdad );

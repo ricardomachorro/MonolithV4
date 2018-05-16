@@ -1,11 +1,11 @@
 #Internal package file, do not edit.
-#Tue May 15 11:57:13 CDT 2018
-1.base=E\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Wed May 16 11:37:12 CDT 2018
+1.base=D\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\assets\\debug
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY
 count=2
-1.set=DEX
-0.path=fonts/calibri.ttf
-0.set=ASSET
-0.base=E\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\assets\\debug
-1.path=classes.dex
+1.set=ASSET
+0.path=classes.dex
+0.set=DEX
+0.base=D\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
+1.path=fonts/calibri.ttf

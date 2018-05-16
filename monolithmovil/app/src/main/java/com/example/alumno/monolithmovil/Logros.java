@@ -3,6 +3,7 @@ package com.example.alumno.monolithmovil;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class Logros extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private AppBarLayout appBar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -84,9 +86,13 @@ public class Logros extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_logros, container, false);
         btn=(Button)view.findViewById(R.id.btnagregar);
+        View parent = (View) container.getParent();
+        appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
+        appBar.removeViews ( 1,appBar.getChildCount ()-1 );
         texttitu=(TextView) view.findViewById(R.id.titulotxt);
         texttitu.setText("Logros de "+ Utilidades.usuario);
         webView1=(WebView) view.findViewById(R.id.web);
