@@ -125,6 +125,7 @@ public class Actividades extends Fragment {
         SeccionesAct adapter = new SeccionesAct(getFragmentManager());
         adapter.addFragment(new ActividadesTerminadas (),"Actividades Terminadas");
         adapter.addFragment(new Actividades_NoTerminadas (),"Actividades  No Terminadas");
+        adapter.addFragment(new ActividadesCategoria (),"Categorias");
         viewPager.setAdapter(adapter);
     }
 
