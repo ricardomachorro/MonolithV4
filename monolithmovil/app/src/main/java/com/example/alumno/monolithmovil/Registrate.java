@@ -1,7 +1,6 @@
 package com.example.alumno.monolithmovil;
 
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -14,8 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.alumno.monolithmovil.clases.Utilidades;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
@@ -23,8 +20,6 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-
-import java.util.Vector;
 
 public class Registrate extends AppCompatActivity {
 
@@ -68,7 +63,7 @@ public class Registrate extends AppCompatActivity {
 
         if (!nombre.isEmpty() && !correo.isEmpty() && !pais.isEmpty() && ! direccion.isEmpty() && !contraseña.isEmpty() && !edad.isEmpty()){
                  if(edad.matches ( "[0-9]*" ) && edad.length ()<3){
-                     if(!pais.matches ( "[0-9]*" )){
+                     if(pais.matches ( "[A-Za-z ]*" )){
                          if(direccion.length ()>13){
                               if(correo.matches (  "^[A-Za-z0-9+_.-]+@(.+)$" )){
                                   if(contraseña.length ()>5 && contraseña.length ()<15){

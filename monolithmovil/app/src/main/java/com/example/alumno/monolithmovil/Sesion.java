@@ -1,8 +1,5 @@
 package com.example.alumno.monolithmovil;
 
-/**
- * Created by Alex on 30/04/2018.
- */
 
 import android.content.Context;
 import android.content.SharedPreferences;

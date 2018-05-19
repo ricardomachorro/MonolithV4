@@ -3,6 +3,7 @@ package com.example.alumno.monolithmovil;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
@@ -13,9 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.alumno.monolithmovil.clases.Utilidades;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     String resultado = "";
     ProgressDialog proceso;
     ConstraintLayout constraintLayout;
-    public static final String IP = "192.168.20.56";
+    public static final String IP = "192.168.0.5";
     public static final String PUERTO = "8080";
     obtenerDatos datos;
     //
@@ -210,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onCancelled() {
             super.onCancelled();
         }
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 
 }

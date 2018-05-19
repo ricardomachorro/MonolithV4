@@ -9,6 +9,7 @@ import java.sql.*;
 import Objetos.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Database2 {
     
@@ -38,6 +39,45 @@ public class Database2 {
         st=c.createStatement();
         st.executeUpdate(sql);
         }
+    }
+    
+    public ArrayList<Actividad> ConsultarActividad(String IDUsaurio) throws SQLException{
+        ArrayList<Actividad> PaqueteActividad=new ArrayList<>();
+        st=c.createStatement();
+        rs=st.executeQuery("select * from Actividad inner join Categoria on Actividad.IDCategoria=Categoria.IDCategoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.IDUsuario="+IDUsaurio);
+        while(rs.next()){
+            String NombreAct=rs.getString("Actividad.Nombre");
+            java.sql.Date FechaAct=rs.getDate("Actividad.Fecha");
+            String Categoria=rs.getString("Categoria.NombreCategoria");
+            boolean Estado=rs.getBoolean("Actividad.Estado");
+            String EstadoVer=Boolean.toString(Estado);
+            Actividad act=new Actividad();
+            act.setTitulo(NombreAct);
+            act.setFechaLimite(FechaAct);
+            act.setCategoria(Categoria);
+            act.setEstado(EstadoVer);
+            PaqueteActividad.add(act);
+            
+        }
+        return PaqueteActividad;
+    }
+    
+    public ArrayList<Actividad> ConsultarCategorias(String IDUsaurio) throws SQLException{
+        ArrayList<Actividad> PaqueteActividad=new ArrayList<>();
+        st=c.createStatement();
+        rs=st.executeQuery("select * from Categoria inner join Usuario on Categoria.IDUsuario=Usuario.IDUsuario  where Usuario.IDUsuario="+IDUsaurio);
+        while(rs.next()){
+            
+            String Categoria=rs.getString("Categoria.NombreCategoria");
+           
+            Actividad act=new Actividad();
+            
+            act.setCategoria(Categoria);
+            
+            PaqueteActividad.add(act);
+            
+        }
+        return PaqueteActividad;
     }
     
     public void ActualizarNota(Nota note, String NombreAnterior)throws Exception{ //Notas

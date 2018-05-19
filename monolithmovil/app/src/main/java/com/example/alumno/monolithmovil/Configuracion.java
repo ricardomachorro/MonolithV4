@@ -85,7 +85,6 @@ public class Configuracion extends Fragment {
         final View vista = inflater.inflate(R.layout.fragment_configuracion, container, false);
         constraintLayout = vista.findViewById(R.id.constrain);
         View parent = (View) container.getParent();
-        tituloConfig=vista.findViewById ( R.id.titlConfiguracion );
         appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
         appBar.removeViews ( 1,appBar.getChildCount ()-1 );
         tituloParametros=vista.findViewById ( R.id.titParametrosUsuario);
@@ -100,14 +99,6 @@ public class Configuracion extends Fragment {
         PmPais.setText ( "Pais: "+ sesion.getPais () );
         PmDir.setText ( "Direccion: "+ sesion.getDireccion ());
         PmCorreo.setText ( "Correo:" + sesion.getCorreo () );
-        //LbNombre=vista.findViewById ( R.id.LbNuevoNombre );
-       // LbEdad=vista.findViewById ( R.id.LbNuevaEdad );
-       // LbPais=vista.findViewById ( R.id.LbNuevoPais );
-       // LbDir=vista.findViewById ( R.id.LbNuevaDir );
-      //  LbCorreo=vista.findViewById ( R.id.LbCorreo );
-       // LbContraAntigua=vista.findViewById ( R.id.LbAntiguaCon );
-       // LbContraNueva=vista.findViewById ( R.id.LbNuevaCon );
-       // LbConf=vista.findViewById ( R.id.LbConfCon );
         txtNombre=vista.findViewById ( R.id.txtNuevoNombre );
         txtEdad=vista.findViewById ( R.id.txtNuevaEdad );
         txtPais=vista.findViewById ( R.id.txtNuevoPais );
@@ -130,6 +121,7 @@ public class Configuracion extends Fragment {
                 String Contrasena = txtContraNueva.getText().toString().trim();
                 if (!Nombre.isEmpty() && !Edad.isEmpty() && !Pais.isEmpty() && !Direccion.isEmpty() && !Correo.isEmpty() && !Contrasena.isEmpty()  ){
                   if(Edad.matches ( "[0-9]*"  ) && Edad.length ()<3){
+                      if(Pais.matches ( "[A-Za-z ]*" )){
                       if(Direccion.length ()>13){
                           if(Correo.matches ( "^[A-Za-z0-9+_.-]+@(.+)$" )){
                               if( Contrasena.length ()<15 && Contrasena.length ()>5){
@@ -152,6 +144,9 @@ public class Configuracion extends Fragment {
                           }
                       }else{
                           Toast.makeText(vista.getContext (), "Pongauna Direccion valida", Toast.LENGTH_SHORT).show();
+                      }
+                      }else{
+
                       }
                   }else{
                       Toast.makeText(vista.getContext (), "Ponga una edad valida", Toast.LENGTH_SHORT).show();

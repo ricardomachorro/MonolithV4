@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuPrincipal extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,Solicitudes.OnFragmentInteractionListener,Ofertas.OnFragmentInteractionListener, Actividades.OnFragmentInteractionListener, Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, PreConfiguracion.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener,ContenedorFragment.OnFragmentInteractionListener,Intercambio.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,Solicitudes.OnFragmentInteractionListener,Ofertas.OnFragmentInteractionListener, Actividades.OnFragmentInteractionListener,Actividades_Terminadas.OnFragmentInteractionListener,Actividades_NoTerminadas.OnFragmentInteractionListener,ActividadesCategoria.OnFragmentInteractionListener,Notas.OnFragmentInteractionListener, Logros.OnFragmentInteractionListener, Grupos.OnFragmentInteractionListener, PreConfiguracion.OnFragmentInteractionListener, Configuracion.OnFragmentInteractionListener,ContenedorFragment.OnFragmentInteractionListener,Intercambio.OnFragmentInteractionListener {
 /*
 *Implements es Onfreagment.Nombredelfragment
 *
@@ -28,9 +28,6 @@ public class MenuPrincipal extends AppCompatActivity
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

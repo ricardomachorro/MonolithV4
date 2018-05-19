@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alumno.monolithmovil.adapters.SeccionesAdapter;
-import com.example.alumno.monolithmovil.clases.Utilidades;
 
 
 /**
@@ -81,8 +80,8 @@ public class ContenedorFragment extends Fragment {
             View parent = (View) container.getParent();
             if(appBar==null){
                 appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
-                appBar.removeViews ( 1,appBar.getChildCount ()-1 );
                 pestañas=new TabLayout(getActivity());
+                appBar.removeViews ( 1,appBar.getChildCount ()-1 );
                 pestañas.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
                 appBar.addView(pestañas);
                 viewPager=(ViewPager) vista.findViewById(R.id.idviewpaginas);
@@ -158,3 +157,6 @@ public class ContenedorFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
+
+
+

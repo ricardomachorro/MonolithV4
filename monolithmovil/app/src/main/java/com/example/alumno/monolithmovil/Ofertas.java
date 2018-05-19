@@ -11,8 +11,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.alumno.monolithmovil.clases.Utilidades;
-
 
 /**
  * A simple {@link Fragment} subclass.

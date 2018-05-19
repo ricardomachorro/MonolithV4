@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.alumno.monolithmovil.clases.Utilidades;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,7 +90,7 @@ public class Logros extends Fragment {
         btn=(Button)view.findViewById(R.id.btnagregar);
         View parent = (View) container.getParent();
         appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
-        appBar.removeViews ( 1,appBar.getChildCount ()-1 );
+
         texttitu=(TextView) view.findViewById(R.id.titulotxt);
         texttitu.setText("Logros de "+ Utilidades.usuario);
         webView1=(WebView) view.findViewById(R.id.web);

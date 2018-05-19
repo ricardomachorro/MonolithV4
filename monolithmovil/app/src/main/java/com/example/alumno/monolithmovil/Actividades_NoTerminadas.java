@@ -1,12 +1,35 @@
 package com.example.alumno.monolithmovil;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.alumno.monolithmovil.adapters.AdapCartasFin;
+import com.example.alumno.monolithmovil.adapters.AdapCartasNoFin;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
+import java.util.ArrayList;
 
 
 /**
@@ -27,7 +50,22 @@ public class Actividades_NoTerminadas extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    private ListView ListViewCartas;
+    TextView TituloText;
+    EditText txtNuevaAc;
+    Button btnNuevaAct;
+    ConstraintLayout constrain;
+    ArrayList<ActividadesCartas> listaCartas=new ArrayList<ActividadesCartas> (  );
+    Sesion sesion;
+    String IP = MainActivity.IP;
+    String PUERTO = MainActivity.PUERTO;
+    String resultado = "";
+    ProgressDialog proceso;
+
+
     private OnFragmentInteractionListener mListener;
+
 
     public Actividades_NoTerminadas() {
         // Required empty public constructor
@@ -63,8 +101,23 @@ public class Actividades_NoTerminadas extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_actividades__no_terminadas, container, false );
+
+        View view= inflater.inflate(R.layout.fragment_actividades__no_terminadas, container, false);
+        sesion=new Sesion (view.getContext ());
+        ListViewCartas=view.findViewById ( R.id.ListaViewActNoFIn);
+        proceso = new ProgressDialog ( getContext () );
+        proceso.setProgressStyle ( ProgressDialog.STYLE_SPINNER );
+        proceso.setMessage ( "Cargando Actividades" );
+        proceso.setCancelable ( false );
+        proceso.show ();
+        new LLenarListView (ListViewCartas.getContext (),ListViewCartas).execute ( Integer.toString ( sesion.getIDUsuario () ) );
+        TituloText=view.findViewById ( R.id.TitleNoActFinalizadas );
+        //txtNuevaAc=view.findViewById ( R.id.txtNuevaActividadFin );
+        btnNuevaAct=view.findViewById ( R.id.btnNuevaActNoFin );
+        constrain=view.findViewById ( R.id.constrainNoAct);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,18 +144,118 @@ public class Actividades_NoTerminadas extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    public void LlenarCartas(ArrayList<ActividadesCartas> array){
+        listaCartas=array;
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public class LLenarListView extends AsyncTask<String, String, Boolean> {
+
+        public View Vista;
+        public Context contexto;
+
+        public LLenarListView(Context contexto,View rootView){
+            this.Vista=rootView;
+            this.contexto=contexto;
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+
+
+
+
+            //ws inicio sesion
+            String NAMESPACE = "http://WebService/";
+            String URL = "http://"+IP+":"+PUERTO+"/MonolithV4/ActividadWebMethods?WSDL";
+            String METHOD_NAME = "ConsultarAct";
+            String SOAP_ACTION = "http://WebService/ConsultarAct";
+
+
+            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+            request.addProperty("UsuarioID", params[0]); // para agregar parámetros a nuestro método de nuestro webservice
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11);
+            envelope.setOutputSoapObject(request);
+
+            envelope.dotNet = false;
+
+            HttpTransportSE ht = new HttpTransportSE(URL);
+            ht.debug = true; // para las pruebas
+
+
+            try{
+                ht.call(SOAP_ACTION, envelope);
+                String a = ht.requestDump;
+                String b = ht.responseDump;
+                Log.println(Log.INFO, "request", a);
+                Log.println(Log.INFO, "response", b);
+                SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                resultado = response.toString(); // con esta variable guardamos lo que nos returne el web service
+                Log.i("Respuesta" ,  resultado);
+                return true; // este debería ir dentro del try
+            }
+            catch(Exception error){
+                error.printStackTrace();
+                return false;
+            }
+
+
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+
+            if(success){ // para saber que se ejecutó correctamente mi web service (success)
+                if(resultado.equals("Error")){
+                    proceso.dismiss();
+                    Snackbar.make(constrain, "Lo sentimos, hubo un error al cargar los Datos", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                else{
+                    try{
+                        ArrayList<ActividadesCartas> array=new ArrayList<> (  );
+                        JSONObject info = new JSONObject(resultado);
+                        JSONArray jsonLista=info.getJSONArray ("Actividades"  );
+                        for(int i=0;i<jsonLista.length ()-1;i++){
+                            JSONObject json_obj = jsonLista.getJSONObject(i);
+                            if(json_obj.getString ( "Estado" ).equalsIgnoreCase ( "false" )){
+                                String Nombre=json_obj.getString ( "Nombre" );
+                                String Categoria=json_obj.getString ( "Categoria" );
+                                String Fecha=json_obj.getString ( "Fecha" );
+                                String Estado=json_obj.getString ( "Estado" );
+                                ActividadesCartas actCarta=new ActividadesCartas (  Nombre,Fecha,Categoria);
+                                array.add ( actCarta );
+                            }
+
+                        }
+                        LlenarCartas ( array );
+                        AdapCartasFin adapte=new AdapCartasFin ( Vista.getContext (), listaCartas);
+                        ListViewCartas.setAdapter ( adapte) ;
+                        adapte.notifyDataSetChanged ();
+                        proceso.dismiss ();
+
+                    }
+                    catch (JSONException error){
+                        proceso.dismiss();
+                        Snackbar.make(constrain, "Error", Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
+
+                }
+
+            }
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+    }
+
 }

@@ -1,4 +1,0 @@
-#Wed May 16 11:28:00 CDT 2018
-base.0=D\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
-path.0=classes.dex
-renamed.0=classes.dex

@@ -1,3 +1,4 @@
+
 package WebService;
 
 import javax.jws.WebService;
@@ -5,6 +6,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import BaseDatos.Database2;
 import Objetos.Actividad;
+import Objetos.ObtenerDatos;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 @WebService(serviceName = "ActividadWebMethods")
 public class ActividadWebMethods {
@@ -49,6 +54,94 @@ public class ActividadWebMethods {
             Exito=true;
         }
         return Exito;
+    }
+    
+    @WebMethod(operationName = "ConsultarAct")
+    public String ConsultarAct(@WebParam(name = "UsuarioID") String UsuarioID) throws Exception {
+       String PaqueteAct="";
+        ObtenerDatos objeto;
+        try{
+             objeto = new ObtenerDatos();
+             Database2 db=new Database2();
+              ArrayList<Actividad> PaqueteActividad=db.ConsultarActividad(UsuarioID);
+              JSONObject PaqueteFinalJson=new JSONObject();
+              JSONArray PaqueteJsonAct = new JSONArray();
+               
+              for(int i=0;i<PaqueteActividad.size()-1;i++){
+                  JSONObject ObjetoJson= new JSONObject();
+                  ObjetoJson.put("Nombre", PaqueteActividad.get(i).getTitulo());
+                  ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
+                  ObjetoJson.put("Fecha",PaqueteActividad.get(i).getFechaLimite().toString());
+                  ObjetoJson.put("Estado",PaqueteActividad.get(i).getEstado());
+                  PaqueteJsonAct.add(ObjetoJson);
+              }
+             
+               PaqueteFinalJson.put("Actividades",PaqueteJsonAct);
+               PaqueteAct=PaqueteFinalJson.toString();
+             
+             
+        }catch(Exception ex){
+            PaqueteAct="Error";
+        }
+       return PaqueteAct;
+    }
+    
+     @WebMethod(operationName = "ConsultarActNoFin")
+    public String ConsultarActNoFin(@WebParam(name = "UsuarioID") String UsuarioID) throws Exception {
+       String PaqueteAct="";
+        ObtenerDatos objeto;
+        try{
+             objeto = new ObtenerDatos();
+             Database2 db=new Database2();
+              ArrayList<Actividad> PaqueteActividad=db.ConsultarActividad(UsuarioID);
+              JSONObject PaqueteFinalJson=new JSONObject();
+              JSONArray PaqueteJsonAct = new JSONArray();
+               
+              for(int i=0;i<PaqueteActividad.size()-1;i++){
+                  JSONObject ObjetoJson= new JSONObject();
+                  ObjetoJson.put("Nombre", PaqueteActividad.get(i).getTitulo());
+                  ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
+                  ObjetoJson.put("Fecha",PaqueteActividad.get(i).getFechaLimite().toString());
+                  ObjetoJson.put("Estado",PaqueteActividad.get(i).getEstado());
+                  PaqueteJsonAct.add(ObjetoJson);
+              }
+             
+               PaqueteFinalJson.put("Actividades",PaqueteJsonAct);
+               PaqueteAct=PaqueteFinalJson.toString();
+             
+             
+        }catch(Exception ex){
+            PaqueteAct="Error";
+        }
+       return PaqueteAct;
+    }
+    
+    
+     @WebMethod(operationName = "ConsultarCat")
+    public String ConsultarCat(@WebParam(name = "UsuarioID") String UsuarioID) throws Exception {
+       String PaqueteAct="";
+        ObtenerDatos objeto;
+        try{
+             objeto = new ObtenerDatos();
+             Database2 db=new Database2();
+              ArrayList<Actividad> PaqueteActividad=db.ConsultarCategorias(UsuarioID);
+              JSONObject PaqueteFinalJson=new JSONObject();
+              JSONArray PaqueteJsonAct = new JSONArray();
+               
+              for(int i=0;i<PaqueteActividad.size()-1;i++){
+                  JSONObject ObjetoJson= new JSONObject();
+                  ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
+                  PaqueteJsonAct.add(ObjetoJson);
+              }
+             
+               PaqueteFinalJson.put("Actividades",PaqueteJsonAct);
+               PaqueteAct=PaqueteFinalJson.toString();
+             
+             
+        }catch(Exception ex){
+            PaqueteAct="Error";
+        }
+       return PaqueteAct;
     }
     
     @WebMethod(operationName = "EliminarCategoria")

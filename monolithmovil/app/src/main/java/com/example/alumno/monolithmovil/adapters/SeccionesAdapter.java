@@ -22,10 +22,6 @@ public class SeccionesAdapter extends FragmentStatePagerAdapter {
         listafragment.add(fragment);
         listatitulos.add(titulo);
     }
-    public void Limpiar(){
-        listafragment.clear ();
-        listatitulos.clear ();
-    }
 
     @Override
     public CharSequence getPageTitle(int position) {

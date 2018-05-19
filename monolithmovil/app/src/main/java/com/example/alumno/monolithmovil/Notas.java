@@ -1,9 +1,11 @@
 package com.example.alumno.monolithmovil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +25,11 @@ public class Notas extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private AppBarLayout appBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private AppBarLayout appBar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,14 +63,25 @@ public class Notas extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    FloatingActionButton Action;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_notas, container, false);
         View parent = (View) container.getParent();
-        appBar=(AppBarLayout) parent.findViewById(R.id.appBar);
-        appBar.removeViews ( 1,appBar.getChildCount ()-1 );
-        return inflater.inflate(R.layout.fragment_notas, container, false);
+        Action = (FloatingActionButton)view.findViewById(R.id.abrirLista);
+        Action.setOnClickListener(new View.OnClickListener(){
+                                      @Override
+                                      public void onClick(View v) {
+                                          abrirListaNotas(v);
+                                      }
+
+                                  }
+
+        );
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -108,5 +121,10 @@ public class Notas extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void abrirListaNotas(View v) {
+        Intent i = new Intent(getActivity().getApplicationContext(), listaNotas.class);
+        startActivity(i);
     }
 }
