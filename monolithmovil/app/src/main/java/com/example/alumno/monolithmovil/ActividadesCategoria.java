@@ -210,7 +210,7 @@ public class ActividadesCategoria extends Fragment {
                         ArrayList<CategoriasCartasAct> array=new ArrayList<> (  );
                         JSONObject info = new JSONObject(resultado);
                         JSONArray jsonLista=info.getJSONArray ("Actividades"  );
-                        for(int i=0;i<jsonLista.length ()-1;i++){
+                        for(int i=0;i<jsonLista.length ();i++){
                             JSONObject json_obj = jsonLista.getJSONObject(i);
 
                                 String Categoria=json_obj.getString ( "Categoria" );

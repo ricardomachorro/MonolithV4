@@ -112,8 +112,6 @@ public class Actividades_NoTerminadas extends Fragment {
         proceso.show ();
         new LLenarListView (ListViewCartas.getContext (),ListViewCartas).execute ( Integer.toString ( sesion.getIDUsuario () ) );
         TituloText=view.findViewById ( R.id.TitleNoActFinalizadas );
-        //txtNuevaAc=view.findViewById ( R.id.txtNuevaActividadFin );
-        btnNuevaAct=view.findViewById ( R.id.btnNuevaActNoFin );
         constrain=view.findViewById ( R.id.constrainNoAct);
 
 
@@ -221,7 +219,7 @@ public class Actividades_NoTerminadas extends Fragment {
                         ArrayList<ActividadesCartas> array=new ArrayList<> (  );
                         JSONObject info = new JSONObject(resultado);
                         JSONArray jsonLista=info.getJSONArray ("Actividades"  );
-                        for(int i=0;i<jsonLista.length ()-1;i++){
+                        for(int i=0;i<jsonLista.length ();i++){
                             JSONObject json_obj = jsonLista.getJSONObject(i);
                             if(json_obj.getString ( "Estado" ).equalsIgnoreCase ( "false" )){
                                 String Nombre=json_obj.getString ( "Nombre" );

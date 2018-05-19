@@ -70,7 +70,7 @@ public class ActividadWebMethods {
              objeto = new ObtenerDatos();
              Database2 db=new Database2();
               ArrayList<Actividad> PaqueteActividad=db.ConsultarActividad(UsuarioID);
-              JSONObject PaqueteFinalJson=new JSONObject();
+               JSONObject PaqueteFinalJson=new JSONObject();
               JSONArray PaqueteJsonAct = new JSONArray();
                
               for(int i=0;i<PaqueteActividad.size();i++){

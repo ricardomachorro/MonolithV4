@@ -221,7 +221,7 @@ public class Actividades_Terminadas extends Fragment {
             if(success){ // para saber que se ejecutó correctamente mi web service (success)
                 if(resultado.equals("Error")){
                     proceso.dismiss();
-                    Snackbar.make(constrain, "Lo sentimos, hubo un error al cargar lso Datos", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(constrain, "Lo sentimos, hubo un error al guardar los datos", Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 else{
@@ -229,7 +229,7 @@ public class Actividades_Terminadas extends Fragment {
                         ArrayList<ActividadesCartas> array=new ArrayList<> (  );
                         JSONObject info = new JSONObject(resultado);
                         JSONArray jsonLista=info.getJSONArray ("Actividades"  );
-                        for(int i=0;i<jsonLista.length ()-1;i++){
+                        for(int i=0;i<jsonLista.length ();i++){
                             JSONObject json_obj = jsonLista.getJSONObject(i);
                             if(json_obj.getString ( "Estado" ).equalsIgnoreCase ( "true" )){
                                 String Nombre=json_obj.getString ( "Nombre" );
@@ -333,8 +333,9 @@ public class Actividades_Terminadas extends Fragment {
                 }
                 else{
                     try{
-
-
+                        proceso.dismiss ();
+                        Actividades_NoTerminadas frag=new Actividades_NoTerminadas ();
+                        
                     }
                     catch (
                             Exception error){
