@@ -244,16 +244,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Actividades_Terminadas.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades_Terminadas.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="337" column="24" lean-forward="false" selection-start-line="337" selection-start-column="24" selection-end-line="337" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Actividades.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -264,7 +254,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Actividades_NoTerminadas.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Actividades_NoTerminadas.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades_NoTerminadas.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-410">
@@ -2408,7 +2398,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="676" />
     <option name="width" value="697" />
     <option name="height" value="735" />
@@ -2485,7 +2475,7 @@
     <property name="device.picker.selection" value="ZY3228F7NS" />
     <property name="android.profiler.active" value="true" />
     <property name="VectorAssetImportPath" value="E:\" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1526753029318" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1526754065129" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
   </component>
@@ -2869,7 +2859,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3324,18 +3314,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades_NoTerminadas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-410">
-          <caret line="113" column="68" lean-forward="false" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades_Terminadas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="337" column="24" lean-forward="false" selection-start-line="337" selection-start-column="24" selection-end-line="337" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/alumno/monolithmovil/Actividades_NoTerminadas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="113" column="68" lean-forward="false" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
           <folding />
         </state>
       </provider>

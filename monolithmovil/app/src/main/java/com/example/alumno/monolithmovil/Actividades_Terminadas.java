@@ -335,7 +335,7 @@ public class Actividades_Terminadas extends Fragment {
                     try{
                         proceso.dismiss ();
                         Actividades_NoTerminadas frag=new Actividades_NoTerminadas ();
-                        
+
                     }
                     catch (
                             Exception error){
