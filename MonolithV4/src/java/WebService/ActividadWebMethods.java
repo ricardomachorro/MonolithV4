@@ -15,9 +15,10 @@ import org.json.simple.JSONObject;
 public class ActividadWebMethods {
 
     @WebMethod(operationName = "RegistroActividad")
-    public boolean RegistroActividad(@WebParam(name = "NombreUsuario") String NombreUsuario, @WebParam(name = "ClaseActividad") String ClaseActividad,
+    public String RegistroActividad(@WebParam(name = "NombreUsuario") String NombreUsuario, @WebParam(name = "ClaseActividad") String ClaseActividad,
             @WebParam(name = "TituloActividad") String TituloActividad) throws Exception {
-        boolean Exito = false;
+        String Exito = "Exito";
+        try{
         int IDActividad=0;
         Actividad act = new Actividad();
         act.setCategoria(ClaseActividad);
@@ -26,8 +27,13 @@ public class ActividadWebMethods {
         Database2 db = new Database2();
        IDActividad=db.IngresoActividad(act);
        if(IDActividad>0){
-           Exito=true;
+          
+           
        }
+       }catch(Exception ex){
+           Exito="Erro";
+       }
+        
  
         return Exito;
     }
@@ -67,7 +73,7 @@ public class ActividadWebMethods {
               JSONObject PaqueteFinalJson=new JSONObject();
               JSONArray PaqueteJsonAct = new JSONArray();
                
-              for(int i=0;i<PaqueteActividad.size()-1;i++){
+              for(int i=0;i<PaqueteActividad.size();i++){
                   JSONObject ObjetoJson= new JSONObject();
                   ObjetoJson.put("Nombre", PaqueteActividad.get(i).getTitulo());
                   ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
@@ -128,7 +134,7 @@ public class ActividadWebMethods {
               JSONObject PaqueteFinalJson=new JSONObject();
               JSONArray PaqueteJsonAct = new JSONArray();
                
-              for(int i=0;i<PaqueteActividad.size()-1;i++){
+              for(int i=0;i<PaqueteActividad.size();i++){
                   JSONObject ObjetoJson= new JSONObject();
                   ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
                   PaqueteJsonAct.add(ObjetoJson);

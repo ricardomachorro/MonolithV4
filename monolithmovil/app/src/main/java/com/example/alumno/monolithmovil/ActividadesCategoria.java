@@ -98,12 +98,13 @@ public class ActividadesCategoria extends Fragment {
         ListViewCartas=view.findViewById ( R.id.ListaViewCatAct );
         constrain=view.findViewById ( R.id.constraintActCat);
         txtTitulo=view.findViewById ( R.id.TitleCatActividades );
+        new LLenarListView (ListViewCartas.getContext (),ListViewCartas).execute ( Integer.toString ( sesion.getIDUsuario () ) );
         proceso = new ProgressDialog ( getContext () );
         proceso.setProgressStyle ( ProgressDialog.STYLE_SPINNER );
-        proceso.setMessage ( "Cargando Actividades" );
+        proceso.setMessage ( "Cargando  Categorias" );
         proceso.setCancelable ( false );
         proceso.show ();
-        new LLenarListView (ListViewCartas.getContext (),ListViewCartas).execute ( Integer.toString ( sesion.getIDUsuario () ) );
+
 
         return view;
     }

@@ -110,9 +110,14 @@ public class Actividades_Terminadas extends Fragment {
                 if(!txtNuevaAc.getText ().toString ().isEmpty ()){
                     String Caracteres=txtNuevaAc.getText ().toString ();
                     String[] partes =Caracteres.split("#");
-                    String NombreAct=partes[1];
-                    String Categoria=partes[2];
-                    new NuevaAct ( ListViewCartas.getContext (),ListViewCartas ).execute (sesion.getNombreUsuario (),Categoria, NombreAct );
+                    String NombreAct=partes[0];
+                    String Categoria=partes[1];
+                    proceso = new ProgressDialog ( getContext () );
+                    proceso.setProgressStyle ( ProgressDialog.STYLE_SPINNER );
+                    proceso.setMessage ( "Guardando Actividad" );
+                    proceso.setCancelable ( false );
+                    proceso.show ();
+                   new NuevaAct ( ListViewCartas.getContext (),ListViewCartas ).execute (sesion.getNombreUsuario (),Categoria, NombreAct );
                 }else{
                     Toast.makeText(getActivity (), "Debes poner una contraseña mayor a 5 caracteres y menor a 15 caracteres", Toast.LENGTH_SHORT).show();
                 }
