@@ -32,6 +32,7 @@
             android:name="com.example.alumno.monolithmovil.MenuPrincipal"
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/AppTheme" />
+        <activity android:name="com.example.alumno.monolithmovil.ActividadCambio" />
     </application>
 
 </manifest>

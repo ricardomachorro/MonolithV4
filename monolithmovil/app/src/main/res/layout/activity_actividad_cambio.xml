@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".ActividadCambio">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp"
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <TextView
+            android:id="@+id/TituloCambioActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="Cmabios Actividad"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:srcCompat="@mipmap/queen" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Datos Actuales"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtNombreAntiguo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre Actual" />
+
+                <TextView
+                    android:id="@+id/txtFechaAntigua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Actual" />
+
+                <TextView
+                    android:id="@+id/txtCategoriaAntigua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categoria Actual" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtFormulario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cambios"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/txtNuevoNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:ems="10"
+                    android:hint="Nombre Nuevo"
+                    android:inputType="textPersonName"
+                    android:textSize="10sp" />
+
+                <EditText
+                    android:id="@+id/txtNuevaFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:ems="10"
+                    android:hint="Fecha Nueva"
+                    android:inputType="date"
+                    android:textSize="10sp" />
+
+                <EditText
+                    android:id="@+id/txtNuevaCategoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:ems="10"
+                    android:hint="Nueva Categoria"
+                    android:inputType="textPersonName"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btnCambio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Guardar Cambios"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

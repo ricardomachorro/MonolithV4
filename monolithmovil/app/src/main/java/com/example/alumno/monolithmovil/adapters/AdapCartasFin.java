@@ -1,6 +1,7 @@
 package com.example.alumno.monolithmovil.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alumno.monolithmovil.ActividadCambio;
 import com.example.alumno.monolithmovil.ActividadesCartas;
 import com.example.alumno.monolithmovil.Actividades_NoTerminadas;
 import com.example.alumno.monolithmovil.MainActivity;
@@ -36,7 +38,7 @@ public class AdapCartasFin extends BaseAdapter {
    String resultado;
    Sesion sesion;
    View Vista;
-
+    TextView titulo,Categoria,Fecha;
 
     Context contexto;
     ArrayList<ActividadesCartas> lista=new ArrayList<ActividadesCartas> (  );
@@ -67,16 +69,17 @@ public class AdapCartasFin extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Vista=infleter.inflate ( R.layout.carta_act_finalizada,null);
-        sesion= sesion=new Sesion (Vista.getContext ());
-        TextView titulo=Vista.findViewById ( R.id.ActFinTitulo );
-        TextView Cateogoria=Vista.findViewById ( R.id.ActFinCat );
-        TextView Fecha=Vista.findViewById ( R.id.ActFinFecha );
+        sesion=new Sesion (Vista.getContext ());
+        titulo=Vista.findViewById ( R.id.ActFinTitulo );
+        Categoria=Vista.findViewById ( R.id.ActFinCat );
+        Fecha=Vista.findViewById ( R.id.ActFinFecha );
         titulo.setText(lista.get ( position).getNombreAct ());
-        Cateogoria.setText(lista.get ( position ).getCategoria ());
+        Categoria.setText(lista.get ( position ).getCategoria ());
          Fecha.setText ( lista.get(position).getFecha () );
         ImageButton btnEliminar=Vista.findViewById ( R.id.btnDrop  );
         btnEliminar.setTag (lista.get ( position ).getIdentificador () );
         ImageButton btnCambiar=Vista.findViewById ( R.id.btnChange );
+        btnCambiar.setTag (lista.get ( position ).getIdentificador ()  );
         CheckBox check=Vista.findViewById ( R.id.checkAct );
         check.setTag(lista.get ( position ).getIdentificador () );
         if(lista.get ( position ).getEstado ().equals ( "true" )){
@@ -98,6 +101,25 @@ public class AdapCartasFin extends BaseAdapter {
             }
         } );
 
+        btnCambiar.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent (v.getContext () ,ActividadCambio.class);
+                String NombreAct=titulo.getText().toString ();
+                String FechaAct=Fecha.getText ().toString ();
+                String CategoriaAct=Categoria.getText ().toString ();
+                intent.putExtra ( "NombreActividad",NombreAct );
+                intent.putExtra ( "FechaActividad",FechaAct);
+                intent.putExtra ( "CategoriaActividad",CategoriaAct );
+                intent.putExtra ( "IDActividad",v.getTag ().toString ());
+                intent.putExtra("NombreUsuario",sesion.getNombreUsuario ());
+                intent.putExtra ( "IDUsuario",sesion.getIDUsuario () );
+
+                v.getContext ().startActivity ( intent );
+
+
+            }
+        } );
 
         return Vista;
     }
