@@ -79,6 +79,7 @@ public class ActividadWebMethods {
                   ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
                   ObjetoJson.put("Fecha",PaqueteActividad.get(i).getFechaLimite().toString());
                   ObjetoJson.put("Estado",PaqueteActividad.get(i).getEstado());
+                  ObjetoJson.put("IDActividad",PaqueteActividad.get(i).getIDActviidad());
                   PaqueteJsonAct.add(ObjetoJson);
               }
              
@@ -150,14 +151,43 @@ public class ActividadWebMethods {
        return PaqueteAct;
     }
     
-    @WebMethod(operationName = "EliminarCategoria")
-    public boolean EliminarCategoria(@WebParam(name = "UsuarioNombre") String UsuarioNombre,@WebParam(name = "CategoriaNombre") String CategoriaNombre) throws Exception {
-        boolean Exito = false;
-        
-        Database2 db = new Database2();
-        if(db.EliminarCategoria(UsuarioNombre, CategoriaNombre)){
-            Exito=true;
+    @WebMethod(operationName = "ChecarActividad")
+    public String  ChecarActividad(@WebParam(name = "IDActividad") String IDActividad,@WebParam(name = "Usuario") String UsuarioNombre) throws Exception {
+        String Exito="";
+        try{
+            int idAct=Integer.parseInt(IDActividad);
+             Database2 db = new Database2();
+             if(db.CambiarEstadoActividad(idAct, UsuarioNombre)){
+                 
+             }else{
+                Exito="Error"; 
         }
+        
+        }catch(Exception ex){
+            Exito="Error";
+        }
+        
+        return Exito;
+    }
+    
+   
+    
+    
+    @WebMethod(operationName = "EliminarActividad")
+    public String EliminarActividad
+        (@WebParam(name = "IDActividad") String IDActividad) throws Exception {
+        String Exito ="";
+        try{
+            Database2 db = new Database2();
+            if(db.EliminarActividad(Integer.parseInt(IDActividad))){
+                  
+            }else{
+                Exito="Error";
+            }
+        }catch(Exception ex){
+              Exito="Error";
+        }
+        
         return Exito;
     }
 }

@@ -92,7 +92,7 @@ public class Actividades_Terminadas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_actividades__terminadas, container, false);
+        final View view= inflater.inflate(R.layout.fragment_actividades__terminadas, container, false);
         sesion=new Sesion (view.getContext ());
         ListViewCartas=view.findViewById ( R.id.ListaViewActFIn );
         proceso = new ProgressDialog ( getContext () );
@@ -118,6 +118,9 @@ public class Actividades_Terminadas extends Fragment {
                     proceso.setCancelable ( false );
                     proceso.show ();
                    new NuevaAct ( ListViewCartas.getContext (),ListViewCartas ).execute (sesion.getNombreUsuario (),Categoria, NombreAct );
+                   new LLenarListView ( ListViewCartas.getContext (),ListViewCartas ).execute ( Integer.toString ( sesion.getIDUsuario () )  );
+
+
                 }else{
                     Toast.makeText(getActivity (), "Debes poner una contraseña mayor a 5 caracteres y menor a 15 caracteres", Toast.LENGTH_SHORT).show();
                 }
@@ -231,14 +234,15 @@ public class Actividades_Terminadas extends Fragment {
                         JSONArray jsonLista=info.getJSONArray ("Actividades"  );
                         for(int i=0;i<jsonLista.length ();i++){
                             JSONObject json_obj = jsonLista.getJSONObject(i);
-                            if(json_obj.getString ( "Estado" ).equalsIgnoreCase ( "true" )){
+
                                 String Nombre=json_obj.getString ( "Nombre" );
                                 String Categoria=json_obj.getString ( "Categoria" );
                                 String Fecha=json_obj.getString ( "Fecha" );
                                 String Estado=json_obj.getString ( "Estado" );
-                                ActividadesCartas actCarta=new ActividadesCartas (  Nombre,Fecha,Categoria);
+                                int IDActividad=json_obj.getInt ( "IDActividad" );
+                                ActividadesCartas actCarta=new ActividadesCartas (  Nombre,Fecha,Categoria,Estado,IDActividad);
                                 array.add ( actCarta );
-                            }
+
 
                         }
                        LlenarCartas ( array );

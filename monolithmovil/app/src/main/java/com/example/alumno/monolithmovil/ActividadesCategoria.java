@@ -133,6 +133,7 @@ public class ActividadesCategoria extends Fragment {
         mListener = null;
     }
 
+
     public void LlenarCartas(ArrayList<CategoriasCartasAct> array){
         listaCartas=array;
     }

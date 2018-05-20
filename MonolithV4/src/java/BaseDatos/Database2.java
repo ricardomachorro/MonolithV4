@@ -51,11 +51,13 @@ public class Database2 {
             String Categoria=rs.getString("Categoria.NombreCategoria");
             boolean Estado=rs.getBoolean("Actividad.Estado");
             String EstadoVer=Boolean.toString(Estado);
+            int IDActividad=rs.getInt("Actividad.IDActividad");
             Actividad act=new Actividad();
             act.setTitulo(NombreAct);
             act.setFechaLimite(FechaAct);
             act.setCategoria(Categoria);
             act.setEstado(EstadoVer);
+            act.setIDActviidad(IDActividad);
             PaqueteActividad.add(act);
             
         }
@@ -544,7 +546,7 @@ public class Database2 {
             
             st = c.createStatement();
             st.executeUpdate(sql);
-            
+            ActividadCambiadaExitosa=true;
         } catch (Exception ex) {
 
         }

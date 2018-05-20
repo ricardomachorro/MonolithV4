@@ -11,6 +11,18 @@ public class Actividad {
     private Date FechaLimite; 
     private String Estado;
     private String Usuario;
+    private int IDActviidad;
+
+    public int getIDActviidad() {
+        return IDActviidad;
+    }
+
+    public void setIDActviidad(int IDActviidad) {
+        this.IDActviidad = IDActviidad;
+    }
+
+    
+    
 
     public String getTitulo() {
         return Titulo;

@@ -2,14 +2,23 @@ package com.example.alumno.monolithmovil;
 
 public class ActividadesCartas {
 
-    String NombreAct,Fecha,Categoria;
+    String NombreAct,Fecha,Categoria,Estado;
     int Identificador;
 
+    public String getEstado() {
+        return Estado;
+    }
 
-    public ActividadesCartas(String nombreAct, String fecha, String categoria) {
+    public void setEstado(String estado) {
+        Estado = estado;
+    }
+
+    public ActividadesCartas(String nombreAct, String fecha, String categoria,String estado, int identificador) {
         NombreAct = nombreAct;
         Fecha = fecha;
         Categoria = categoria;
+        Identificador = identificador;
+        Estado=estado;
     }
 
     public String getNombreAct() {

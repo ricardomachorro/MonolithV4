@@ -226,7 +226,8 @@ public class Actividades_NoTerminadas extends Fragment {
                                 String Categoria=json_obj.getString ( "Categoria" );
                                 String Fecha=json_obj.getString ( "Fecha" );
                                 String Estado=json_obj.getString ( "Estado" );
-                                ActividadesCartas actCarta=new ActividadesCartas (  Nombre,Fecha,Categoria);
+                                int IDActividad=json_obj.getInt ( "IDActividad" );
+                                ActividadesCartas actCarta=new ActividadesCartas (  Nombre,Fecha,Categoria,Estado,IDActividad);
                                 array.add ( actCarta );
                             }
 
