@@ -107,6 +107,7 @@ public class AdapCartasFin extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
     public class ChecarAct extends AsyncTask<String, String, Boolean> {
 
 
@@ -127,6 +128,76 @@ public class AdapCartasFin extends BaseAdapter {
             request.addProperty("Usuario", params[1]);
 
 
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11);
+            envelope.setOutputSoapObject(request);
+
+            envelope.dotNet = false;
+
+            HttpTransportSE ht = new HttpTransportSE(URL);
+            ht.debug = true; // para las pruebas
+
+
+            try{
+                ht.call(SOAP_ACTION, envelope);
+                String a = ht.requestDump;
+                String b = ht.responseDump;
+                Log.println(Log.INFO, "request", a);
+                Log.println(Log.INFO, "response", b);
+                SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
+                resultado = response.toString(); // con esta variable guardamos lo que nos returne el web service
+                Log.i("Respuesta" ,  resultado);
+                return true; // este debería ir dentro del try
+            }
+            catch(Exception error){
+                error.printStackTrace();
+                return false;
+            }
+
+
+
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+
+            if(success){ // para saber que se ejecutó correctamente mi web service (success)
+                if(resultado.equals("Error")){
+                    Toast.makeText (Vista.getContext (),"Error ", Toast.LENGTH_SHORT ).show ();
+                }else{
+                    Toast.makeText (Vista.getContext (),"Checheo Exitoso ", Toast.LENGTH_SHORT ).show ();
+                }
+
+
+            }
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+    }
+
+
+
+    public class EliminarAct extends AsyncTask<String, String, Boolean> {
+
+
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+
+
+            //ws inicio sesion
+            String NAMESPACE = "http://WebService/";
+            String URL = "http://"+IP+":"+PUERTO+"/MonolithV4/ActividadWebMethods?WSDL";
+            String METHOD_NAME = "EliminarActi";
+
+            String SOAP_ACTION = "http://WebService/EliminarActi";
+
+
+            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+            request.addProperty("IDActividad", params[0]); // para agregar parámetros a nuestro método de nuestro webservice
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
@@ -177,75 +248,5 @@ public class AdapCartasFin extends BaseAdapter {
         }
     }
 
-    public class EliminarAct extends AsyncTask<String, String, Boolean> {
 
-        String NAMESPACE = "http://WebService/";
-        String URL = "http://"+IP+":"+PUERTO+"/MonolithV4/ActividadWebMethods?WSDL";
-        String METHOD_NAME = "EliminarActividad";
-        String SOAP_ACTION = "http://WebService/EliminarActividad";
-
-
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-
-
-            //ws inicio sesion
-
-
-
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("IDActividad", params[0]); // para agregar parámetros a nuestro método de nuestro webservice
-
-
-
-
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11);
-            envelope.setOutputSoapObject(request);
-
-            envelope.dotNet = false;
-
-            HttpTransportSE ht = new HttpTransportSE(URL);
-            ht.debug = true; // para las pruebas
-
-
-            try{
-                ht.call(SOAP_ACTION, envelope);
-                String a = ht.requestDump;
-                String b = ht.responseDump;
-                Log.println(Log.INFO, "request", a);
-                Log.println(Log.INFO, "response", b);
-                SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-                resultado = response.toString(); // con esta variable guardamos lo que nos returne el web service
-                Log.i("Respuesta" ,  resultado);
-                return true; // este debería ir dentro del try
-            }
-            catch(Exception error){
-                error.printStackTrace();
-                return false;
-            }
-
-
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-
-            if(success){ // para saber que se ejecutó correctamente mi web service (success)
-                if(resultado.equals("Error")){
-                    Toast.makeText (Vista.getContext (),"Error ", Toast.LENGTH_SHORT ).show ();
-                }else{
-                    Toast.makeText (Vista.getContext (),"Actividad eliminada con Exito ", Toast.LENGTH_SHORT ).show ();
-                }
-
-
-            }
-
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
-    }
 }

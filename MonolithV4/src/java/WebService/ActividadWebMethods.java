@@ -173,9 +173,8 @@ public class ActividadWebMethods {
    
     
     
-    @WebMethod(operationName = "EliminarActividad")
-    public String EliminarActividad
-        (@WebParam(name = "IDActividad") String IDActividad) throws Exception {
+    @WebMethod(operationName = "EliminarActi")
+    public String EliminarActi(@WebParam(name = "IDActividad") String IDActividad) throws Exception {
         String Exito ="";
         try{
             Database2 db = new Database2();
