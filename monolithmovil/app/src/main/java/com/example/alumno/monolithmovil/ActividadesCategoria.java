@@ -215,7 +215,9 @@ public class ActividadesCategoria extends Fragment {
                             JSONObject json_obj = jsonLista.getJSONObject(i);
 
                                 String Categoria=json_obj.getString ( "Categoria" );
-                                CategoriasCartasAct cat=new CategoriasCartasAct ( Categoria );
+                                int Identificador=json_obj.getInt ( "IDCategoria" );
+
+                                CategoriasCartasAct cat=new CategoriasCartasAct ( Categoria,Identificador);
                                 array.add ( cat );
 
 

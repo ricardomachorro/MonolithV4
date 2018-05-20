@@ -67,13 +67,13 @@ public final class R {
         public static final int layout_optimizationLevel = 0x7f030103;
     }
     public static final class id {
-        public static final int barrier = 0x7f080034;
-        public static final int bottom = 0x7f080039;
-        public static final int chains = 0x7f080048;
-        public static final int dimensions = 0x7f080065;
-        public static final int direct = 0x7f080067;
-        public static final int end = 0x7f08006e;
-        public static final int gone = 0x7f08007b;
+        public static final int barrier = 0x7f080035;
+        public static final int bottom = 0x7f08003a;
+        public static final int chains = 0x7f080049;
+        public static final int dimensions = 0x7f080066;
+        public static final int direct = 0x7f080068;
+        public static final int end = 0x7f08006f;
+        public static final int gone = 0x7f08007c;
         public static final int invisible = 0x7f08008a;
         public static final int left = 0x7f08008e;
         public static final int none = 0x7f0800a0;

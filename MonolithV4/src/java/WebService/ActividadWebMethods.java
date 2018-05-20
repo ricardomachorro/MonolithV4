@@ -138,6 +138,7 @@ public class ActividadWebMethods {
               for(int i=0;i<PaqueteActividad.size();i++){
                   JSONObject ObjetoJson= new JSONObject();
                   ObjetoJson.put("Categoria",PaqueteActividad.get(i).getCategoria());
+                  ObjetoJson.put("IDCategoria",PaqueteActividad.get(i).getIDActviidad());
                   PaqueteJsonAct.add(ObjetoJson);
               }
              
@@ -189,4 +190,22 @@ public class ActividadWebMethods {
         
         return Exito;
     }
+    
+     @WebMethod(operationName = "EliminarCategoria")
+    public String EliminarCategoria(@WebParam(name = "IDCategoria") String IDCategoria) throws Exception {
+        String Exito ="";
+        try{
+            Database2 db = new Database2();
+            if(db.EliminarCategoriaMovil(Integer.parseInt(IDCategoria))){
+                  
+            }else{
+                Exito="Error";
+            }
+        }catch(Exception ex){
+              Exito="Error";
+        }
+        
+        return Exito;
+    }
+    
 }

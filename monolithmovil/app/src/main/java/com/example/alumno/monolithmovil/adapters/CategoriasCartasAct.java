@@ -4,8 +4,9 @@ public class CategoriasCartasAct {
     int Identificador;
     String Nombre;
 
-    public CategoriasCartasAct(String nombre) {
+    public CategoriasCartasAct(String nombre,int identificador) {
         this.Nombre = nombre;
+        this.Identificador=identificador;
     }
 
     public int getIdentificador() {

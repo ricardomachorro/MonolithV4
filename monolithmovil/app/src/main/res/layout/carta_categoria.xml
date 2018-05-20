@@ -25,7 +25,7 @@
             android:textSize="24sp" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/BtnCatActEliminar"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_weight="1"

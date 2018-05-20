@@ -71,10 +71,11 @@ public class Database2 {
         while(rs.next()){
             
             String Categoria=rs.getString("Categoria.NombreCategoria");
-           
+            int Identificador=rs.getInt("Categoria.IDCategoria");
             Actividad act=new Actividad();
             
             act.setCategoria(Categoria);
+            act.setIDActviidad(Identificador);
             
             PaqueteActividad.add(act);
             
@@ -277,6 +278,22 @@ public class Database2 {
             if(!rs.next()){
                Exito=true; 
             }
+        return Exito;
+    }
+    
+     public boolean EliminarCategoriaMovil(int IDCategoria) throws Exception{//Actividades
+        boolean Exito=false;
+        try{
+            String sql1="delete from Categoria where IDCategoria=?";
+            ps=c.prepareStatement(sql1);
+            ps.setInt(1, IDCategoria);
+           ps.execute();
+           Exito=true;
+     
+        }catch(Exception ex){
+            
+        }
+  
         return Exito;
     }
 

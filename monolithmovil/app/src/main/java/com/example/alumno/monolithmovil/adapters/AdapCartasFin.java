@@ -36,7 +36,7 @@ public class AdapCartasFin extends BaseAdapter {
    String resultado;
    Sesion sesion;
    View Vista;
-   String checktag;
+
 
     Context contexto;
     ArrayList<ActividadesCartas> lista=new ArrayList<ActividadesCartas> (  );

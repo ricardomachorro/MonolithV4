@@ -1,4 +1,4 @@
-#Sat May 19 23:02:05 CDT 2018
+#Sun May 20 11:30:41 CDT 2018
 base.0=E\:\\6-Semestre\\ProyectoAula\\MonolithV4\\monolithmovil\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
